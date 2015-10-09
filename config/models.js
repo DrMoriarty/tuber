@@ -18,6 +18,7 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
   // connection: 'localDiskDb',
+    connection: 'someMongodbServer',
 
   /***************************************************************************
   *                                                                          *
@@ -27,6 +28,6 @@ module.exports.models = {
   * See http://sailsjs.org/#!/documentation/concepts/ORM/model-settings.html  *
   *                                                                          *
   ***************************************************************************/
-  // migrate: 'alter'
+   migrate: 'alter'
 
 };

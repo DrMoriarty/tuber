@@ -1,0 +1,5 @@
+#!/bin/sh
+cd /home/tuber
+#node app.js
+sails lift 2>&1
+

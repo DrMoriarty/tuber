@@ -62,34 +62,34 @@ module.exports =
         # fields for drivers
         vehicleType: 'string'
         vehicleNum: 
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         maxLength:
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         maxWidth:
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         maxDepth:
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         maxWeight:
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         averageSpeed:
-            type: 'number'
+            type: 'float'
             defaultsTo: 0
         averageDayDistance:
-            type: 'number'
+            type: 'float'
             defaultsTo: 0
         pricePerKm:
-            type: 'number'
+            type: 'float'
             defaultsTo: 0
         defaultPrice:
-            type: 'number'
+            type: 'float'
             defaultsTo: 0
         coverageDistance:
-            type: 'number'
+            type: 'float'
             defaultsTo: 0
         toJSON: ->
             obj = this.toObject()

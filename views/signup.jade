@@ -55,15 +55,55 @@ html
                   .input-group
                     span.input-group-addon
                       span.glyphicon.glyphicon-user
-                    input.form-control(type='email', placeholder='User Name', name="login")
+                    input.form-control(type='text', placeholder='First Name', name="firstname")
                 .form-group
                   .input-group
                     span.input-group-addon
-                      span.glyphicon.glyphicon-link
+                      span.glyphicon.glyphicon-user
+                    input.form-control(type='text', placeholder='Last Name', name="lastname")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-envelope
+                    input.form-control(type='email', placeholder='Email', name="email")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-home
+                    input.form-control(type='text', placeholder='Address (line 1)', name="address1")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-home
+                    input.form-control(type='text', placeholder='Address (line 2)', name="address2")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-home
+                    input.form-control(type='text', placeholder='ZIP', name="zip")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-globe
+                    input.form-control(type='text', placeholder='City', name="city")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-globe
+                    input.form-control(type='text', placeholder='Country', name="country")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-phone
+                    input.form-control(type='text', placeholder='Phone number', name="phone")
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      span.glyphicon.glyphicon-lock
                     input.form-control(type='password', placeholder='Password', name="password")
               .panel-footer
                 span.text-muted.fs12.lh30
-                  a  Forgotten Password?
+                  a  
                 input.btn.btn-sm.bg-purple2.pull-right(type="submit", value="Signup")
                 .clearfix
     // End: Main

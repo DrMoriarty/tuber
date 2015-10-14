@@ -6,6 +6,7 @@
 """
 
 passport = require 'passport'
+facebookStrategy = require('passport-facebook').Strategy
 
 module.exports = 
 	_config: 
@@ -13,7 +14,9 @@ module.exports =
         shortcuts: false
         rest: false
     login: (req, res) ->
-        passport.authenticate 'local', (err, user, info) ->
+        console.log 'Log in user', req.params
+        fn = passport.authenticate 'local', (err, user, info) ->
+            console.log user, info
             if err || !user
                 return res.send
                     message: info.message
@@ -24,6 +27,7 @@ module.exports =
                 res.send
                     message: info.message
                     user: user
+        fn(req, res)
     logout: (req, res) ->
         req.logout()
         res.redirect('/')

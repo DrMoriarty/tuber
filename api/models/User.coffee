@@ -46,9 +46,6 @@ module.exports =
         fbId: 
             type: 'string'
             unique: true
-        login:
-            type: 'string'
-            unique: true
         password: 
             type: 'string'
             minLength: 5
@@ -97,11 +94,6 @@ module.exports =
             return obj
 
     beforeCreate: (user, cb) ->
-        if not user.login?
-            if user.email
-                user.login = user.email
-            else if user.fbId
-                user.login = user.fbId
         if user.password?
             bcrypt.genSalt 10, (err, salt) ->
                 bcrypt.hash user.password, salt, (err, hash) ->

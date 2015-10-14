@@ -49,7 +49,9 @@ module.exports.routes = {
     },
 
     'post /recovery': 'AuthController.generatePasswordRecovery',
-    'get /recovery': 'AuthController.usePasswordRecovery'
+    'get /recovery': 'AuthController.usePasswordRecovery',
+    'get /auth/facebook': 'AuthController.loginFb',
+    'get /auth/facebook/callback': 'AuthController.loginFbCallback'
 
     /***************************************************************************
      *                                                                          *

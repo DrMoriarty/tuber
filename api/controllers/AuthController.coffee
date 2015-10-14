@@ -32,6 +32,13 @@ module.exports =
         req.logout()
         res.redirect('/')
 
+    loginFb: (req, res) ->
+        fn = passport.authenticate('facebook')
+        fn(req, res)
+    loginFbCallback: (req, res) ->
+        fn = passport.authenticate('facebook', {successRedirect: '/', failureRedirect: '/login'})
+        fn(req, res)
+
     generatePasswordRecovery: (req, res) ->
         # TODO
         res.send('TODO')

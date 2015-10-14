@@ -45,13 +45,13 @@ passport.use(new LocalStrategy({
 
 passport.use(new FacebookStrategy({
     clientID: '905711859517805',
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://www.example.com/auth/facebook/callback"
+    clientSecret: '83643dddd7b6e575c4d8ed655750e6e3',
+    callbackURL: "http://5.101.119.187/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate(..., function(err, user) {
-      if (err) { return done(err); }
-      done(null, user);
-    });
+      User.findOrCreate({fbId: profile.id}, {fbId: profile.id, firstname: profile.givenName, lastname: profile.familyName}, function(err, user) {
+          if (err) { return done(err); }
+          done(null, user);
+      });
   }
 ));

@@ -49,7 +49,11 @@ passport.use(new FacebookStrategy({
     callbackURL: "http://5.101.119.187/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-      User.findOrCreate({fbId: profile.id}, {fbId: profile.id, firstname: profile.givenName, lastname: profile.familyName}, function(err, user) {
+      fname = profile.name.givenName;
+      lname = profile.name.familyName;
+      if(!fname) fname = profile.displayName;
+      if(!lname) lname = "";
+      User.findOrCreate({fbId: profile.id}, {fbId: profile.id, firstname: fname, lastname: lname}, function(err, user) {
           if (err) { return done(err); }
           done(null, user);
       });

@@ -24,21 +24,27 @@ module.exports =
         address1: 
             type: 'string'
             required: true
+            defaultsTo: ''
         address2: 
             type: 'string'
             required: true
+            defaultsTo: ''
         zip: 
             type: 'string'
             required: true
+            defaultsTo: ''
         city:
             type: 'string'
             required: true
+            defaultsTo: ''
         country:
             type: 'string'
             required: true
+            defaultsTo: ''
         phone: 
             type: 'string'
             required: true
+            defaultsTo: ''
         birthdate: 'date'
         email:
             type: 'email'

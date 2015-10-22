@@ -32,6 +32,9 @@ module.exports.policies = {
     },
     'RouteController': {
         '*': 'isAuthenticated'
+    },
+    'BraintreeController': {
+        '*': 'isAuthenticated'
     }
 
   /***************************************************************************

@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "braintree": "^1.29.0",
     "coffee-script": "^1.10.0",
     "ejs": "~0.8.4",
     "grunt": "0.4.2",

@@ -51,7 +51,9 @@ module.exports.routes = {
     'post /recovery': 'AuthController.generatePasswordRecovery',
     'get /recovery': 'AuthController.usePasswordRecovery',
     'get /auth/facebook': 'AuthController.loginFb',
-    'get /auth/facebook/callback': 'AuthController.loginFbCallback'
+    'get /auth/facebook/callback': 'AuthController.loginFbCallback',
+    'get /braintree/token': 'BraintreeController.clientToken',
+    '/braintree/transaction': 'BraintreeController.transaction'
 
     /***************************************************************************
      *                                                                          *

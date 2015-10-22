@@ -14,7 +14,7 @@ module.exports =
         shortcuts: false
         rest: false
     login: (req, res) ->
-        console.log 'Log in user', req.params
+        #console.log 'Log in user', req.params
         fn = passport.authenticate 'local', (err, user, info) ->
             console.log user, info
             if err || !user

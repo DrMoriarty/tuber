@@ -1,0 +1,7 @@
+{
+  "name": "pilgrim-parser",
+  "dependencies": {
+    "querystring": "^0.2.0",
+    "request": "^2.40.0"
+  }
+}

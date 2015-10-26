@@ -35,6 +35,9 @@ module.exports.policies = {
     },
     'BraintreeController': {
         '*': 'isAuthenticated'
+    },
+    'SearchController': {
+        '*': 'isAuthenticated'
     }
 
   /***************************************************************************

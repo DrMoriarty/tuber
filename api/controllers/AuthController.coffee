@@ -48,3 +48,16 @@ module.exports =
     usePasswordRecovery: (req, res) ->
         # TODO
         res.send('TODO')
+
+    install: (req, res) ->
+        User.findOne({admin: true}).exec (err, admin) ->
+            if err? or !admin
+                # create an admin
+                User.create({firstname: 'Admin', lastname: 'Admin', email: 'admin@me.com', password: 'admin', admin: true, address1: 'Kremlin sq.', address2: 'bt. 1', zip: '160000', city: 'Vologda', country: 'Russia', phone: '01'}).exec (err, admin) ->
+                    if err?
+                        console.log err
+                        res.send err
+                    else
+                        res.send 'Service successfully installed'
+            else
+                res.redirect('/')

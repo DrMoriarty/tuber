@@ -52,8 +52,16 @@ module.exports.routes = {
     'get /recovery': 'AuthController.usePasswordRecovery',
     'get /auth/facebook': 'AuthController.loginFb',
     'get /auth/facebook/callback': 'AuthController.loginFbCallback',
+    'get /install': 'AuthController.install',
+
     'get /braintree/token': 'BraintreeController.clientToken',
-    '/braintree/transaction': 'BraintreeController.transaction'
+    '/braintree/transaction': 'BraintreeController.transaction',
+
+    'get /search/route': 'SearchController.searchRoute',
+    'get /search/parcel': 'SearchController.searchParcel',
+    'get /search/parcelEllipse': 'SearchController.searchParcelInEllipse',
+    'get /search/lastMessages': 'SearchController.messages',
+    '/tracking': 'TrackingController.track'
 
     /***************************************************************************
      *                                                                          *

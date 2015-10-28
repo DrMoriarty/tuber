@@ -27,16 +27,47 @@ module.exports.policies = {
   ***************************************************************************/
 
     '*': true,
+    'AddressController': {
+        '*': 'isAuthenticated'
+    },
+    'AuthController': {
+        '*': 'isAuthenticated',
+        'login': true,
+        'install': true
+    },
+    'BraintreeController': {
+        '*': 'isAuthenticated'
+    },
+    'CityController': {
+        '*': 'isAuthenticated',
+        'create': true
+    },
+    'CountryController': {
+        '*': 'isAuthenticated',
+        'create': true
+    },
+    'MessageController': {
+        '*': 'isAuthenticated'
+    },
     'ParcelController': {
+        '*': 'isAuthenticated'
+    },
+    'PersonController': {
         '*': 'isAuthenticated'
     },
     'RouteController': {
         '*': 'isAuthenticated'
     },
-    'BraintreeController': {
+    'RoutePointController': {
         '*': 'isAuthenticated'
     },
     'SearchController': {
+        '*': 'isAuthenticated'
+    },
+    'TrackingController': {
+        '*': 'isAuthenticated'
+    },
+    'UserController': {
         '*': 'isAuthenticated'
     }
 

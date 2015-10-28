@@ -20,8 +20,8 @@ module.exports =
         type: 'string'
         required: false
     latitude:
-        type: 'number'
+        type: 'float'
         defaultsTo: 0
     longitude:
-        type: 'number'
+        type: 'float'
         defaultsTo: 0

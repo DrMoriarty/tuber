@@ -33,7 +33,8 @@ module.exports.policies = {
     'AuthController': {
         '*': 'isAuthenticated',
         'login': true,
-        'install': true
+        'install': true,
+        'logout': true
     },
     'BraintreeController': {
         '*': 'isAuthenticated'

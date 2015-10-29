@@ -6,22 +6,27 @@
 """
 
 module.exports = 
-  attributes: 
-    country: 
-        type: 'string'
-        required: true
-    city:
-        type: 'string'
-        required: true
-    address1:
-        type: 'string'
-        required: false
-    address2:
-        type: 'string'
-        required: false
-    latitude:
-        type: 'float'
-        defaultsTo: 0
-    longitude:
-        type: 'float'
-        defaultsTo: 0
+    attributes: 
+        country: 
+            type: 'string'
+            required: true
+        city:
+            type: 'string'
+            required: true
+        address1:
+            type: 'string'
+            required: false
+        address2:
+            type: 'string'
+            required: false
+        latitude:
+            type: 'float'
+            defaultsTo: 0
+        longitude:
+            type: 'float'
+            defaultsTo: 0
+        owner:
+            model: 'User'
+
+    beforeCreate: (address, next) ->
+        next()

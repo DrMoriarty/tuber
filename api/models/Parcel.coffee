@@ -35,6 +35,8 @@ module.exports =
         arriveDate: 
             type: 'datetime'
             required: true
-        status: 'string'
+        status: 
+            type: 'string'
+            enum: ['draft', 'published', 'accepted', 'started', 'arrived']
 
 

@@ -30,3 +30,5 @@ module.exports =
             type: 'string'
             required: true
         email: 'email'
+        owner:
+            model: 'User'

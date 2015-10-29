@@ -1,13 +1,11 @@
 """
- AddressController
+ PersonController
 
- @description :: Server-side logic for managing addresses
+ @description :: Server-side logic for managing people
  @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
 """
 
-#blueprintsFind = require '../../node_modules/sails/lib/hooks/blueprints/actions/find'
 blueprintsFindOne = require '../../node_modules/sails/lib/hooks/blueprints/actions/findOne'
-#blueprintsCreate = require '../../node_modules/sails/lib/hooks/blueprints/actions/create'
 actionUtil = require '../../node_modules/sails/lib/hooks/blueprints/actionUtil'
 
 module.exports = 

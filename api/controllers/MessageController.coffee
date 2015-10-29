@@ -1,13 +1,11 @@
 """
- AddressController
+ MessageController
 
- @description :: Server-side logic for managing addresses
+ @description :: Server-side logic for managing messages
  @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
 """
 
-#blueprintsFind = require '../../node_modules/sails/lib/hooks/blueprints/actions/find'
 blueprintsFindOne = require '../../node_modules/sails/lib/hooks/blueprints/actions/findOne'
-#blueprintsCreate = require '../../node_modules/sails/lib/hooks/blueprints/actions/create'
 actionUtil = require '../../node_modules/sails/lib/hooks/blueprints/actionUtil'
 
 module.exports = 
@@ -17,7 +15,7 @@ module.exports =
 
         data = actionUtil.parseCriteria(req)
         if not req.user.admin
-            data.owner = req.user.id
+            data.sender = req.user.id
         console.log 'Filter data', data
         query = Address.find()
             .where( data )
@@ -32,7 +30,7 @@ module.exports =
 
     create: (req, res) ->
         data = actionUtil.parseValues(req)
-        data.owner = req.user.id
+        data.sender = req.user.id
         Address.create(data).exec( (err, newInstance) ->
             if err
                 return res.negotiate(err)

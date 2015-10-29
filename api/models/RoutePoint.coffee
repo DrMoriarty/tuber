@@ -6,12 +6,14 @@
 """
 
 module.exports = 
-  attributes: 
-    address:
-        model: 'Address'
-        required: true
-    route:
-        model: 'Route'
-        required: true
-    date:
-        type: 'datetime'
+    attributes: 
+        address:
+            model: 'Address'
+            required: true
+        route:
+            model: 'Route'
+            required: true
+        date:
+            type: 'datetime'
+        owner:
+            model: 'User'

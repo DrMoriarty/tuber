@@ -1,0 +1,118 @@
+doctype html
+html
+  head
+    // Meta, title, CSS, favicons, etc.
+    meta(charset='utf-8')
+    title Fusion - A Responsive HTML5 Admin UI Template Theme
+    meta(name='keywords', content='HTML5 Bootstrap 3 Admin Template UI Theme')
+    meta(name='description', content='Fusion - A Responsive HTML5 Admin UI Template Theme')
+    meta(name='author', content='AdminDesigns')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    // Font CSS (Via CDN)
+    link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800')
+    // Bootstrap CSS
+    link(rel='stylesheet', type='text/css', href='vendor/bootstrap/css/bootstrap.min.css')
+    // Theme CSS
+    link(rel='stylesheet', type='text/css', href='css/vendor.css')
+    link(rel='stylesheet', type='text/css', href='css/theme.css')
+    link(rel='stylesheet', type='text/css', href='css/utility.css')
+    link(rel='stylesheet', type='text/css', href='css/custom.css')
+    // Favicon
+    link(rel='shortcut icon', href='img/favicon.ico')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js')
+  body
+    // Start: Header
+    header.navbar.navbar-fixed-top
+      .navbar-branding
+        span#toggle_sidemenu_l.glyphicons.glyphicons-show_lines
+        a.navbar-brand(href='/admin')
+          img(src='img/logos/header-logo.png')
+      .navbar-left
+        .navbar-divider
+      .navbar-right
+        .navbar-search
+          input#HeaderSearch(type='text', placeholder='Search...', value='Search...')
+        .navbar-menus
+    // End: Header
+    // Start: Main
+    #main
+      // Start: Sidebar
+      aside#sidebar_left
+        .user-info
+          .media
+            .pull-left
+              .media-object.border.border-purple.br64.bw2.p2
+                img.br64(src='img/avatars/5.jpg', alt='...')
+            .mobile-link
+              span.glyphicons.glyphicons-show_big_thumbnails
+            .media-body
+              h5.media-heading.mt5.mbn.fw700
+                | #{user.fullname()}
+              .media-links.fs11
+                a(href='/logout') Sign Out
+        .user-divider
+        .sidebar-menu
+          ul.nav.sidebar-nav
+            li
+              a.ajax-disable(href='/admin')
+                span.glyphicons.glyphicons-home
+                span.sidebar-title Dashboard
+                //span.sidebar-title-tray
+                  span.label.label-xs.bg-purple2 New
+            li
+              a.ajax-disable(href='/admin/carrier')
+                span.glyphicons.glyphicons-truck
+                span.sidebar-title Carriers
+            li
+              a(href='/admin/sender')
+                span.glyphicons.glyphicons-gift
+                span.sidebar-title Senders
+            li
+              a(href='/admin/route')
+                span.glyphicons.glyphicons-cars
+                span.sidebar-title Routes
+            li
+              a(href='/admin/parcel')
+                span.glyphicons.glyphicons-cargo
+                span.sidebar-title Parcels
+            li
+              a(href='/')
+                span.glyphicons.glyphicons-user_add
+                span.sidebar-title Register a carrier
+            li
+              a(href='/')
+                span.glyphicons.glyphicons-user_add
+                span.sidebar-title Register a sender
+      // End: Sidebar
+      // Start: Content
+      section#content_wrapper
+        #topbar
+          block topbar
+        #content
+          block content
+      // End: Content
+    // End: Main
+    // Google Map API
+    script(type='text/javascript', src='http://maps.google.com/maps/api/js?sensor=true')
+    // jQuery
+    script(type='text/javascript', src='vendor/jquery/jquery-1.11.1.min.js')
+    script(type='text/javascript', src='vendor/jquery/jquery_ui/jquery-ui.min.js')
+    // Bootstrap
+    script(type='text/javascript', src='vendor/bootstrap/js/bootstrap.min.js')
+    // Theme Javascript
+    script(type='text/javascript', src='js/utility/spin.min.js')
+    script(type='text/javascript', src='js/utility/underscore-min.js')
+    script(type='text/javascript', src='js/main.js')
+    script(type='text/javascript', src='js/ajax.js')
+    script(type='text/javascript', src='js/custom.js')
+    script(type='text/javascript').
+      jQuery(document).ready(function () {
+      "use strict";
+      // Init Theme Core
+      Core.init();
+      // Enable Ajax Loading
+      // Ajax.init();
+      });

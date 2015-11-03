@@ -30,6 +30,9 @@ module.exports.policies = {
     'AddressController': {
         '*': 'isAuthenticated'
     },
+    'AdminController': {
+        '*': 'isAdmin'
+    },
     'AuthController': {
         '*': 'isAuthenticated',
         'login': true,

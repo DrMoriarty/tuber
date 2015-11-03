@@ -61,7 +61,23 @@ module.exports.routes = {
     'get /search/parcel': 'SearchController.searchParcel',
     'get /search/parcelEllipse': 'SearchController.searchParcelInEllipse',
     'get /search/lastMessages': 'SearchController.messages',
-    '/tracking': 'TrackingController.track'
+    '/tracking': 'TrackingController.track',
+
+    'get /admin': 'AdminController.main',
+    'get /admin/city': 'AdminController.city',
+    'get /admin/city/:id': 'AdminController.city',
+    'get /admin/country': 'AdminController.country',
+    'get /admin/country/:id': 'AdminController.country',
+    'get /admin/parcel': 'AdminController.parcel',
+    'get /admin/parcel/:id': 'AdminController.parcel',
+    'get /admin/person': 'AdminController.person',
+    'get /admin/person/:id': 'AdminController.person',
+    'get /admin/route': 'AdminController.route',
+    'get /admin/route/:id': 'AdminController.route',
+    'get /admin/carrier': 'AdminController.carrier',
+    'get /admin/carrier/:id': 'AdminController.carrier',
+    'get /admin/sender': 'AdminController.sender',
+    'get /admin/sender/:id': 'AdminController.sender'
 
     /***************************************************************************
      *                                                                          *

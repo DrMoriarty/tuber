@@ -17,7 +17,7 @@ module.exports =
         if not req.user.admin
             data.owner = req.user.id
         console.log 'Filter data', data
-        query = Address.find()
+        query = Person.find()
             .where( data )
             .limit( actionUtil.parseLimit(req) )
             .skip( actionUtil.parseSkip(req) )
@@ -31,7 +31,7 @@ module.exports =
     create: (req, res) ->
         data = actionUtil.parseValues(req)
         data.owner = req.user.id
-        Address.create(data).exec( (err, newInstance) ->
+        Person.create(data).exec( (err, newInstance) ->
             if err
                 return res.negotiate(err)
             res.created(newInstance)

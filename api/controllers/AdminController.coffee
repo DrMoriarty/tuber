@@ -17,14 +17,17 @@ module.exports =
 
     parcel: (req, res) ->
         id = req.param('id')
-        Parcel.findOne(id).exec (err, result) ->
+        Parcel.findOne(id).populateAll().exec (err, result) ->
+            console.log result
             if err or !result
                 res.notFound()
             else
                 res.view 'parcel', {user: req.user, result: result}
         
     parcels: (req, res) ->
-        res.view 'parcels', {user: req.user}
+        offset = req.param('offset') or 0
+        Parcel.find().skip(offset).limit(50).populateAll().exec (err, result) ->
+            res.view 'parcels', {user: req.user, result: result}
 
     newParcel: (req, res) ->
         User.find({driver: false}).exec (err, senders) ->

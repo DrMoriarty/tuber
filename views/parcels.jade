@@ -27,13 +27,19 @@ block content
               tr
                 th #
                 th Sender
+                th Size
+                th Weight
                 th Departure time
                 th Arrival time
+                th Status
             tbody
               if result
                 each it in result
-                  tr(onclick='javascript:location.href="/admin/route/#{it.id}"')
+                  tr(onclick='javascript:location.href="/admin/parcel/#{it.id}"')
                     td= it.id
-                    td= it.owner.fullname()
+                    td #{it.owner.firstname} #{it.owner.lastname}
+                    td #{it.length} x #{it.width} x #{it.depth}
+                    td= it.weight
                     td= it.pickupDate
                     td= it.arriveDate
+                    td= it.status

@@ -12,21 +12,22 @@ module.exports =
             required: true
         driver:
             model: 'User'
+            defaultsTo: null
         fromPerson: 
             model: 'Person'
         toPerson:
             model: 'Person'
         length: 
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         width:
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         depth:
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         weight:
-            type: 'number'
+            type: 'integer'
             defaultsTo: 0
         comment: 'string'
         pickupDate: 

@@ -9,5 +9,86 @@ block topbar
       li.crumb-link
         a(href='/admin/parcel') Parcels
       li.crumb-active
-        a(href='/admin/parcel/id') Parcel
+        a(href='/admin/parcel/#{result.id}') Parcel
+
+block content
+  .row
+    .col-md-12
+      .panel
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-pencil
+            |  Edit parcel
+        .panel-body
+          .alert.alert-theme Yellow fields are required!
+          form#altForm.cmxform(method='post', action='/api/parcel/#{result.id}')
+            .form-group
+              label.control-label Sender
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                .form-control-static.text-muted=  result.owner.fullname()
+            .form-group.has-warning
+              label(for='length') Length
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#length.form-control.length(name='length', type='text', placeholder='Length in cm', required='', value='#{result.length}')
+            .form-group.has-warning
+              label(for='width') Width
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#width.form-control.width(name='width', type='text', placeholder='Width in cm', required='', value='#{result.width}')
+            .form-group.has-warning
+              label(for='depth') Depth
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#depth.form-control.depth(name='depth', type='text', placeholder='Depth in cm', required='', value='#{result.depth}')
+            .form-group.has-warning
+              label(for='weight') Weight
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#weight.form-control.weight(name='weight', type='text', placeholder='Weight in cm', required='', value='#{result.weight}')
+            .form-group.has-warning
+              label(for='pickupDate') Departure date
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-calendar
+                input#pickupDate.form-control.mtn.pickupDate(name='pickupDate', type='text', placeholder='', value='#{result.pickupDate}')
+            .form-group.has-warning
+              label.control-label(for='status') Status
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                select#status(name='status', required='')
+                  option(value='draft', selected=(result.status == 'draft')) Draft
+                  option(value='published', selected=(result.status == 'published')) Published
+                  option(value='accepted', selected=(result.status == 'accepted')) Accepted
+                  option(value='started', selected=(result.status == 'started')) Started
+                  option(value='arrived', selected=(result.status == 'arrived')) Arrived
+            .form-group
+              input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
+
+block script
+  script(type='text/javascript').
+    jQuery(document).ready(function () {
+      // validate the comment form when it is submitted
+      $("#altForm").validate({
+        submitHandler: function(form) {
+          $.post(form.action, $(form).serialize(), function(data, status) {
+            location.href = '/admin/parcel';
+          });
+        }
+      });
+      $('.phone').mask('+9 (999) 999-9999');
+      $('#sender').multiselect({
+        enableFiltering: true,
+      });
+      $('#status').multiselect();
+      //Init jquery Date Picker
+      $('.pickupDate').datepicker()
+    });
 

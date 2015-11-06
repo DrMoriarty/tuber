@@ -80,8 +80,9 @@ block script
       // validate the comment form when it is submitted
       $("#altForm").validate({
         submitHandler: function(form) {
-          $.post(form.action, $(form).serialize());
-          location.href = '/admin/parcel';
+          $.post(form.action, $(form).serialize(), function(data, status) {
+            location.href = '/admin/parcel';
+          });
         }
       });
       $('.phone').mask('+9 (999) 999-9999');

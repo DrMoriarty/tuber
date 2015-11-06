@@ -17,11 +17,12 @@ module.exports =
         if not req.user.admin
             data.owner = req.user.id
         console.log 'Filter data', data
-        query = Address.find()
+        query = Parcel.find()
             .where( data )
             .limit( actionUtil.parseLimit(req) )
             .skip( actionUtil.parseSkip(req) )
             .sort( actionUtil.parseSort(req) )
+        #    .populateAll()
         query = actionUtil.populateEach(query, req)
         query.exec (err, matchingRecords) ->
             if (err)
@@ -30,8 +31,11 @@ module.exports =
 
     create: (req, res) ->
         data = actionUtil.parseValues(req)
-        data.owner = req.user.id
-        Address.create(data).exec( (err, newInstance) ->
+        if not req.user.admin
+            data.owner = req.user.id
+        else if !data.owner
+            data.owner = req.user.id
+        Parcel.create(data).exec( (err, newInstance) ->
             if err
                 return res.negotiate(err)
             res.created(newInstance)

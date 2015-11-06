@@ -26,31 +26,31 @@ block content
               label.control-label Sender
               .input-group
                 span.input-group-addon
-                  i.fa.fa-globe
+                  i.fa.fa-user
                 .form-control-static.text-muted=  result.owner.fullname()
             .form-group.has-warning
               label(for='length') Length
               .input-group
                 span.input-group-addon
-                  i.fa.fa-home
+                  i.fa.fa-gift
                 input#length.form-control.length(name='length', type='text', placeholder='Length in cm', required='', value='#{result.length}')
             .form-group.has-warning
               label(for='width') Width
               .input-group
                 span.input-group-addon
-                  i.fa.fa-home
+                  i.fa.fa-gift
                 input#width.form-control.width(name='width', type='text', placeholder='Width in cm', required='', value='#{result.width}')
             .form-group.has-warning
               label(for='depth') Depth
               .input-group
                 span.input-group-addon
-                  i.fa.fa-home
+                  i.fa.fa-gift
                 input#depth.form-control.depth(name='depth', type='text', placeholder='Depth in cm', required='', value='#{result.depth}')
             .form-group.has-warning
               label(for='weight') Weight
               .input-group
                 span.input-group-addon
-                  i.fa.fa-home
+                  i.fa.fa-gift
                 input#weight.form-control.weight(name='weight', type='text', placeholder='Weight in cm', required='', value='#{result.weight}')
             .form-group.has-warning
               label(for='pickupDate') Departure date
@@ -62,7 +62,7 @@ block content
               label.control-label(for='status') Status
               .input-group
                 span.input-group-addon
-                  i.fa.fa-globe
+                  i.fa.fa-bolt
                 select#status(name='status', required='')
                   option(value='draft', selected=(result.status == 'draft')) Draft
                   option(value='published', selected=(result.status == 'published')) Published

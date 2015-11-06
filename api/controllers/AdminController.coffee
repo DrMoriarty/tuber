@@ -69,7 +69,7 @@ module.exports =
             res.view 'carriers', {user: req.user, result: result}
 
     newCarrier: (req, res) ->
-        res.view 'newCarrier', {user: req.user}
+        res.view 'newcarrier', {user: req.user}
 
     sender: (req, res) ->
         id = req.param('id')
@@ -85,7 +85,7 @@ module.exports =
             res.view 'senders', {user: req.user, result: result}
 
     newSender: (req, res) ->
-        res.view 'newSender', {user: req.user}
+        res.view 'newsender', {user: req.user}
 
     search: (req, res) ->
         res.view 'search', {user: req.user}

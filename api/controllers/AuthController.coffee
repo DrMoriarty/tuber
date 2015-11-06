@@ -14,9 +14,8 @@ module.exports =
         shortcuts: false
         rest: false
     login: (req, res) ->
-        #console.log 'Log in user', req.params
         fn = passport.authenticate 'local', (err, user, info) ->
-            console.log user, info
+            #console.log err, user, info
             if err || !user
                 return res.send
                     message: info.message
@@ -24,13 +23,14 @@ module.exports =
             req.logIn user, (err) ->
                 if err
                     res.send(err)
-                res.send
-                    message: info.message
-                    user: user
+                else
+                    res.send
+                        message: info.message
+                        user: user
         fn(req, res)
     logout: (req, res) ->
         req.logout()
-        res.redirect('/')
+        res.redirect('/login')
 
     loginFb: (req, res) ->
         fn = passport.authenticate('facebook')

@@ -11,14 +11,14 @@ html
     // Font CSS (Via CDN)
     link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800')
     // Bootstrap CSS
-    link(rel='stylesheet', type='text/css', href='vendor/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='/vendor/bootstrap/css/bootstrap.min.css')
     // Theme CSS
-    link(rel='stylesheet', type='text/css', href='css/vendor.css')
-    link(rel='stylesheet', type='text/css', href='css/theme.css')
-    link(rel='stylesheet', type='text/css', href='css/utility.css')
-    link(rel='stylesheet', type='text/css', href='css/custom.css')
+    link(rel='stylesheet', type='text/css', href='/css/vendor.css')
+    link(rel='stylesheet', type='text/css', href='/css/theme.css')
+    link(rel='stylesheet', type='text/css', href='/css/utility.css')
+    link(rel='stylesheet', type='text/css', href='/css/custom.css')
     // Favicon
-    link(rel='shortcut icon', href='img/favicon.ico')
+    link(rel='shortcut icon', href='/img/favicon.ico')
     // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
     //if lt IE 9
       script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
@@ -29,7 +29,7 @@ html
       .navbar-branding
         span#toggle_sidemenu_l.glyphicons.glyphicons-show_lines
         a.navbar-brand(href='/admin')
-          img(src='img/logos/header-logo.png')
+          img(src='/img/logos/header-logo.png')
       .navbar-left
         .navbar-divider
       .navbar-right
@@ -43,9 +43,9 @@ html
       aside#sidebar_left
         .user-info
           .media
-            .pull-left
+            a.pull-left(href='/admin/profile/edit')
               .media-object.border.border-purple.br64.bw2.p2
-                img.br64(src='img/avatars/5.jpg', alt='...')
+                img.br64(src='/img/avatars/5.jpg', alt='...')
             .mobile-link
               span.glyphicons.glyphicons-show_big_thumbnails
             .media-body
@@ -70,7 +70,7 @@ html
               a(href='/admin/sender')
                 span.glyphicons.glyphicons-gift
                 span.sidebar-title Senders
-            li
+            //-li
               a(href='/admin/route')
                 span.glyphicons.glyphicons-cars
                 span.sidebar-title Routes
@@ -79,11 +79,11 @@ html
                 span.glyphicons.glyphicons-cargo
                 span.sidebar-title Parcels
             li
-              a(href='/')
+              a(href='/admin/carrier/new')
                 span.glyphicons.glyphicons-user_add
                 span.sidebar-title Register a carrier
             li
-              a(href='/')
+              a(href='/admin/sender/new')
                 span.glyphicons.glyphicons-user_add
                 span.sidebar-title Register a sender
       // End: Sidebar
@@ -98,16 +98,22 @@ html
     // Google Map API
     script(type='text/javascript', src='http://maps.google.com/maps/api/js?sensor=true')
     // jQuery
-    script(type='text/javascript', src='vendor/jquery/jquery-1.11.1.min.js')
-    script(type='text/javascript', src='vendor/jquery/jquery_ui/jquery-ui.min.js')
+    script(type='text/javascript', src='/vendor/jquery/jquery-1.11.1.min.js')
+    script(type='text/javascript', src='/vendor/jquery/jquery_ui/jquery-ui.min.js')
     // Bootstrap
-    script(type='text/javascript', src='vendor/bootstrap/js/bootstrap.min.js')
+    script(type='text/javascript', src='/vendor/bootstrap/js/bootstrap.min.js')
+    // Plugins
+    script(type='text/javascript', src='/vendor/plugins/validate/jquery.validate.js')
+    script(type='text/javascript', src='/vendor/plugins/jquerymask/jquery.maskedinput.min.js')
+    script(type='text/javascript', src='/vendor/plugins/multiselect/bootstrap-multiselect.js')
+    script(type='text/javascript', src='/vendor/plugins/timepicker/bootstrap-timepicker.min.js')
+    script(type='text/javascript', src='/vendor/plugins/datepicker/bootstrap-datepicker.js')
     // Theme Javascript
-    script(type='text/javascript', src='js/utility/spin.min.js')
-    script(type='text/javascript', src='js/utility/underscore-min.js')
-    script(type='text/javascript', src='js/main.js')
-    script(type='text/javascript', src='js/ajax.js')
-    script(type='text/javascript', src='js/custom.js')
+    script(type='text/javascript', src='/js/utility/spin.min.js')
+    script(type='text/javascript', src='/js/utility/underscore-min.js')
+    script(type='text/javascript', src='/js/main.js')
+    script(type='text/javascript', src='/js/ajax.js')
+    script(type='text/javascript', src='/js/custom.js')
     script(type='text/javascript').
       jQuery(document).ready(function () {
       "use strict";
@@ -116,3 +122,4 @@ html
       // Enable Ajax Loading
       // Ajax.init();
       });
+    block script

@@ -1,0 +1,94 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-link
+        a(href='/admin/parcel') Parcels
+      li.crumb-active
+        a(href='/admin/parcel/new') New parcel
+
+block content
+  .row
+    .col-md-12
+      .panel
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-pencil
+            |  New parcel
+        .panel-body
+          .alert.alert-theme Yellow fields are required!
+          form#altForm.cmxform(method='post', action='/api/parcel')
+            .form-group.has-warning
+              label.control-label(for='sender') Sender
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                select#sender(name='owner', required='')
+                  each sender in senders
+                    option(value='#{sender.id}')= sender.fullname()
+            .form-group.has-warning
+              label(for='length') Length
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#length.form-control.length(name='length', type='text', placeholder='Length in cm', required='')
+            .form-group.has-warning
+              label(for='width') Width
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#width.form-control.width(name='width', type='text', placeholder='Width in cm', required='')
+            .form-group.has-warning
+              label(for='depth') Depth
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#depth.form-control.depth(name='depth', type='text', placeholder='Depth in cm', required='')
+            .form-group.has-warning
+              label(for='weight') Weight
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#weight.form-control.weight(name='weight', type='text', placeholder='Weight in cm', required='')
+            .form-group.has-warning
+              label(for='pickupDate') Departure date
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-calendar
+                input#pickupDate.form-control.mtn.pickupDate(name='pickupDate', type='text', placeholder='')
+            .form-group.has-warning
+              label.control-label(for='status') Status
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                select#status(name='status', required='')
+                  option(value='draft') Draft
+                  option(value='published') Published
+                  option(value='accepted') Accepted
+                  option(value='started') Started
+                  option(value='arrived') Arrived
+            .form-group
+              input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
+
+block script
+  script(type='text/javascript').
+    jQuery(document).ready(function () {
+      // validate the comment form when it is submitted
+      $("#altForm").validate({
+        submitHandler: function(form) {
+          $.post(form.action, $(form).serialize());
+          location.href = '/admin/parcel';
+        }
+      });
+      $('.phone').mask('+9 (999) 999-9999');
+      $('#sender').multiselect({
+        enableFiltering: true,
+      });
+      $('#status').multiselect();
+      //Init jquery Date Picker
+      $('.pickupDate').datepicker()
+    });

@@ -1,0 +1,39 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-active
+        a(href='/admin/carrier') Carriers
+  .topbar-right
+    ol.breadcrumb
+      a(href='/admin/carrier/new')
+        button.btn.btn-info(class='button') Create new
+
+block content
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th #
+                th First Name
+                th Last Name
+                th ZIP
+            tbody
+              if result
+                each it in result
+                  tr(onclick='javascript:location.href="/admin/carrier/#{it.id}"')
+                    td= it.id
+                    td= it.firstname
+                    td= it.lastname
+                    td= it.zip

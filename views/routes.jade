@@ -1,0 +1,35 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-active
+        a(href='/admin/route') Routes
+
+block content
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th #
+                th Driver
+                th Departure time
+                th Arrival time
+            tbody
+              if result
+                each it in result
+                  tr(onclick='javascript:location.href="/admin/route/#{it.id}"')
+                    td= it.id
+                    td= it.owner.fullname()
+                    td= it.departure
+                    td= it.arrival

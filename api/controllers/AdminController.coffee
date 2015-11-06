@@ -3,34 +3,87 @@ module.exports =
     main: (req, res) ->
         res.view 'blank', {user: req.user}
 
-    country: (req, res) ->
-        id = req.param('id')
-        res.send 'TODO'
+    profile: (req, res) ->
+        res.view 'profile', {user: req.user}
 
-    city: (req, res) ->
-        id = req.param('id')
-        res.send 'TODO'
+    profileEdit: (req, res) ->
+        res.view 'profileEdit', {user: req.user}
+
+    countries: (req, res) ->
+        res.view 'countries', {user: req.user}
+
+    cities: (req, res) ->
+        res.view 'cities', {user: req.user}
 
     parcel: (req, res) ->
         id = req.param('id')
-        res.send 'TODO'
+        Parcel.findOne(id).exec (err, result) ->
+            if err or !result
+                res.notFound()
+            else
+                res.view 'parcel', {user: req.user, result: result}
+        
+    parcels: (req, res) ->
+        res.view 'parcels', {user: req.user}
+
+    newParcel: (req, res) ->
+        User.find({driver: false}).exec (err, senders) ->
+            res.view 'newParcel', {user: req.user, senders: senders}
         
     person: (req, res) ->
         id = req.param('id')
-        res.send 'TODO'
+        Person.findOne(id).exec (err, result) ->
+            if err or !result
+                res.notFound()
+            else
+                res.view 'person', {user: req.user, result: result}
+
+    persons: (req, res) ->
+        res.view 'persons', {user: req.user}
 
     route: (req, res) ->
         id = req.param('id')
-        res.send 'TODO'
+        Route.findOne(id).exec (err, result) ->
+            if err or !result
+                res.notFound()
+            else
+                res.view 'route', {user: req.user, result: result}
+
+    routes: (req, res) ->
+        res.view 'routes', {user: req.user}
 
     carrier: (req, res) ->
         id = req.param('id')
-        res.send 'TODO'
+        User.findOne(id).exec (err, result) ->
+            if err or !result
+                res.notFound()
+            else
+                res.view 'carrier', {user: req.user, result: result}
+
+    carriers: (req, res) ->
+        offset = req.param('offset') or 0
+        User.find({driver: true}).skip(offset).limit(50).exec (err, result) ->
+            res.view 'carriers', {user: req.user, result: result}
+
+    newCarrier: (req, res) ->
+        res.view 'newCarrier', {user: req.user}
 
     sender: (req, res) ->
         id = req.param('id')
-        res.send 'TODO'
+        User.findOne(id).exec (err, result) ->
+            if err or !result
+                res.notFound()
+            else
+                res.view 'sender', {user: req.user, result: result}
+
+    senders: (req, res) ->
+        offset = req.param('offset') or 0
+        User.find({driver: false}).skip(offset).limit(50).exec (err, result) ->
+            res.view 'senders', {user: req.user, result: result}
+
+    newSender: (req, res) ->
+        res.view 'newSender', {user: req.user}
 
     search: (req, res) ->
-        res.send 'TODO'
+        res.view 'search', {user: req.user}
 

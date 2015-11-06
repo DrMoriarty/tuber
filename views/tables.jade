@@ -1,0 +1,2175 @@
+doctype html
+html
+  head
+    // Meta, title, CSS, favicons, etc.
+    meta(charset='utf-8')
+    title Fusion - A Responsive HTML5 Admin UI Template Theme
+    meta(name='keywords', content='HTML5 Bootstrap 3 Admin Template UI Theme')
+    meta(name='description', content='Fusion - A Responsive HTML5 Admin UI Template Theme')
+    meta(name='author', content='AdminDesigns')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    // Font CSS (Via CDN)
+    link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800')
+    // Bootstrap CSS
+    link(rel='stylesheet', type='text/css', href='vendor/bootstrap/css/bootstrap.min.css')
+    //
+      Required Plugin CSS
+      <link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/css/datatables.min.css">
+      <link rel="stylesheet" type="text/css" href="vendor/plugins/datatables/extras/TableTools/media/css/TableTools.css">
+      <link rel="stylesheet" type="text/css" href="vendor/editors/xeditable/css/bootstrap-editable.css">
+    // Theme CSS
+    link(rel='stylesheet', type='text/css', href='css/vendor.css')
+    link(rel='stylesheet', type='text/css', href='css/theme.css')
+    link(rel='stylesheet', type='text/css', href='css/utility.css')
+    link(rel='stylesheet', type='text/css', href='css/custom.css')
+    // Favicon
+    link(rel='shortcut icon', href='img/favicon.ico')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      |   
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js')
+  body.datatables-page
+    script.
+      var boxtest = localStorage.getItem('boxed'); if (boxtest === 'true') {document.body.className+=' boxed-layout';}
+    // Start: Theme Preview Pane
+    #skin-toolbox
+      .skin-toolbox-toggle
+        i.fa.fa-wrench
+      |   
+      .skin-toolbox-panel
+        form#skin-toolbox-form
+          h4.pl5 Theme Options
+          |       
+          .form-group
+            .cBox.cBox-inline
+              input#ajax-option(type='checkbox', checked='')
+              |           
+              label(for='ajax-option') Ajax Loading
+          |       
+          h4.pl5.mt20 Stylesss Options
+          |       
+          .form-group
+            .cBox.cBox-inline
+              input#header-option(type='checkbox', checked='')
+              |           
+              label(for='header-option') Fixed Header
+          |       
+          .form-group
+            .cBox.cBox-inline
+              input#sidebar-option(type='checkbox')
+              |           
+              label(for='sidebar-option') Fixed Sidebar
+          |       
+          .form-group
+            .cBox.cBox-inline
+              input#breadcrumb-hidden(type='checkbox')
+              |           
+              label(for='breadcrumb-hidden') Hide Breadcrumbs
+          |       
+          .form-group
+            .cBox.cBox-inline
+              input#usermenu-hidden(type='checkbox')
+              |           
+              label(for='usermenu-hidden') Hide Usermenu
+          |       
+          h4.pl5.mt20 Layout Options
+          |       
+          .form-group
+            label.radio-inline
+              input#fullwidth-option(type='radio', name='optionsRadios', checked='')
+              |           Fullwidth
+          |       
+          .form-group.mb20
+            label.radio-inline
+              input#boxed-option(type='radio', name='optionsRadios')
+              |           Boxed Layouts
+          |       
+          h4.pl5.mt20 Header Colors
+          |       
+          .form-group.mb10
+            .toggle-color-wrap
+              .toggle-color-swap.bg-purple3(data-swap='bg-purple3')
+              |             
+              .toggle-color-swap.bg-purple2(data-swap='bg-purple2')
+              |             
+              .toggle-color-swap.bg-blue4-alt(data-swap='bg-blue4-alt')
+              |             
+              .toggle-color-swap.bg-blue5-alt(data-swap='bg-blue5-alt')
+              |             
+              .toggle-color-swap.bg-blue6-alt(data-swap='bg-blue6-alt')
+              |             
+              .toggle-color-swap.bg-red2(data-swap='bg-red2')
+              |             
+              .toggle-color-swap.bg-orange2(data-swap='bg-orange2')
+              |             
+              .toggle-color-swap.bg-brown-alt(data-swap='bg-brown-alt')
+              |             
+              .toggle-color-swap.bg-dark3(data-swap='bg-dark3')
+              |             
+              .toggle-color-swap.bg-white(data-swap='bg-white')
+              |             
+              .clearfix
+          |       
+          |       
+          .form-group
+            a#customizer-link.btn.btn-gradient.btn-block(href='customizer.html') CUSTOMIZER
+    // End: Theme Preview Pane
+    // Start: Header
+    header.navbar.navbar-fixed-top
+      .navbar-branding
+        span#toggle_sidemenu_l.glyphicons.glyphicons-show_lines
+        |  
+        a.navbar-brand(href='dashboard.html')
+          img(src='img/logos/header-logo.png')
+      |   
+      .navbar-left
+        .navbar-divider
+        |     
+        #settings_menu
+          span.glyphicons.glyphicons-settings.dropdown-toggle.cursor(data-toggle='dropdown')
+          |       
+          ul.dropdown-menu(role='menu')
+            li
+              a(href='javascript:void(0);')
+                span.glyphicons.glyphicons-bell.text-purple.mr15
+                | Users
+            |         
+            li
+              a(href='javascript:void(0);')
+                span.glyphicons.glyphicons-notes.text-blue.mr15
+                | Servers
+            |         
+            li
+              a(href='javascript:void(0);')
+                span.glyphicons.glyphicons-facebook.text-orange.mr15
+                | Crons
+        |     
+        #language_menu
+          a.dropdown-toggle(data-toggle='dropdown', href='#')
+            span.flag-xs.flag-us
+            |  
+            span.small.va-m US
+            |  
+            i.fa.fa-angle-down
+          |       
+          ul.dropdown-menu(role='menu')
+            li
+              a(href='javascript:void(0);')
+                span.flag-xs.flag-in
+                |  Hindu
+            |         
+            li
+              a(href='javascript:void(0);')
+                span.flag-xs.flag-tr
+                |  Turkish
+            |         
+            li
+              a(href='javascript:void(0);')
+                span.flag-xs.flag-es
+                |  Spanish
+      |   
+      .navbar-right
+        .navbar-search
+          input#HeaderSearch(type='text', placeholder='Search...', value='Search...')
+        |     
+        .navbar-menus
+          #alert_menu.btn-group
+            button.dropdown-toggle(type='button', data-toggle='dropdown')
+              span.glyphicons.glyphicons-bell
+              |  
+              b 3
+            |         
+            ul.dropdown-menu.media-list(role='menu')
+              li.dropdown-header
+                | Recent Messages
+                span.pull-right.glyphicons.glyphicons-bell
+              |           
+              li.p15.pb10
+                ul.list-unstyled
+                  li
+                    span.glyphicons.glyphicons-bell.text-orange2.fs16.mr15
+                    b CEO
+                    |  lunch meeting Tuesday
+                  |               
+                  li.pt10
+                    span.glyphicons.glyphicons-facebook.text-blue2.fs16.mr15
+                    | Facebook likes are at 
+                    b 4,100
+                  |               
+                  li.pt10
+                    span.glyphicons.glyphicons-paperclip.text-teal2.fs16.mr15
+                    | Mark 
+                    b uploaded
+                    |  3 new Docs
+                  |               
+                  li.pt10
+                    span.glyphicons.glyphicons-gift.text-purple2.fs16.mr15
+                    | It&apos;s 
+                    b Marks
+                    |  34th Birthday
+                  |               
+                  li.pt10
+                    span.glyphicons.glyphicons-cup.text-red2.fs16.mr15
+                    | Best new employee awarded to 
+                    b Jessica
+          |       
+          #comment_menu.btn-group
+            button.dropdown-toggle(type='button', data-toggle='dropdown')
+              span.glyphicons.glyphicons-display
+              |  
+              b 7
+            |         
+            .dropdown-menu(role='menu')
+              ul.nav.nav-tabs.tabs-border-bottom(role='tablist')
+                li.active
+                  a(href='#header_tab1', role='tab', data-toggle='tab') Messages
+                |             
+                li
+                  a(href='#header_tab2', role='tab', data-toggle='tab') Tickets
+                |             
+                li
+                  a(href='#header_tab3', role='tab', data-toggle='tab') Todo List
+              // Tab panes
+              .tab-content.pn.border-none.dropdown-persist
+                #header_tab1.tab-pane.active
+                  .dropdown-submenu.dropdown-persist
+                    .row
+                      .col-xs-8
+                        input.dropdownSearch(type='text', placeholder='Search...')
+                      |                   
+                      .col-xs-4
+                        .cBox.cBox-inline.ml20
+                          input#headercBox1(type='checkbox', name='check', value='None')
+                          |                       
+                          label(for='headercBox1') Delete
+                  |               
+                  .p15
+                    .media.border-none
+                      a.pull-left(href='#')
+                        img.media-object.thumbnail.thumbnail-sm.rounded(src='img/avatars/2.jpg', alt='...')
+                      |                   
+                      .media-body
+                        h5.media-heading.mbn
+                          | Simon Rivers 
+                          small.text-light5  - 3 hours ago
+                        |                     
+                        p.text-muted  Hey Louis, I was wondering if
+                    |                 
+                    .media.mt10.border-none
+                      a.pull-left(href='#')
+                        img.media-object.thumbnail.thumbnail-sm.rounded.border-online(src='img/avatars/6.jpg', alt='...')
+                      |                   
+                      .media-body
+                        h5.media-heading.mbn
+                          | Tracy Rope 
+                          small.text-light5  - 8 hours ago
+                        |                     
+                        p.text-muted  Bam baby get at, I was
+                    |                 
+                    .media.mt10.border-none
+                      a.pull-left(href='#')
+                        img.media-object.thumbnail.thumbnail-sm.rounded.border-online(src='img/avatars/8.jpg', alt='...')
+                      |                   
+                      .media-body
+                        h5.media-heading.mbn
+                          | Courtney Dash 
+                          small.text-light5  - 3 days ago
+                        |                     
+                        p.text-muted  I was wonde awesome brief 
+                    |                 
+                    .media.mt10.border-none
+                      a.pull-left(href='#')
+                        img.media-object.thumbnail.thumbnail-sm.rounded.border-light5(src='img/avatars/2.jpg', alt='...')
+                      |                   
+                      .media-body
+                        h5.media-heading.mbn
+                          | Simon Rivers 
+                          small.text-light5  - 3 hours ago
+                        |                     
+                        p.text-muted.mbn  Hey Louis, I was wondering 
+                |             
+                #header_tab2.tab-pane
+                  .dropdown-submenu.dropdown-persist
+                    .cBox.cBox-inline.cBox-orange.ml15.p1
+                      input#headercBox2(type='checkbox', name='check', value='None')
+                      |                   
+                      label(for='headercBox2') Closed
+                    |                 
+                    .cBox.cBox-inline.cBox-purple
+                      input#headercBox3(type='checkbox', name='check', value='None')
+                      |                   
+                      label(for='headercBox3') Low
+                    |                 
+                    .cBox.cBox-inline.cBox-blue
+                      input#headercBox4(type='checkbox', name='check', value='None')
+                      |                   
+                      label(for='headercBox4') Med
+                    |                 
+                    .cBox.cBox-inline.cBox-red2.cBox-gradient
+                      input#headercBox5(type='checkbox', name='check', value='None', checked='')
+                      |                   
+                      label(for='headercBox5') Urgent
+                  |               
+                  .sortable.mt10.mb10
+                    .todo-item.table-layout.p8
+                      .todo-handle.va-m
+                        .v-handle
+                      |                   
+                      .todo-body.va-m
+                        b.text-muted [Ticket #1]
+                        |  - Validation Errors 
+                        small.text-blue2  [read more..]
+                    |                 
+                    .todo-item.table-layout.p8
+                      .todo-handle.va-m
+                        .v-handle
+                      |                   
+                      .todo-body.va-m
+                        b.text-muted [Ticket #2]
+                        |  - User Profile Debug
+                        small.text-blue2  [read more..]
+                    |                 
+                    .todo-item.table-layout.p8
+                      .todo-handle.va-m
+                        .v-handle
+                      |                   
+                      .todo-body.va-m
+                        b.text-muted [Ticket #3]
+                        |  - User hacked 
+                        small.text-blue2  [read more..]
+                    |                 
+                    .todo-item.table-layout.p8
+                      .todo-handle.va-m
+                        .v-handle
+                      |                   
+                      .todo-body.va-m
+                        b.text-muted [Ticket #4]
+                        |  - Mailbox Debug 
+                        small.text-blue2  [read more..]
+                    |                 
+                    .todo-item.table-layout.p8
+                      .todo-handle.va-m
+                        .v-handle
+                      |                   
+                      .todo-body.va-m
+                        b.text-muted [Ticket #5]
+                        |  - User Profile Debug
+                        small.text-blue2  [read more..]
+                    |                 
+                    .todo-item.table-layout.p8
+                      .todo-handle.va-m
+                        .v-handle
+                      |                   
+                      .todo-body.va-m
+                        b.text-muted [Ticket #6]
+                        |  - User Profile Debug
+                        small.text-blue2  [read more..]
+                    |                 
+                    .todo-item.table-layout.p8
+                      .todo-handle.va-m
+                        .v-handle
+                      |                   
+                      .todo-body.va-m
+                        b.text-muted [Ticket #7]
+                        |  - User Profile Debug
+                        small.text-blue2  [read more..]
+                |             
+                #header_tab3.tab-pane
+                  .dropdown-submenu.dropdown-persist
+                    .row
+                      .col-xs-12
+                        input.dropdownSearch(type='text', placeholder='Create New Item...')
+                  |               
+                  .ticket-item.table-layout
+                    .ticket-handle.va-m
+                      .cBox.ml10
+                        input#headercBox7(type='checkbox', name='check', value='None')
+                        |                     
+                        label(for='headercBox7')
+                    |                 
+                    .ticket-body.p10.va-m
+                      b.text-muted [#2]
+                      |  - IE8 Profile Drag Errors 
+                      span.label.label-sm.bg-grey2.ml10 Javascript
+                  |               
+                  .ticket-item.table-layout
+                    .ticket-handle.va-m
+                      .cBox.ml10
+                        input#headercBox6(type='checkbox', name='check', value='None')
+                        |                     
+                        label(for='headercBox6')
+                    |                 
+                    .ticket-body.p10.va-m
+                      b.text-muted [#1]
+                      |  - Validation Errors on USCM testing facitiliy 
+                      small.text-red2 - Urgent
+                  |               
+                  .ticket-item.table-layout
+                    .ticket-handle.va-m
+                      .cBox.ml10
+                        input#headercBox9(type='checkbox', name='check', value='None')
+                        |                     
+                        label(for='headercBox9')
+                    |                 
+                    .ticket-body.p10.va-m
+                      b.text-muted [#4]
+                      |  - CSS Problems with Tables 
+                      span.label.label-sm.bg-orange2.ml10 CSS
+                  |               
+                  .ticket-item.table-layout
+                    .ticket-handle.va-m
+                      .cBox.ml10
+                        input#headercBox10(type='checkbox', name='check', value='None')
+                        |                     
+                        label(for='headercBox10')
+                    |                 
+                    .ticket-body.p10.va-m
+                      b.text-muted [#5]
+                      |  - PHP Form validation errors occuring on email page
+                      span.label.label-sm.bg-purple2.ml10 PHP
+                  |               
+                  .ticket-item.table-layout
+                    .ticket-handle.va-m
+                      .cBox.ml10
+                        input#headercBox8(type='checkbox', name='check', value='None')
+                        |                     
+                        label(for='headercBox8')
+                    |                 
+                    .ticket-body.p10.pb15.va-m
+                      b.text-muted [#3]
+                      |  - Mailbox Validation Errors on Firefox
+          |       
+          #toggle_sidemenu_r.btn-group
+            button(type='button')
+              span.glyphicons.glyphicons-parents
+    // End: Header
+    // Start: Main
+    #main
+      // Start: Sidebar
+      aside#sidebar_left
+        .user-info
+          .media
+            a.pull-left(href='#')
+              .media-object.border.border-purple.br64.bw2.p2
+                img.br64(src='img/avatars/5.jpg', alt='...')
+            |         
+            .mobile-link
+              span.glyphicons.glyphicons-show_big_thumbnails
+            |         
+            .media-body
+              h5.media-heading.mt5.mbn.fw700.cursor
+                | John.Smith
+                span.caret.ml5
+              |           
+              .media-links.fs11
+                a(href='#') Menu
+                i.fa.fa-circle.text-muted.fs3.p8.va-m
+                a(href='screen-lock.html') Sign Out
+        |     
+        .user-divider
+        |     
+        .user-menu
+          .row.text-center.mb15
+            .col-xs-4
+              a(href='dashboard.html')
+                span.glyphicons.glyphicons-home.fs22.text-blue2
+                |           
+                h5.fs11 Home
+            |         
+            .col-xs-4
+              a(href='messages.html')
+                span.glyphicons.glyphicons-inbox.fs22.text-orange2
+                |           
+                h5.fs11 Inbox
+            |         
+            .col-xs-4
+              a(href='tables.html')
+                span.glyphicons.glyphicons-bell.fs22.text-purple2
+                |           
+                h5.fs11 Data
+          |       
+          .row.text-center
+            .col-xs-4.text-center
+              a(href='timeline.html')
+                span.glyphicons.glyphicons-imac.fs22.text-grey3
+                |           
+                h5.fs11 Views
+            |         
+            .col-xs-4
+              a(href='profile.html')
+                span.glyphicons.glyphicons-settings.fs22.text-green2
+                |           
+                h5.fs11 Settings
+            |         
+            .col-xs-4
+              a(href='gallery.html')
+                span.glyphicons.glyphicons-restart.fs22.text-light6
+                |           
+                h5.fs11 Images
+        |     
+        .sidebar-menu
+          ul.nav.sidebar-nav
+            li
+              a.ajax-disable(href='customizer.html')
+                span.glyphicons.glyphicons-eyedropper
+                |  
+                span.sidebar-title Customizer
+                |  
+                span.sidebar-title-tray
+                  span.label.label-xs.bg-purple2 New
+            |         
+            li
+              a.ajax-disable(href='messages.html')
+                span.glyphicons.glyphicons-inbox
+                span.sidebar-title Messages
+            |         
+            li
+              a(href='dashboard.html')
+                span.glyphicons.glyphicons-home
+                span.sidebar-title Dashboard
+            |         
+            li
+              a.accordion-toggle(href='#resources')
+                span.glyphicons.glyphicons-settings
+                span.sidebar-title Resources
+                span.caret
+              |           
+              ul#resources.nav.sub-nav
+                li
+                  a(href='dashboard.html')
+                    span.glyphicons.glyphicons-magic
+                    | Dashboard
+                |             
+                li
+                  a.ajax-disable(href='../documentation/index.html')
+                    span.glyphicons.glyphicons-book
+                    |  Documentation
+                |             
+                li
+                  a.ajax-disable(href='login.html')
+                    span.glyphicons.glyphicons-power
+                    |  Login Page
+                |             
+                li
+                  a.ajax-disable(href='screen-lock.html')
+                    span.glyphicons.glyphicons-lock
+                    |  Screen Lock
+                |             
+                li
+                  a.ajax-disable(href='coming-soon.html')
+                    span.glyphicons.glyphicons-road
+                    |  Coming Soon
+                |             
+                li
+                  a.ajax-disable(href='404-page.html')
+                    span.glyphicons.glyphicons-circle_remove
+                    |  404 Page
+                |             
+                li
+                  a.ajax-disable(href='500-page.html')
+                    span.glyphicons.glyphicons-circle_exclamation_mark
+                    |  500 Page
+            |         
+            li
+              a.accordion-toggle(href='#sideOne')
+                span.glyphicons.glyphicons-adjust_alt
+                span.sidebar-title UI Elements
+                span.caret
+              |           
+              ul#sideOne.nav.sub-nav
+                li
+                  a(href='portlets.html')
+                    span.glyphicons.glyphicons-sort
+                    |  Portlets
+                |             
+                li
+                  a(href='elements.html')
+                    span.glyphicons.glyphicons-paperclip
+                    |  Elements
+                |             
+                li
+                  a.ajax-disable(href='charts.html')
+                    span.glyphicons.glyphicons-stats
+                    |  Charts
+                |             
+                li
+                  a(href='tabs.html')
+                    span.glyphicons.glyphicons-adjust
+                    |  Tabs
+                |             
+                li
+                  a(href='buttons.html')
+                    span.glyphicons.glyphicons-macbook
+                    |  Buttons
+                |             
+                li
+                  a(href='typography.html')
+                    span.glyphicons.glyphicons-font
+                    |  Typography
+                |             
+                li
+                  a(href='grid.html')
+                    span.glyphicons.glyphicons-show_big_thumbnails
+                    |  Grid
+            |         
+            li.active
+              a.accordion-toggle.menu-open(href='#sideTwo')
+                span.glyphicons.glyphicons-vcard
+                span.sidebar-title Form Elements
+                span.caret
+              |           
+              ul#sideTwo.nav.sub-nav
+                li
+                  a(href='forms.html')
+                    span.glyphicons.glyphicons-link
+                    |  Form Elements
+                |             
+                li
+                  a(href='editors.html')
+                    span.glyphicons.glyphicons-pencil
+                    |  Editors
+                |             
+                li
+                  a(href='editable.html')
+                    span.glyphicons.glyphicons-edit
+                    |  Inline Editing
+                |             
+                li
+                  a(href='xedit.html')
+                    span.glyphicons.glyphicons-check
+                    |  X-editable
+                |             
+                li.active
+                  a(href='tables.html')
+                    span.glyphicons.glyphicons-table
+                    |  Tables
+                |             
+                li
+                  a(href='treeview.html')
+                    span.glyphicons.glyphicons-tree_conifer
+                    |  Treeview
+            |         
+            li
+              a.accordion-toggle(href='#sideSix')
+                span.glyphicons.glyphicons-globe
+                span.sidebar-title Maps
+                span.caret
+              |           
+              ul#sideSix.nav.sub-nav
+                li
+                  a(href='maps.html')
+                    span.glyphicons.glyphicons-global
+                    |  GMaps
+                |             
+                li
+                  a(href='map-full.html')
+                    span.glyphicons.glyphicons-globe_af
+                    |  Window Map
+                |             
+                li
+                  a(href='maps-vector.html')
+                    span.glyphicons.glyphicons-vector_path_circle
+                    |  Vector Maps
+            |         
+            li
+              a.accordion-toggle(href='#sideSeven')
+                span.glyphicons.glyphicons-book_open
+                span.sidebar-title Pages
+                span.caret
+              |           
+              ul#sideSeven.nav.sub-nav
+                li
+                  a(href='profile.html')
+                    span.glyphicons.glyphicons.glyphicons-user
+                    |  Profile
+                |             
+                li
+                  a(href='timeline.html')
+                    span.glyphicons.glyphicons-film
+                    |  Timeline
+                |             
+                li
+                  a(href='gallery.html')
+                    span.glyphicons.glyphicons-picture
+                    |  Gallery
+                |             
+                li
+                  a(href='invoice.html')
+                    span.glyphicons.glyphicons.glyphicons-print
+                    |  Printable Invoice
+                |             
+                li
+                  a(href='calendar.html')
+                    span.glyphicons.glyphicons-calendar
+                    |  Calendar
+                |             
+                li
+                  a(href='faq.html')
+                    span.glyphicons.glyphicons-edit
+                    |  Faq Page
+                |             
+                li
+                  a(href='blank.html')
+                    span.glyphicons.glyphicons-unchecked
+                    |  Blank Page
+            |         
+            li
+              a.accordion-toggle(href='#sideFive')
+                span.glyphicons.glyphicons-magic
+                span.sidebar-title Extras
+                span.caret
+              |           
+              ul#sideFive.nav.sub-nav
+                li
+                  a(href='icons.html')
+                    span.glyphicons.glyphicons-flash
+                    |  Icons
+                |             
+                li
+                  a(href='animations.html')
+                    span.glyphicons.glyphicons-fire
+                    |  Animations
+                |             
+                li
+                  a(href='sliders.html')
+                    span.glyphicons.glyphicons-retweet
+                    |  Sliders
+                |             
+                li
+                  a(href='image-tools.html')
+                    span.glyphicons.glyphicons-camera
+                    |  Image Tools
+                |             
+                li
+                  a(href='sketchpad.html')
+                    span.glyphicons.glyphicons-vector_path_square
+                    |  Sketchpad
+            |         
+            li
+              a.accordion-toggle(href='#sideEight')
+                span.glyphicons.glyphicons-more_items
+                span.sidebar-title Multi Level Nav
+                span.caret
+              |           
+              ul#sideEight.nav.sub-nav
+                li
+                  a.ajax-disable(href='javascript:void(0);')
+                    span.glyphicons.glyphicons-ok_2
+                    |  Item #1
+                |             
+                li
+                  a.ajax-disable(href='javascript:void(0);')
+                    span.glyphicons.glyphicons-ok_2
+                    |  Item #2
+                |             
+                li
+                  a.accordion-toggle(href='#sideEight-sub')
+                    span.glyphicons.glyphicons-show_lines
+                    | 2nd Level Nav
+                    span.caret
+                  |               
+                  ul#sideEight-sub.nav.sub-nav
+                    li
+                      a.ajax-disable(href='javascript:void(0);')
+                        span.glyphicons.glyphicons-ok_2
+                        |  Item #1
+                    |                 
+                    li
+                      a.ajax-disable(href='javascript:void(0);')
+                        span.glyphicons.glyphicons-ok_2
+                        |  Item #2
+                    |                 
+                    li
+                      a.accordion-toggle(href='#sideEight-sub-2')
+                        span.glyphicons.glyphicons-show_lines
+                        | 3rd Level Nav
+                        span.caret
+                      |                   
+                      ul#sideEight-sub-2.nav.sub-nav
+                        li
+                          a.ajax-disable(href='javascript:void(0);')
+                            span.glyphicons.glyphicons-ok_2
+                            |  Item #1
+                        |                     
+                        li
+                          a.ajax-disable(href='javascript:void(0);')
+                            span.glyphicons.glyphicons-ok_2
+                            |  Item #2
+                        |                     
+                        li
+                          a.accordion-toggle(href='#sideEight-sub-2')
+                            span.glyphicons.glyphicons-show_lines
+                            | 4th Level Nav
+                            span.caret
+                          |                       
+                          ul#sideEight-sub-3.nav.sub-nav
+                            li
+                              a.ajax-disable(href='javascript:void(0);')
+                                span.glyphicons.glyphicons-ok_2
+                                |  Item #1
+                            |                         
+                            li
+                              a.ajax-disable(href='javascript:void(0);')
+                                span.glyphicons.glyphicons-ok_2
+                                |  Item #2
+                            |                         
+                            li
+                              a.ajax-disable(href='javascript:void(0);')
+                                span.glyphicons.glyphicons-ok_2
+                                |  Item #3
+      // End: Sidebar
+      // Start: Content
+      section#content_wrapper
+        #topbar
+          .topbar-left
+            ol.breadcrumb
+              li.crumb-active
+                a(href='tables.html') Tables
+              |           
+              li.crumb-icon
+                a(href='dashboard.html')
+                  span.glyphicon.glyphicon-home
+              |           
+              li.crumb-link
+                a(href='index.html') Home
+              |           
+              li.crumb-trail Tables
+        |     
+        #content
+          .row
+            .col-md-12
+              .panel.panel-visible
+                .panel-heading
+                  .panel-title.hidden-xs
+                    span.glyphicon.glyphicon-tasks
+                    |  Editable Data Table
+                |             
+                .panel-body.pbn
+                  table#datatable.table.table-striped.table-bordered.table-hover
+                    thead
+                      tr
+                        th Editable
+                        |                     
+                        th.hidden-xs Creator
+                        |                     
+                        th Labels
+                        |                     
+                        th.visible-lg Software license
+                        |                     
+                        th.hidden-xs.hidden-sm Current layout engine
+                        |                     
+                        th Cost (USD)
+                        |                     
+                        th.text-center.hidden-xs Actions
+                    |                 
+                    tbody
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Henry Ford
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-grey CSS
+                        |                     
+                        td.visible-lg GNU GPLv3
+                        |                     
+                        td FSkit
+                        |                     
+                        td Free
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Roger Rights
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-orange.mr5 HTML
+                          span.label.bg-teal Java
+                        |                     
+                        td.visible-lg GNU GPLv3
+                        |                     
+                        td Webkit
+                        |                     
+                        td License
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Goblin Jones
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-green PHP
+                        |                     
+                        td.visible-lg CF2
+                        |                     
+                        td FSkit
+                        |                     
+                        td Contract
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit David Fleece
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-red Python
+                        |                     
+                        td.visible-lg CC V2
+                        |                     
+                        td Webkit
+                        |                     
+                        td Free
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Mary Shark
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-blue.mr5 Javascript
+                          span.label.bg-green PHP
+                        |                     
+                        td.visible-lg GNU GPLv3
+                        |                     
+                        td FSkit
+                        |                     
+                        td License
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Alexander Right
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-purple  A Warm Heart
+                        |                     
+                        td.visible-lg GNU GPLv3
+                        |                     
+                        td Webkit
+                        |                     
+                        td Contract
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Peter Parker
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-blue NewEgg
+                        |                     
+                        td.visible-lg CC V2
+                        |                     
+                        td FSkit
+                        |                     
+                        td Free
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Florida Toss
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-dark Skills
+                        |                     
+                        td.visible-lg CF2
+                        |                     
+                        td Webkit
+                        |                     
+                        td License
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit Cynthia Rodes
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-orange.mr5 HTML
+                          span.label.bg-green PHP
+                        |                     
+                        td.visible-lg CF2
+                        |                     
+                        td FSkit
+                        |                     
+                        td Free
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit James Harvy
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-purple.mr5 Patience
+                          span.label.bg-teal CSS
+                        |                     
+                        td.visible-lg CC V2
+                        |                     
+                        td Webkit
+                        |                     
+                        td License
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Uzbl
+                        |                     
+                        td.hidden-xs
+                          span.xedit Hue Fontain
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-red Ice Cream
+                        |                     
+                        td.visible-lg GNU GPLv3
+                        |                     
+                        td FSkit
+                        |                     
+                        td License
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+                      |                   
+                      tr
+                        td
+                          span.xedit Try Me!
+                        |                     
+                        td.hidden-xs
+                          span.xedit George Michaels
+                        |                     
+                        td.hidden-xs.hidden-sm
+                          span.label.bg-orange Dedication
+                        |                     
+                        td.visible-lg GNU GPLv3
+                        |                     
+                        td Webkit
+                        |                     
+                        td Contract
+                        |                     
+                        td.hidden-xs.text-center
+                          .btn-group
+                            button.btn.bg-grey2.btn-gradient.btn-sm(type='button')
+                              span.glyphicons.glyphicons-user
+                            |                         
+                            button.btn.bg-green2.btn-gradient.btn-sm.dropdown-toggle(type='button', data-toggle='dropdown')
+                              span.glyphicons.glyphicons-cogwheel
+                            |                         
+                            ul.dropdown-menu.checkbox-persist.pull-right.text-left(role='menu')
+                              li
+                                a
+                                  i.fa.fa-user
+                                  |  View Profile
+                              |                           
+                              li
+                                a
+                                  i.fa.fa-envelope-o
+                                  |  Message
+          |       
+          .row
+            .col-md-6
+              .panel
+                .panel-heading
+                  span.panel-title
+                    span.glyphicon.glyphicon-list-alt
+                    |  Basic Table
+                |             
+                .panel-body
+                  table.table
+                    thead
+                      tr
+                        th #
+                        |                     
+                        th First Name
+                        |                     
+                        th Last Name
+                        |                     
+                        th Username
+                    |                 
+                    tbody
+                      tr
+                        td 1
+                        |                     
+                        td Mark
+                        |                     
+                        td Otto
+                        |                     
+                        td @mdo
+                      |                   
+                      tr
+                        td 2
+                        |                     
+                        td Jacob
+                        |                     
+                        td Thornton
+                        |                     
+                        td @fat
+                      |                   
+                      tr
+                        td 3
+                        |                     
+                        td Larry
+                        |                     
+                        td the Bird
+                        |                     
+                        td @twitter
+              |           
+              .panel
+                .panel-heading
+                  span.panel-title
+                    span.glyphicon.glyphicon-list-alt
+                    |  Striped Table
+                |             
+                .panel-body
+                  table.table.table-striped
+                    thead
+                      tr
+                        th #
+                        |                     
+                        th First Name
+                        |                     
+                        th Last Name
+                        |                     
+                        th Username
+                    |                 
+                    tbody
+                      tr
+                        td 1
+                        |                     
+                        td Mark
+                        |                     
+                        td Otto
+                        |                     
+                        td @mdo
+                      |                   
+                      tr
+                        td 2
+                        |                     
+                        td Jacob
+                        |                     
+                        td Thornton
+                        |                     
+                        td @fat
+                      |                   
+                      tr
+                        td 3
+                        |                     
+                        td Larry
+                        |                     
+                        td the Bird
+                        |                     
+                        td @twitter
+              |           
+              .panel
+                .panel-heading
+                  span.panel-title
+                    span.glyphicon.glyphicon-list-alt
+                    |  Colored Table
+                |             
+                .panel-body
+                  table.table.table-hover
+                    thead
+                      tr.active
+                        th #
+                        |                     
+                        th First Name
+                        |                     
+                        th Last Name
+                        |                     
+                        th Username
+                    |                 
+                    tbody
+                      tr.success
+                        td 1
+                        |                     
+                        td Mark
+                        |                     
+                        td Otto
+                        |                     
+                        td @mdo
+                      |                   
+                      tr.warning
+                        td 2
+                        |                     
+                        td Jacob
+                        |                     
+                        td Thornton
+                        |                     
+                        td @fat
+                      |                   
+                      tr.danger
+                        td 3
+                        |                     
+                        td Larry
+                        |                     
+                        td the Bird
+                        |                     
+                        td @twitter
+            |         
+            .col-md-6
+              .panel
+                .panel-heading
+                  span.panel-title
+                    span.glyphicon.glyphicon-list-alt
+                    |  On-Hover Table
+                |             
+                .panel-body
+                  table.table.table-hover
+                    thead
+                      tr
+                        th #
+                        |                     
+                        th First Name
+                        |                     
+                        th Last Name
+                        |                     
+                        th Username
+                    |                 
+                    tbody
+                      tr
+                        td 1
+                        |                     
+                        td Mark
+                        |                     
+                        td Otto
+                        |                     
+                        td @mdo
+                      |                   
+                      tr
+                        td 2
+                        |                     
+                        td Jacob
+                        |                     
+                        td Thornton
+                        |                     
+                        td @fat
+                      |                   
+                      tr
+                        td 3
+                        |                     
+                        td Larry
+                        |                     
+                        td the Bird
+                        |                     
+                        td @twitter
+              |           
+              .panel
+                .panel-heading
+                  span.panel-title
+                    span.glyphicon.glyphicon-list-alt
+                    |  Condensed Table
+                |             
+                .panel-body
+                  table.table.table-condensed
+                    thead
+                      tr
+                        th #
+                        |                     
+                        th First Name
+                        |                     
+                        th Last Name
+                        |                     
+                        th Username
+                    |                 
+                    tbody
+                      tr
+                        td 1
+                        |                     
+                        td Mark
+                        |                     
+                        td Otto
+                        |                     
+                        td @mdo
+                      |                   
+                      tr
+                        td 2
+                        |                     
+                        td Jacob
+                        |                     
+                        td Thornton
+                        |                     
+                        td @fat
+                      |                   
+                      tr
+                        td 3
+                        |                     
+                        td Larry
+                        |                     
+                        td the Bird
+                        |                     
+                        td @twitter
+                      |                   
+                      tr
+                        td 4
+                        |                     
+                        td Todd
+                        |                     
+                        td the Lion
+                        |                     
+                        td @rawr
+                      |                   
+                      tr
+                        td 5
+                        |                     
+                        td Cynthia
+                        |                     
+                        td the Dino
+                        |                     
+                        td @mewo
+              |           
+              .panel
+                .panel-heading
+                  span.panel-title
+                    span.glyphicon.glyphicon-list-alt
+                    |  Bordered Table
+                |             
+                .panel-body
+                  table.table.table-bordered
+                    thead
+                      tr
+                        th #
+                        |                     
+                        th First Name
+                        |                     
+                        th Last Name
+                        |                     
+                        th Username
+                    |                 
+                    tbody
+                      tr
+                        td 1
+                        |                     
+                        td Mark
+                        |                     
+                        td Otto
+                        |                     
+                        td @mdo
+                      |                   
+                      tr
+                        td 2
+                        |                     
+                        td Jacob
+                        |                     
+                        td Thornton
+                        |                     
+                        td @fat
+                      |                   
+                      tr
+                        td 3
+                        |                     
+                        td Larry
+                        |                     
+                        td the Bird
+                        |                     
+                        td @twitter
+          |       
+          .row
+            .col-md-12
+              .panel
+                .panel-heading
+                  span.panel-title
+                    span.glyphicon.glyphicon-list-alt
+                    |  Responsive Table
+                |             
+                .panel-body
+                  .table-responsive
+                    table.table.table-bordered
+                      thead
+                        tr
+                          th #
+                          |                       
+                          th Table heading
+                          |                       
+                          th Table heading
+                          |                       
+                          th Table heading
+                          |                       
+                          th Table heading
+                          |                       
+                          th Table heading
+                          |                       
+                          th Table heading
+                      |                   
+                      tbody
+                        tr
+                          td 1
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                        |                     
+                        tr
+                          td 2
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                        |                     
+                        tr
+                          td 3
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+                          |                       
+                          td Table cell
+            |         
+            .clearfix
+          |       
+          .row
+            .col-sm-12.col-md-11.center-column.mt25
+              .pricing-tables.mt25.text-center
+                .col-sm-4
+                  .pricing-plan
+                    .pricing-title.bg-light2
+                      h3 Basic
+                    |                 
+                    .pricing-info
+                      span.currency-sign $
+                      |                   
+                      h2 39
+                      |                   
+                      h6 Per Month
+                    |                 
+                    .pricing-features
+                      ul
+                        li
+                          i.fa.fa-hdd-o
+                          |  
+                          b 2GB
+                          |  Disk Space
+                        |                     
+                        li
+                          i.fa.fa-exchange
+                          |  
+                          b 20GB
+                          |  Bandwidth
+                        |                     
+                        li
+                          i.fa.fa-refresh
+                          |  
+                          b 5
+                          |  Email Accounts
+                    |                 
+                    .pricing-icons
+                      ul
+                        li
+                          i.fa.fa-times
+                        |                     
+                        li
+                          i.fa.fa-times
+                        |                     
+                        li
+                          i.fa.fa-times
+                        |                     
+                        li
+                          i.fa.fa-ellipsis-h
+                    |                 
+                    a.btn.btn-large.bg-dark(href='#') Sign up
+                |             
+                .col-sm-4.hero-plan
+                  .pricing-plan
+                    .pricing-title.bg-purple2
+                      h3 Standard
+                      |                   
+                      span.pricing-subtitle.text-blue4 Most Popular
+                    |                 
+                    .pricing-info
+                      span.currency-sign $
+                      |                   
+                      h2 59
+                      |                   
+                      h6 Per Month
+                    |                 
+                    .pricing-features
+                      ul
+                        li
+                          i.fa.fa-hdd-o
+                          |  
+                          b 2GB
+                          |  Disk Space
+                        |                     
+                        li
+                          i.fa.fa-exchange
+                          |  
+                          b 20GB
+                          |  Bandwidth
+                        |                     
+                        li
+                          i.fa.fa-refresh
+                          |  
+                          b 5
+                          |  Email Accounts
+                    |                 
+                    .pricing-icons
+                      ul
+                        li
+                          i.fa.fa-check.text-blue
+                        |                     
+                        li
+                          i.fa.fa-times
+                        |                     
+                        li
+                          i.fa.fa-check.text-blue
+                        |                     
+                        li
+                          i.fa.fa-ellipsis-h
+                    |                 
+                    a.btn.bg-purple2(href='#') Sign up
+                |             
+                .col-sm-4
+                  .pricing-plan
+                    .pricing-title.bg-light2
+                      h3 Advanced
+                    |                 
+                    .pricing-info
+                      span.currency-sign $
+                      |                   
+                      h2 99
+                      |                   
+                      h6 Per Month
+                    |                 
+                    .pricing-features
+                      ul
+                        li
+                          i.fa.fa-hdd-o
+                          |  
+                          b 2GB
+                          |  Disk Space
+                        |                     
+                        li
+                          i.fa.fa-exchange
+                          |  
+                          b 20GB
+                          |  Bandwidth
+                        |                     
+                        li
+                          i.fa.fa-refresh
+                          |  
+                          b 5
+                          |  Email Accounts
+                    |                 
+                    .pricing-icons
+                      ul
+                        li
+                          i.fa.fa-check.text-blue
+                        |                     
+                        li
+                          i.fa.fa-check.text-blue
+                        |                     
+                        li
+                          i.fa.fa-times
+                        |                     
+                        li
+                          i.fa.fa-ellipsis-h
+                    |                 
+                    a.btn.bg-dark(href='#') Sign up
+          |       
+          .row
+            .col-sm-12.col-md-11.center-column
+              hr.alt
+              |           
+              .pricing-tables.mt25.text-center.row
+                .col-sm-4.col-md-3.hero-plan
+                  .pricing-plan.mn
+                    .pricing-title.bg-grey2
+                      h3 Standard
+                      |                   
+                      span.pricing-subtitle Most Popular
+                    |                 
+                    .pricing-info
+                      span.currency-sign $
+                      |                   
+                      h2 59
+                      |                   
+                      h6 Per Month
+                    |                 
+                    .pricing-features
+                      ul
+                        li
+                          i.fa.fa-hdd-o
+                          |  
+                          b 2GB
+                          |  Disk Space
+                        |                     
+                        li
+                          i.fa.fa-exchange
+                          |  
+                          b 20GB
+                          |  Bandwidth
+                        |                     
+                        li
+                          i.fa.fa-refresh
+                          |  
+                          b 5
+                          |  Email Accounts
+                    |                 
+                    a.btn.bg-grey2(href='#') Sign up
+                |             
+                .col-sm-4.col-md-3.hero-plan
+                  .pricing-plan.mn
+                    .pricing-title.bg-blue2
+                      h3 Standard
+                      |                   
+                      span.pricing-subtitle Most Popular
+                    |                 
+                    .pricing-info
+                      span.currency-sign $
+                      |                   
+                      h2 59
+                      |                   
+                      h6 Per Month
+                    |                 
+                    .pricing-features
+                      ul
+                        li
+                          i.fa.fa-hdd-o
+                          |  
+                          b 2GB
+                          |  Disk Space
+                        |                     
+                        li
+                          i.fa.fa-exchange
+                          |  
+                          b 20GB
+                          |  Bandwidth
+                        |                     
+                        li
+                          i.fa.fa-refresh
+                          |  
+                          b 5
+                          |  Email Accounts
+                    |                 
+                    a.btn.bg-blue2(href='#') Sign up
+                |             
+                .col-sm-4.col-md-3.hero-plan
+                  .pricing-plan.mn
+                    .pricing-title.bg-green2
+                      h3 Standard
+                      |                   
+                      span.pricing-subtitle Most Popular
+                    |                 
+                    .pricing-info
+                      span.currency-sign $
+                      |                   
+                      h2 59
+                      |                   
+                      h6 Per Month
+                    |                 
+                    .pricing-features
+                      ul
+                        li
+                          i.fa.fa-hdd-o
+                          |  
+                          b 2GB
+                          |  Disk Space
+                        |                     
+                        li
+                          i.fa.fa-exchange
+                          |  
+                          b 20GB
+                          |  Bandwidth
+                        |                     
+                        li
+                          i.fa.fa-refresh
+                          |  
+                          b 5
+                          |  Email Accounts
+                    |                 
+                    a.btn.bg-green2(href='#') Sign up
+                |             
+                .hidden-sm.col-md-3.hero-plan
+                  .pricing-plan.mn
+                    .pricing-title.bg-purple2
+                      h3 Standard
+                      |                   
+                      span.pricing-subtitle Most Popular
+                    |                 
+                    .pricing-info
+                      span.currency-sign $
+                      |                   
+                      h2 59
+                      |                   
+                      h6 Per Month
+                    |                 
+                    .pricing-features
+                      ul
+                        li
+                          i.fa.fa-hdd-o
+                          |  
+                          b 2GB
+                          |  Disk Space
+                        |                     
+                        li
+                          i.fa.fa-exchange
+                          |  
+                          b 20GB
+                          |  Bandwidth
+                        |                     
+                        li
+                          i.fa.fa-refresh
+                          |  
+                          b 5
+                          |  Email Accounts
+                    |                 
+                    a.btn.bg-purple2(href='#') Sign up
+      // End: Content
+      // Start: Right Sidebar
+      aside#sidebar_right
+        .sidebar-right-header
+          .pull-right.posr
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              i.fa.fa-circle.text-orange2.fs8
+              |  
+              span.caret.text-muted
+            |         
+            ul.dropdown-menu.dropdown-sm(role='menu')
+              li.menu-arrow
+                .menu-arrow-up
+              |           
+              li
+                a(href='javascript:void(0);')
+                  i.fa.fa-circle.text-green2.pr5
+                  |  Online
+              |           
+              li
+                a(href='javascript:void(0);')
+                  i.fa.fa-circle.text-red2.pr5
+                  |  Busy
+              |           
+              li.divider
+              |           
+              li
+                a(href='javascript:void(0);')
+                  i.fa.fa-circle.text-orange2.pr5
+                  |  Away
+          |       
+          .media.mtn
+            a.pull-left.mt5(href='#')
+              img.thumbnail.thumbnail-sm.rounded(src='img/avatars/2.jpg', alt='...')
+            |         
+            .media-body
+              h5.small.mt5.mbn.text-cloud
+                b Current Status:
+              |           
+              h5.small.text-white
+                b &quot;Away: Lunch meeting&quot;
+        |     
+        .sidebar_right_content.p25
+          .sidebar_right_menu.row.text-center
+            .col-xs-4.pln
+              a(href='calendar.html')
+                span.glyphicons.glyphicons-imac.fs22.text-grey2
+                |           
+                h5.fs11.text-white Calendar
+            |         
+            .col-xs-4
+              a(href='profile.html')
+                span.glyphicons.glyphicons-settings.fs22.text-green
+                |           
+                h5.fs11.text-white Settings
+            |         
+            .col-xs-4.prn
+              a(href='messages.html')
+                span.glyphicons.glyphicons-inbox.fs22.text-orange
+                |           
+                h5.fs11.text-white Inbox
+          |       
+          hr.mb25.mtn.border-dark3
+          |       
+          h5.text-muted.fs13.mb25 Notes
+          |       
+          h5.text-white.mbn 9:30 AM - Ford Pitch
+          |       
+          p.text-light6.fs12.fw600.mb15 Client expects a working draft
+          |       
+          h5.text-white.mbn 12:15 AM - Lunch Meeting
+          |       
+          p.text-light6.fs12.fw600.mb15 To discuss Ford Pitch outcome
+          |       
+          h5.text-white.mbn 2:30 AM - Computer Repair
+          |       
+          p.text-light6.fs12.fw600.mb15 Coming to replace failing HD 
+          |       
+          h5.text-white.mbn 4:15 AM - First Yoga Class
+          |       
+          p.text-light6.fs12.fw600 Ask about your free classes
+          |       
+          hr.mb25.mt25.border-dark3
+          |       
+          h5.text-muted.fs13.pull-left.mr20 Users
+          |       
+          .btn-group.pull-left
+            button.btn.btn-gradient.btn-xs.bg-blue7-alt.dropdown-toggle.fs11.fw600(type='button', data-toggle='dropdown')
+              i.fa.fa-circle.text-green2.fs8.pr5
+              |  Online 
+              span.caret.caret-sm.ml5
+            |         
+            ul.dropdown-menu.dropdown-sm(role='menu')
+              li.menu-arrow
+                .menu-arrow-up
+              |           
+              li
+                a(href='javascript:void(0);')
+                  i.fa.fa-circle.text-green2.pr5
+                  |  Online
+              |           
+              li
+                a(href='javascript:void(0);')
+                  i.fa.fa-circle.text-red2.pr5
+                  |  Busy
+              |           
+              li.divider
+              |           
+              li
+                a(href='javascript:void(0);')
+                  i.fa.fa-circle.text-orange2.pr5
+                  |  Away
+          |       
+          .clearfix
+          |       
+          .media.mt30.border-none
+            a.pull-left(href='#')
+              img.media-object.thumbnail.thumbnail-sm.rounded(src='img/avatars/4.jpg', alt='...')
+            |         
+            .media-body
+              h5.media-heading.text-white.mbn Simon Rivers
+              |           
+              p.text-muted.fs12  What&apos;s up, buddy
+          |       
+          .media.border-none
+            a.pull-left(href='#')
+              img.media-object.thumbnail.thumbnail-sm.rounded(src='img/avatars/5.jpg', alt='...')
+            |         
+            .media-body
+              h5.media-heading.text-white.mbn Eric Ulrich
+              |           
+              p.text-muted.fs12  Client Problem pg.14
+          |       
+          .media.border-none
+            a.pull-left(href='#')
+              img.media-object.thumbnail.thumbnail-sm.rounded(src='img/avatars/6.jpg', alt='...')
+            |         
+            .media-body
+              h5.media-heading.text-white.mbn Hershel Sandin
+              |           
+              p.text-muted.fs12  Looking for an intern?
+          |       
+          .media.border-none
+            a.pull-left(href='#')
+              img.media-object.thumbnail.thumbnail-sm.rounded(src='img/avatars/7.jpg', alt='...')
+            |         
+            .media-body
+              h5.media-heading.text-white.mbn Jacob Hill
+              |           
+              p.text-muted.fs12  Lunch meeting tomorrow.
+          |       
+          .media.border-none
+            a.pull-left(href='#')
+              img.media-object.thumbnail.thumbnail-sm.rounded(src='img/avatars/3.jpg', alt='...')
+            |         
+            .media-body
+              h5.media-heading.text-white.mbn Dante Harper
+              |           
+              p.text-muted.fs12  I have a new twitter!
+      // End: Right Sidebar
+    // End: Main
+    // Google Map API
+    script(type='text/javascript', src='http://maps.google.com/maps/api/js?sensor=true')
+    // jQuery
+    script(type='text/javascript', src='vendor/jquery/jquery-1.11.1.min.js')
+    |  
+    script(type='text/javascript', src='vendor/jquery/jquery_ui/jquery-ui.min.js')
+    // Bootstrap
+    script(type='text/javascript', src='vendor/bootstrap/js/bootstrap.min.js')
+    // Page Plugins
+    script(type='text/javascript', src='vendor/plugins/datatables/js/jquery.dataTables.min.js')
+    |  
+    script(type='text/javascript', src='vendor/plugins/datatables/js/datatables.js')
+    // Datatable Bootstrap Addon
+    script(type='text/javascript', src='vendor/plugins/datatables/extras/TableTools/media/js/TableTools.min.js')
+    // Datatable TableTools Addon
+    script(type='text/javascript', src='vendor/plugins/datatables/extras/TableTools/media/js/ZeroClipboard.js')
+    // Datatable TableTools Addon
+    script(type='text/javascript', src='vendor/editors/xeditable/js/bootstrap-editable.js')
+    |  
+    script(type='text/javascript', src='vendor/plugins/chosen/chosen.jquery.js')
+    // Theme Javascript
+    script(type='text/javascript', src='js/utility/spin.min.js')
+    |  
+    script(type='text/javascript', src='js/utility/underscore-min.js')
+    |  
+    script(type='text/javascript', src='js/main.js')
+    |  
+    script(type='text/javascript', src='js/ajax.js')
+    |  
+    script(type='text/javascript', src='js/custom.js')
+    |  
+    script(type='text/javascript').
+      jQuery(document).ready(function () {
+      "use strict";
+      // Init Theme Core
+      Core.init();
+      // Init Datatables with Tabletools Addon
+      $('#datatable').dataTable( {
+      "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ -1 ] }],
+      "oLanguage": { "oPaginate": {"sPrevious": "", "sNext": ""} },
+      "iDisplayLength": 5,
+      "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      "sDom": 'T<"panel-menu dt-panelmenu"lfr><"clearfix">tip',
+      "oTableTools": {
+      "sSwfPath": "vendor/plugins/datatables/extras/TableTools/media/swf/copy_csv_xls_pdf.swf"
+      }
+      });
+      // Add Placeholder text to datatables filter bar
+      $('.dataTables_filter input').attr("placeholder", "Enter Filter Terms Here....");
+      // Manually Init Chosen on Datatables Filters
+      $("select[name='datatable_length']").chosen();
+      // Init Xeditable Plugin
+      $.fn.editable.defaults.mode = 'popup';
+      $('.xedit').editable();
+      });

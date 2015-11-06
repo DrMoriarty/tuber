@@ -1,0 +1,209 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-link
+        a(href='/admin/carrier') Carriers
+      li.crumb-active
+        a(href='/admin/carrier/#{result.id}')= result.fullname()
+
+block content
+  .row
+    .col-md-12
+      .panel
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-pencil
+            |  #{result.fullname()}
+        .panel-body
+          .alert.alert-theme Yellow fields are required!
+          form#altForm.cmxform(method='post', action='/api/user/#{result.id}')
+            .form-group.has-warning
+              label(for='firstname') First name
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                input#firstname.form-control(name='firstname', type='text', maxlength='30', placeholder='First name', required='', value='#{result.firstname}')
+            .form-group.has-warning
+              label(for='lastname') Last name
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                input#lastname.form-control(name='lastname', type='text', maxlength='30', placeholder='Last name', required='', value='#{result.lastname}')
+            .form-group.has-warning
+              label(for='phone')  Your Phone Number 
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-phone
+                input#phone.form-control.phone(name='phone', type='text', placeholder='+9 (999) 999-9999', required='', value='#{result.phone}')
+            .form-group.has-warning
+              label(for='email')  Your Email 
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                input#email.form-control.email(name='email', type='text', placeholder='user@gmail.com', required='', value='#{result.email}')
+            .form-group.has-success
+              label(for='company')  Your company
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                input#company.form-control.company(name='company', type='text', placeholder='* Optional', value='#{result.company}')
+            .form-group.has-success
+              label(for='vat')  VAT
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-bolt
+                input#vat.form-control.company(name='vat', type='text', placeholder='* Optional', value='#{result.vat}')
+            .form-group.has-warning
+              label(for='maskedZip') Zip Code
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                input#maskedZip.form-control.zip(name='zip', type='text', maxlength='10', placeholder='99999-999', required='', value='#{result.zip}')
+            .form-group.has-warning
+              label(for='address1') Address #1
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#address1.form-control.address1(name='address1', type='text', placeholder='Address line', required='', value='#{result.address1}')
+            .form-group.has-warning
+              label(for='address2') Address #2
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#address2.form-control.address1(name='address2', type='text', placeholder='Address line', required='', value='#{result.address2}')
+            .form-group.has-warning
+              label(for='city') City
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                input#city.form-control.city(name='city', type='text', placeholder='City', required='', value='#{result.city}')
+            .form-group.has-warning
+              label.control-label(for='country') Country
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                select#selectcountry(name='country', required='')
+                  option(value='Russia') Russia
+                  option(value='Germany') Germany
+
+            .form-group.has-warning
+              label(for='vehicleNum') Number of vehicles
+              .input-group
+                span.input-group-addon
+                  i.glyphicons.glyphicons-cars
+                input#vehicleNum.form-control.vehicleNum(name='vehicleNum', type='text', placeholder='', required='', value='#{result.vehicleNum}')
+            .form-group.has-warning
+              label(for='vehicleType') Type of vehicles
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-car
+                input#vehicleType.form-control.vehicleType(name='vehicleType', type='text', placeholder='', required='', value='#{result.vehicleType}')
+            .form-group.has-warning
+              label(for='maxLength') Max parcel length
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-gift
+                input#maxLength.form-control.maxLength(name='maxLength', type='text', placeholder='', required='', value='#{result.maxLength}')
+            .form-group.has-warning
+              label(for='maxWidth') Max parcel width
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-gift
+                input#maxWidth.form-control.maxWidth(name='maxWidth', type='text', placeholder='', required='', value='#{result.maxWidth}')
+            .form-group.has-warning
+              label(for='maxDepth') Max parcel depth
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-gift
+                input#maxDepth.form-control.maxDepth(name='maxDepth', type='text', placeholder='', required='', value='#{result.maxDepth}')
+            .form-group.has-warning
+              label(for='maxWeight') Max parcel weight
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-gift
+                input#maxWeight.form-control.maxWeight(name='maxWeight', type='text', placeholder='', required='', value='#{result.maxWeight}')
+            .form-group.has-warning
+              label(for='parcelsPerDay') Max parcels per day
+              .input-group
+                span.input-group-addon
+                  i.glyphicons.glyphicons-cargo
+                input#parcelsPerDay.form-control.parcelsPerDay(name='parcelsPerDay', type='text', placeholder='', required='', value='#{result.parcelsPerDay}')
+            .form-group.mb25
+              label.col-md-3.control-label Work days
+              .col-md-12
+                label.checkbox-inline.mr10
+                  input#inlineCheckbox1(name='workDay0', type='checkbox', value='true', checked='#{result.workDay0}')
+                  | MON
+                label.checkbox-inline.mr10
+                  input#inlineCheckbox1(name='workDay1', type='checkbox', value='true', checked='#{result.workDay1}')
+                  | TUE
+                label.checkbox-inline.mr10
+                  input#inlineCheckbox1(name='workDay2', type='checkbox', value='true', checked='#{result.workDay2}')
+                  | WED
+                label.checkbox-inline.mr10
+                  input#inlineCheckbox2(name='workDay3', type='checkbox', value='true', checked='#{result.workDay3}')
+                  | THU
+                label.checkbox-inline.mr10
+                  input#inlineCheckbox3(name='workDay4', type='checkbox', value='true', checked='#{result.workDay4}')
+                  | FRI
+                label.checkbox-inline.mr10
+                  input#inlineCheckbox4(name='workDay5', type='checkbox', value='true', checked='#{result.workDay5}')
+                  | SAT
+                label.checkbox-inline.mr10
+                  input#inlineCheckbox5(name='workDay6', type='checkbox', value='true', checked='#{result.workDay6}')
+                  | SUN
+            .form-group.has-warning
+              label(for='coverageDistance') Work area radius
+              .input-group
+                span.input-group-addon
+                  i.glyphicons.glyphicons-globe
+                input#coverageDistance.form-control.coverageDistance(name='coverageDistance', type='text', placeholder='', required='', value='#{result.coverageDistance}')
+            .form-group.has-warning
+              label(for='averageSpeed') Average speed
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-bolt
+                input#averageSpeed.form-control.averageSpeed(name='averageSpeed', type='text', placeholder='', required='', value='#{result.averageSpeed}')
+            .form-group.has-warning
+              label(for='averageDayDistance') Average day distance
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-bolt
+                input#averageDayDistance.form-control.averageDayDistance(name='averageDayDistance', type='text', placeholder='', required='', value='#{result.averageDayDistance}')
+            .form-group.has-warning
+              label(for='pricePerKm') Price per km
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-money
+                input#pricePerKm.form-control.pricePerKm(name='pricePerKm', type='text', placeholder='', required='', value='#{result.pricePerKm}')
+            .form-group.has-warning
+              label(for='defaultPrice') Default price
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-money
+                input#defaultPrice.form-control.defaultPrice(name='defaultPrice', type='text', placeholder='', required='', value='#{result.defaultPrice}')
+
+            .form-group
+              input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
+
+block script
+  script(type='text/javascript').
+    jQuery(document).ready(function () {
+      // validate the comment form when it is submitted
+      $("#altForm").validate({
+        submitHandler: function(form) {
+          $.post(form.action, $(form).serialize(), function(data, status) {
+            location.href = '/admin/carrier';
+          });
+        }
+      });
+      $('.phone').mask('+9 (999) 999-9999');
+      $('#selectcountry').multiselect({
+      enableFiltering: true,
+      });
+    });

@@ -79,6 +79,30 @@ module.exports =
         maxWeight:
             type: 'integer'
             defaultsTo: 0
+        parcelsPerDay:
+            type: 'integer'
+            defaultsTo: 0
+        workDay0: 
+            type: 'boolean'
+            defaultsTo: false
+        workDay1:
+            type: 'boolean'
+            defaultsTo: false
+        workDay2:
+            type: 'boolean'
+            defaultsTo: false
+        workDay3:
+            type: 'boolean'
+            defaultsTo: false
+        workDay4:
+            type: 'boolean'
+            defaultsTo: false
+        workDay5:
+            type: 'boolean'
+            defaultsTo: false
+        workDay6:
+            type: 'boolean'
+            defaultsTo: false
         averageSpeed:
             type: 'float'
             defaultsTo: 0
@@ -100,7 +124,7 @@ module.exports =
             return obj
 
     beforeCreate: (user, cb) ->
-        if user.password?
+        if user.password? and user.password.length > 0
             bcrypt.genSalt 10, (err, salt) ->
                 bcrypt.hash user.password, salt, (err, hash) ->
                     if (err)
@@ -110,4 +134,20 @@ module.exports =
                         user.password = hash
                         cb null, user
         else
+            delete user.password
+            cb null, user
+
+    beforeUpdate: (user, cb) ->
+        if user.password? and user.password.length > 0
+            #console.log 'Change password', user.password, 'for', user
+            bcrypt.genSalt 10, (err, salt) ->
+                bcrypt.hash user.password, salt, (err, hash) ->
+                    if (err)
+                        console.log err
+                        cb err
+                    else
+                        user.password = hash
+                        cb null, user
+        else
+            delete user.password
             cb null, user

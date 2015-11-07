@@ -6,21 +6,21 @@ block topbar
       li.crumb-icon
         a(href='/admin')
           span.glyphicon.glyphicon-home
+      li.crumb-link
+        a(href='/admin/carrier') Carriers
       li.crumb-active
-        a(href='/admin/parcel') Parcels
-  .topbar-right
-    ol.breadcrumb
-      a(href='/admin/parcel/new')
-        button.btn.btn-info(class='button') Create new
+        a(href='/admin/findparcels/#{driverId}') Find parcels
 
 block content
   .row
     .col-md-12
+      if err
+        .alert.alert-theme= err
       .panel.panel-visible
         .panel-heading
           span.panel-title
             span.glyphicon.glyphicon-list-alt
-            |  
+            | Parcels
         .panel-body
           table.table.table-hover
             thead
@@ -29,24 +29,28 @@ block content
                 th Sender
                 th Size
                 th Weight
-                th Departure time
-                th Arrival time
-                th Status
-                th Find carriers
+                th Departure date
+                th Accept
             tbody
               if result
                 each it in result
-                  tr(onclick='javascript:location.href="/admin/parcel/#{it.id}"')
+                  tr(onclick='javascript:location.href="/admin/carrier/#{it.id}"')
                     td= it.id
                     td #{it.owner.firstname} #{it.owner.lastname}
                     td #{it.length} x #{it.width} x #{it.depth}
                     td= it.weight
                     td= it.pickupDate
-                    td= it.arriveDate
-                    td= it.status
                     td
-                      if it.status == 'published'
-                        a(href='/admin/findcarriers/#{it.id}')
+                      if it.request 
+                        if it.request.driverAccepted
+                          button.btn.btn-default(type='button') Accepted
+                        else
+                          a(href='/admin/accept/carrier/#{driverId}/parcel/#{it.id}')
+                            button.btn.btn-info.btn-gradient(type='button')
+                              i.glyphicons.glyphicons-ok
+                      else
+                        a(href='/admin/accept/carrier/#{driverId}/parcel/#{it.id}')
                           button.btn.btn-info.btn-gradient(type='button')
-                            i.fa.fa-truck
+                            i.glyphicons.glyphicons-ok
 
+      

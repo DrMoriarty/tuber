@@ -1,3 +1,4 @@
+async = require 'async'
 
 module.exports =
     main: (req, res) ->
@@ -88,5 +89,79 @@ module.exports =
         res.view 'newsender', {user: req.user}
 
     search: (req, res) ->
+        # TODO
         res.view 'search', {user: req.user}
 
+    findCarriers: (req, res) ->
+        parcelId = req.param('id')
+        SearchService.searchDriver parcelId, (err, result) ->
+            drivers = []
+            async.each result,
+                (it, cb) ->
+                    Request.find({parcel: parcelId, driver: it.id}).populateAll().exec (err, res) ->
+                        if res? and res.length > 0
+                            it.request = res[0]
+                        drivers.push(it)
+                        cb(null)
+                (err) ->
+                    console.log err if err?
+                    console.log 'Found drivers', drivers
+                    res.view 'findcarriers', {user: req.user, parcelId: parcelId, result: drivers, err: err}
+
+    findParcels: (req, res) ->
+        driverId = req.param('id')
+        SearchService.searchParcel driverId, (err, result) ->
+            parcels = []
+            async.each result,
+                (it, cb) ->
+                    Request.find({parcel: it.id, driver: driverId}).populateAll().exec (err, res) ->
+                        if res? and res.length > 0
+                            it.request = res[0]
+                        parcels.push(it)
+                        cb(null)
+                (err) ->
+                    console.log err if err?
+                    console.log 'Found parcels', parcels
+                    res.view 'findparcels', {user: req.user, driverId: driverId, result: parcels, err: err}
+
+    acceptDriver: (req, res) ->
+        driverId = req.param('driverId')
+        parcelId = req.param('parcelId')
+        Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).exec (err, requests) ->
+                if err? or not requests or requests.length <= 0
+                    Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, senderAccepted: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            res.redirect '/admin/request'
+                else
+                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {senderAccept: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            res.redirect '/admin/request'
+
+    acceptParcel: (req, res) ->
+        driverId = req.param('driverId')
+        parcelId = req.param('parcelId')
+        Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).exec (err, requests) ->
+                if err? or not requests or requests.length <= 0
+                    Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, driverAccepted: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            res.redirect '/admin/request'
+                else
+                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {driverAccept: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            res.redirect '/admin/request'
+                        
+
+    requests: (req, res) ->
+        page = req.param('page') or 0
+        Request.find().paginate(page, 20).populateAll().exec (err, result) ->
+            res.view 'requests', {user: req.user, result: result}

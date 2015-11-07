@@ -57,9 +57,9 @@ module.exports.routes = {
     'get /braintree/token': 'BraintreeController.clientToken',
     '/braintree/transaction': 'BraintreeController.transaction',
 
-    'get /search/route': 'SearchController.searchRoute',
-    'get /search/parcel': 'SearchController.searchParcel',
-    'get /search/parcelEllipse': 'SearchController.searchParcelInEllipse',
+    'all /search/driver': 'SearchController.searchDriver',
+    'all /search/parcel': 'SearchController.searchParcel',
+    //'get /search/parcelEllipse': 'SearchController.searchParcelInEllipse',
     'get /search/lastMessages': 'SearchController.messages',
     '/tracking': 'TrackingController.track',
 
@@ -82,7 +82,12 @@ module.exports.routes = {
     'get /admin/carrier/:id': 'AdminController.carrier',
     'get /admin/sender': 'AdminController.senders',
     'get /admin/sender/new': 'AdminController.newSender',
-    'get /admin/sender/:id': 'AdminController.sender'
+    'get /admin/sender/:id': 'AdminController.sender',
+    'get /admin/findcarriers/:id': 'AdminController.findCarriers',
+    'get /admin/findparcels/:id': 'AdminController.findParcels',
+    'all /admin/accept/parcel/:parcelId/carrier/:driverId': 'AdminController.acceptDriver',
+    'all /admin/accept/carrier/:driverId/parcel/:parcelId': 'AdminController.acceptParcel',
+    'get /admin/request': 'AdminController.requests',
 
     /***************************************************************************
      *                                                                          *

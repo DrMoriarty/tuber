@@ -1,0 +1,53 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-link
+        a(href='/admin/parcel') Parcels
+      li.crumb-active
+        a(href='/admin/findcarriers/#{parcelId}') Find carriers
+
+block content
+  .row
+    .col-md-12
+      if err
+        .alert.alert-theme= err
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            | Carriers
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th #
+                th First Name
+                th Last Name
+                th ZIP
+                th Accept
+            tbody
+              if result
+                each it in result
+                  tr(onclick='javascript:location.href="/admin/carrier/#{it.id}"')
+                    td= it.id
+                    td= it.firstname
+                    td= it.lastname
+                    td= it.zip
+                    td
+                      if it.request 
+                        if it.request.senderAccepted
+                          button.btn.btn-default(type='button') Accepted
+                        else
+                          a(href='/admin/accept/parcel/#{parcelId}/carrier/#{it.id}')
+                            button.btn.btn-info.btn-gradient(type='button')
+                              i.glyphicons.glyphicons-ok
+                      else
+                        a(href='/admin/accept/parcel/#{parcelId}/carrier/#{it.id}')
+                          button.btn.btn-info.btn-gradient(type='button')
+                            i.glyphicons.glyphicons-ok
+      

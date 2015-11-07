@@ -59,6 +59,9 @@ module.exports.policies = {
     'PersonController': {
         '*': 'isAuthenticated'
     },
+    'RequestController': {
+        '*': 'isAuthenticated'
+    },
     'RouteController': {
         '*': 'isAuthenticated'
     },

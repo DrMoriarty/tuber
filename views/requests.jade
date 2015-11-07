@@ -1,0 +1,39 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-active
+        a(href='/admin/request') Requests
+
+block content
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Requests
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th #
+                th Sender
+                th Carrier
+                th Departure
+                th Sender accepted
+                th Carrier accepted
+            tbody
+              if result
+                each it in result
+                  tr
+                    td= it.id
+                    td #{it.sender.firstname} #{it.sender.lastname}
+                    td #{it.driver.firstname} #{it.driver.lastname}
+                    td= it.parcel.pickupDate
+                    td= it.senderAccepted
+                    td= it.driverAccepted

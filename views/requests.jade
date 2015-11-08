@@ -27,6 +27,7 @@ block content
                 th Departure
                 th Sender accepted
                 th Carrier accepted
+                th Paid
             tbody
               if result
                 each it in result
@@ -37,3 +38,4 @@ block content
                     td= it.parcel.pickupDate
                     td= it.senderAccepted
                     td= it.driverAccepted
+                    td= it.paid

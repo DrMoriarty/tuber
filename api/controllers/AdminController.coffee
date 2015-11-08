@@ -1,5 +1,10 @@
 async = require 'async'
 
+cleanUpRequests = (senderId, parcelId, driverId) ->
+    Request.remove {sender: senderId, parcel: parcelId, driver: {'!': driverId}}, (err, result) ->
+        console.log err if err?
+        console.log 'Remove other requests', result
+
 module.exports =
     main: (req, res) ->
         res.view 'blank', {user: req.user}
@@ -136,17 +141,24 @@ module.exports =
                         else
                             res.redirect '/admin/request'
                 else
-                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {senderAccept: true}).exec (err, result) ->
+                    driverAccepted = false
+                    for req in requests
+                        if req.driverAccepted
+                            driverAccepted = true
+                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {senderAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
                         else
                             res.redirect '/admin/request'
+                    if driverAccepted
+                        # remove all other requests for this parcel
+                        cleanUpRequests(parcel.owner.id, parcelId, driverId)
 
     acceptParcel: (req, res) ->
         driverId = req.param('driverId')
         parcelId = req.param('parcelId')
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
-            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).exec (err, requests) ->
+            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).populateAll().exec (err, requests) ->
                 if err? or not requests or requests.length <= 0
                     Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, driverAccepted: true}).exec (err, result) ->
                         if err?
@@ -154,12 +166,18 @@ module.exports =
                         else
                             res.redirect '/admin/request'
                 else
-                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {driverAccept: true}).exec (err, result) ->
+                    senderAccepted = false
+                    for req in requests
+                        if req.senderAccepted
+                            senderAccepted = true
+                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {driverAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
                         else
                             res.redirect '/admin/request'
-                        
+                    if senderAccepted
+                        # we need to remove all other requests from this driver
+                        cleanUpRequests(parcel.owner.id, parcelId, driverId)
 
     requests: (req, res) ->
         page = req.param('page') or 0

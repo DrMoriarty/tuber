@@ -5,44 +5,8 @@
  @docs        :: http://sailsjs.org/#!documentation/models
 """
 
-geocoder = require 'geocoder'
 bcrypt = require 'bcrypt'
 util = require 'util'
-
-updateCoordinates = (user, data, cb) ->
-    console.log 'User coordinates', util.inspect(data, {showHidden: false, depth: null})
-    if data.results? and data.results.length > 0
-        res = data.results[0]
-        if res.geometry?.location?
-            if cb?
-                user.latitude = res.geometry.location.lat
-                user.longitude = res.geometry.location.lng
-                cb (user)
-            else if user?.id?
-                User.update user.id, {latitude: res.geometry.location.lat, longitude: res.geometry.location.lng}, (err, updatedRecord) ->
-                    if err?
-                        console.log 'Error', err
-                    else
-                        console.log 'Update user', updatedRecord
-            else
-                console.log 'Nowhere to save the coordinates! User:', user
-        else
-            console.log 'Invalid geocoding result', util.inspect(data, {showHidden: false, depth: null})
-    else
-        console.log 'Invalid geocoding result', util.inspect(data, {showHidden: false, depth: null})
-
-checkUserCoordinates = (user, cb) ->
-    console.log 'New user records', user
-    if user.zip?
-        address = user.zip
-        if user.country?
-            address = address + ', ' + user.country
-        geocoder.geocode address, (err, data) ->
-            if not err and data
-                updateCoordinates user, data, (u) ->
-                    cb(u)
-    else
-        cb(user)
 
 module.exports = 
 	_config: 
@@ -175,10 +139,16 @@ module.exports =
                         cb err
                     else
                         user.password = hash
-                        cb null, user
+                        GeoService.zipGeo user.zip, user.country, (lat, lng) ->
+                            user.latitude = lat
+                            user.longitude = lng
+                            cb null, user
         else
             delete user.password
-            cb null, user
+            GeoService.zipGeo user.zip, user.country, (lat, lng) ->
+                user.latitude = lat
+                user.longitude = lng
+                cb null, user
 
     beforeUpdate: (user, cb) ->
         if user.password? and user.password.length > 0
@@ -190,20 +160,13 @@ module.exports =
                         cb err
                     else
                         user.password = hash
-                        checkUserCoordinates user, (u) ->
-                            cb null, u
+                        GeoService.zipGeo user.zip, user.country, (lat, lng) ->
+                            user.latitude = lat
+                            user.longitude = lng
+                            cb null, user
         else
             delete user.password
-            checkUserCoordinates user, (u) ->
-                cb null, u
-
-    afterCreate: (user, cb) ->
-        if user.zip?
-            address = user.zip
-            if user.country?
-                address = address + ', ' + user.country
-            geocoder.geocode address, (err, data) ->
-                if not err and data
-                    updateCoordinates this, data
-
-
+            GeoService.zipGeo user.zip, user.country, (lat, lng) ->
+                user.latitude = lat
+                user.longitude = lng
+                cb null, user

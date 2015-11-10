@@ -64,6 +64,18 @@ block content
                 span.input-group-addon
                   i.fa.fa-globe
                 input#maskedZip.form-control.zip(name='zip', type='text', maxlength='10', placeholder='99999-999', required='', value='#{result.zip}')
+            .form-group
+              label.control-label Latitude
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                .form-control-static.text-muted=  result.latitude
+            .form-group
+              label.control-label Longitude
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                .form-control-static.text-muted=  result.longitude
             .form-group.has-warning
               label(for='address1') Address #1
               .input-group

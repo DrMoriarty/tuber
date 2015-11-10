@@ -18,12 +18,14 @@ updateCoordinates = (user, data, cb) ->
                 user.latitude = res.geometry.location.lat
                 user.longitude = res.geometry.location.lng
                 cb (user)
-            else
+            else if user?.id?
                 User.update user.id, {latitude: res.geometry.location.lat, longitude: res.geometry.location.lng}, (err, updatedRecord) ->
                     if err?
                         console.log 'Error', err
                     else
                         console.log 'Update user', updatedRecord
+            else
+                console.log 'Nowhere to save the coordinates! User:', user
         else
             console.log 'Invalid geocoding result', util.inspect(data, {showHidden: false, depth: null})
     else

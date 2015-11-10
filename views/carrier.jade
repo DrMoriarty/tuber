@@ -197,6 +197,7 @@ block script
       // validate the comment form when it is submitted
       $("#altForm").validate({
         submitHandler: function(form) {
+          Pace.restart();
           formData = $(form).serialize();
           if(formData.indexOf('workDay0') < 0) formData = formData + '&workDay0=false';
           if(formData.indexOf('workDay1') < 0) formData = formData + '&workDay1=false';

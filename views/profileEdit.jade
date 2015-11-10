@@ -45,6 +45,7 @@ block script
       // validate the comment form when it is submitted
       $("#altForm").validate({
         submitHandler: function(form) {
+          Pace.restart();
           $.post(form.action, $(form).serialize(), function(data, status) {
             location.href = '/admin';
           });

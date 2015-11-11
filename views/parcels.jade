@@ -27,6 +27,7 @@ block content
               tr
                 th #
                 th Sender
+                th Driver
                 th Size
                 th Weight
                 th Departure time
@@ -39,6 +40,10 @@ block content
                   tr(onclick='javascript:location.href="/admin/parcel/#{it.id}"')
                     td= it.id
                     td #{it.owner.firstname} #{it.owner.lastname}
+                    if it.driver
+                      td #{it.driver.firstname} #{it.driver.lastname}
+                    else
+                      td None
                     td #{it.length} x #{it.width} x #{it.depth}
                     td= it.weight
                     td= it.pickupDate

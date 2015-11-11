@@ -1,9 +1,12 @@
 async = require 'async'
 
-cleanUpRequests = (senderId, parcelId, driverId) ->
-    Request.remove {sender: senderId, parcel: parcelId, driver: {'!': driverId}}, (err, result) ->
+finishRequest = (senderId, parcelId, driverId) ->
+    Request.destroy({sender: senderId, parcel: parcelId, driver: {'!': driverId}}).exec (err, result) ->
         console.log err if err?
         console.log 'Remove other requests', result
+    Parcel.update({id: parcelId}, {status: 'accepted', driver: driverId}).exec (err, result) ->
+        console.log err if err?
+        console.log 'Update parcel', result
 
 module.exports =
     main: (req, res) ->
@@ -152,7 +155,7 @@ module.exports =
                             res.redirect '/admin/request'
                     if driverAccepted
                         # remove all other requests for this parcel
-                        cleanUpRequests(parcel.owner.id, parcelId, driverId)
+                        finishRequest(parcel.owner.id, parcelId, driverId)
 
     acceptParcel: (req, res) ->
         driverId = req.param('driverId')
@@ -177,7 +180,7 @@ module.exports =
                             res.redirect '/admin/request'
                     if senderAccepted
                         # we need to remove all other requests from this driver
-                        cleanUpRequests(parcel.owner.id, parcelId, driverId)
+                        finishRequest(parcel.owner.id, parcelId, driverId)
 
     requests: (req, res) ->
         page = req.param('page') or 0

@@ -1,6 +1,5 @@
 async = require 'async'
 gps = require 'gps-util'
-
 module.exports = 
     searchDriver: (parcelId, cb) ->
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
@@ -17,10 +16,15 @@ module.exports =
                     maxWeight: {'>=': parcel.weight}
                     vehicleNum: {'>': 0}
                 User.find(searchParams).populateAll().exec (err, result) ->
+                    console.log 'Unfiltered drivers', result
                     drivers = []
                     for driver in result
-                        if gps.getDistance(parcel.owner.longitude, parcel.owner.latitude, driver.longitude, driver.latitude,) <= driver.coverageDistance
+                        dist = gps.getDistance(parcel.owner.longitude, parcel.owner.latitude, driver.longitude, driver.latitude)
+                        if dist*0.001 <= driver.coverageDistance
                             drivers.push driver
+                        else
+                            console.log 'Too far', dist
+                    console.log 'Filtered drivers', drivers
                     cb(null, drivers)
                     
     searchParcel: (driverId, cb) ->
@@ -29,7 +33,8 @@ module.exports =
                 console.log err
                 cb(err, null)
             else
-                bbox = gps.getBoundingBox(driver.latitude, driver.longitude, driver.coverageDistance)
+                bbox = gps.getBoundingBox(driver.latitude, driver.longitude, driver.coverageDistance*1000)
+                console.log 'Bounding box', bbox
                 searchParams =
                     longitude: { '>=': bbox[0].lng, '<=': bbox[1].lng}
                     latitude: { '>=': bbox[0].lat, '<=': bbox[1].lat}
@@ -40,14 +45,16 @@ module.exports =
                     width: {'<=': driver.maxWidth}
                     depth: {'<=': driver.maxDepth}
                     weight: {'<=': driver.maxWeight}
+                console.log 'Search params', searchParams
                 User.find(searchParams).exec (err, senders) ->
                     if err or not senders
                         cb(err, null)
                     else
+                        console.log 'Unfiltered senders', senders
                         parcels = []
                         async.each senders,
                             (it, callback) ->
-                                if gps.getDistance(driver.longitude, driver.latitude, it.longitude, it.latitude) > driver.coverageDistance
+                                if gps.getDistance(driver.longitude, driver.latitude, it.longitude, it.latitude)*0.001 > driver.coverageDistance
                                     return callback(null)
                                 Parcel.find({owner: it.id, status: 'published'}).where(parcelParams).populateAll().exec (err, result) ->
                                     console.log err if err?

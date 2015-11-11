@@ -23,6 +23,9 @@ module.exports =
             type: 'boolean'
             defaultsTo: false
         invoice: 'string'
+        price:
+            type: 'float'
+            defaultsTo: 0
         paid:
             type: 'boolean'
             defaultsTo: false

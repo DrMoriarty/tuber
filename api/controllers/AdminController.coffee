@@ -141,6 +141,8 @@ module.exports =
                     Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, senderAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
+                        else if req.wantsJSON
+                            res.json result
                         else
                             res.redirect '/admin/request'
                 else
@@ -151,6 +153,8 @@ module.exports =
                     Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {senderAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
+                        else if req.wantsJSON
+                            res.json result
                         else
                             res.redirect '/admin/request'
                     if driverAccepted
@@ -166,6 +170,8 @@ module.exports =
                     Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, driverAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
+                        else if req.wantsJSON
+                            res.json result
                         else
                             res.redirect '/admin/request'
                 else
@@ -176,6 +182,8 @@ module.exports =
                     Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {driverAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
+                        else if req.wantsJSON
+                            res.json result
                         else
                             res.redirect '/admin/request'
                     if senderAccepted

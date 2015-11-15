@@ -92,6 +92,10 @@ html
               a(href='/admin/sender/new')
                 span.glyphicons.glyphicons-user_add
                 span.sidebar-title Register a sender
+            li
+              a(href='/admin/servertests')
+                span.glyphicons.glyphicons-stats
+                span.sidebar-title Server tests
       // End: Sidebar
       // Start: Content
       section#content_wrapper
@@ -114,7 +118,9 @@ html
     script(type='text/javascript', src='/vendor/plugins/multiselect/bootstrap-multiselect.js')
     script(type='text/javascript', src='/vendor/plugins/timepicker/bootstrap-timepicker.min.js')
     script(type='text/javascript', src='/vendor/plugins/datepicker/bootstrap-datepicker.js')
-    script(type='text/javascript', src='/vendor/plugins/pace/pace.min.js')
+    script(type='text/javascript', src='/vendor/plugins/pace/pace.min.js', data-pace-options='{ "ajax": {"trackMethods": ["GET", "POST", "PUT", "DELETE", "REMOVE"]} }')
+    script(type='text/javascript', src='/vendor/plugins/raphael/raphael.js')
+    script(type='text/javascript', src='/vendor/plugins/morris/morris.js')
     // Theme Javascript
     script(type='text/javascript', src='/js/utility/spin.min.js')
     script(type='text/javascript', src='/js/utility/underscore-min.js')

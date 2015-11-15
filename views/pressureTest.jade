@@ -1,0 +1,82 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-active
+        a(href='/admin/pressuretest') Server Tests
+
+block content
+  .row
+    .col-md-12
+      .panel
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-stats
+            |  Stress test
+        .panel-body
+          .col-lg-8.pn
+            #graph(style='height: 395px; width: 100%;')
+          .col-lg-4
+            form#altForm.cmxform(method='post', action='/admin/stresstest')
+              .form-group
+                label(for='firstname') Number of tests
+                input#firstname.form-control(name='count', type='text', maxlength='30', value='10', required='')
+              .form-group
+                input.submit.btn.bg-purple.pull-right(type='submit', value='Start test')
+            
+
+block script
+  script(type='text/javascript').
+    jQuery(document).ready(function () {
+    "use strict";
+    // Init Theme Core
+    Core.init();
+    // Morris Charts Plugin
+    var runMorrisCharts = function (data) {
+      // Use Morris.Area instead of Morris.Line
+      if (data != null) {
+        window.lastMorrisData = data;
+      } else {
+        data = window.lastMorrisData;
+      }
+      var gdata = {
+        element: 'graph',
+        data: data,
+        xkey: 'series',
+        ykeys: ['errors', 'maxClientTime', 'maxServerTime', 'clientTime', 'serverTime'],
+        labels: ['Errors', 'Max client time per request', 'Max server time per request', 'Mid client time per request', 'Mid server time per request'],
+        lineColors: [redColor, blueColor, greenColor, blue2Color, green2Color],
+        parseTime: false
+      };
+      Morris.Line(gdata);
+    }
+    // Init All Dashboard required Widgets
+    //runMorrisCharts();
+    //////////////////////////////////////
+    // Responsive Dashboard Chart Helpers
+    // Update chart size anytime the window is resized or when our primary
+    // content container undergoes an animation(indicating a size change).
+    $(window).resize(_.debounce(function(){
+      if ($('#graph').length){
+        $('#graph').empty();
+        runMorrisCharts()
+      }
+    }, 200));
+    $('body').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
+      $('#graph').empty();
+      runMorrisCharts();
+    });
+      // validate the comment form when it is submitted
+      $("#altForm").validate({
+        submitHandler: function(form) {
+          $.post(form.action, $(form).serialize(), function(data, status) {
+            $('#graph').empty();
+            runMorrisCharts(data);
+          });
+        }
+      });
+    });

@@ -194,3 +194,19 @@ module.exports =
         page = req.param('page') or 0
         Request.find().paginate(page, 20).populateAll().exec (err, result) ->
             res.view 'requests', {user: req.user, result: result}
+
+    serverTests: (req, res) ->
+        res.view 'pressureTest', {user: req.user}
+
+    stressTest: (req, res) ->
+        count = req.param('count') or 10
+        step = count / 10
+        complex = []
+        c = step
+        for i in [0...10]
+            complex.push {list: TestService.defaultTestList, count: c}
+            c += step
+        TestService.performComplexTest complex, (result) ->
+            res.json result
+            console.log result
+        

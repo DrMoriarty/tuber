@@ -23,8 +23,13 @@ block content
           .col-lg-4
             form#altForm.cmxform(method='post', action='/admin/stresstest')
               .form-group
-                label(for='firstname') Number of tests
-                input#firstname.form-control(name='count', type='text', maxlength='30', value='10', required='')
+                label.control-label(for='pattern') Test pattern
+                .input-group
+                  select#pattern(name='pattern')
+                    option(value='default') Default
+              .form-group
+                label(for='number') Number of tests
+                input#number.form-control(name='count', type='text', maxlength='30', value='10', required='')
               .form-group
                 input.submit.btn.bg-purple.pull-right(type='submit', value='Start test')
             
@@ -35,6 +40,9 @@ block script
     "use strict";
     // Init Theme Core
     Core.init();
+    $('#pattern').multiselect({
+      enableFiltering: false,
+    });
     // Morris Charts Plugin
     var runMorrisCharts = function (data) {
       // Use Morris.Area instead of Morris.Line

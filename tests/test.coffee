@@ -4,8 +4,8 @@ request = require("request")
 querystring = require("querystring")
 async = require 'async'
 
-API='http://localhost:1337/'
-#API='http://5.178.85.110/'
+#API='http://localhost:1337/'
+API='http://5.101.119.187/'
 
 DEBUG = false
 
@@ -143,6 +143,10 @@ performSequenceSerie = (sequence, number, cb) ->
                     result.maxServerTime = res.serverTime
             result.series += 1
             if result.series >= number
+                result.serverTime /= result.requests * 1000
+                result.clientTime /= result.requests * 1000
+                result.maxClientTime /= 1000
+                result.maxServerTime /= 1000
                 cb result
 
 performComplexTest = (series, cb) ->
@@ -157,5 +161,20 @@ performComplexTest = (series, cb) ->
 
 MAXTEST = 100
 
-performComplexTest [{list: testlist, count:10}, {list: testlist, count:25}, {list: testlist, count:50}, {list: testlist, count:100}], (res) ->
+for arg in process.argv
+    if arg == '-d'
+        DEBUG = true
+    if arg.indexOf('-t=') == 0
+        MAXTEST = parseInt(arg.substring(3))
+
+complex = []
+step = MAXTEST / 10 or 1
+count = step
+
+for i in [0...10]
+    complex.push {list: testlist, count:count}
+    count += step
+
+performComplexTest complex, (res) ->
     console.log res
+

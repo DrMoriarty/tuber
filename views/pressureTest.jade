@@ -45,6 +45,9 @@ block script
     });
     // Morris Charts Plugin
     var runMorrisCharts = function (data) {
+      $.ajaxSetup({
+        timeout: 600000
+      });
       // Use Morris.Area instead of Morris.Line
       if (data != null) {
         window.lastMorrisData = data;

@@ -15,4 +15,7 @@ module.exports =
     text: 'string'
     class: 'string'
     object: 'string'
+    read:
+        type: 'boolean'
+        defaultsTo: false
 

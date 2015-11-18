@@ -53,28 +53,15 @@ module.exports =
         ]
 
     messages: (req, res) ->
-        # TODO
-        res.json [
-            {
-                sender: null
-                recipient: {
-                    id: '0000000000'
-                    firstname: 'Demo'
-                    lastname: 'Demo'
-                }
-                text: 'Demo message'
-                class: 'parcel'
-                object: '111111111111'
-            }
-            {
-                sender: null
-                recipient: {
-                    id: '0000000000'
-                    firstname: 'Demo'
-                    lastname: 'Demo'
-                }
-                text: 'Demo message'
-                class: 'parcel'
-                object: '111111111111'
-            }
-        ]
+        since = req.param('since')
+        params =
+            sort: 'createdAt DESC'
+        if since?
+            params.createdAt = {'>': since}
+        Message.find(params).exec (err, result) ->
+            if err?
+                console.log err
+                return res.negotiate err
+            res.json result
+            
+

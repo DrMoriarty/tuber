@@ -15,7 +15,7 @@ module.exports =
 
         data = actionUtil.parseCriteria(req)
         if not req.user.admin
-            data.sender = req.user.id
+            data.recipient = req.user.id
         console.log 'Filter data', data
         query = Message.find()
             .where( data )

@@ -34,21 +34,23 @@ module.exports.policies = {
         '*': 'isAdmin'
     },
     'AuthController': {
-        '*': 'isAuthenticated',
         'login': true,
         'install': true,
-        'logout': true
+        'logout': true,
+        'generatePasswordRecovery': true,
+        'usePasswordRecovery': true,
+        '*': 'isAuthenticated'
     },
     'BraintreeController': {
         '*': 'isAuthenticated'
     },
     'CityController': {
-        '*': 'isAuthenticated',
-        'create': true
+        'create': true,
+        '*': 'isAuthenticated'
     },
     'CountryController': {
-        '*': 'isAuthenticated',
-        'create': true
+        'create': true,
+        '*': 'isAuthenticated'
     },
     'MessageController': {
         '*': 'isAuthenticated'

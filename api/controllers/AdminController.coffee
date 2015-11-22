@@ -142,8 +142,10 @@ module.exports =
                         if err?
                             res.json err
                         else if req.wantsJSON
+                            MessagingService.driverAcceptedByOwner result.id
                             res.json result
                         else
+                            MessagingService.driverAcceptedByOwner result.id
                             res.redirect '/admin/request'
                 else
                     driverAccepted = false
@@ -154,8 +156,10 @@ module.exports =
                         if err?
                             res.json err
                         else if req.wantsJSON
+                            MessagingService.driverAcceptedByOwner result.id
                             res.json result
                         else
+                            MessagingService.driverAcceptedByOwner result.id
                             res.redirect '/admin/request'
                     if driverAccepted
                         # remove all other requests for this parcel
@@ -171,8 +175,10 @@ module.exports =
                         if err?
                             res.json err
                         else if req.wantsJSON
+                            MessagingService.parcelAcceptedByDriver result.id
                             res.json result
                         else
+                            MessagingService.parcelAcceptedByDriver result.id
                             res.redirect '/admin/request'
                 else
                     senderAccepted = false
@@ -183,8 +189,10 @@ module.exports =
                         if err?
                             res.json err
                         else if req.wantsJSON
+                            MessagingService.parcelAcceptedByDriver result.id
                             res.json result
                         else
+                            MessagingService.parcelAcceptedByDriver result.id
                             res.redirect '/admin/request'
                     if senderAccepted
                         # we need to remove all other requests from this driver

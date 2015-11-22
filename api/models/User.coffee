@@ -125,9 +125,12 @@ module.exports =
         coverageDistance:
             type: 'float'
             defaultsTo: 0
+        recoveryHash:
+            type: 'string'
         toJSON: ->
             obj = this.toObject()
             delete obj.password
+            delete obj.recoveryHash
             return obj
 
     beforeCreate: (user, cb) ->

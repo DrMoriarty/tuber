@@ -17,11 +17,27 @@ module.exports =
                 res.json {token: response.clientToken}
 
     transaction: (req, res) ->
-        nonce = if req.body?.payment_method? then req.body.payment_method else 'fake-valid-nonce'
-        amount = if req.body?.amount? then req.body.amount else 1.0
-        gateway.transaction.sale { amount: amount, paymentMethodNonce: nonce}, (err, result) ->
-            if err?
-                console.log err
-                res.json {error: err}
-            else
-                res.json result
+        nonce = req.body.payment_method or req.body.payment_method_nonce or 'fake-valid-nonce'
+        amount = req.body.amount or 1.0
+        requestId = req.body.request_id
+        if not requestId or not amount or not nonce
+            res.status 400
+            res.json {error: 'Bad request'}
+        else
+            gateway.transaction.sale { amount: amount, paymentMethodNonce: nonce}, (err, result) ->
+                if err?
+                    console.log err
+                    res.status 400
+                    res.json {error: err}
+                else if not result.success
+                    console.log result
+                    res.status 400
+                    res.json result
+                else
+                    res.json result
+                    if requestId?
+                        Request.update({id: requestId}, {'paid': true, invoice: result}).exec (err, result) ->
+                            if err?
+                                console.log err 
+                            else
+                                MessagingService.invoicePaid requestId

@@ -46,11 +46,20 @@ module.exports =
 
     zipGeo: (zip, country, callback) ->
         found = false
+        count = 0
         GeoService.zipGeoFromOSM zip, country, (lat, lng) ->
+            count += 1
             if not found and lat? and lng?
                 found = true
-                callback lat, lng
+                return callback lat, lng
+            if count >= 2
+                # both methods founded nothing
+                callback 0, 0
         GeoService.zipGeoFromGoogle zip, country, (lat, lng) ->
+            count += 1
             if not found and lat? and lng?
                 found = true
-                callback lat, lng
+                return callback lat, lng
+            if count >= 2
+                # both methods founded nothing
+                callback 0, 0

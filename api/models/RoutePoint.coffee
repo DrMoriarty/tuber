@@ -17,3 +17,16 @@ module.exports =
             type: 'datetime'
         owner:
             model: 'User'
+
+    afterCreate: (object, cb) ->
+        LogService.saveLog 'Create', 'RoutePoint', JSON.stringify(object)
+        cb()
+
+    afterUpdate: (object, cb) ->
+        LogService.saveLog 'Update', 'RoutePoint', JSON.stringify(object)
+        cb()
+
+    afterDestroy: (object, cb) ->
+        LogService.saveLog 'Delete', 'RoutePoint', JSON.stringify(object)
+        cb()
+

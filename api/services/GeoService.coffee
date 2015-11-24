@@ -38,11 +38,9 @@ module.exports =
                     latitude = feature.geometry.coordinates[1]
             else if strict
                 # no data, try to call non strict request
-                return GeoService.zipGeoFromOSM zip, country,
-                    (lat, lng) ->
-                        callback lat, lng
-                    false
-            callback latitude, longitude
+                GeoService.zipGeoFromOSM zip, country, callback, false
+            else
+                callback latitude, longitude
 
     zipGeo: (zip, country, callback) ->
         found = false
@@ -52,7 +50,7 @@ module.exports =
             if not found and lat? and lng?
                 found = true
                 return callback lat, lng
-            if count >= 2
+            if not found and count == 2
                 # both methods founded nothing
                 callback 0, 0
         GeoService.zipGeoFromGoogle zip, country, (lat, lng) ->
@@ -60,6 +58,6 @@ module.exports =
             if not found and lat? and lng?
                 found = true
                 return callback lat, lng
-            if count >= 2
+            if not found and count == 2
                 # both methods founded nothing
                 callback 0, 0

@@ -173,3 +173,15 @@ module.exports =
                 user.latitude = lat
                 user.longitude = lng
                 cb null, user
+
+    afterCreate: (object, cb) ->
+        LogService.saveLog 'Create', 'User', JSON.stringify(object)
+        cb()
+
+    afterUpdate: (object, cb) ->
+        LogService.saveLog 'Update', 'User', JSON.stringify(object)
+        cb()
+
+    afterDestroy: (object, cb) ->
+        LogService.saveLog 'Delete', 'User', JSON.stringify(object)
+        cb()

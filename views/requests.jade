@@ -33,8 +33,14 @@ block content
                 each it in result
                   tr
                     td= it.id
-                    td #{it.sender.firstname} #{it.sender.lastname}
-                    td #{it.driver.firstname} #{it.driver.lastname}
+                    if it.sender
+                      td #{it.sender.firstname} #{it.sender.lastname}
+                    else
+                      td None
+                    if it.driver
+                      td #{it.driver.firstname} #{it.driver.lastname}
+                    else
+                      td None
                     td= it.parcel.pickupDate
                     td= it.senderAccepted
                     td= it.driverAccepted

@@ -217,4 +217,7 @@ module.exports =
         TestService.performComplexTest complex, (result) ->
             res.json result
             console.log result
-        
+
+    logs: (req, res) ->
+        LogService.lastLogs 25, (err, result) ->
+            res.view 'logs', {user: req.user, result: result}

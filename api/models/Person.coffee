@@ -32,3 +32,15 @@ module.exports =
         email: 'email'
         owner:
             model: 'User'
+
+    afterCreate: (object, cb) ->
+        LogService.saveLog 'Create', 'Person', JSON.stringify(object)
+        cb()
+
+    afterUpdate: (object, cb) ->
+        LogService.saveLog 'Update', 'Person', JSON.stringify(object)
+        cb()
+
+    afterDestroy: (object, cb) ->
+        LogService.saveLog 'Delete', 'Person', JSON.stringify(object)
+        cb()

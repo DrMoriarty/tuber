@@ -89,7 +89,8 @@ module.exports.routes = {
     'all /admin/accept/carrier/:driverId/parcel/:parcelId': 'AdminController.acceptParcel',
     'get /admin/request': 'AdminController.requests',
     'get /admin/servertests': 'AdminController.serverTests',
-    'all /admin/stresstest': 'AdminController.stressTest'
+    'all /admin/stresstest': 'AdminController.stressTest',
+    'all /admin/logs': 'AdminController.logs'
 
     /***************************************************************************
      *                                                                          *

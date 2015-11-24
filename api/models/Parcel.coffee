@@ -39,4 +39,15 @@ module.exports =
             type: 'string'
             enum: ['draft', 'published', 'accepted', 'started', 'arrived']
 
+    afterCreate: (object, cb) ->
+        LogService.saveLog 'Create', 'Parcel', JSON.stringify(object)
+        cb()
+
+    afterUpdate: (object, cb) ->
+        LogService.saveLog 'Update', 'Parcel', JSON.stringify(object)
+        cb()
+
+    afterDestroy: (object, cb) ->
+        LogService.saveLog 'Delete', 'Parcel', JSON.stringify(object)
+        cb()
 

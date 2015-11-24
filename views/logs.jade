@@ -1,0 +1,36 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-active
+        a(href='/admin/logs') Logs
+
+block content
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Last API calls
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th Date
+                th Action
+                th Object
+                th Argument
+            tbody
+              if result
+                each it in result
+                  tr
+                    td= it.createdAt
+                    td= it.type
+                    td= it.method
+                    td= it.argument
+

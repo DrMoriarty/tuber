@@ -30,4 +30,15 @@ module.exports =
             type: 'boolean'
             defaultsTo: false
 
+    afterCreate: (object, cb) ->
+        LogService.saveLog 'Create', 'Request', JSON.stringify(object)
+        cb()
+
+    afterUpdate: (object, cb) ->
+        LogService.saveLog 'Update', 'Request', JSON.stringify(object)
+        cb()
+
+    afterDestroy: (object, cb) ->
+        LogService.saveLog 'Delete', 'Request', JSON.stringify(object)
+        cb()
 

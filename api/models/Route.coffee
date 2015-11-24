@@ -22,3 +22,16 @@ module.exports =
     endAddress:
         model: 'Address'
         required: true
+
+    afterCreate: (object, cb) ->
+        LogService.saveLog 'Create', 'Route', JSON.stringify(object)
+        cb()
+
+    afterUpdate: (object, cb) ->
+        LogService.saveLog 'Update', 'Route', JSON.stringify(object)
+        cb()
+
+    afterDestroy: (object, cb) ->
+        LogService.saveLog 'Delete', 'Route', JSON.stringify(object)
+        cb()
+

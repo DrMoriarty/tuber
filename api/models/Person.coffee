@@ -20,6 +20,12 @@ module.exports =
             type: 'string'
             required: true
         zip: 'string'
+        latitude:
+            type: 'float'
+            defaultsTo: 0
+        longitude:
+            type: 'float'
+            defaultsTo: 0
         city:
             type: 'string'
             required: true
@@ -44,3 +50,15 @@ module.exports =
     afterDestroy: (object, cb) ->
         LogService.saveLog 'Delete', 'Person', JSON.stringify(object)
         cb()
+
+    beforeCreate: (person, cb) ->
+        GeoService.zipGeo person.zip, person.country, (lat, lng) ->
+            person.latitude = lat
+            person.longitude = lng
+            cb null, person
+
+    beforeUpdate: (person, cb) ->
+        GeoService.zipGeo person.zip, person.country, (lat, lng) ->
+            person.latitude = lat
+            person.longitude = lng
+            cb null, person

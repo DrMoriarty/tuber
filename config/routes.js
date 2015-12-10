@@ -62,6 +62,8 @@ module.exports.routes = {
     //'get /search/parcelEllipse': 'SearchController.searchParcelInEllipse',
     'get /search/lastMessages': 'SearchController.messages',
     '/tracking': 'TrackingController.track',
+    'all /accept/parcel/:parcelId/carrier/:driverId': 'SearchController.acceptDriver',
+    'all /accept/carrier/parcel/:parcelId': 'SearchController.acceptParcel',
 
     'get /admin': 'AdminController.main',
     'get /admin/profile': 'AdminController.profile',
@@ -90,7 +92,11 @@ module.exports.routes = {
     'get /admin/request': 'AdminController.requests',
     'get /admin/servertests': 'AdminController.serverTests',
     'all /admin/stresstest': 'AdminController.stressTest',
-    'all /admin/logs': 'AdminController.logs'
+    'all /admin/logs': 'AdminController.logs',
+    'get /dpd/getAuth': 'DpdController.getAuth',
+    'get /dpd/storeOrders': 'DpdController.storeOrders',
+    'get /dpd/getTrackingData': 'DpdController.getTrackingData',
+    'get /dpd/getParcelLabelNumber': 'DpdController.getParcelLabelNumber',
 
     /***************************************************************************
      *                                                                          *

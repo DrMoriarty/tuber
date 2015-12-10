@@ -27,7 +27,10 @@ block content
               .input-group
                 span.input-group-addon
                   i.fa.fa-user
-                .form-control-static.text-muted=  result.owner.fullname()
+                if result.owner
+                  .form-control-static.text-muted=  result.owner.fullname()
+                else
+                  .form-control-static.text-muted None
             .form-group.has-warning
               label(for='length') Length
               .input-group

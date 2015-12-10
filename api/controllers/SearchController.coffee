@@ -1,8 +1,17 @@
 async = require 'async'
 
+finishRequest = (senderId, parcelId, driverId) ->
+    Request.destroy({sender: senderId, parcel: parcelId, driver: {'!': driverId}}).exec (err, result) ->
+        console.log err if err?
+        console.log 'Remove other requests', result
+    Parcel.update({id: parcelId}, {status: 'accepted', driver: driverId}).exec (err, result) ->
+        console.log err if err?
+        console.log 'Update parcel', result
+
 module.exports = 
     searchDriver: (req, res) ->
         parcelId = req.param('parcel')
+        console.log 'Parcel', parcelId
         SearchService.searchDriver parcelId, (err, result) ->
             if err or not result
                 res.notFound()
@@ -11,6 +20,7 @@ module.exports =
                     
     searchParcel: (req, res) ->
         driverId = req.param('driver')
+        console.log 'Driver', driverId
         SearchService.searchParcel driverId, (err, result) ->
             if err or not result
                 res.notFound()
@@ -64,4 +74,57 @@ module.exports =
                 return res.negotiate err
             res.json result
             
+    acceptDriver: (req, res) ->
+        driverId = req.param('driverId')
+        parcelId = req.param('parcelId')
+        Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).exec (err, requests) ->
+                if err? or not requests or requests.length <= 0
+                    Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, senderAccepted: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            MessagingService.driverAcceptedByOwner result.id
+                            res.json result
+                else
+                    driverAccepted = false
+                    for req in requests
+                        if req.driverAccepted
+                            driverAccepted = true
+                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {senderAccepted: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            MessagingService.driverAcceptedByOwner result.id
+                            res.json result
+                    if driverAccepted
+                        # remove all other requests for this parcel
+                        finishRequest(parcel.owner.id, parcelId, driverId)
+
+    acceptParcel: (req, res) ->
+        driverId = req.user.id
+        parcelId = req.param('parcelId')
+        Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).populateAll().exec (err, requests) ->
+                if err? or not requests or requests.length <= 0
+                    Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, driverAccepted: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            MessagingService.parcelAcceptedByDriver result.id
+                            res.json result
+                else
+                    senderAccepted = false
+                    for req in requests
+                        if req.senderAccepted
+                            senderAccepted = true
+                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {driverAccepted: true}).exec (err, result) ->
+                        if err?
+                            res.json err
+                        else
+                            MessagingService.parcelAcceptedByDriver result.id
+                            res.json result
+                    if senderAccepted
+                        # we need to remove all other requests from this driver
+                        finishRequest(parcel.owner.id, parcelId, driverId)
 

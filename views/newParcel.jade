@@ -30,6 +30,24 @@ block content
                 select#sender(name='owner', required='')
                   each sender in senders
                     option(value='#{sender.id}')= sender.fullname()
+            .form-group
+              label.control-label(for='fromPerson') From person
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                select#fromPerson(name='fromPerson')
+                  option(value=null) Use owner\'s address
+                  each person in persons
+                    option(value='#{person.id}')= person.fullname()
+            .form-group
+              label.control-label(for='toPerson') To person
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                select#toPerson(name='toPerson')
+                  option(value=null) Use owner\'s address
+                  each person in persons
+                    option(value='#{person.id}')= person.fullname()
             .form-group.has-warning
               label(for='length') Length
               .input-group
@@ -53,7 +71,7 @@ block content
               .input-group
                 span.input-group-addon
                   i.fa.fa-gift
-                input#weight.form-control.weight(name='weight', type='text', placeholder='Weight in cm', required='')
+                input#weight.form-control.weight(name='weight', type='text', placeholder='Weight in kg', required='')
             .form-group.has-warning
               label(for='pickupDate') Departure date
               .input-group
@@ -88,6 +106,12 @@ block script
       });
       $('.phone').mask('+9 (999) 999-9999');
       $('#sender').multiselect({
+        enableFiltering: true,
+      });
+      $('#toPerson').multiselect({
+        enableFiltering: true,
+      });
+      $('#fromPerson').multiselect({
         enableFiltering: true,
       });
       $('#status').multiselect();

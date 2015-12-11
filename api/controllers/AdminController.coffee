@@ -31,7 +31,7 @@ module.exports =
             if err or !result
                 res.notFound()
             else
-                res.view 'parcel', {user: req.user, result: result}
+                res.view 'parcel', {user: req.user, result: result, persons: persons}
         
     parcels: (req, res) ->
         offset = req.param('offset') or 0
@@ -40,7 +40,8 @@ module.exports =
 
     newParcel: (req, res) ->
         User.find({driver: false}).exec (err, senders) ->
-            res.view 'newParcel', {user: req.user, senders: senders}
+            Person.find().exec (err, persons) ->
+                res.view 'newParcel', {user: req.user, senders: senders, persons: persons}
         
     person: (req, res) ->
         id = req.param('id')
@@ -51,7 +52,12 @@ module.exports =
                 res.view 'person', {user: req.user, result: result}
 
     persons: (req, res) ->
-        res.view 'persons', {user: req.user}
+        offset = req.param('offset') or 0
+        Person.find().skip(offset).limit(50).populateAll().exec (err, result) ->
+            res.view 'persons', {user: req.user, result: result}
+
+    newPerson: (req, res) ->
+        res.view 'newperson', {user: req.user}
 
     route: (req, res) ->
         id = req.param('id')

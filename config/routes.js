@@ -76,6 +76,7 @@ module.exports.routes = {
     'get /admin/parcel/new': 'AdminController.newParcel',
     'get /admin/parcel/:id': 'AdminController.parcel',
     'get /admin/person': 'AdminController.persons',
+    'get /admin/person/new': 'AdminController.newPerson',
     'get /admin/person/:id': 'AdminController.person',
     'get /admin/route': 'AdminController.routes',
     'get /admin/route/:id': 'AdminController.route',
@@ -93,10 +94,10 @@ module.exports.routes = {
     'get /admin/servertests': 'AdminController.serverTests',
     'all /admin/stresstest': 'AdminController.stressTest',
     'all /admin/logs': 'AdminController.logs',
-    'get /dpd/getAuth': 'DpdController.getAuth',
-    'get /dpd/storeOrders': 'DpdController.storeOrders',
-    'get /dpd/getTrackingData': 'DpdController.getTrackingData',
-    'get /dpd/getParcelLabelNumber': 'DpdController.getParcelLabelNumber',
+    'all /dpd/getAuth': 'DpdController.getAuth',
+    'all /dpd/storeOrders': 'DpdController.storeOrders',
+    'all /dpd/getTrackingData': 'DpdController.getTrackingData',
+    'all /dpd/getParcelLabelNumber': 'DpdController.getParcelLabelNumber',
 
     /***************************************************************************
      *                                                                          *

@@ -13,6 +13,8 @@ module.exports =
         lastname: 
             type: 'string'
             required: true
+        fullname: ->
+            @firstname + ' ' + @lastname
         address1: 
             type: 'string'
             required: true

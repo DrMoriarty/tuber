@@ -65,13 +65,17 @@ html
                 //span.sidebar-title-tray
                   span.label.label-xs.bg-purple2 New
             li
-              a.ajax-disable(href='/admin/carrier')
+              a(href='/admin/carrier')
                 span.glyphicons.glyphicons-truck
                 span.sidebar-title Carriers
             li
               a(href='/admin/sender')
                 span.glyphicons.glyphicons-gift
                 span.sidebar-title Senders
+            li
+              a(href='/admin/person')
+                span.glyphicons.glyphicons-user
+                span.sidebar-title Persons
             //-li
               a(href='/admin/route')
                 span.glyphicons.glyphicons-cars
@@ -92,6 +96,10 @@ html
               a(href='/admin/sender/new')
                 span.glyphicons.glyphicons-user_add
                 span.sidebar-title Register a sender
+            li
+              a(href='/admin/person/new')
+                span.glyphicons.glyphicons-user_add
+                span.sidebar-title Register a person
             li
               a(href='/admin/servertests')
                 span.glyphicons.glyphicons-stats

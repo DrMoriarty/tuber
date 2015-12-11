@@ -31,6 +31,24 @@ block content
                   .form-control-static.text-muted=  result.owner.fullname()
                 else
                   .form-control-static.text-muted None
+            .form-group
+              label.control-label From person
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                if result.fromPerson
+                  .form-control-static.text-muted=  result.fromPerson.fullname()
+                else
+                  .form-control-static.text-muted None
+            .form-group
+              label.control-label To person
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                if result.toPerson
+                  .form-control-static.text-muted=  result.toPerson.fullname()
+                else
+                  .form-control-static.text-muted None
             .form-group.has-warning
               label(for='length') Length
               .input-group

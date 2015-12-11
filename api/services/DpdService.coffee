@@ -1,6 +1,7 @@
 soap = require 'soap'
-request = require 'request'
 {parseString} = require 'xml2js'
+sprintf = require('sprintf-js').sprintf
+request = require 'request'
 
 module.exports =
     loginClient: (cb) ->
@@ -60,14 +61,22 @@ module.exports =
 
     storeOrders: (parcelId, cb) ->
         self = @
-        Parcel.findOne(parcelId).populateAll().exec (err, result) ->
-            if err?
-                console.log err
-                cb err, null
-            else
-                if not result.fromPerson? and not result.toPerson?
-                    return cb {error: 'Departure or shipment address not found', parcel: result}, null
-                self.storeOrderRequest result, cb
+        if not parcelId?
+            return cb {error: 'Parcel not defined'}, null
+        req = ->
+            Parcel.findOne(parcelId).populateAll().exec (err, result) ->
+                if err?
+                    console.log err
+                    cb err, null
+                else
+                    if not result.fromPerson? and not result.toPerson?
+                        return cb {error: 'Departure or shipment address not found', parcel: result}, null
+                    self.storeOrderRequest result, cb
+        if not @authToken?
+            @getAuth (data) ->
+                req()
+        else
+            req()
 
     storeOrderRequest: (parcel, cb) ->
         username = 'delti130'
@@ -75,7 +84,7 @@ module.exports =
         lang = 'en_US'   # en_US or de_DE
         fromAddress = parcel.fromPerson || parcel.owner
         toAddress = parcel.toPerson || parcel.owner
-        parcelSizes = 'LLLWWWHHH' # in cm
+        parcelSizes = sprintf('%03d%03d%03d', parseInt(parcel.length), parseInt(parcel.width), parseInt(parcel.depth)) # in cm
         data = 
         """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ShipmentService/3.2">
             <soapenv:Header>
@@ -93,7 +102,7 @@ module.exports =
                     </printOptions>
                     <order>
                         <generalShipmentData>
-                            <identificationNumber>77777</identificationNumber>
+                            <identificationNumber>#{parcel.id}</identificationNumber>
                             <sendingDepot>0163</sendingDepot>
                             <product>CL</product>
                             <mpsCompleteDelivery>0</mpsCompleteDelivery>
@@ -122,7 +131,7 @@ module.exports =
                             </recipient>
                         </generalShipmentData>
                         <parcels>
-                            <parcelLabelNumber>98765432100</parcelLabelNumber>
+                            <parcelLabelNumber>00000000000</parcelLabelNumber>
                             <volume>#{parcelSizes}</volume>
                             <weight>#{parcel.weight}</weight>
                             <addService>1</addService>
@@ -134,6 +143,15 @@ module.exports =
                 </ns1:storeOrders>
             </soapenv:Body>
         </soapenv:Envelope>"""
+
+        """
+                            <proactiveNotification>
+                                <channel>3</channel>
+                                <value>#{parcel.owner.phone}</value>
+                                <rule>7</rule>
+                                <language>DE</language>
+                            </proactiveNotification>
+        """
         request.post {url:'https://public-ws-stage.dpd.com/services/ShipmentService/V3_2/storeOrders', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
@@ -148,17 +166,25 @@ module.exports =
                     else
                         cb null, result
 
-    getTrackingData: (cb) ->
+    getTrackingData: (labelNumber, cb) ->
+        if not @authToken?
+            self = @
+            @getAuth (data) ->
+                self.getTrackingDataRequest labelNumber, cb
+        else
+            @getTrackingDataRequest labelNumber, cb
+
+    getTrackingDataRequest: (labelNumber, cb) ->
         username = 'delti130'
-        token = '_token_'
-        labelNumber = '01405400945058'
+        token = DpdService.authToken
+        lang = 'en_EN'   # en_US or de_DE
         data = """
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ParcelLifeCycleService/2.0">
             <soapenv:Header>
                 <ns:authentication>
                     <delisId>#{username}</delisId>
                     <authToken>#{token}</authToken>
-                    <messageLanguage>en_EN</messageLanguage>
+                    <messageLanguage>#{lang}</messageLanguage>
                 </ns:authentication>
             </soapenv:Header>
             <soapenv:Body>
@@ -173,9 +199,14 @@ module.exports =
                 console.log err
                 cb err, null
             else
-                console.log httpResponse
                 console.log body
-                cb null, body
+                parseString body, (err, result) ->
+                    console.log 'XML to JSON', err, result
+                    if err?
+                        console.log err
+                        cb err, body
+                    else
+                        cb null, result
 
     getParcelLabelNumber: (cb) ->
         username = 'delti130'

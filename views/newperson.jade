@@ -7,9 +7,9 @@ block topbar
         a(href='/admin')
           span.glyphicon.glyphicon-home
       li.crumb-link
-        a(href='/admin/sender') Senders
+        a(href='/admin/person') Persons
       li.crumb-active
-        a(href='/admin/sender/new') New sender
+        a(href='/admin/person/new') New person
 
 block content
   .row
@@ -18,10 +18,10 @@ block content
         .panel-heading
           span.panel-title
             span.glyphicon.glyphicon-pencil
-            |  New sender
+            |  New person
         .panel-body
           .alert.alert-theme Yellow fields are required!
-          form#altForm.cmxform(method='post', action='/api/user')
+          form#altForm.cmxform(method='post', action='/api/person')
             .form-group.has-warning
               label(for='firstname') First name
               .input-group
@@ -46,18 +46,6 @@ block content
                 span.input-group-addon
                   i.fa.fa-envelope
                 input#email.form-control.email(name='email', type='text', placeholder='user@gmail.com', required='')
-            .form-group.has-success
-              label(for='company')  Your company
-              .input-group
-                span.input-group-addon
-                  i.fa.fa-envelope
-                input#company.form-control.company(name='company', type='text', placeholder='* Optional')
-            .form-group.has-success
-              label(for='vat')  VAT
-              .input-group
-                span.input-group-addon
-                  i.fa.fa-bolt
-                input#vat.form-control.company(name='vat', type='text', placeholder='* Optional')
             .form-group.has-warning
               label(for='maskedZip') Zip Code
               .input-group
@@ -102,7 +90,7 @@ block script
         submitHandler: function(form) {
           Pace.restart();
           $.post(form.action, $(form).serialize(), function(data, status) {
-            location.href = '/admin/sender';
+            location.href = '/admin/person';
           });
         }
       });

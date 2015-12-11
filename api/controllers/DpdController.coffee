@@ -1,20 +1,34 @@
 module.exports =
     getAuth: (req, res) ->
         DpdService.getAuth (err, data) ->
-            #res.setHeader( "Content-type", "text/xml" )
-            res.send data
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data
 
     storeOrders: (req, res) ->
-        DpdService.storeOrders (err, data) ->
-            #res.setHeader( "Content-type", "text/xml" )
-            res.send data
+        parcelId = req.param('parcel')
+        DpdService.storeOrders parcelId, (err, data) ->
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data
 
     getTrackingData: (req, res) ->
-        DpdService.getTrackingData (err, data) ->
-            #res.setHeader( "Content-type", "text/xml" )
-            res.send data
+        labelNumber = req.param('labelnumber')
+        DpdService.getTrackingData labelNumber, (err, data) ->
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data
 
     getParcelLabelNumber: (req, res) ->
         DpdService.getParcelLabelNumber (err, data) ->
-            #res.setHeader( "Content-type", "text/xml" )
-            res.send data
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data

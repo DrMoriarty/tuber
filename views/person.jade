@@ -9,5 +9,104 @@ block topbar
       li.crumb-link
         a(href='/admin/person') Persons
       li.crumb-active
-        a(href='/admin/person/id') Person
+        a(href='/admin/person/#{result.id}')= result.fullname()
 
+block content
+  .row
+    .col-md-12
+      .panel
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-pencil
+            |  #{result.fullname()}
+        .panel-body
+          .alert.alert-theme Yellow fields are required!
+          form#altForm.cmxform(method='post', action='/api/person/#{result.id}')
+            .form-group.has-warning
+              label(for='firstname') First name
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                input#firstname.form-control(name='firstname', type='text', maxlength='30', placeholder='First name', required='', value='#{result.firstname}')
+            .form-group.has-warning
+              label(for='lastname') Last name
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                input#lastname.form-control(name='lastname', type='text', maxlength='30', placeholder='Last name', required='', value='#{result.lastname}')
+            .form-group.has-warning
+              label(for='phone')  Phone Number 
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-phone
+                input#phone.form-control.phone(name='phone', type='text', placeholder='+9 (999) 999-9999', required='', value='#{result.phone}')
+            .form-group.has-warning
+              label(for='email')  Email 
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-envelope
+                input#email.form-control.email(name='email', type='text', placeholder='user@gmail.com', required='', value='#{result.email}')
+            .form-group.has-warning
+              label(for='maskedZip') Zip Code
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                input#maskedZip.form-control.zip(name='zip', type='text', maxlength='10', placeholder='99999-999', required='', value='#{result.zip}')
+            .form-group
+              label.control-label Latitude
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                .form-control-static.text-muted=  result.latitude
+            .form-group
+              label.control-label Longitude
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                .form-control-static.text-muted=  result.longitude
+            .form-group.has-warning
+              label(for='address1') Address #1
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#address1.form-control.address1(name='address1', type='text', placeholder='Address line', required='', value='#{result.address1}')
+            .form-group.has-warning
+              label(for='address2') Address #2
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-home
+                input#address2.form-control.address1(name='address2', type='text', placeholder='Address line', required='', value='#{result.address2}')
+            .form-group.has-warning
+              label(for='city') City
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                input#city.form-control.city(name='city', type='text', placeholder='City', required='', value='#{result.city}')
+            .form-group.has-warning
+              label.control-label(for='country') Country
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                select#selectcountry(name='country', required='')
+                  option(value='RU') Russia
+                  option(value='DE') Germany
+            .form-group
+              input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
+
+block script
+  script(type='text/javascript').
+    jQuery(document).ready(function () {
+      // validate the comment form when it is submitted
+      $("#altForm").validate({
+        submitHandler: function(form) {
+          Pace.restart();
+          $.post(form.action, $(form).serialize(), function(data, status) {
+            location.href = '/admin/person';
+          });
+        }
+      });
+      $('.phone').mask('+9 (999) 999-9999');
+      $('#selectcountry').multiselect({
+      enableFiltering: true,
+      });
+    });

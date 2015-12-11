@@ -53,6 +53,7 @@ module.exports.routes = {
     'get /auth/facebook': 'AuthController.loginFb',
     'get /auth/facebook/callback': 'AuthController.loginFbCallback',
     'get /install': 'AuthController.install',
+    'get /api/parcel/:parcelId/pdf': 'ParcelController.shipmentLabel',
 
     'get /braintree/token': 'BraintreeController.clientToken',
     '/braintree/transaction': 'BraintreeController.transaction',

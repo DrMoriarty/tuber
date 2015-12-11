@@ -3,6 +3,10 @@ soap = require 'soap'
 sprintf = require('sprintf-js').sprintf
 request = require 'request'
 
+roundInt = (x) ->
+    x = Number(x)
+    (if x >= 0 then Math.floor(x) else Math.ceil(x))
+
 module.exports =
     loginClient: (cb) ->
         if @_cachedLoginClient?
@@ -71,6 +75,8 @@ module.exports =
                 else
                     if not result.fromPerson? and not result.toPerson?
                         return cb {error: 'Departure or shipment address not found', parcel: result}, null
+                    if result.shipment?.type?
+                        return cb {error: 'The parcel already shipped', parcel: result}, null
                     self.storeOrderRequest result, cb
         if not @authToken?
             @getAuth (data) ->
@@ -85,6 +91,7 @@ module.exports =
         fromAddress = parcel.fromPerson || parcel.owner
         toAddress = parcel.toPerson || parcel.owner
         parcelSizes = sprintf('%03d%03d%03d', parseInt(parcel.length), parseInt(parcel.width), parseInt(parcel.depth)) # in cm
+        weight = roundInt(parcel.weight * 100)
         data = 
         """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ShipmentService/3.2">
             <soapenv:Header>
@@ -133,7 +140,7 @@ module.exports =
                         <parcels>
                             <parcelLabelNumber>00000000000</parcelLabelNumber>
                             <volume>#{parcelSizes}</volume>
-                            <weight>#{parcel.weight}</weight>
+                            <weight>#{weight}</weight>
                             <addService>1</addService>
                         </parcels>
                         <productAndServiceData>

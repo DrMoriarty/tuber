@@ -7,8 +7,25 @@
 
 blueprintsFindOne = require '../../node_modules/sails/lib/hooks/blueprints/actions/findOne'
 actionUtil = require '../../node_modules/sails/lib/hooks/blueprints/actionUtil'
+SkipperDisk = require('skipper-disk')
 
 module.exports = 
+    shipmentLabel: (req, res) ->
+        parcelId = req.param('parcelId')
+        Parcel.findOne(parcelId).exec (err, result) ->
+            if err?
+                res.negotiate err
+            else if not result
+                res.notFound()
+            if result.shipment?.type? and result.shipment.type == 'DPD'
+                file = SkipperDisk()
+                file.read('upload/'+parcelId+'.pdf').on('error', (err) ->
+                    res.serverError(err)
+                ).pipe(res)
+            else
+                res.json {error: 'Parcel have not been shipped yet'}
+                
+
     find: (req, res) ->
         if ( actionUtil.parsePk(req) ) 
             return blueprintsFindOne(req,res)

@@ -42,3 +42,14 @@ block content
                       a(href='/admin/findparcels/#{it.id}')
                         button.btn.btn-info.btn-gradient(type='button')
                           i.glyphicon.glyphicon-gift
+          .dataTables_info
+            | Page #{page}
+          .dataTables_paginate.paging_bs_normal
+            ul.pagination.pagination-sm
+              - for (var i=1; i<=pages; i++)
+                if (i == page)
+                  li.active
+                    a(href='/admin/carrier?sort=#{sort}&page=#{i}') #{i}
+                else
+                  li
+                    a(href='/admin/carrier?sort=#{sort}&page=#{i}') #{i}

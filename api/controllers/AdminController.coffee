@@ -1,4 +1,5 @@
 async = require 'async'
+pageSize = 20
 
 finishRequest = (senderId, parcelId, driverId) ->
     Request.destroy({sender: senderId, parcel: parcelId, driver: {'!': driverId}}).exec (err, result) ->
@@ -34,10 +35,11 @@ module.exports =
                 res.view 'parcel', {user: req.user, result: result}
         
     parcels: (req, res) ->
-        offset = req.param('offset') or 0
+        page = req.param('page') or 1
         sort = req.param('sort') or 'createdAt'
-        Parcel.find().sort(sort).skip(offset).limit(50).populateAll().exec (err, result) ->
-            res.view 'parcels', {user: req.user, result: result}
+        Parcel.count().exec (err, count) ->
+            Parcel.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                res.view 'parcels', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newParcel: (req, res) ->
         User.find({driver: false}).exec (err, senders) ->
@@ -53,10 +55,11 @@ module.exports =
                 res.view 'person', {user: req.user, result: result}
 
     persons: (req, res) ->
-        offset = req.param('offset') or 0
+        page = req.param('page') or 1
         sort = req.param('sort') or 'createdAt'
-        Person.find().sort(sort).skip(offset).limit(50).populateAll().exec (err, result) ->
-            res.view 'persons', {user: req.user, result: result}
+        Person.count().exec (err, count) ->
+            Person.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                res.view 'persons', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newPerson: (req, res) ->
         res.view 'newperson', {user: req.user}
@@ -81,10 +84,11 @@ module.exports =
                 res.view 'carrier', {user: req.user, result: result}
 
     carriers: (req, res) ->
-        offset = req.param('offset') or 0
+        page = req.param('page') or 1
         sort = req.param('sort') or 'createdAt'
-        User.find({driver: true}).sort(sort).skip(offset).limit(50).exec (err, result) ->
-            res.view 'carriers', {user: req.user, result: result}
+        User.count({driver: true}).exec (err, count) ->
+            User.find({driver: true}).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
+                res.view 'carriers', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newCarrier: (req, res) ->
         res.view 'newcarrier', {user: req.user}
@@ -98,10 +102,11 @@ module.exports =
                 res.view 'sender', {user: req.user, result: result}
 
     senders: (req, res) ->
-        offset = req.param('offset') or 0
+        page = req.param('page') or 1
         sort = req.param('sort') or 'createdAt'
-        User.find({driver: false}).sort(sort).skip(offset).limit(50).exec (err, result) ->
-            res.view 'senders', {user: req.user, result: result}
+        User.count({driver: false}).exec (err, count) ->
+            User.find({driver: false}).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
+                res.view 'senders', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newSender: (req, res) ->
         res.view 'newsender', {user: req.user}
@@ -209,9 +214,11 @@ module.exports =
                         finishRequest(parcel.owner.id, parcelId, driverId)
 
     requests: (req, res) ->
-        page = req.param('page') or 0
-        Request.find().paginate(page, 20).populateAll().exec (err, result) ->
-            res.view 'requests', {user: req.user, result: result}
+        page = req.param('page') or 1
+        sort = req.param('sort') or 'createdAt'
+        Request.count().exec (err, count) ->
+            Request.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                res.view 'requests', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     serverTests: (req, res) ->
         res.view 'pressureTest', {user: req.user}

@@ -48,3 +48,14 @@ block content
                     td= it.senderAccepted
                     td= it.driverAccepted
                     td= it.paid
+          .dataTables_info
+            | Page #{page}
+          .dataTables_paginate.paging_bs_normal
+            ul.pagination.pagination-sm
+              - for (var i=1; i<=pages; i++)
+                if (i == page)
+                  li.active
+                    a(href='/admin/request?sort=#{sort}&page=#{i}') #{i}
+                else
+                  li
+                    a(href='/admin/request?sort=#{sort}&page=#{i}') #{i}

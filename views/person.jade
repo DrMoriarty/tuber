@@ -10,8 +10,24 @@ block topbar
         a(href='/admin/person') Persons
       li.crumb-active
         a(href='/admin/person/#{result.id}')= result.fullname()
+  .topbar-right
+    ol.breadcrumb
+      a(href='javascript:;')
+        button.btn.btn-danger(class='button', data-toggle='modal', data-target='#rmModal') Remove
 
 block content
+  .modal.fade#rmModal(tabindex='-1', role='dialog', aria-labelledby='rmModalLabel')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') x
+          h4 Remove this item?
+        .modal-body
+          | You can not undone this operation
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal', type='button') Cancel
+          button.btn.btn-primary(data-dismiss='modal', type='button', onClick='javascript:removeItem();') Remove
   .row
     .col-md-12
       .panel
@@ -110,3 +126,12 @@ block script
       enableFiltering: true,
       });
     });
+    window.removeItem = function() {
+      $.ajax({
+        url: '/api/person/#{result.id}',
+        type: 'DELETE',
+        success: function() {
+          location.href = '/admin/person';
+        }
+      });
+    };

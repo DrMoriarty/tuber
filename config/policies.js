@@ -77,6 +77,7 @@ module.exports.policies = {
         '*': 'isAuthenticated'
     },
     'UserController': {
+        'create': true,
         '*': 'isAuthenticated'
     }
 

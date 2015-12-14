@@ -31,7 +31,7 @@ module.exports =
             if err or !result
                 res.notFound()
             else
-                res.view 'parcel', {user: req.user, result: result, persons: persons}
+                res.view 'parcel', {user: req.user, result: result}
         
     parcels: (req, res) ->
         offset = req.param('offset') or 0

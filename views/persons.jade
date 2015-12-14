@@ -25,10 +25,10 @@ block content
           table.table.table-hover
             thead
               tr
-                th #
-                th First Name
-                th Last Name
-                th ZIP
+                th(onclick='javascript:location.href="/admin/person?sort=id"') #
+                th(onclick='javascript:location.href="/admin/person?sort=firstname"') First Name
+                th(onclick='javascript:location.href="/admin/person?sort=lastname"') Last Name
+                th(onclick='javascript:location.href="/admin/person?sort=zip"') ZIP
             tbody
               if result
                 each it in result

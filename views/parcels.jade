@@ -25,14 +25,14 @@ block content
           table.table.table-hover
             thead
               tr
-                th #
+                th(onclick='javascript:location.href="/admin/parcel?sort=id"') #
                 th Sender
                 th Driver
                 th Size
-                th Weight
-                th Departure time
-                th Arrival time
-                th Status
+                th(onclick='javascript:location.href="/admin/parcel?sort=weight"') Weight
+                th(onclick='javascript:location.href="/admin/parcel?sort=pickupDate"') Departure time
+                th(onclick='javascript:location.href="/admin/parcel?sort=arriveDate"') Arrival time
+                th(onclick='javascript:location.href="/admin/parcel?sort=status"') Status
                 th Find carriers
             tbody
               if result

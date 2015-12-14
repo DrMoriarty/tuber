@@ -21,13 +21,13 @@ block content
           table.table.table-hover
             thead
               tr
-                th #
+                th(onclick='javascript:location.href="/admin/request?sort=id"') #
                 th Sender
                 th Carrier
                 th Departure
-                th Sender accepted
-                th Carrier accepted
-                th Paid
+                th(onclick='javascript:location.href="/admin/request?sort=senderAccepted"') Sender accepted
+                th(onclick='javascript:location.href="/admin/request?sort=driverAccepted"') Carrier accepted
+                th(onclick='javascript:location.href="/admin/request?sort=paid"') Paid
             tbody
               if result
                 each it in result
@@ -41,7 +41,10 @@ block content
                       td #{it.driver.firstname} #{it.driver.lastname}
                     else
                       td None
-                    td= it.parcel.pickupDate
+                    if it.parcel && it.parcel.pickupDate
+                      td= it.parcel.pickupDate
+                    else
+                      td
                     td= it.senderAccepted
                     td= it.driverAccepted
                     td= it.paid

@@ -25,10 +25,10 @@ block content
           table.table.table-hover
             thead
               tr
-                th #
-                th First Name
-                th Last Name
-                th ZIP
+                th(onclick='javascript:location.href="/admin/carrier?sort=id"') #
+                th(onclick='javascript:location.href="/admin/carrier?sort=firstname"') First Name
+                th(onclick='javascript:location.href="/admin/carrier?sort=lastname"') Last Name
+                th(onclick='javascript:location.href="/admin/carrier?sort=zip"') ZIP
                 th Find parcels
             tbody
               if result

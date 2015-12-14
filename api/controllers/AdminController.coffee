@@ -35,7 +35,8 @@ module.exports =
         
     parcels: (req, res) ->
         offset = req.param('offset') or 0
-        Parcel.find().skip(offset).limit(50).populateAll().exec (err, result) ->
+        sort = req.param('sort') or 'createdAt'
+        Parcel.find().sort(sort).skip(offset).limit(50).populateAll().exec (err, result) ->
             res.view 'parcels', {user: req.user, result: result}
 
     newParcel: (req, res) ->
@@ -53,7 +54,8 @@ module.exports =
 
     persons: (req, res) ->
         offset = req.param('offset') or 0
-        Person.find().skip(offset).limit(50).populateAll().exec (err, result) ->
+        sort = req.param('sort') or 'createdAt'
+        Person.find().sort(sort).skip(offset).limit(50).populateAll().exec (err, result) ->
             res.view 'persons', {user: req.user, result: result}
 
     newPerson: (req, res) ->
@@ -80,7 +82,8 @@ module.exports =
 
     carriers: (req, res) ->
         offset = req.param('offset') or 0
-        User.find({driver: true}).skip(offset).limit(50).exec (err, result) ->
+        sort = req.param('sort') or 'createdAt'
+        User.find({driver: true}).sort(sort).skip(offset).limit(50).exec (err, result) ->
             res.view 'carriers', {user: req.user, result: result}
 
     newCarrier: (req, res) ->
@@ -96,7 +99,8 @@ module.exports =
 
     senders: (req, res) ->
         offset = req.param('offset') or 0
-        User.find({driver: false}).skip(offset).limit(50).exec (err, result) ->
+        sort = req.param('sort') or 'createdAt'
+        User.find({driver: false}).sort(sort).skip(offset).limit(50).exec (err, result) ->
             res.view 'senders', {user: req.user, result: result}
 
     newSender: (req, res) ->

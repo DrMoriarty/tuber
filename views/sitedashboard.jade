@@ -1,0 +1,268 @@
+extend layoutsite
+
+block header
+  // header section
+  section.header-section
+    .container
+      ul
+        li
+          a(href='/price') 1. Price offers
+        li
+          a(href='/confirmation') 2. Confirmation
+        li
+          a(href='/payment') 3. Payment
+        li
+          span 4. Dashboard
+      span.title #{user.firstname} #{user.lastname}
+
+block content
+  // content
+  section.section
+    .container
+      .sitebar.js-tabs
+        ul.nav
+          li
+            a(href='#') My parameters
+          li.active
+            a(href='#') MY ORDERS/Status/details
+          li
+            a(href='#') My payments
+          li
+            a(href='#') My insurrance
+      .content
+        // tab
+        .js-tab-body
+          .sender
+            ul
+              li
+                | NAME:
+                strong Wilhelm  Meier
+              li
+                | COMPANY (optional):
+                strong delticom
+              li
+                | VAT (optional):
+                strong DE123456789
+              li
+                | ADRESS:
+                strong 28211 Bremen friedrich missler str.,1
+              li
+                | MOBILE PHONE:
+                strong 0049 151 4611 8937
+              li
+                | E-MAIL:
+                strong thierry.delesalle@delti.com
+              li
+                | SUBSCRIBE:
+                strong YES
+            a.orange_button(href='registration.html') CHANGE MY INFO
+            .pattern
+        // tab
+        .js-tab-body(style='display: block;')
+          .sender
+            h3 SA12345678
+            ul
+              li
+                | CURRENT: 
+                em 1 kg postage, now on the way to Hamburg, expected delivery in 8 hours
+              li
+                | SENDING DETAILS: 
+                strong 1kg, 60cm x 60cm x 60cm
+              li.no-margin
+                | DEPARTURE DATE: 
+                strong 20/11/15
+              li
+                | ARRIVAL DATE: 
+                strong 21/11/15 - 23/11/15
+              li.no-margin
+                | FROM: 
+                strong 28211 Bremen friedrich missler str.,1
+              li
+                | TO: 
+                strong 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              li.no-margin
+                | INSURRANCE: 
+                strong Standart (until 520&euro;)
+              li
+                | DELIVERY OPTIONS: 
+                strong +30&euro; to home adress
+              li
+                | TOTAL AMOUNT (Including VAT): 
+                strong 186&euro;
+            .sender-name
+              figure
+                span THE SENDER:
+                img(src='img/emma.jpg', alt='')
+                figcaption
+                  a(href='#')
+                    i.fa.fa-phone-square
+                    | call
+              ul
+                li
+                  | NAME: 
+                  strong Emma Klein
+                li
+                  | RAITE: 
+                  span.rating
+                    span &star;
+                    span &star;
+                    span &star;
+                    span &star;
+                    span &star;
+                li
+                  | PHONENUMBER: 
+                  strong 089-12345678
+            .clear
+            a.orange_button.cansel_order(href='#') CANCEL THIS ORDER
+            span.note * If you canceled this order now, You must pay 500&euro;
+            .pattern
+          .sender
+            h3 SA34521781
+            ul
+              li
+                | CURRENT: 
+                u 2 kg order was taken, finished
+              li
+                | SENDING DETAILS: 
+                strong 2kg, 70cm x 83cm x 45cm
+              li.no-margin
+                | DEPARTURE DATE: 
+                strong 17/10/15
+              li
+                | ARRIVAL DATE: 
+                strong 22/10/15 - 24/10/15
+              li.no-margin
+                | FROM: 
+                strong 28211 Bremen friedrich missler str.,1
+              li
+                | TO: 
+                strong 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              li.no-margin
+                | INSURRANCE: 
+                strong Standart (until 520&euro;)
+              li
+                | DELIVERY OPTIONS: 
+                strong +30&euro; to home adress
+              li
+                | TOTAL AMOUNT (Including VAT): 
+                strong 208&euro;
+            .sender-name
+              figure
+                span THE SENDER:
+                img(src='img/martha.jpg', alt='')
+                figcaption
+                  a(href='#')
+                    i.fa.fa-phone-square
+                    | call
+              ul
+                li
+                  | NAME: 
+                  strong Martha Muller
+                li
+                  | RAITE: 
+                  span.rating
+                    span &star;
+                    span &star;
+                    span &star;
+                    span &star;
+                    span &star;
+                li
+                  | PHONENUMBER: 
+                  strong 089-12345678
+            .clear
+          ul.pagination
+            li.prev
+              a(href='#')
+                i.fa.fa-angle-double-left
+            li.active
+              a(href='#') 1
+            li
+              a(href='#') 2
+            li
+              a(href='#') 3
+            li
+              a(href='#') 4
+            li
+              a(href='#') 5
+            li.next
+              a(href='#')
+                i.fa.fa-angle-double-right
+        // tab
+        .js-tab-body
+          .sender
+            ul
+              li
+                | ORDER NO: 
+                strong SA12345678
+              li
+                | PAYMNET STATUS 
+                em Pay Success
+              li.no-margin
+                | TOTAL AMOUNT:
+                strong 186&euro;
+              li
+                | Received:
+                strong 186&euro; 
+              li.no-margin
+                | Payment Method: 
+                strong Credit Card
+              li
+                | Date Received: 
+                strong 11/10/2015
+            .pattern
+          .sender
+            ul
+              li
+                | ORDER NO: 
+                strong SA12345678
+              li
+                | PAYMNET STATUS 
+                em Pay Success
+              li.no-margin
+                | TOTAL AMOUNT:
+                strong 208&euro;
+              li
+                | Received:
+                strong 208&euro; 
+              li.no-margin
+                | Payment Method: 
+                strong Credit Card
+              li
+                | Date Received: 
+                strong 11/10/2015
+            .pattern
+        // tab
+        .js-tab-body
+          .sender
+            h3 SA12345678
+            ul
+              li
+                | CURRENT: 
+                em 1 kg postage, now on the way to Hamburg, expected delivery in 8 hours
+              li
+                | SENDING DETAILS: 
+                strong 1kg, 60cm x 60cm x 60cm
+              li.no-margin
+                | DEPARTURE DATE: 
+                strong 20/11/15
+              li
+                | ARRIVAL DATE: 
+                strong 21/11/15 - 23/11/15
+              li.no-margin
+                | FROM: 
+                strong 28211 Bremen friedrich missler str.,1
+              li
+                | TO: 
+                strong 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              li.no-margin
+                | INSURRANCE: 
+                strong Standart (until 520&euro;)
+              li
+                | DELIVERY OPTIONS: 
+                strong +30&euro; to home adress
+              li
+                | TOTAL AMOUNT (Including VAT): 
+                strong 186&euro;
+            a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
+            span.note * You myst delivery this order to 23/11/2015
+            .pattern

@@ -1,0 +1,137 @@
+extend layoutsite
+
+block header
+  // header section
+  section.header-section
+    .container
+      ul
+        li
+          a(href='/price') 1. Price offers
+        li
+          span 2. Confirmation
+        li
+          a(href='/payment') 3. Payment
+        li
+          a(href='/dashboard') 4. Dashboard
+      span.title Wilhelm  Meier
+
+block content
+  // content
+  section.section
+    .confirmation
+      .container
+        .confirmation-selected
+          h3 YOU HAVE SELECTED
+          .confirmation-select.confirmation-first-select
+            select.js-select
+              option cheapest delivery ---  &euro;156
+              option cheapest delivery ---  &euro;156
+          .clear
+        hr
+        .confirmation-delivery
+          input#day_before(name='day', type='radio')
+          label(for='day_before') day earlier
+          input#day_later(name='day', type='radio')
+          label(for='day_later') day later
+          input#2days_later(name='day', type='radio')
+          label(for='2days_later') two days later
+          .confirmation-calendar
+            input.js-datetime(name='date', type='text', placeholder='28 April 2015')
+            .confirmation-calendar-body.js-datetime-body.hide
+              h4 Your check in Date
+          span.span_to  to 
+          .confirmation-calendar
+            input.js-datetime(name='date', type='text', placeholder='28 April 2015')
+            .confirmation-calendar-body.js-datetime-body.hide
+              h4 Your check in Date
+          input#day_before2(name='day', type='radio')
+          label(for='day_before2') day earlier
+          input#day_later2(name='day', type='radio')
+          label(for='day_later2') day later
+          input#2days_later2(name='day', type='radio')
+          label(for='2days_later2') two days later
+        .confirmation-time
+          span.white_span TIME:
+          .confirmation-clock
+            input#time_from.js-datetime(name='time', type='text', placeholder='12:00 - 15:00')
+            .confirmation-clock-body.js-time-body.hide
+              .confirmation-clock-header
+                span Your check in TIME
+              span.time TIME:
+              span.at at
+              input.time_at.js-time-from(name='time', type='text', placeholder=' 14:00 ')
+              span.to to
+              input.time_to.js-time-to(name='time', type='text', placeholder=' 17:00 ')
+              em *Period must be have more than two hours.
+          span.span_to &nbsp;&nbsp;&nbsp;
+          .confirmation-clock
+            input#time_to.js-datetime(name='time', type='text', placeholder='14:00 - 16:00')
+            .confirmation-clock-body.js-time-body.hide
+              .confirmation-clock-header
+                span Your check in TIME
+              span.time TIME:
+              span.at at
+              input.time_at.js-time-from(name='time', type='text', placeholder=' 15:00 ')
+              span.to to
+              input.time_to.js-time-to(name='time', type='text', placeholder=' 18:00 ')
+              em *Period must be have more than two hours.
+        hr
+        .confirmation-departure
+          span.white_span.to FROM:
+          input#postbox(name='post', type='radio')
+          label(for='postbox') POSTBOX
+          input#home(name='post', type='radio')
+          label(for='home') HOME ADRESS
+          input#postoffice(name='post', type='radio')
+          label(for='postoffice') POST OFFICE
+          .confirmation-select
+            select.js-select
+              option 28211 Bremen friedrich missler str.,1
+              option 28211 Bremen friedrich missler str.,1
+              option 28211 Bremen friedrich missler str.,1
+              option 28211 Bremen friedrich missler str.,1
+              option 28211 Bremen friedrich missler str.,1
+        .confirmation-destination
+          span.white_span.from TO:
+          input#postbox2(name='post2', type='radio')
+          label(for='postbox2') POSTBOX
+          input#home2(name='post2', type='radio')
+          label(for='home2') HOME ADRESS
+          input#postoffice2(name='post2', type='radio')
+          label(for='postoffice2') POST OFFICE
+          .confirmation-select
+            select.confirmation-select.js-select
+              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+        .clear
+        hr
+        .confirmation-confirm
+          .confirmation-confirm-title
+            h4 SENDING DETAILS:
+            span 2kg, 60cm x 60cm x 60cm
+            h4 INSURRANCE:
+            span Standart (until 520&euro;)
+            h4 DELIVERY OPTIONS:
+            span +30&euro; to home adress
+          .confirmation-confirm-total
+            h4
+              span TOTAL AMOUNT 
+              | (Including VAT): 186&euro;
+          a.orange_button(href='/payment') CONFIRM
+          .clear
+  // maps
+  section.maps
+    .maps-left
+      .wr-map
+        #map1
+        .maps-sign FROM: POSTBOX
+      .wr-map
+        #map2
+        .maps-sign TO: HOME ADRESS
+    .maps-right
+      .wr-map
+        #map3
+        .maps-sign PACKAGE ROUTE

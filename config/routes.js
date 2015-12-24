@@ -32,9 +32,15 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-    '/': {
-        view: 'homepage'
-    },
+    'get /': 'SiteController.home',
+    'get /faq': 'SiteController.faq',
+    'get /registration': 'SiteController.registration',
+    'get /parcel': 'SiteController.parcel',
+    'get /price': 'SiteController.price',
+    'get /dashboard': 'SiteController.dashboard',
+    'get /confirmation': 'SiteController.confirmation',
+    'get /payment': 'SiteController.payment',
+    'get /profile': 'SiteController.profile',
     
     'get /login': {
         view: 'login'

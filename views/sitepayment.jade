@@ -1,0 +1,80 @@
+extend layoutsite
+
+
+block header
+  // header section
+  section.header-section
+    .container
+      ul
+        li
+          a(href='/price') 1. Price offers
+        li
+          a(href='/confirmation') 2. Confirmation
+        li
+          span 3. Payment
+        li
+          a(href='/dashboard') 4. Dashboard
+      span.title Wilhelm  Meier
+
+block content
+  // content
+  section.section
+    h1 Payment of the order
+    hr
+    .container
+      .order
+        h3
+          | SUMMARY OF THE ORDER: 
+          span &euro;156
+        ul
+          li
+            | FROM:  
+            strong 28211 Bremen friedrich missler str.,1
+          li
+            | TO:  
+            strong 23412 Hamburg Holtumer Strasse, 14, 5
+        ul
+          li
+            | SENDING DETAILS: 
+            strong 2kg, 60cm x 60cm x 60cm
+          li
+            | INSURRANCE: 
+            strong Standart (until 520&euro;)
+        span.total TOTAL AMOUNT (Including VAT): 186&euro;
+    hr
+    .container
+      form.form(action='')
+        ul.payment
+          li
+            input#paypal(type='radio', name='cards')
+            label(for='paypal')
+              // <a href="https://www.paypal.com" id="link_paypal" target="_blank">
+              i.fa.fa-cc-paypal
+              // </a>
+            label.check(for='#')
+          li
+            input#card1(type='radio', name='cards')
+            label(for='card1')
+              i.fa.fa-cc-mastercard
+            input#card2(type='radio', name='cards')
+            label(for='card2')
+              i.fa.fa-cc-visa
+            input#card3(type='radio', name='cards')
+            label(for='card3')
+              i.fa.fa-cc-amex
+            label.check(for='#')
+            // <i class="icon-mastercard"></i>
+            // <i class="icon-visa active"></i>
+            // <i class="icon-express"></i>
+        #wrap_hide
+          label(for='first_name') CARDHOLDER FIRST NAME*
+          input#first_name(type='text', placeholder='Thierrry')
+          label(for='last_name') CARDHOLDER LAST NAME*
+          input#last_name(type='text', placeholder='Shtutgartz')
+          label(for='card') CARD NAMBER*
+          input#card(type='text', placeholder='4556614505116697')
+          label(for='card_date') EXPIRATION DATE*
+          input#card_date(type='text', placeholder='02/16')
+          label(for='last_name') SECURITY CODE*
+          input#last_name(type='text', placeholder='660 (The 3 digits after the card number on the signature panel of your card)')
+        a#pay_form_button.orange_button(href='dashboard.html') CONFIRM ORDER

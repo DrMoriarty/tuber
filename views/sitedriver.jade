@@ -1,0 +1,110 @@
+extend layoutsite
+
+block content
+  // content
+  section.section
+    h1 Transporter Parameters
+    | 
+    .container
+      form.form.transporter.js-validate(action='price.html', method='post')
+        h3 Transport coverage
+        label(for='nb_vehicle') NB OF VEHICLE:
+        input#nb_vehicle.required(type='text', placeholder='1')
+        label(for='type_vehicle') TYPE OF VEHICLE:
+        input#type_vehicle.required(type='text', placeholder='Car')
+        h3 Volume coverage
+        label MAXI PARCEL SIZE:
+        ul.form-sizes
+          li
+            span.up
+              i.fa.fa-chevron-up
+            input(type='text', value='100')
+            em kg
+            span.down
+              i.fa.fa-chevron-down
+            strong Weight
+          li
+            span.up
+              i.fa.fa-chevron-up
+            input(type='text', value='100')
+            em cm
+            span.down
+              i.fa.fa-chevron-down
+            strong Length
+          li
+            span.up
+              i.fa.fa-chevron-up
+            input(type='text', value='100')
+            em cm
+            span.down
+              i.fa.fa-chevron-down
+            strong Width
+          li
+            span.up
+              i.fa.fa-chevron-up
+            input(type='text', value='100')
+            em cm
+            span.down
+              i.fa.fa-chevron-down
+            strong Depth
+        label(for='nb_max') NB OF MAXI PARCEL PER DAY
+        input#nb_max.required(type='text', placeholder='2')
+        h3 Geography coverage
+        .form-half
+          label I CAN TRANSPORT THOUGH:
+          input.required(type='text', placeholder='Country')
+          input.required(type='text', placeholder='Zip Code')
+          label(for='place') WITHIN AN AREA OF:
+          input#place.required(type='text', placeholder='Zip Code')
+          label ON DAYS:
+          ul.days
+            li
+              input#mon(type='checkbox')
+              label(for='mon') Mon
+            li
+              input#tue(type='checkbox')
+              label(for='tue') Tue
+            li
+              input#wed(type='checkbox')
+              label(for='wed') Wed
+            li
+              input#thu(type='checkbox')
+              label(for='thu') Thu
+            li
+              input#fri(type='checkbox')
+              label(for='fri') Fri
+            li
+              input#sat(type='checkbox')
+              label(for='sat') Sat
+            li
+              input#sun(type='checkbox')
+              label(for='sun') Sun
+        .form-half.map
+          label geography data:
+          #map4
+        .clear
+        h3 Time coverage
+        label(for='speed') MY SPEED IS ROUGHLY:
+        input#speed.required(type='text', placeholder='XXXX km/hour')
+        label(for='max_speed') MY MAXI KM PER DAY:
+        input#max_speed.required(type='text', placeholder='XXXX km/day')
+        h3 Pricing
+        label(for='price_km') PRICE PER KM:
+        input#price_km.required(type='text', placeholder='10€')
+        label(for='price_country') PRICE PER COUNTRY:
+        input#price_country.required(type='text', placeholder='10€')
+        label(for='price_ft') PRICE FROM/TO:
+        input#price_ft.required(type='text', placeholder='10€')
+        h3 My Payment Data
+        ul.form-info
+          li
+            | CARD NUMBER IS: 
+            strong 41XX XXXX XXXX 7689
+          li
+            | TUBER BALANCE: 
+            strong 235&euro;
+        .form-withdraw
+          label(for='withdraw') I WANT withdrawal:
+          input#withdraw(type='text')
+          a.blue_button(href='#') SEND
+        button.orange_button go to best proposal

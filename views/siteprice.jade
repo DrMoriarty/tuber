@@ -1,0 +1,72 @@
+extend layoutsite
+
+block header
+  // header section
+  section.header-section
+    .container
+      ul
+        li
+          span 1. Price offers
+        li
+          a(href='/confirmation') 2. Confirmation
+        li
+          a(href='/payment') 3. Payment
+        li
+          a(href='/dashboard') 4. Dashboard
+      span.title #{user.firstname} #{user.lastname}
+
+block content
+  // content
+  section.section
+    h1 Price Offers
+    .container
+      article.offers
+        figure
+          img(src='img/price_cheap.png', alt='')
+          figcaption FROM &euro;156
+        strong cheapest
+        ul
+          li Expected dates:
+          li Departure: 20/07/2015
+          li Arrival: 28/07/2015
+        a.more(href='#')
+          i.icons-plus
+          | MORE INFO
+        a.orange_button(href='/confirmation')
+          | GET IT
+          br
+          | NOW
+      article.offers
+        figure
+          img(src='img/price_fast.png', alt='')
+          figcaption FROM &euro;180
+        strong fastest
+        ul
+          li Expected dates:
+          li Departure: 20/07/2015
+          li Arrival: 28/07/2015
+        a.more(href='#')
+          i.icons-plus
+          | MORE INFO
+        a.orange_button(href='/confirmation')
+          | GET IT
+          br
+          | NOW
+      article.offers
+        figure
+          img(src='img/price_eco.png', alt='')
+          figcaption FROM &euro;200
+        strong ecologiest
+        ul
+          li Expected dates:
+          li Departure: 20/07/2015
+          li Arrival: 28/07/2015
+        a.more(href='#')
+          i.icons-plus
+          | MORE INFO
+        a.orange_button(href='/confirmation')
+          | GET IT
+          br
+          | NOW
+      .clear
+      a.offers-more(href='#') SEE MORE OFFERS

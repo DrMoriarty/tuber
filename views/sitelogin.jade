@@ -1,0 +1,62 @@
+extend layoutsite
+
+block content
+  // content
+  section.section
+    h1 Tuber parcels delivery
+    if parcel
+      include siteparcelstatus
+    h2.centred_title
+      | Call us on  
+      span +49 (0) 511 936 000 00
+      br
+      strong or
+      |  fill in an enquiry below.
+    .container
+      .login
+        form.form.js-validate(method='POST', action='/login')
+          i.icons-want_send_parsel
+          h3 I want to SEND a parsel
+          label(for='send_login') Login/E-mail adress
+          input#send_login.required(type='text', name='email')
+          label(for='send_password') Password
+          input#send_password.required(type='password', name='password')
+          button.orange_button(type='submit') Send
+          a(href='/') Forgot your password? 
+          span or
+          a(href='/registration?driver=false')  Register
+      .login
+        form.form.js-validate(method='POST', action='/login')
+          i.icons-can_transport_parsel
+          h3 I want to TRANSPORT a parsel
+          label(for='transport_login') Login/E-mail adress
+          input#transport_login.required(type='text', name='email')
+          label(for='transport_password') Password
+          input#transport_password.required(type='password', name='password')
+          button.orange_button(type='submit') Send
+          a(href='/') Forgot your password? 
+          span or
+          a(href='/registration?driver=true')  Register
+  // promo
+  section.promo
+    .container
+      h2 Parcel delivery
+      p
+        | Tuber is a parcels delivery service for p2p fast delivery.
+        br
+        | Check for details
+      a(href='/')
+        | SUBSCRIBE
+        br
+        | HERE
+
+block script
+  script(type='text/javascript').
+    $('.js-validate').submit(function() {
+      $.post(this.action, $(this).serialize(), function(data) {
+        console.log('Logged in', data);
+        location.reload();
+      });
+      return false;
+    });
+      

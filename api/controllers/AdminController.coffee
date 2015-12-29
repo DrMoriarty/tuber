@@ -86,8 +86,9 @@ module.exports =
     carriers: (req, res) ->
         page = req.param('page') or 1
         sort = req.param('sort') or 'createdAt'
-        User.count({driver: true}).exec (err, count) ->
-            User.find({driver: true}).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
+        filter = {driver: true, admin: false}
+        User.count(filter).exec (err, count) ->
+            User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
                 res.view 'carriers', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newCarrier: (req, res) ->
@@ -104,8 +105,9 @@ module.exports =
     senders: (req, res) ->
         page = req.param('page') or 1
         sort = req.param('sort') or 'createdAt'
-        User.count({driver: false}).exec (err, count) ->
-            User.find({driver: false}).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
+        filter = {driver: false, admin: false}
+        User.count(filter).exec (err, count) ->
+            User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
                 res.view 'senders', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newSender: (req, res) ->

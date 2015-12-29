@@ -1,5 +1,8 @@
 extend layoutsite
 
+block head
+  
+
 block header
   // header section
   section.header-section
@@ -13,7 +16,7 @@ block header
           a(href='/payment') 3. Payment
         li
           a(href='/dashboard') 4. Dashboard
-      span.title Wilhelm  Meier
+      span.title #{user.firstname} #{user.lastname}
 
 block content
   // content
@@ -135,3 +138,6 @@ block content
       .wr-map
         #map3
         .maps-sign PACKAGE ROUTE
+
+block script
+  script(src="https://maps.googleapis.com/maps/api/js")

@@ -33,8 +33,15 @@ module.exports =
         pickupDate: 
             type: 'datetime'
             required: true
+        pickupTime1: 'string'
+        pickupTime2: 'string'
         arriveDate: 
             type: 'datetime'
+        arriveTime1: 'string'
+        arriveTime2: 'string'
+        insurance:
+            type: 'float'
+            defaultsTo: 0
         status: 
             type: 'string'
             enum: ['draft', 'published', 'accepted', 'started', 'arrived']

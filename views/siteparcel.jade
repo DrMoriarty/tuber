@@ -13,14 +13,14 @@ block content
         i.fa.fa-angle-double-right
         span About my parcel
     .container.bordered
-      form.form.js-validate(action='/price')
+      form.form.js-validate(action='/make/parcel1', method='POST')
         .form-block
           .left
             i.icons-profile
             a(href='/profile') GO IN TO MY PROFILE
           .right
             h3 From 
-            input#address(type='checkbox')
+            input#address(type='checkbox', name='fromPersonProfile')
             label(for='address') Choose my profile address
             br
             span or 
@@ -28,17 +28,17 @@ block content
               | FILL ADDRESS FORM 
               i +
             .hidden_address1
-              input(type='text', placeholder='First name, for ex.: “George”')
-              input(type='text', placeholder='Last name, for ex.: “Bohorquez”')
-              input(type='text', placeholder='Adress (street), for ex.: “Way to the ocean”')
-              input(type='text', placeholder='Adress (number), for ex.: “777”')
-              input(type='text', placeholder='Zip Code, for ex.: “456-78”')
-              input(type='text', placeholder='City, for ex.: “San Francisco”')
-              input(type='text', placeholder='Country, for ex.: “United States”')
-              input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”')
-              input(type='text', placeholder='E-mail, for ex.: “George@delti.com”')
+              input(type='text', placeholder='First name, for ex.: “George”', name='fromPerson.firstName')
+              input(type='text', placeholder='Last name, for ex.: “Bohorquez”', name='fromPerson.lastName')
+              input(type='text', placeholder='Adress (street), for ex.: “Way to the ocean”', name='fromPerson.address1')
+              input(type='text', placeholder='Adress (number), for ex.: “777”', name='fromPerson.address2')
+              input(type='text', placeholder='Zip Code, for ex.: “456-78”', name='fromPerson.zip')
+              input(type='text', placeholder='City, for ex.: “San Francisco”', name='fromPerson.city')
+              input(type='text', placeholder='Country, for ex.: “United States”', name='fromPerson.country')
+              input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”', name='fromPerson.phone')
+              input(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='fromPersons.email')
             h3 To 
-            input#address1(type='checkbox')
+            input#address1(type='checkbox', name='toPersonProfile')
             label(for='address1') Choose my profile address
             br
             span or 
@@ -46,16 +46,16 @@ block content
               | FILL ADDRESS FORM 
               i +
             .hidden_address2
-              input(type='text', placeholder='First name, for ex.: “George”')
-              input(type='text', placeholder='Last name, for ex.: “Bohorquez”')
-              input(type='text', placeholder='Adress (street), for ex.: “Way to the ocean”')
-              input(type='text', placeholder='Adress (number), for ex.: “777”')
-              input(type='text', placeholder='Zip Code, for ex.: “456-78”')
-              input(type='text', placeholder='City, for ex.: “San Francisco”')
-              input(type='text', placeholder='Country, for ex.: “United States”')
-              input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”')
-              input(type='text', placeholder='E-mail, for ex.: “George@delti.com”')
-            input#packetshop(type='checkbox')
+              input(type='text', placeholder='First name, for ex.: “George”', name='toPerson.firstName')
+              input(type='text', placeholder='Last name, for ex.: “Bohorquez”', name='toPerson.lastName')
+              input(type='text', placeholder='Adress (street), for ex.: “Way to the ocean”', name='toPerson.address1')
+              input(type='text', placeholder='Adress (number), for ex.: “777”', name='toPerson.address2')
+              input(type='text', placeholder='Zip Code, for ex.: “456-78”', name='toPerson.zip')
+              input(type='text', placeholder='City, for ex.: “San Francisco”', name='toPerson.city')
+              input(type='text', placeholder='Country, for ex.: “United States”', name='toPerson.country')
+              input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”', name='toPerson.phone')
+              input(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='toPerson.email')
+            input#packetshop(type='checkbox', name='usePacketshop')
             label.packetshop(for='packetshop') To reduce costs, I am willing to drop the package in a Packetshop close to me.
         .form-block
           .left
@@ -66,7 +66,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100')
+                input(type='text', value='100', name='weight')
                 em kg
                 span.down
                   i.fa.fa-chevron-down
@@ -74,7 +74,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100')
+                input(type='text', value='100', name='length')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
@@ -82,7 +82,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100')
+                input(type='text', value='100', name='width')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
@@ -90,12 +90,12 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100')
+                input(type='text', value='100', name='depth')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
                 strong Depth
-            input#declare(type='checkbox')
+            input#declare(type='checkbox', name='userAgreementContent')
             label.declare(for='declare')
               | I officially declare that non of the products transported areprohibited neither in origin country, neither in destination country. It is under my responsabili
         .form-block
@@ -104,26 +104,26 @@ block content
           .right.about
             h3 About the timing
             .form-datepicker
-              input.time.js-datetime.required(type='text', placeholder='Parsel can be picked up starring')
+              input.time.js-datetime.required(type='text', placeholder='Parsel can be picked up starring', name='pickupDate')
               .form-datepicker-body.js-datetime-body.hide
                 h4 Your check in Date
                 strong.time TIME:
                 strong.at at
-                input.time_at(name='time', type='text', placeholder=' 14:00 ')
+                input.time_at(type='text', placeholder=' 14:00 ', name='pickupTime1')
                 strong.to to
-                input.time_to(name='time', type='text', placeholder=' 17:00 ')
+                input.time_to(type='text', placeholder=' 17:00 ', name='pickupTime2')
                 em *Period must be have more than two hours.
             .form-datepicker
-              input.time.js-datetime.time-right.required(type='text', placeholder='Parsel should arrived before')
+              input.time.js-datetime.time-right.required(type='text', placeholder='Parsel should arrived before', name='arriveDate')
               .form-datepicker-body.calendar-right.js-datetime-body.hide
                 h4 Your check in Date
                 strong.time TIME:
                 strong.at at
-                input.time_at(name='time', type='text', placeholder=' 15:00 ')
+                input.time_at(type='text', placeholder=' 15:00 ', name='arriveTime1')
                 strong.to to
-                input.time_to(name='time', type='text', placeholder=' 18:00 ')
+                input.time_to(type='text', placeholder=' 18:00 ', name='arriveTime2')
                 em *Period must be have more than two hours.
-            input#timing(type='checkbox')
+            input#timing(type='checkbox', name='userAgreementTimes')
             label(for='timing') I am ware that the time frame influences TUber prices.
         .clear
         .form-block
@@ -131,6 +131,25 @@ block content
             i.icons-insurrance
           .right.insurrance
             h3 About insurrance
-            input.required(type='text', placeholder='Packet is insured until the value XXX€')
+            input.required(type='text', placeholder='Packet is insured until the value XXX€', name='insurance')
             button.orange_button Go to &quot;best proposal&quot;
         .clear
+
+block script
+  script(type='text/javascript').
+    $('.js-validate').submit(function() {
+      regdata = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: this.action,
+        data: regdata,
+        success: function(data) {
+          console.log('Result', data);
+          location.href = '/price';
+        },
+        error: function(err) {
+          console.log("Error", err);
+        }});
+      return false;
+    });
+  

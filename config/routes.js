@@ -41,6 +41,8 @@ module.exports.routes = {
     'get /confirmation': 'SiteController.confirmation',
     'get /payment': 'SiteController.payment',
     'get /profile': 'SiteController.profile',
+    'post /make/parcel1': 'SiteController.parcel1',
+    'post /make/parcel2': 'SiteController.parcel2',
     
     'get /login': {
         view: 'login'

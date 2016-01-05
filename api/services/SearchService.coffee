@@ -3,7 +3,7 @@ gps = require 'gps-util'
 module.exports = 
     searchDriver: (parcelId, cb) ->
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
-            if err or not parcel or parcel.status != 'published'
+            if err or not parcel or (parcel.status != 'published' and parcel.status != 'draft')
                 console.log err
                 cb(err, null)
             else

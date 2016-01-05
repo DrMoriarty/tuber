@@ -1,7 +1,6 @@
 extend layoutsite
 
 block head
-  
 
 block header
   // header section
@@ -9,11 +8,11 @@ block header
     .container
       ul
         li
-          a(href='/price') 1. Price offers
+          a(href='/price/#{parcel.id}') 1. Price offers
         li
           span 2. Confirmation
         li
-          a(href='/payment') 3. Payment
+          a(href='/payment/#{parcel.id}') 3. Payment
         li
           a(href='/dashboard') 4. Dashboard
       span.title #{user.firstname} #{user.lastname}
@@ -26,12 +25,14 @@ block content
         .confirmation-selected
           h3 YOU HAVE SELECTED
           .confirmation-select.confirmation-first-select
-            select.js-select
-              option cheapest delivery ---  &euro;156
-              option cheapest delivery ---  &euro;156
+            select.js-select(onchange='selectDriver(this)')
+              each driver in drivers
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel.pathLength)}') cheapest delivery ---  &euro;#{driver.getPrice(parcel.pathLength)}
+              option(driverId='1234567890', price=100500) cheapest delivery ---  &euro;100500
           .clear
         hr
-        .confirmation-delivery
+        #dateblock
+        //.confirmation-delivery
           input#day_before(name='day', type='radio')
           label(for='day_before') day earlier
           input#day_later(name='day', type='radio')
@@ -39,105 +40,171 @@ block content
           input#2days_later(name='day', type='radio')
           label(for='2days_later') two days later
           .confirmation-calendar
-            input.js-datetime(name='date', type='text', placeholder='28 April 2015')
+            input.js-datetime(name='pickupDate', type='text', placeholder='28 April 2015', value='#{moment(parcel.pickupDate).format("LL")}')
             .confirmation-calendar-body.js-datetime-body.hide
               h4 Your check in Date
           span.span_to  to 
           .confirmation-calendar
-            input.js-datetime(name='date', type='text', placeholder='28 April 2015')
+            input.js-datetime(name='arriveDate', type='text', placeholder='28 April 2015', value='#{moment(parcel.arriveDate).format("LL")}')
             .confirmation-calendar-body.js-datetime-body.hide
               h4 Your check in Date
-          input#day_before2(name='day', type='radio')
+          input#day_before2(name='day2', type='radio')
           label(for='day_before2') day earlier
-          input#day_later2(name='day', type='radio')
+          input#day_later2(name='day2', type='radio')
           label(for='day_later2') day later
-          input#2days_later2(name='day', type='radio')
+          input#2days_later2(name='day2', type='radio')
           label(for='2days_later2') two days later
         .confirmation-time
-          span.white_span TIME:
+          span.white_span TIME: 
           .confirmation-clock
-            input#time_from.js-datetime(name='time', type='text', placeholder='12:00 - 15:00')
+            input#time_from.js-datetime(name='time', type='text', placeholder='12:00 - 15:00', value='#{parcel.pickupTime1} - #{parcel.pickupTime2}')
             .confirmation-clock-body.js-time-body.hide
               .confirmation-clock-header
                 span Your check in TIME
               span.time TIME:
               span.at at
-              input.time_at.js-time-from(name='time', type='text', placeholder=' 14:00 ')
+              input.time_at.js-time-from(name='pickupTime1', type='text', placeholder=' 14:00 ', value='#{parcel.pickupTime1}')
               span.to to
-              input.time_to.js-time-to(name='time', type='text', placeholder=' 17:00 ')
+              input.time_to.js-time-to(name='pickupTime2', type='text', placeholder=' 17:00 ', value='#{parcel.pickupTime2}')
               em *Period must be have more than two hours.
           span.span_to &nbsp;&nbsp;&nbsp;
           .confirmation-clock
-            input#time_to.js-datetime(name='time', type='text', placeholder='14:00 - 16:00')
+            input#time_to.js-datetime(name='time', type='text', placeholder='14:00 - 16:00', value='#{parcel.arriveTime1} - #{parcel.arriveTime2}')
             .confirmation-clock-body.js-time-body.hide
               .confirmation-clock-header
                 span Your check in TIME
               span.time TIME:
               span.at at
-              input.time_at.js-time-from(name='time', type='text', placeholder=' 15:00 ')
+              input.time_at.js-time-from(name='arriveTime1', type='text', placeholder=' 15:00 ', value='#{parcel.arriveTime1}')
               span.to to
-              input.time_to.js-time-to(name='time', type='text', placeholder=' 18:00 ')
+              input.time_to.js-time-to(name='arriveTime2', type='text', placeholder=' 18:00 ', value='#{parcel.arriveTime2}')
               em *Period must be have more than two hours.
         hr
         .confirmation-departure
           span.white_span.to FROM:
           input#postbox(name='post', type='radio')
           label(for='postbox') POSTBOX
-          input#home(name='post', type='radio')
+          input#home(name='post', type='radio', checked=true)
           label(for='home') HOME ADRESS
           input#postoffice(name='post', type='radio')
           label(for='postoffice') POST OFFICE
           .confirmation-select
             select.js-select
-              option 28211 Bremen friedrich missler str.,1
-              option 28211 Bremen friedrich missler str.,1
-              option 28211 Bremen friedrich missler str.,1
-              option 28211 Bremen friedrich missler str.,1
-              option 28211 Bremen friedrich missler str.,1
+              if parcel.fromPerson
+                option #{parcel.fromPersonAddress()}
+              else
+                option #{parcel.ownerAddress()}
         .confirmation-destination
           span.white_span.from TO:
           input#postbox2(name='post2', type='radio')
           label(for='postbox2') POSTBOX
-          input#home2(name='post2', type='radio')
+          input#home2(name='post2', type='radio', checked=true)
           label(for='home2') HOME ADRESS
           input#postoffice2(name='post2', type='radio')
           label(for='postoffice2') POST OFFICE
           .confirmation-select
             select.confirmation-select.js-select
-              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
-              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
-              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
-              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
-              option 21109 Hamburg, Niedergeorgswerder Deich 73, 4
+              if parcel.toPerson
+                option #{parcel.toPersonAddress()}
+              else
+                option #{parcel.ownerAddress()}
         .clear
         hr
         .confirmation-confirm
           .confirmation-confirm-title
             h4 SENDING DETAILS:
-            span 2kg, 60cm x 60cm x 60cm
+            span #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
             h4 INSURRANCE:
-            span Standart (until 520&euro;)
+            span Standart (until #{parcel.insurance}&euro;)
             h4 DELIVERY OPTIONS:
-            span +30&euro; to home adress
+            span +0&euro; to home adress
           .confirmation-confirm-total
             h4
               span TOTAL AMOUNT 
-              | (Including VAT): 186&euro;
-          a.orange_button(href='/payment') CONFIRM
+              | (Including VAT):
+              span#totalPrice #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
+              span &euro;
+          a.orange_button(onClick='javascript:confirmation();') CONFIRM
           .clear
   // maps
   section.maps
-    .maps-left
-      .wr-map
+    .maps-left#map1block
+      //.wr-map
         #map1
         .maps-sign FROM: POSTBOX
-      .wr-map
+      //.wr-map
         #map2
         .maps-sign TO: HOME ADRESS
-    .maps-right
-      .wr-map
+    .maps-right#map2block
+      //.wr-map
         #map3
         .maps-sign PACKAGE ROUTE
 
 block script
+  script(src="/vendor/react/react-with-addons.js")
+  script(src="/vendor/react/react-dom.min.js")
+  script(src="/js/site/view/dateblock.js")
+  script(src="/js/site/view/gmap.js")
   script(src="https://maps.googleapis.com/maps/api/js")
+  script(type='text/javascript').
+    // TODO
+    document.currentDriverId = '#{drivers[0].id}';
+    document.currentTotalPrice = #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)};
+    ReactDOM.render(React.createElement(DateBlock, {pdate:'#{parcel.pickupDate}', adate:'#{parcel.arriveDate}'}), document.getElementById('dateblock'));
+    ReactDOM.render(React.createElement(GMap, {
+      title1: 'HOME ADDRESS',
+      title2: 'HOME ADDRESS',
+      lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
+      lon1: #{parcel.fromPerson ? parcel.fromPerson.longitude : parcel.owner.longitude},
+      lat2: #{parcel.toPerson ? parcel.toPerson.latitude : parcel.owner.latitude},
+      lon2: #{parcel.toPerson ? parcel.toPerson.longitude : parcel.owner.longitude}}),
+      document.getElementById('map1block'));
+    ReactDOM.render(React.createElement(GPath, {
+      lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
+      lon1: #{parcel.fromPerson ? parcel.fromPerson.longitude : parcel.owner.longitude},
+      lat2: #{parcel.toPerson ? parcel.toPerson.latitude : parcel.owner.latitude},
+      lon2: #{parcel.toPerson ? parcel.toPerson.longitude : parcel.owner.longitude}}),
+      document.getElementById('map2block'));
+    function confirmation () {
+      // update parcel
+      values = $('input.js-datetime');
+      var data = {};
+      data.pickupDate = moment(values[0].value, 'DD MMMM YYYY').format();
+      data.arriveDate = moment(values[1].value, 'DD MMMM YYYY').format();
+      var times = values[2].value.split(' - ');
+      data.pickupTime1 = times[0];
+      data.pickupTime2 = times[1];
+      times = values[3].value.split(' - ');
+      data.arriveTime1 = times[0];
+      data.arriveTime2 = times[1];
+      data.status = 'published';
+      console.log('Data', data);
+      $.post('/api/parcel/#{parcel.id}', data, function(data, status) {
+        if(status != 'success') {
+          console.log('Result', data, 'status', status);
+          return;
+        }
+        // create request
+        $.post('/api/request', {parcel: '#{parcel.id}', driver: document.currentDriverId, sender: '#{user.id}', senderAccepted: true, price: document.currentTotalPrice}, function(request, status) {
+          if(status == 'success') {
+            $.post('/api/parcel/#{parcel.id}', {request:request.id}, function(data, status) {
+              if(status == 'success') {
+                location.href='/payment/'+request.id;
+              } else {
+                console.log('Parcel result', data);
+              }
+            });
+          } else {
+            console.log('Result', request);
+          }
+        });
+      });
+    }
+    function selectDriver(select) {
+      option = select.options[select.selectedIndex];
+      insurancePrice = parseInt('#{parcel.insurancePrice}');
+      price = parseInt(option.getAttribute('price')) + (insurancePrice ? insurancePrice : 0);
+      $('span#totalPrice').html(price);
+      document.currentDriverId = option.getAttribute('driverId');
+      document.currentTotalPrice = price;
+    }

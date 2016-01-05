@@ -5,6 +5,8 @@
 
 moment = require 'moment'
 async = require 'async'
+gps = require 'gps-util'
+pageSize = 3
 
 module.exports = 
     home: (req, res) ->
@@ -31,33 +33,138 @@ module.exports =
 
     price: (req, res) ->
         if req.user?
-            res.view 'siteprice', {user: req.user}
+            parcelId = req.param('parcelId')
+            Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+                if err?
+                    console.log err
+                    return res.negotiate err
+                SearchService.searchDriver parcelId, (err, data) ->
+                    if err?
+                        console.log err
+                        res.negotiate err
+                    else
+                        prices =
+                            cheapest: 
+                                price: ''
+                                pickupDate: '-'
+                                arriveDate: '-'
+                                available: false
+                            fastest:
+                                price: ''
+                                pickupDate: '-'
+                                arriveDate: '-'
+                                available: false
+                            ecologiest:
+                                price: ''
+                                pickupDate: '-'
+                                arriveDate: '-'
+                                available: false
+                        console.log 'Drivers', data
+                        cheapest = fastest = ecologiest = null
+                        pathLength = parcel.pathLength
+                        for carrier in data
+                            if cheapest?
+                                if carrier.getPrice(pathLength) < cheapest.getPrice(pathLength)
+                                    cheapest = carrier
+                            else
+                                cheapest = carrier
+                            if fastest?
+                                if carrier.averageDayDistance > fastest.averageDayDistance or (carrier.averageDayDistance == fastest.averageDayDistance and carrier.averageSpeed > fastest.averageSpeed)
+                                    fastest = carrier
+                            else
+                                fastest = carrier
+                            if ecologiest?
+                                if carrier.averageSpeed < ecologiest.averageSpeed
+                                    ecologiest = carrier
+                            else
+                                ecologiest = carrier
+                        if cheapest?
+                            prices.cheapest.id = cheapest.id
+                            prices.cheapest.price = cheapest.getPrice pathLength
+                            prices.cheapest.available = true
+                        if fastest?
+                            prices.fastest.id = fastest.id
+                            prices.fastest.price = fastest.getPrice pathLength
+                            prices.fastest.available = true
+                        if ecologiest?
+                            prices.ecologiest.id = ecologiest.id
+                            prices.ecologiest.price = ecologiest.getPrice pathLength
+                            prices.ecologiest.available = true
+                        console.log 'Prices', prices
+                        moreAvailable = data.length > 3
+                        res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable}
         else
             res.redirect '/'
 
     dashboard: (req, res) ->
+        page = req.param('page') or 1
         if req.user?
-            res.view 'sitedashboard', {user: req.user}
+            filter = {owner: req.user.id, status: {'!': 'archive'}}
+            Parcel.count(filter).exec (err, count) ->
+              Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                  if err
+                      console.log err
+                      return res.negotiate err
+                  Parcel.find({owner: req.user.id, status: 'archive'}).populateAll().exec (err, archive) ->
+                      if err
+                          console.log err
+                          return res.negotiate err
+                      res.view 'sitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
         else
             res.redirect '/'
 
     confirmation: (req, res) ->
         if req.user?
-            res.view 'siteconfirm', {user: req.user}
+            parcelId = req.param('parcelId')
+            driverId = req.param('driverId')
+            Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+                if err?
+                    console.log err
+                    return res.negotiate err
+                SearchService.searchDriver parcelId, (err, drivers) ->
+                    if err?
+                        console.log err
+                        res.negotiate err
+                    res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId}
         else
             res.redirect '/'
 
     payment: (req, res) ->
         if req.user?
-            res.view 'sitepayment', {user: req.user}
+            requestId = req.param('requestId')
+            Request.findOne(requestId).populateAll().exec (err, request) ->
+                if err?
+                    console.log err
+                    return res.negotiate err
+                if not request?
+                    return res.notFound()
+                Parcel.findOne(request.parcel.id).populateAll().exec (err, parcel) ->
+                    if err?
+                        console.log err
+                        return res.negotiate err
+                    User.findOne(request.driver.id).populateAll().exec (err, driver) ->
+                        if err?
+                            console.log err
+                            return res.negotiate err
+                        res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver}
         else
             res.redirect '/'
+
+    findPayment: (req, res) ->
+        parcelId = req.param('parcel')
+        if parcelId
+            Request.find({parcel: parcelId, senderAccepted: true}).exec (err, requests) ->
+                if err?
+                    console.log err
+                    return res.negotiate err
+                if requests? and requests.length > 0
+                    res.redirect '/payment/'+requests[0].id
 
     profile: (req, res) ->
         if req.user?
             res.view 'siteprofile', {user: req.user}
 
-    parcel1: (req, res) ->
+    makeParcel: (req, res) ->
         data = req.body
         console.log 'Parcel 1', data
         parcel = {owner: req.user.id, length: data.length, width: data.width, depth: data.depth, weight: data.weight}

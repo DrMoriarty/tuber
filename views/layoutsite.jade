@@ -17,15 +17,15 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     // CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
-    link(rel='stylesheet', href='css/lib/jquery-ui.min.css')
-    link(rel='stylesheet', href='css/lib/jquery.selectBoxIt.css')
-    link(rel='stylesheet', href='css/main.css')
+    link(rel='stylesheet', href='/css/lib/jquery-ui.min.css')
+    link(rel='stylesheet', href='/css/lib/jquery.selectBoxIt.css')
+    link(rel='stylesheet', href='/css/main.css')
     // we can live with IE
     //if lt IE 9 
       script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
       script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
     //if lte IE 8 
-      link(rel='stylesheet', type='text/css', href='css/ie.css')
+      link(rel='stylesheet', type='text/css', href='/css/ie.css')
     //if lt IE 7 
       script(type='text/javascript').
         window.location.href="/ie6_close/index_ru.html";
@@ -116,5 +116,6 @@ html
     script(src='/vendor/jquery/feelform.min.js')
     script(src='/vendor/jquery/jquery.bpopup.min.js')
     script(src='/vendor/jquery/jquery.easing.min.js')
-    script(src='js/main.js')
+    script(src='/vendor/moment/moment-with-locales.min.js')
+    script(src='/js/main.js')
     block script

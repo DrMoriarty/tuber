@@ -7,9 +7,9 @@ block header
     .container
       ul
         li
-          a(href='/price') 1. Price offers
+          a(href='/price/#{parcel.id}') 1. Price offers
         li
-          a(href='/confirmation') 2. Confirmation
+          a(href='/confirmation/#{parcel.id}') 2. Confirmation
         li
           span 3. Payment
         li
@@ -25,22 +25,28 @@ block content
       .order
         h3
           | SUMMARY OF THE ORDER: 
-          span &euro;156
+          span &euro;#{driver.getPrice(parcel.pathLength)}
         ul
           li
             | FROM:  
-            strong 28211 Bremen friedrich missler str.,1
+            if parcel.fromPerson
+              strong #{parcel.fromPersonAddress()}
+            else
+              strong #{parcel.ownerAddress()}
           li
             | TO:  
-            strong 23412 Hamburg Holtumer Strasse, 14, 5
+            if parcel.toPerson
+              strong #{parcel.toPersonAddress()}
+            else
+              strong #{parcel.ownerAddress()}
         ul
           li
             | SENDING DETAILS: 
-            strong 2kg, 60cm x 60cm x 60cm
+            strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
           li
             | INSURRANCE: 
-            strong Standart (until 520&euro;)
-        span.total TOTAL AMOUNT (Including VAT): 186&euro;
+            strong Standart (until #{parcel.insurance}&euro;)
+        span.total TOTAL AMOUNT (Including VAT): #{request.price}&euro;
     hr
     .container
       form.form(action='')
@@ -77,4 +83,4 @@ block content
           input#card_date(type='text', placeholder='02/16')
           label(for='last_name') SECURITY CODE*
           input#last_name(type='text', placeholder='660 (The 3 digits after the card number on the signature panel of your card)')
-        a#pay_form_button.orange_button(href='dashboard.html') CONFIRM ORDER
+        a#pay_form_button.orange_button(href='/dashboard') CONFIRM ORDER

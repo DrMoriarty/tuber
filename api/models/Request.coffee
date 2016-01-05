@@ -29,6 +29,19 @@ module.exports =
         paid:
             type: 'boolean'
             defaultsTo: false
+        deliveryOption:
+            type: 'string'
+            defaultsTo: ''
+        deliveryPrice:
+            type: 'float'
+            defaultsTo: 0
+        trackingNumber:
+            type: 'string'
+        status:
+            type: 'string'
+
+        totalPrice: ->
+            @price + @deliveryPrice + @parcel.insurance
 
     afterCreate: (object, cb) ->
         LogService.saveLog 'Create', 'Request', JSON.stringify(object)

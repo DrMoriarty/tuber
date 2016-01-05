@@ -127,6 +127,8 @@ module.exports =
             defaultsTo: 0
         recoveryHash:
             type: 'string'
+        getPrice: (pathLength) ->
+            if @defaultPrice > 0 then @defaultPrice else @pricePerKm * pathLength
         toJSON: ->
             obj = this.toObject()
             delete obj.password

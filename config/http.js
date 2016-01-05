@@ -9,6 +9,8 @@
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
 
+var moment = require('moment');
+
 module.exports.http = {
 
   /****************************************************************************
@@ -90,5 +92,9 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-    cache: 31557600000
+    cache: 31557600000,
+
+    customMiddleware: function(app) {
+        app.locals.moment = moment;
+    }
 };

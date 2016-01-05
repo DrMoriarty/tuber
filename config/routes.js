@@ -36,13 +36,13 @@ module.exports.routes = {
     'get /faq': 'SiteController.faq',
     'get /registration': 'SiteController.registration',
     'get /parcel': 'SiteController.parcel',
-    'get /price': 'SiteController.price',
+    'get /price/:parcelId': 'SiteController.price',
     'get /dashboard': 'SiteController.dashboard',
-    'get /confirmation': 'SiteController.confirmation',
-    'get /payment': 'SiteController.payment',
+    'get /confirmation/:parcelId': 'SiteController.confirmation',
+    'get /payment/:requestId': 'SiteController.payment',
+    'get /payment': 'SiteController.findPayment',
     'get /profile': 'SiteController.profile',
-    'post /make/parcel1': 'SiteController.parcel1',
-    'post /make/parcel2': 'SiteController.parcel2',
+    'post /make/parcel': 'SiteController.makeParcel',
     
     'get /login': {
         view: 'login'

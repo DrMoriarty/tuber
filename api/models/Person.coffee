@@ -21,7 +21,9 @@ module.exports =
         address2:
             type: 'string'
             required: true
-        zip: 'string'
+        zip: 
+            type: 'string'
+            defaultsTo: ''
         latitude:
             type: 'float'
             defaultsTo: 0

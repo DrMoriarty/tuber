@@ -13,7 +13,7 @@ block content
         i.fa.fa-angle-double-right
         span About my parcel
     .container.bordered
-      form.form.js-validate(action='/make/parcel1', method='POST')
+      form.form.js-validate(action='/make/parcel', method='POST')
         .form-block
           .left
             i.icons-profile
@@ -145,7 +145,7 @@ block script
         data: regdata,
         success: function(data) {
           console.log('Result', data);
-          location.href = '/price';
+          location.href = '/price/'+data.parcel;
         },
         error: function(err) {
           console.log("Error", err);

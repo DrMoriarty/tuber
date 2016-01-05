@@ -6,11 +6,11 @@ block header
     .container
       ul
         li
-          a(href='/price') 1. Price offers
+          a(href='javascript:;') 1. Price offers
         li
-          a(href='/confirmation') 2. Confirmation
+          a(href='javascript:;') 2. Confirmation
         li
-          a(href='/payment') 3. Payment
+          a(href='javascript:;') 3. Payment
         li
           span 4. Dashboard
       span.title #{user.firstname} #{user.lastname}
@@ -28,7 +28,7 @@ block content
           li
             a(href='#') My payments
           li
-            a(href='#') My insurrance
+            a(href='#') My archive
       .content
         // tab
         .js-tab-body
@@ -36,233 +36,277 @@ block content
             ul
               li
                 | NAME:
-                strong Wilhelm  Meier
+                strong #{user.firstname} #{user.lastname}
               li
                 | COMPANY (optional):
-                strong delticom
+                strong #{user.company}
               li
                 | VAT (optional):
-                strong DE123456789
+                strong #{user.vat}
               li
                 | ADRESS:
-                strong 28211 Bremen friedrich missler str.,1
+                strong #{user.zip} #{user.city} #{user.address1} #{user.address2}
               li
                 | MOBILE PHONE:
-                strong 0049 151 4611 8937
+                strong #{user.phone}
               li
                 | E-MAIL:
-                strong thierry.delesalle@delti.com
+                strong #{user.email}
               li
                 | SUBSCRIBE:
                 strong YES
-            a.orange_button(href='registration.html') CHANGE MY INFO
+            a.orange_button(href='/profile') CHANGE MY INFO
             .pattern
         // tab
         .js-tab-body(style='display: block;')
-          .sender
-            h3 SA12345678
-            ul
-              li
-                | CURRENT: 
-                em 1 kg postage, now on the way to Hamburg, expected delivery in 8 hours
-              li
-                | SENDING DETAILS: 
-                strong 1kg, 60cm x 60cm x 60cm
-              li.no-margin
-                | DEPARTURE DATE: 
-                strong 20/11/15
-              li
-                | ARRIVAL DATE: 
-                strong 21/11/15 - 23/11/15
-              li.no-margin
-                | FROM: 
-                strong 28211 Bremen friedrich missler str.,1
-              li
-                | TO: 
-                strong 21109 Hamburg, Niedergeorgswerder Deich 73, 4
-              li.no-margin
-                | INSURRANCE: 
-                strong Standart (until 520&euro;)
-              li
-                | DELIVERY OPTIONS: 
-                strong +30&euro; to home adress
-              li
-                | TOTAL AMOUNT (Including VAT): 
-                strong 186&euro;
-            .sender-name
-              figure
-                span THE SENDER:
-                img(src='img/emma.jpg', alt='')
-                figcaption
-                  a(href='#')
-                    i.fa.fa-phone-square
-                    | call
-              ul
-                li
-                  | NAME: 
-                  strong Emma Klein
-                li
-                  | RAITE: 
-                  span.rating
-                    span &star;
-                    span &star;
-                    span &star;
-                    span &star;
-                    span &star;
-                li
-                  | PHONENUMBER: 
-                  strong 089-12345678
-            .clear
-            a.orange_button.cansel_order(href='#') CANCEL THIS ORDER
-            span.note * If you canceled this order now, You must pay 500&euro;
-            .pattern
-          .sender
-            h3 SA34521781
-            ul
-              li
-                | CURRENT: 
-                u 2 kg order was taken, finished
-              li
-                | SENDING DETAILS: 
-                strong 2kg, 70cm x 83cm x 45cm
-              li.no-margin
-                | DEPARTURE DATE: 
-                strong 17/10/15
-              li
-                | ARRIVAL DATE: 
-                strong 22/10/15 - 24/10/15
-              li.no-margin
-                | FROM: 
-                strong 28211 Bremen friedrich missler str.,1
-              li
-                | TO: 
-                strong 21109 Hamburg, Niedergeorgswerder Deich 73, 4
-              li.no-margin
-                | INSURRANCE: 
-                strong Standart (until 520&euro;)
-              li
-                | DELIVERY OPTIONS: 
-                strong +30&euro; to home adress
-              li
-                | TOTAL AMOUNT (Including VAT): 
-                strong 208&euro;
-            .sender-name
-              figure
-                span THE SENDER:
-                img(src='img/martha.jpg', alt='')
-                figcaption
-                  a(href='#')
-                    i.fa.fa-phone-square
-                    | call
-              ul
-                li
-                  | NAME: 
-                  strong Martha Muller
-                li
-                  | RAITE: 
-                  span.rating
-                    span &star;
-                    span &star;
-                    span &star;
-                    span &star;
-                    span &star;
-                li
-                  | PHONENUMBER: 
-                  strong 089-12345678
-            .clear
-          ul.pagination
-            li.prev
-              a(href='#')
-                i.fa.fa-angle-double-left
-            li.active
-              a(href='#') 1
-            li
-              a(href='#') 2
-            li
-              a(href='#') 3
-            li
-              a(href='#') 4
-            li
-              a(href='#') 5
-            li.next
-              a(href='#')
-                i.fa.fa-angle-double-right
+          if parcels && parcels.length
+            each parcel in parcels
+              .sender
+                if parcel.request && parcel.request.trackingNumber
+                  h3 parcel.request.trackingNumber
+                else
+                  h3 NO TRACKING NUMBER
+                ul
+                  if parcel.request && parcel.request.status
+                    li
+                      | CURRENT: 
+                      em #{parcel.request.status}
+                  li
+                    | SENDING DETAILS: 
+                    strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+                  li.no-margin
+                    | DEPARTURE DATE: 
+                    strong #{moment(parcel.pickupDate).format('LL')}
+                  li
+                    | ARRIVAL DATE: 
+                    strong #{moment(parcel.arriveDate).format('LL')}
+                  li.no-margin
+                    | FROM: 
+                    if parcel.fromPerson
+                      strong #{parcel.fromPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  li
+                    | TO: 
+                    if parcel.toPerson
+                      strong #{parcel.toPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  li.no-margin
+                    | INSURRANCE: 
+                    strong Standart (until #{parcel.insurance}&euro;)
+                  li
+                    | DELIVERY OPTIONS:
+                    if parcel.request && parcel.request.deliveryPrice
+                      strong +#{parcel.request.deliveryPrice}&euro; #{parcel.request.deliveryOption}
+                  li
+                    | TOTAL AMOUNT (Including VAT):
+                    if parcel.request
+                      strong #{parcel.request.price}&euro;
+                if parcel.fromPerson
+                  .sender-name(style='min-height: 221px;')
+                    figure
+                      span THE SENDER:
+                      img(src='/img/person.png', alt='')
+                      figcaption
+                        a(href='tel://#{parcel.fromPerson.phone}')
+                          i.fa.fa-phone-square
+                          | call
+                    ul
+                      li
+                        | NAME: 
+                        strong #{parcel.fromPerson.firstname} #{parcel.fromPerson.lastname}
+                      li
+                        | RAITE: 
+                        span.rating
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                      li
+                        | PHONENUMBER: 
+                        strong #{parcel.fromPerson.phone}
+                if parcel.toPerson
+                  .sender-name(style='min-height: 221px;')
+                    figure
+                      span THE RECIPIENT:
+                      img(src='/img/person.png', alt='')
+                      figcaption
+                        a(href='tel://#{parcel.toPerson.phone}')
+                          i.fa.fa-phone-square
+                          | call
+                    ul
+                      li
+                        | NAME: 
+                        strong #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
+                      li
+                        | RAITE: 
+                        span.rating
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                      li
+                        | PHONENUMBER: 
+                        strong #{parcel.toPerson.phone}
+                .clear
+                if parcel.status == 'draft'
+                  a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}"') CONTINUE
+                else if parcel.status == 'published'
+                  a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}"') PROCESS PAYMENT
+                else if parcel.status == 'accepted'
+                  a.orange_button.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') CANCEL THIS ORDER
+                  span.note * If you canceled this order now, You must pay 500&euro;
+                else if parcel.status == 'started'
+                  a.orange_button.cansel_order(href='#', onClick='confirmOrder("#{parcel.id}")') CONFIRM RECEIPT OF PARCEL
+                else if parcel.status == 'arrived'
+                  a.orange_button.cansel_order(href='#', onClick='archiveOrder("#{parcel.id}")') ARCHIVE RECORD
+                else
+                  a.orange_button.cansel_order(href='#', onClick='deleteOrder("#{parcel.id}")') DELETE
+                .pattern
+            ul.pagination
+              li.prev
+                a(href='/dashboard')
+                  i.fa.fa-angle-double-left
+              - for (var i=1; i<=pages; i++)
+                if (i == page)
+                  li.active
+                    a(href='/dashboard?page=#{i}') #{i}
+                else
+                  li
+                    a(href='/dashboard?page=#{i}') #{i}
+              li.next
+                a(href='/dashboard?page=#{pages}')
+                  i.fa.fa-angle-double-right
+          else
+            .sender
+              .clear
+              h3 YOU HAVE NO PARCELS YET
+              .clear
         // tab
         .js-tab-body
-          .sender
-            ul
-              li
-                | ORDER NO: 
-                strong SA12345678
-              li
-                | PAYMNET STATUS 
-                em Pay Success
-              li.no-margin
-                | TOTAL AMOUNT:
-                strong 186&euro;
-              li
-                | Received:
-                strong 186&euro; 
-              li.no-margin
-                | Payment Method: 
-                strong Credit Card
-              li
-                | Date Received: 
-                strong 11/10/2015
-            .pattern
-          .sender
-            ul
-              li
-                | ORDER NO: 
-                strong SA12345678
-              li
-                | PAYMNET STATUS 
-                em Pay Success
-              li.no-margin
-                | TOTAL AMOUNT:
-                strong 208&euro;
-              li
-                | Received:
-                strong 208&euro; 
-              li.no-margin
-                | Payment Method: 
-                strong Credit Card
-              li
-                | Date Received: 
-                strong 11/10/2015
-            .pattern
+          if payments && payments.length
+            each payment in payments
+              .sender
+                ul
+                  li
+                    | ORDER NO: 
+                    strong SA12345678
+                  li
+                    | PAYMENT STATUS 
+                    em Pay Success
+                  li.no-margin
+                    | TOTAL AMOUNT:
+                    strong 186&euro;
+                  li
+                    | Received:
+                    strong 186&euro; 
+                  li.no-margin
+                    | Payment Method: 
+                    strong Credit Card
+                  li
+                    | Date Received: 
+                    strong 11/10/2015
+                .pattern
+          else
+            .sender
+              .clear
+              h3 YOU HAVE NO PAYMENTS YET
+              .clear
         // tab
         .js-tab-body
-          .sender
-            h3 SA12345678
-            ul
-              li
-                | CURRENT: 
-                em 1 kg postage, now on the way to Hamburg, expected delivery in 8 hours
-              li
-                | SENDING DETAILS: 
-                strong 1kg, 60cm x 60cm x 60cm
-              li.no-margin
-                | DEPARTURE DATE: 
-                strong 20/11/15
-              li
-                | ARRIVAL DATE: 
-                strong 21/11/15 - 23/11/15
-              li.no-margin
-                | FROM: 
-                strong 28211 Bremen friedrich missler str.,1
-              li
-                | TO: 
-                strong 21109 Hamburg, Niedergeorgswerder Deich 73, 4
-              li.no-margin
-                | INSURRANCE: 
-                strong Standart (until 520&euro;)
-              li
-                | DELIVERY OPTIONS: 
-                strong +30&euro; to home adress
-              li
-                | TOTAL AMOUNT (Including VAT): 
-                strong 186&euro;
-            a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
-            span.note * You myst delivery this order to 23/11/2015
-            .pattern
+          if archive && archive.length
+            each parcel in archive
+              .sender
+                h3 SA12345678
+                ul
+                  li
+                    | CURRENT: 
+                    em 1 kg postage, now on the way to Hamburg, expected delivery in 8 hours
+                  li
+                    | SENDING DETAILS: 
+                    strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+                  li.no-margin
+                    | DEPARTURE DATE: 
+                    strong #{moment(parcel.pickupDate).format('LL')}
+                  li
+                    | ARRIVAL DATE: 
+                    strong #{moment(parcel.arriveDate).format('LL')}
+                  li.no-margin
+                    | FROM: 
+                    if parcel.fromPerson
+                      strong #{parcel.fromPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  li
+                    | TO: 
+                    if parcel.toPerson
+                      strong #{parcel.toPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  li.no-margin
+                    | INSURRANCE: 
+                    strong Standart (until #{parcel.insurance}&euro;)
+                  li
+                    | DELIVERY OPTIONS: 
+                    strong +30&euro; to home adress
+                  li
+                    | TOTAL AMOUNT (Including VAT): 
+                    strong 186&euro;
+                a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
+                span.note * You must delivery this order to 23/11/2015
+                .pattern
+          else
+            .sender
+              .clear
+              h3 YOU HAVE NO ARCHIVED PARCELS YET
+              .clear
+
+block script
+  script(type='text/javascript').
+    function cancelOrder(id) {
+      console.log('Cancel order', id);
+    }
+    function confirmOrder(id) {
+      console.log('Confirm order', id);
+      $.ajax({
+        type: 'POST',
+        url: '/api/parcel/'+id,
+        data: {'status': 'arrived'},
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
+    function archiveOrder(id) {
+      console.log('Archive order', id);
+      $.ajax({
+        type: 'POST',
+        url: '/api/parcel/'+id,
+        data: {'status': 'archive'},
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
+    function deleteOrder(id) {
+      console.log('Delete order', id);
+      $.ajax({
+        type: 'DELETE',
+        url: '/api/parcel/'+id,
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }

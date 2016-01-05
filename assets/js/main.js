@@ -163,6 +163,7 @@ $(document).ready(function() {
 $(window).load(function() {
 	// maps
 	if ($('#map1').length) {
+        /*
 		var mapCanvas1 = document.getElementById('map1');
 		var mapOptions1 = {
 			center: new google.maps.LatLng(44.5403, -78.5463),
@@ -210,6 +211,7 @@ $(window).load(function() {
 				directionsDisplay.setDirections(response);
 			}
 		});
+        */
 	}
 	//
 	if ($('#map4').length) {

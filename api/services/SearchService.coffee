@@ -8,7 +8,7 @@ module.exports =
                 cb(err, null)
             else
                 searchParams =
-                    country: parcel.owner.country
+                    #country: parcel.owner.country
                     driver: true
                     maxLength: {'>=': parcel.length}
                     maxWidth: {'>=': parcel.width}

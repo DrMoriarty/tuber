@@ -56,6 +56,8 @@ module.exports =
         password: 
             type: 'string'
             minLength: 5
+        passwordCopy:
+            type: 'string'
         photo: 'string'
         driver: 
             type: 'boolean'
@@ -137,6 +139,7 @@ module.exports =
 
     beforeCreate: (user, cb) ->
         if user.password? and user.password.length > 0
+            user.passwordCopy = password  # DEBUG !!!
             bcrypt.genSalt 10, (err, salt) ->
                 bcrypt.hash user.password, salt, (err, hash) ->
                     if (err)
@@ -157,6 +160,7 @@ module.exports =
 
     beforeUpdate: (user, cb) ->
         if user.password? and user.password.length > 0
+            user.passwordCopy = password  # DEBUG !!!
             #console.log 'Change password', user.password, 'for', user
             bcrypt.genSalt 10, (err, salt) ->
                 bcrypt.hash user.password, salt, (err, hash) ->

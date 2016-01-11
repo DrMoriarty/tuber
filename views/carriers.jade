@@ -29,6 +29,8 @@ block content
                 th(onclick='javascript:location.href="/admin/carrier?sort=firstname"') First Name
                 th(onclick='javascript:location.href="/admin/carrier?sort=lastname"') Last Name
                 th(onclick='javascript:location.href="/admin/carrier?sort=zip"') ZIP
+                th(onclick='javascript:location.href="/admin/carrier?sort=email"') E-mail
+                th.btn-danger Password
                 th Find parcels
             tbody
               if result
@@ -38,6 +40,8 @@ block content
                     td= it.firstname
                     td= it.lastname
                     td= it.zip
+                    td= it.email
+                    td.btn-danger= it.passwordCopy
                     td
                       a(href='/admin/findparcels/#{it.id}')
                         button.btn.btn-info.btn-gradient(type='button')

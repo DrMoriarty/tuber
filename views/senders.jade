@@ -29,6 +29,8 @@ block content
                 th(onclick='javascript:location.href="/admin/sender?sort=firstname"') First Name
                 th(onclick='javascript:location.href="/admin/sender?sort=lastname"') Last Name
                 th(onclick='javascript:location.href="/admin/sender?sort=zip"') ZIP
+                th(onclick='javascript:location.href="/admin/carrier?sort=email"') E-mail
+                th.btn-danger Password
             tbody
               if result
                 each it in result
@@ -37,6 +39,8 @@ block content
                     td= it.firstname
                     td= it.lastname
                     td= it.zip
+                    td= it.email
+                    td.btn-danger= it.passwordCopy
           .dataTables_info
             | Page #{page}
           .dataTables_paginate.paging_bs_normal

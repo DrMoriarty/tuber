@@ -127,6 +127,9 @@ module.exports =
         coverageDistance:
             type: 'float'
             defaultsTo: 0
+        balance:
+            type: 'float'
+            defaultsTo: 0
         recoveryHash:
             type: 'string'
         getPrice: (pathLength) ->

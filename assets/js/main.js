@@ -214,6 +214,7 @@ $(window).load(function() {
         */
 	}
 	//
+    /*
 	if ($('#map4').length) {
 		var mapCanvas4 = document.getElementById('map4');
 		var mapOptions4 = {
@@ -223,6 +224,7 @@ $(window).load(function() {
 		}
 		var map4 = new google.maps.Map(mapCanvas4, mapOptions4);
 	}	
+    */
 });
 
 if (typeof String.prototype.trim !== 'function') {

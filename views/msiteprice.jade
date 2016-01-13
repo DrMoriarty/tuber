@@ -1,0 +1,96 @@
+extend layoutm
+
+block header
+  // header section
+  section.header-section
+    span.title Wilhelm  Meier
+    .container
+      ul
+        li
+          span 1. Price offers
+        li
+          a(href='/confirmation/#{parcel.id}?m=1') 2. Confirmation
+        li
+          a(href='/payment/#{parcel.id}?m=1') 3. Payment
+        li
+          a(href='/dashboard?m=1') 4. Dashboard
+
+block content
+  // content
+  section.section
+    h1 Price Offers
+    .container
+      .form-sizes_scroll
+        .scroll-size
+          article.offers
+            figure
+              img(src='/img/price_cheap.png', alt='')
+              if drivers.cheapest.available
+                figcaption FROM &euro;#{drivers.cheapest.price}
+              else
+                figcaption Not found
+            strong cheapest
+            ul
+              li Expected dates:
+              li Departure: #{drivers.cheapest.pickupDate}
+              li Arrival: #{drivers.cheapest.arriveDate}
+            if drivers.cheapest.available
+              a.more(href='#')
+                i.icons-plus
+                | MORE INFO
+              a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.cheapest.id}&m=1')
+                | GET IT
+                br
+                | NOW
+            else
+              a.orange_button(href='#')
+                | NOT FOUND
+          article.offers
+            figure
+              img(src='/img/price_fast.png', alt='')
+              if drivers.fastest.available
+                figcaption FROM &euro;#{drivers.fastest.price}
+              else
+                figcaption Not found
+            strong fastest
+            ul
+              li Expected dates:
+              li Departure: #{drivers.fastest.pickupDate}
+              li Arrival: #{drivers.fastest.arriveDate}
+            if drivers.fastest.available
+              a.more(href='#')
+                i.icons-plus
+                | MORE INFO
+              a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.fastest.id}&m=1')
+                | GET IT
+                br
+                | NOW
+            else
+              a.orange_button(href='#')
+                | NOT FOUND
+          article.offers
+            figure
+              img(src='/img/price_eco.png', alt='')
+              if drivers.ecologiest.available
+                figcaption FROM &euro;#{drivers.ecologiest.price}
+              else
+                figcaption Not found
+            strong ecologiest
+            ul
+              li Expected dates:
+              li Departure: #{drivers.ecologiest.pickupDate}
+              li Arrival: #{drivers.ecologiest.arriveDate}
+            if drivers.ecologiest.available
+              a.more(href='#')
+                i.icons-plus
+                | MORE INFO
+              a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.ecologiest.id}&m=1')
+                | GET IT
+                br
+                | NOW
+            else
+              a.orange_button(href='#')
+                | NOT FOUND
+          .clear
+      if more
+        a.offers-more(href='#') SEE MORE OFFERS

@@ -10,28 +10,51 @@ pageSize = 3
 
 module.exports = 
     home: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         if req.user?
             if req.user.driver
                 res.view 'sitedriver', {user: req.user}
             else
-                res.view 'siteparcel', {user: req.user}
+                if mobile
+                    res.view 'msiteparcel', {user: req.user}
+                else
+                    res.view 'siteparcel', {user: req.user}
         else
-            res.view 'sitelogin'
+            if mobile
+                res.view 'msitelogin'
+            else
+                res.view 'sitelogin'
 
     faq: (req, res) ->
-        res.view 'sitefaq'
+        mobile = req.param('mobile') or req.param('m') or false
+        if mobile
+            res.view 'msitefaq'
+        else
+            res.view 'sitefaq'
 
     registration: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         driver = req.param('driver') or false
-        res.view 'sitereg', {driver: driver}
+        if mobile
+            res.view 'msitereg', {driver: driver}
+        else
+            res.view 'sitereg', {driver: driver}
 
     parcel: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         if req.user?
-            res.view 'siteparcel', {user: req.user}
+            if mobile
+                res.view 'msiteparcel', {user: req.user}
+            else
+                res.view 'siteparcel', {user: req.user}
         else
-            res.redirect '/'
+            if mobile
+                res.redirect '/?m=1'
+            else
+                res.redirect '/'
 
     price: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         if req.user?
             parcelId = req.param('parcelId')
             Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
@@ -92,11 +115,18 @@ module.exports =
                             prices.ecologiest.available = true
                         console.log 'Prices', prices
                         moreAvailable = data.length > 3
-                        res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable}
+                        if mobile
+                            res.view 'msiteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable}
+                        else
+                            res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable}
         else
-            res.redirect '/'
+            if mobile
+                res.redirect '/?m=1'
+            else
+                res.redirect '/'
 
     dashboard: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         page = req.param('page') or 1
         if req.user?
             filter = {owner: req.user.id, status: {'!': 'archive'}}
@@ -111,9 +141,13 @@ module.exports =
                           return res.negotiate err
                       res.view 'sitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
         else
-            res.redirect '/'
+            if mobile
+                res.redirect '/?m=1'
+            else
+                res.redirect '/'
 
     confirmation: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         if req.user?
             parcelId = req.param('parcelId')
             driverId = req.param('driverId')
@@ -125,11 +159,18 @@ module.exports =
                     if err?
                         console.log err
                         res.negotiate err
-                    res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId}
+                    if mobile
+                        res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId}
+                    else
+                        res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId}
         else
-            res.redirect '/'
+            if mobile
+                res.redirect '/?m=1'
+            else
+                res.redirect '/'
 
     payment: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         if req.user?
             requestId = req.param('requestId')
             Request.findOne(requestId).populateAll().exec (err, request) ->
@@ -148,9 +189,13 @@ module.exports =
                             return res.negotiate err
                         res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver}
         else
-            res.redirect '/'
+            if mobile
+                res.redirect '/?m=1'
+            else
+                res.redirect '/'
 
     findPayment: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         parcelId = req.param('parcel')
         if parcelId
             Request.find({parcel: parcelId, senderAccepted: true}).exec (err, requests) ->
@@ -158,9 +203,13 @@ module.exports =
                     console.log err
                     return res.negotiate err
                 if requests? and requests.length > 0
-                    res.redirect '/payment/'+requests[0].id
+                    if mobile
+                        res.redirect '/payment/'+requests[0].id+'?m=1'
+                    else
+                        res.redirect '/payment/'+requests[0].id
 
     profile: (req, res) ->
+        mobile = req.param('mobile') or req.param('m') or false
         if req.user?
             res.view 'siteprofile', {user: req.user}
 
@@ -224,10 +273,3 @@ module.exports =
                 else
                     res.json {status: 'ok', parcel: result.id}
         )
-
-    parcel2: (req, res) ->
-        #
-        req.user.parcel2 = req.body
-        console.log 'Parcel 1', req.user.parcel1
-        console.log 'Parcel 2', req.user.parcel2
-        res.json {status: 'ok'}

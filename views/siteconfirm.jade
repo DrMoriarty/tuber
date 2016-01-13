@@ -28,7 +28,6 @@ block content
             select.js-select(onchange='selectDriver(this)')
               each driver in drivers
                 option(driverId='#{driver.id}', price='#{driver.getPrice(parcel.pathLength)}') cheapest delivery ---  &euro;#{driver.getPrice(parcel.pathLength)}
-              option(driverId='1234567890', price=100500) cheapest delivery ---  &euro;100500
           .clear
         hr
         #dateblock

@@ -1,0 +1,106 @@
+extend layoutm
+
+block content
+  // content
+  section.section
+    h1 Tuber parcels delivery
+    ul.breadcrumbs
+      li You are here
+      li
+        i.fa.fa-angle-double-right
+        a(href='/?m=1') Home
+      li
+        i.fa.fa-angle-double-right
+        span About my parcel
+    .container
+      form.form.js-validate(action='/make/parcel', method='POST')
+        .form-block.bordered
+          i.icons-profile
+          h3 From
+          p
+            input#address(type='checkbox', name='fromPersonProfile')
+            label.map_checkbox(for='address') Choose my profile address
+            i.icons-arrow.fill_adress1
+          h3 To
+          p
+            input#address1(type='checkbox', name='toPersonProfile')
+            label.map_checkbox(for='address1') Choose my profile address
+            i.icons-arrow.fill_adress1
+          input#packetshop(type='checkbox', name='usePacketshop')
+          label.packetshop(for='packetshop') To reduce costs, I am willing to drop the package in a Packetshop close to me.
+          a.orange_button(href='#') GO TO &quot;MY PROFILE&quot;
+        .form-block.bordered
+          i.icons-parcel
+          h3(align='left') ABOUT MY PARCEL
+          .form-sizes_scroll
+            ul.form-sizes
+              li
+                span.up
+                  i.fa.fa-chevron-up
+                input(type='text', value='100', name='weight')
+                em kg
+                span.down
+                  i.fa.fa-chevron-down
+                strong Weight
+              li
+                span.up
+                  i.fa.fa-chevron-up
+                input(type='text', value='100', name='length')
+                em cm
+                span.down
+                  i.fa.fa-chevron-down
+                strong Length
+              li
+                span.up
+                  i.fa.fa-chevron-up
+                input(type='text', value='100', name='width')
+                em cm
+                span.down
+                  i.fa.fa-chevron-down
+                strong Width
+              li
+                span.up
+                  i.fa.fa-chevron-up
+                input(type='text', value='100', name='depth')
+                em cm
+                span.down
+                  i.fa.fa-chevron-down
+                strong Depth
+          input#declare(type='checkbox', name='userAgreementContent')
+          label.declare(for='declare')
+            | I officially declare that non of the products transported areprohibited neither in origin country, neither in destination country. It is under my responsabili
+        .form-block.bordered
+          i.icons-timing
+          h3 About the timing
+          .confirmation-select-mobile
+            span.placeholder1 Parsel can be picked up starting
+            span.placeholder2 Parsel should arrive before
+            input.pl1(type='datetime-local', name='pickupDate')
+            input.pl2(type='datetime-local', name='arriveDate')
+          input#timing(type='checkbox', name='userAgreementTimes')
+          label.timing(for='timing') I am ware that the time frame influences TUber prices.
+        .form-block.bordered
+          i.icons-insurrance
+          h3 About insurrance
+          input(type='text', placeholder='Packet is insured until the value XXX€', name='insurrance')
+        button.orange_button Go to &quot;best proposal&quot;
+        .clear
+
+block script
+  script(type='text/javascript').
+    $('.js-validate').submit(function() {
+      regdata = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: this.action,
+        data: regdata,
+        success: function(data) {
+          console.log('Result', data);
+          location.href = '/price/'+data.parcel+'?m=1';
+        },
+        error: function(err) {
+          console.log("Error", err);
+        }});
+      return false;
+    });
+  

@@ -1,0 +1,3432 @@
+@charset "UTF-8";
+/**
+ * Creative Coding settings file
+ * 
+ * @author Alexeev Vadim <html5css3.pro@gmail.com>
+ * @version 4.0
+ */
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&subset=latin,cyrillic);
+/* line 5, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* ╨Ш╨╝╨┐╨╛╤А╤В╨╕╤А╤Г╨╡╨╝ ╨│╤Г╨│╨╗-╤И╤А╨╕╤Д╤В╤Л */
+/* ╨Ш╨╝╨┐╨╛╤А╤В╨╕╤А╤Г╨╡╨╝ ╨╗╨╛╨║╨░╨╗╤М╨╜╤Л╨╡ ╤И╤А╨╕╤Д╤В╤Л */
+@font-face {
+  font-family: Cabin-Bold;
+  src: url("../fonts/Cabin-Bold/Cabin-Bold.eot");
+  src: url("../fonts/Cabin-Bold/Cabin-Bold.eot") format("embedded-opentype"), url("../fonts/Cabin-Bold/Cabin-Bold.woff2") format("woff2"), url("../fonts/Cabin-Bold/Cabin-Bold.woff") format("woff"), url("../fonts/Cabin-Bold/Cabin-Bold.ttf") format("truetype"), url("../fonts/Cabin-Bold/Cabin-Bold.svg#TTDrugsThin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: Cabin-Bold;
+    src: url("../fonts/Cabin-Bold/Cabin-Bold.svg#Cabin-Bold") format("svg");
+  }
+}
+@font-face {
+  font-family: Cabin-Italic;
+  src: url("../fonts/Cabin-Italic/Cabin-Italic.eot");
+  src: url("../fonts/Cabin-Italic/Cabin-Italic.eot") format("embedded-opentype"), url("../fonts/Cabin-Italic/Cabin-Italic.woff2") format("woff2"), url("../fonts/Cabin-Italic/Cabin-Italic.woff") format("woff"), url("../fonts/Cabin-Italic/Cabin-Italic.ttf") format("truetype"), url("../fonts/Cabin-Italic/Cabin-Italic.svg#TTDrugsThin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: Cabin-Italic;
+    src: url("../fonts/Cabin-Italic/Cabin-Italic.svg#Cabin-Italic") format("svg");
+  }
+}
+@font-face {
+  font-family: Cabin-Regular;
+  src: url("../fonts/Cabin-Regular/Cabin-Regular.eot");
+  src: url("../fonts/Cabin-Regular/Cabin-Regular.eot") format("embedded-opentype"), url("../fonts/Cabin-Regular/Cabin-Regular.woff2") format("woff2"), url("../fonts/Cabin-Regular/Cabin-Regular.woff") format("woff"), url("../fonts/Cabin-Regular/Cabin-Regular.ttf") format("truetype"), url("../fonts/Cabin-Regular/Cabin-Regular.svg#TTDrugsThin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: Cabin-Regular;
+    src: url("../fonts/Cabin-Regular/Cabin-Regular.svg#Cabin-Regular") format("svg");
+  }
+}
+@font-face {
+  font-family: ProximaNova-Bold;
+  src: url("../fonts/ProximaNova-Bold/ProximaNova-Bold.eot");
+  src: url("../fonts/ProximaNova-Bold/ProximaNova-Bold.eot") format("embedded-opentype"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.woff2") format("woff2"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.woff") format("woff"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.ttf") format("truetype"), url("../fonts/ProximaNova-Bold/ProximaNova-Bold.svg#TTDrugsThin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: ProximaNova-Bold;
+    src: url("../fonts/ProximaNova-Bold/ProximaNova-Bold.svg#ProximaNova-Bold") format("svg");
+  }
+}
+@font-face {
+  font-family: ProximaNova-Regular;
+  src: url("../fonts/ProximaNova-Regular/ProximaNova-Regular.eot");
+  src: url("../fonts/ProximaNova-Regular/ProximaNova-Regular.eot") format("embedded-opentype"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.woff2") format("woff2"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.woff") format("woff"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.ttf") format("truetype"), url("../fonts/ProximaNova-Regular/ProximaNova-Regular.svg#TTDrugsThin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: ProximaNova-Regular;
+    src: url("../fonts/ProximaNova-Regular/ProximaNova-Regular.svg#ProximaNova-Regular") format("svg");
+  }
+}
+@font-face {
+  font-family: ProximaNova-RegularIt;
+  src: url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.eot");
+  src: url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.eot") format("embedded-opentype"), url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.woff2") format("woff2"), url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.woff") format("woff"), url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.ttf") format("truetype"), url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.svg#TTDrugsThin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: ProximaNova-RegularIt;
+    src: url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.svg#ProximaNova-RegularIt") format("svg");
+  }
+}
+@font-face {
+  font-family: FontAwesome;
+  src: url("../fonts/FontAwesome/FontAwesome.eot");
+  src: url("../fonts/FontAwesome/FontAwesome.eot") format("embedded-opentype"), url("../fonts/FontAwesome/FontAwesome.woff2") format("woff2"), url("../fonts/FontAwesome/FontAwesome.woff") format("woff"), url("../fonts/FontAwesome/FontAwesome.ttf") format("truetype"), url("../fonts/FontAwesome/FontAwesome.svg#TTDrugsThin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @font-face {
+    font-family: FontAwesome;
+    src: url("../fonts/FontAwesome/FontAwesome.svg#FontAwesome") format("svg");
+  }
+}
+/* define fonts */
+/* Font mixin */
+/* ╨Т╨║╨╗╤О╤З╨░╨╡╨╝ ╤Б╨┐╤А╨░╨╣╤В╤Л */
+/* line 128, icons/*.png */
+.icons-sprite, .icons-arrow-right, .icons-arrow, .icons-can_transport_parsel, .icons-faq_arrow, .icons-insurrance, .icons-parcel, .icons-plus, .icons-profile, .icons-timing, .icons-visa, .icons-want_send_parsel {
+  background-image: url('../img/icons-s3af80811bd.png');
+  background-repeat: no-repeat;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-arrow-right {
+  background-position: 0 0;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-arrow {
+  background-position: 0 -42px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-can_transport_parsel {
+  background-position: 0 -88px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-faq_arrow {
+  background-position: 0 -189px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-insurrance {
+  background-position: 0 -196px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-parcel {
+  background-position: 0 -329px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-plus {
+  background-position: 0 -462px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-profile {
+  background-position: 0 -475px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-timing {
+  background-position: 0 -628px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-visa {
+  background-position: 0 -762px;
+}
+
+/* line 84, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-want_send_parsel {
+  background-position: 0 -797px;
+}
+
+/* ╨Я╨╛╨┤╨║╨╗╤О╤З╨░╨╡╨╝ ╨Ш╨║╨╛╨╜╨║╨╕ */
+/* line 138, ../sass/_settings.scss */
+.icons-arrow {
+  display: inline-block;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-arrow-right {
+  display: inline-block;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-profile {
+  display: inline-block;
+  position: relative;
+  width: 148px;
+  height: 153px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-parcel {
+  display: inline-block;
+  position: relative;
+  width: 133px;
+  height: 133px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-timing {
+  display: inline-block;
+  position: relative;
+  width: 133px;
+  height: 134px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-insurrance {
+  display: inline-block;
+  position: relative;
+  width: 137px;
+  height: 133px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-faq_arrow {
+  display: inline-block;
+  position: relative;
+  width: 11px;
+  height: 7px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-visa {
+  display: inline-block;
+  position: relative;
+  width: 62px;
+  height: 35px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-plus {
+  display: inline-block;
+  position: relative;
+  width: 12px;
+  height: 13px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-can_transport_parsel {
+  display: inline-block;
+  position: relative;
+  width: 108px;
+  height: 101px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
+.icons-want_send_parsel {
+  display: inline-block;
+  position: relative;
+  width: 103px;
+  height: 101px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 156, ../sass/_settings.scss */
+body {
+  /* ╤Б╨│╨╗╨░╨╢╨╕╨▓╨░╨╜╨╕╨╡ ╤И╤А╨╕╤Д╤В╨╛╨▓ ╨▓ ╨▓╨╡╨▒╨║╨╕╤В╨╡ */
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+/* line 161, ../sass/_settings.scss */
+body button, body select {
+  -webkit-appearance: none;
+}
+/* line 163, ../sass/_settings.scss */
+body a {
+  text-decoration: none;
+}
+/* line 166, ../sass/_settings.scss */
+body a:hover, body a:focus, body a:active, body a:active:focus {
+  outline: none;
+}
+
+/* line 174, ../sass/_settings.scss */
+.inline-block, .app .header .logo, .app .header-section ul li, .app .section .breadcrumbs li, .app .section .form .days li, .app .section .form .form-sizes li, .app .section .form .form-sizes li input, .app .section .form .form-block .form-datepicker, .app .section .confirmation .confirmation-calendar, .app .section .confirmation .confirmation-clock, .app .section .transporter .form-withdraw button.blue_button, .app .promo a {
+  display: -moz-inline-stack;
+  /* Firefox 2 */
+  display: inline-block;
+  /* good browser */
+  _overflow: hidden;
+  /* IE6, IE7 */
+  *zoom: 1;
+  /* include hasLayout for IE6, IE7 */
+  *display: inline;
+  /* with hasLayout true display:inline in IE6, IE7 behaves like display:inline-block */
+}
+
+/* line 184, ../sass/_settings.scss */
+.clear:before, .clear:after, .app .section .form .form-block:after {
+  clear: both;
+  box-sizing: border-box;
+  content: " ";
+  display: table;
+}
+
+/* ╨Р╨┤╨░╨┐╤В╨░╤Ж╨╕╤П */
+/* line 224, ../sass/_settings.scss */
+.orange_button,
+.gray_button,
+.blue_button {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 26px;
+  line-height: 40px;
+  letter-spacing: 0px;
+  color: #fff;
+  width: auto;
+  margin: 30px auto 30px auto;
+  display: block;
+  box-sizing: border-box;
+  padding: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+/* line 243, ../sass/_settings.scss */
+.orange_button:active, .orange_button:focus, .orange_button:active:focus,
+.gray_button:active,
+.gray_button:focus,
+.gray_button:active:focus,
+.blue_button:active,
+.blue_button:focus,
+.blue_button:active:focus {
+  border: none !important;
+  outline: none;
+  -moz-box-shadow: inset 0px 0px 5px 0px #1a1a1a;
+  -webkit-box-shadow: inset 0px 0px 5px 0px #1a1a1a;
+  box-shadow: inset 0px 0px 5px 0px #1a1a1a;
+}
+
+/* line 250, ../sass/_settings.scss */
+.orange_button {
+  background: #e58000;
+}
+/* line 250, ../sass/_settings.scss */
+.orange_button:hover {
+  background: #6fa8a4;
+}
+
+/* line 251, ../sass/_settings.scss */
+.gray_button {
+  background: #666666;
+}
+/* line 251, ../sass/_settings.scss */
+.gray_button:hover {
+  background: #999;
+}
+
+/* line 252, ../sass/_settings.scss */
+.blue_button {
+  background: #4cbfc6;
+}
+/* line 252, ../sass/_settings.scss */
+.blue_button:hover {
+  background: #19a6ab;
+}
+
+/* line 258, ../sass/_settings.scss */
+.container {
+  position: relative;
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-width: 800px;
+  width: auto;
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+}
+/* line 265, ../sass/_settings.scss */
+.container.bordered {
+  margin: 0 auto 60px auto;
+  border: 1px solid #c9cbcc;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+}
+
+/* line 272, ../sass/_settings.scss */
+.bordered {
+  border: 1px solid #c9cbcc;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  padding-bottom: 30px;
+}
+
+/* line 274, ../sass/_settings.scss */
+#wrap_hide {
+  display: none;
+}
+/* line 276, ../sass/_settings.scss */
+#wrap_hide label {
+  display: block;
+  margin: 0 auto 5px auto;
+}
+/* line 280, ../sass/_settings.scss */
+#wrap_hide input {
+  width: 100%;
+}
+
+/* line 284, ../sass/_settings.scss */
+.burger_nav {
+  display: none;
+}
+
+/* line 287, ../sass/_settings.scss */
+.form-sizes_scroll {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+/* line 290, ../sass/_settings.scss */
+.form-sizes_scroll .scroll-size {
+  width: 1000px;
+}
+
+/* line 294, ../sass/_settings.scss */
+.popup_box {
+  display: none;
+  background: #fff;
+  border: 1px solid #b1b4ba;
+  -moz-box-shadow: 0px 0px 0px 1px #161e2f;
+  -webkit-box-shadow: 0px 0px 0px 1px #161e2f;
+  box-shadow: 0px 0px 0px 1px #161e2f;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+/* line 303, ../sass/_settings.scss */
+.popup_box span {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-transform: uppercase;
+}
+/* line 306, ../sass/_settings.scss */
+.popup_box span strong {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #000;
+  text-transform: uppercase;
+}
+/* line 311, ../sass/_settings.scss */
+.popup_box strong {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #000;
+  text-transform: uppercase;
+}
+/* line 315, ../sass/_settings.scss */
+.popup_box em {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #666666;
+}
+/* line 318, ../sass/_settings.scss */
+.popup_box .orange_button,
+.popup_box .gray_button {
+  display: block;
+  width: 314px;
+  margin: 34px auto 15px;
+  font-size: 22px;
+  line-height: 32px;
+}
+
+/* line 327, ../sass/_settings.scss */
+.popup_adress {
+  display: none;
+  background: #fff;
+  border-top: 1px solid #494949;
+  border-bottom: 1px solid #494949;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 330, ../sass/_settings.scss */
+.popup_adress h3 {
+  font-family: Cabin-Bold;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  display: block;
+  width: 100%;
+  position: relative;
+}
+@media only screen and (max-width: 481px) {
+  /* line 330, ../sass/_settings.scss */
+  .popup_adress h3 {
+    font-size: 17px;
+    letter-spacing: -0.2px;
+  }
+}
+/* line 334, ../sass/_settings.scss */
+.popup_adress h3 span {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #72aead;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}
+/* line 337, ../sass/_settings.scss */
+.popup_adress h3 span:hover, .popup_adress h3 span:active, .popup_adress h3 span:focus, .popup_adress h3 span:active:focus {
+  color: #e58000;
+}
+/* line 339, ../sass/_settings.scss */
+.popup_adress h3 a {
+  font-family: Cabin-Bold;
+  font-size: 26px;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: #72aead;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+/* line 342, ../sass/_settings.scss */
+.popup_adress h3 a:hover, .popup_adress h3 a:active, .popup_adress h3 a:focus, .popup_adress h3 a:active:focus {
+  color: #e58000;
+}
+/* line 345, ../sass/_settings.scss */
+.popup_adress input {
+  display: block;
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  height: 60px;
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #999999;
+  margin-bottom: 12px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* line 353, ../sass/_settings.scss */
+.popup_time {
+  display: none;
+  background: #fff;
+  border-top: 1px solid #494949;
+  border-bottom: 1px solid #494949;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 356, ../sass/_settings.scss */
+.popup_time h3 {
+  font-family: Cabin-Bold;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  display: block;
+  width: 100%;
+  position: relative;
+}
+@media only screen and (max-width: 481px) {
+  /* line 356, ../sass/_settings.scss */
+  .popup_time h3 {
+    font-size: 17px;
+    letter-spacing: -0.2px;
+  }
+}
+/* line 360, ../sass/_settings.scss */
+.popup_time h3 span {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #72aead;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}
+/* line 363, ../sass/_settings.scss */
+.popup_time h3 span:hover, .popup_time h3 span:active, .popup_time h3 span:focus, .popup_time h3 span:active:focus {
+  color: #e58000;
+}
+/* line 365, ../sass/_settings.scss */
+.popup_time h3 a {
+  font-family: Cabin-Bold;
+  font-size: 26px;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: #72aead;
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+/* line 368, ../sass/_settings.scss */
+.popup_time h3 a:hover, .popup_time h3 a:active, .popup_time h3 a:focus, .popup_time h3 a:active:focus {
+  color: #e58000;
+}
+
+/* line 376, ../sass/_settings.scss */
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
+}
+
+/* line 381, ../sass/_settings.scss */
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+
+/* line 386, ../sass/_settings.scss */
+.rating > span:hover,
+.rating > span:hover ~ span {
+  color: transparent;
+  cursor: pointer;
+}
+
+/* line 390, ../sass/_settings.scss */
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+  color: #111;
+}
+
+/* line 398, ../sass/_settings.scss */
+.error {
+  -moz-animation: blink ease-in 2s forwards;
+  -webkit-animation: blink ease-in 2s forwards;
+  animation: blink ease-in 2s forwards;
+}
+@-moz-keyframes blink {
+  0% {
+    border-color: #e58000;
+  }
+  50% {
+    border-color: #fff;
+  }
+  60% {
+    border-color: #e58000;
+  }
+  70% {
+    border-color: #fff;
+  }
+  80% {
+    border-color: #e58000;
+  }
+  90% {
+    border-color: #fff;
+  }
+  100% {
+    border-color: #e58000;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    border-color: #e58000;
+  }
+  50% {
+    border-color: #fff;
+  }
+  60% {
+    border-color: #e58000;
+  }
+  70% {
+    border-color: #fff;
+  }
+  80% {
+    border-color: #e58000;
+  }
+  90% {
+    border-color: #fff;
+  }
+  100% {
+    border-color: #e58000;
+  }
+}
+@keyframes blink {
+  0% {
+    border-color: #e58000;
+  }
+  50% {
+    border-color: #fff;
+  }
+  60% {
+    border-color: #e58000;
+  }
+  70% {
+    border-color: #fff;
+  }
+  80% {
+    border-color: #e58000;
+  }
+  90% {
+    border-color: #fff;
+  }
+  100% {
+    border-color: #e58000;
+  }
+}
+/* line 413, ../sass/_settings.scss */
+.ui-widget-content {
+  border: none;
+  background: #fff;
+}
+
+/* line 418, ../sass/_settings.scss */
+.ui-corner-all {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* line 422, ../sass/_settings.scss */
+.ui-datepicker {
+  padding: 0;
+  width: 314px;
+  margin-bottom: 10px;
+  -moz-border-radius-bottomleft: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* line 428, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+  top: 45px;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+/* line 431, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-prev:hover, .ui-datepicker .ui-datepicker-next:hover {
+  border: none;
+  background: transparent;
+}
+/* line 434, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-prev {
+  left: 5px;
+  cursor: pointer;
+}
+/* line 436, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-prev span {
+  background: transparent url("../img/picker-arrow-left.png") center center no-repeat;
+}
+/* line 438, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-next {
+  right: 5px;
+  cursor: pointer;
+}
+/* line 440, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-next span {
+  background: transparent url("../img/picker-arrow-right.png") center center no-repeat;
+}
+/* line 443, ../sass/_settings.scss */
+.ui-datepicker table {
+  margin: 0 6px 10px;
+  width: 95%;
+}
+/* line 448, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-header {
+  margin-bottom: 13px;
+  padding: 40px 0 0 0;
+  position: relative;
+  border: none;
+  background: #414141;
+  -moz-border-radius-bottomleft: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* line 457, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-header:after {
+  content: "";
+  display: block;
+  height: 40px;
+  background: #f9f9f9;
+}
+/* line 463, ../sass/_settings.scss */
+.ui-datepicker .ui-datepicker-title {
+  margin: 0px 15px 5px;
+  position: absolute;
+  top: 43px;
+  left: 75px;
+}
+
+/* line 468, ../sass/_settings.scss */
+.ui-datepicker-title span {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.8px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+/* line 473, ../sass/_settings.scss */
+.ui-datepicker-calendar thead th {
+  padding: 3px 6px;
+}
+/* line 474, ../sass/_settings.scss */
+.ui-datepicker-calendar thead tr {
+  border-top: 1px solid #483653;
+  border-bottom: 1px solid #483653;
+}
+/* line 478, ../sass/_settings.scss */
+.ui-datepicker-calendar thead tr span {
+  text-transform: uppercase;
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 15px;
+  line-height: 21px;
+  letter-spacing: 0;
+  color: #000;
+}
+/* line 484, ../sass/_settings.scss */
+.ui-datepicker-calendar tbody td {
+  text-align: center;
+}
+/* line 486, ../sass/_settings.scss */
+.ui-datepicker-calendar tbody td .ui-state-default, .ui-datepicker-calendar tbody td .ui-state-active {
+  padding: 6px 3px;
+}
+/* line 488, ../sass/_settings.scss */
+.ui-datepicker-calendar tbody td .ui-state-default:hover, .ui-datepicker-calendar tbody td .ui-state-active:hover {
+  border: 1px solid #8d8d8d;
+}
+/* line 491, ../sass/_settings.scss */
+.ui-datepicker-calendar tbody td a.ui-state-default {
+  background: #fff;
+  border: 1px solid #fff;
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #000;
+}
+/* line 496, ../sass/_settings.scss */
+.ui-datepicker-calendar tbody td a.ui-state-active {
+  background: #f9f9f9;
+  border: 1px solid #fff;
+  -moz-box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* line 504, ../sass/_settings.scss */
+.ui-datepicker td a {
+  text-align: center;
+}
+
+/* line 508, ../sass/_settings.scss */
+.ui-datepicker td {
+  padding: 5px;
+}
+
+/* line 517, ../sass/_settings.scss */
+.confirmation-select-mobile {
+  display: block;
+}
+/* line 519, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container {
+  padding: 2px 5px;
+  width: 100%;
+  height: 87px;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid #797a7d;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-box-shadow: inset 0 0 0 1px #373841;
+  -webkit-box-shadow: inset 0 0 0 1px #373841;
+  box-shadow: inset 0 0 0 1px #373841;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+}
+/* line 529, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container:focus, .confirmation-select-mobile .selectboxit-container:active {
+  outline: none;
+}
+/* line 531, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit {
+  width: 100% !important;
+  height: 81px;
+  background: transparent;
+  border: none;
+}
+/* line 536, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit .selectboxit-option-icon-url {
+  background-size: auto;
+}
+/* line 540, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit .selectboxit-text {
+  font-family: Cabin-Bold;
+  font-size: 31px;
+  line-height: 36px;
+  letter-spacing: 0px;
+  color: #fff;
+  max-width: 90% !important;
+  margin: 24px 0 0 0;
+  height: 44px;
+}
+/* line 545, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit .selectboxit-arrow-container {
+  background: transparent url("../img/select-arrow-mobile.png") right center no-repeat;
+  height: 42px;
+  width: 42px;
+  margin: 21px 15px 21px 0;
+}
+/* line 549, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit .selectboxit-arrow-container i {
+  display: none;
+}
+/* line 552, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit:hover, .confirmation-select-mobile .selectboxit-container .selectboxit:focus {
+  background: transparent;
+}
+/* line 555, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit .selectboxit-option-icon-container {
+  display: none;
+  margin: 0;
+}
+/* line 560, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit-options {
+  width: 101%;
+  background: #fff;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  max-height: 190px;
+  border: none;
+  min-width: 100% !important;
+  position: absolute;
+  top: -2px !important;
+  left: -2px;
+}
+/* line 569, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #000;
+  cursor: pointer;
+  background: #ffffff;
+  padding: 0 0 0 20px;
+}
+/* line 573, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor .selectboxit-option-icon-url {
+  background-size: auto;
+}
+/* line 577, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor .selectboxit-option-icon-container {
+  display: none;
+  margin: 0;
+}
+/* line 581, ../sass/_settings.scss */
+.confirmation-select-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor:hover {
+  background: #4d5f7a;
+  color: #fff;
+}
+
+/* line 587, ../sass/_settings.scss */
+.confirmation-select-last {
+  margin-bottom: 19px;
+}
+
+/* line 594, ../sass/_settings.scss */
+.faq_select-mobile {
+  display: block;
+}
+/* line 596, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container {
+  vertical-align: middle;
+  height: 87px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #9e9fa3;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+/* line 602, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit {
+  border: none;
+  width: 100% !important;
+  height: 85px;
+  background: #fff;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-box-shadow: inset 0 0 0 1px #dfdfe0;
+  -webkit-box-shadow: inset 0 0 0 1px #dfdfe0;
+  box-shadow: inset 0 0 0 1px #dfdfe0;
+}
+/* line 609, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit:hover, .faq_select-mobile .selectboxit-container .selectboxit:focus {
+  background: #fff;
+}
+/* line 613, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit .selectboxit-text {
+  max-width: 100% !important;
+  margin: 30px 0 0 0;
+  padding: 0 0 0 10px;
+  font-family: Cabin-Bold;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  color: #3d4951;
+}
+@media only screen and (max-width: 481px) {
+  /* line 613, ../sass/_settings.scss */
+  .faq_select-mobile .selectboxit-container .selectboxit .selectboxit-text {
+    font-size: 16px;
+    line-height: 21px;
+    padding: 0 0 0 5px;
+  }
+}
+/* line 620, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit .selectboxit-option-icon-container {
+  display: none;
+}
+/* line 622, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit-arrow-container {
+  background: transparent url("../img/faq-arrow-mobile.png") right center no-repeat;
+  height: 46px;
+  width: 46px;
+  margin: 19px 10px 19px;
+}
+@media only screen and (max-width: 481px) {
+  /* line 622, ../sass/_settings.scss */
+  .faq_select-mobile .selectboxit-container .selectboxit-arrow-container {
+    margin: 19px 2px 19px;
+  }
+}
+/* line 626, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit-arrow-container i {
+  display: none;
+}
+/* line 630, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit-options {
+  width: 100%;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #e4e4e4;
+  -moz-box-shadow: inset 0 0 0 1px #f5f5f5;
+  -webkit-box-shadow: inset 0 0 0 1px #f5f5f5;
+  box-shadow: inset 0 0 0 1px #f5f5f5;
+  max-height: 190px;
+  position: absolute;
+  top: 0 !important;
+  left: 0;
+}
+/* line 639, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit-options .selectboxit-option-icon-container {
+  display: none;
+  margin: 0;
+}
+/* line 643, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 30px;
+  line-height: 30px;
+  letter-spacing: 0;
+  color: #000;
+  cursor: pointer;
+  padding: 0 0 0 10px;
+  background: #ffffff;
+}
+/* line 648, ../sass/_settings.scss */
+.faq_select-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor:hover {
+  color: #fff;
+  background: #d1762c;
+}
+
+/* line 655, ../sass/_settings.scss */
+.select-dash-mobile {
+  display: block;
+  margin-bottom: 32px;
+}
+/* line 658, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container {
+  padding: 2px 10px;
+  width: 100%;
+  height: 67px;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid #ffffff;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+}
+/* line 667, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container:focus, .select-dash-mobile .selectboxit-container:active {
+  outline: none;
+}
+/* line 669, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit {
+  width: 100% !important;
+  height: 65px;
+  background: transparent;
+  border: none;
+}
+/* line 674, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit .selectboxit-option-icon-url {
+  background-size: auto;
+}
+/* line 678, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit .selectboxit-text {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 28px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  color: #fff;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 24px 0 0 0;
+}
+@media only screen and (max-width: 481px) {
+  /* line 678, ../sass/_settings.scss */
+  .select-dash-mobile .selectboxit-container .selectboxit .selectboxit-text {
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+/* line 685, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit .selectboxit-arrow-container {
+  background: transparent url("../img/select-arrow.png") right center no-repeat;
+  height: 42px;
+  width: 42px;
+  margin: 10px -5px 10px 0;
+}
+/* line 689, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit .selectboxit-arrow-container i {
+  display: none;
+}
+/* line 692, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit:hover, .select-dash-mobile .selectboxit-container .selectboxit:focus {
+  background: transparent;
+}
+/* line 695, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit .selectboxit-option-icon-container {
+  display: none;
+  margin: 0;
+}
+/* line 700, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit-options {
+  width: 101%;
+  background: #fff;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  max-height: 190px;
+  border: none;
+  position: absolute;
+  top: -2px !important;
+  left: -2px;
+}
+/* line 708, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0;
+  color: #000;
+  cursor: pointer;
+  background: #ffffff;
+  padding: 0 0 0 20px;
+}
+/* line 712, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor .selectboxit-option-icon-url {
+  background-size: auto;
+}
+/* line 716, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor .selectboxit-option-icon-container {
+  display: none;
+  margin: 0;
+}
+/* line 720, ../sass/_settings.scss */
+.select-dash-mobile .selectboxit-container .selectboxit-options .selectboxit-option-anchor:hover {
+  background: #4d5f7a;
+  color: #fff;
+}
+
+/* line 728, ../sass/_settings.scss */
+.maps {
+  overflow: hidden;
+}
+
+/* line 729, ../sass/_settings.scss */
+.maps > div {
+  float: left;
+}
+
+/* line 730, ../sass/_settings.scss */
+.maps-left {
+  width: 39%;
+  border-right: 1px solid #192f43;
+  border-top: 1px solid #192f43;
+  border-bottom: 1px solid #192f43;
+  box-sizing: border-box;
+}
+/* line 733, ../sass/_settings.scss */
+.maps-left .wr-map:last-child {
+  border-top: 2px solid #192f43;
+  margin-top: -2px;
+}
+
+/* line 736, ../sass/_settings.scss */
+.maps-right {
+  width: 61%;
+  border-left: 1px solid #192f43;
+  border-top: 1px solid #192f43;
+  border-bottom: 1px solid #192f43;
+  box-sizing: border-box;
+}
+
+/* line 739, ../sass/_settings.scss */
+.wr-map {
+  position: relative;
+}
+
+/* line 742, ../sass/_settings.scss */
+.maps-sign {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 20px;
+  line-height: 27px;
+  letter-spacing: 0.6px;
+  color: #000;
+  text-transform: uppercase;
+  padding: 18px 25px;
+  text-align: center;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+/* line 750, ../sass/_settings.scss */
+#map1, #map2, #map3, #map4 {
+  width: 100%;
+}
+
+/* line 751, ../sass/_settings.scss */
+#map1, #map2 {
+  height: 210px;
+}
+
+/* line 752, ../sass/_settings.scss */
+#map3 {
+  height: 420px;
+}
+
+/* line 753, ../sass/_settings.scss */
+#map4 {
+  height: 340px;
+}
+
+/* line 4, ../sass/_style.scss */
+.hide,
+.js-tab-body {
+  display: none;
+}
+
+/* line 6, ../sass/_style.scss */
+.container {
+  max-width: 800px;
+  width: auto;
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+}
+
+/* line 7, ../sass/_style.scss */
+.orange_button, .gray_button, .blue_button {
+  width: auto;
+}
+
+/* line 8, ../sass/_style.scss */
+.bordered {
+  border: 1px solid #c9cbcc;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+}
+
+/* line 11, ../sass/_style.scss */
+.app {
+  min-width: 320px;
+  background: #f3f3f3;
+  /* end section */
+}
+/* line 16, ../sass/_style.scss */
+.app .header {
+  margin-bottom: 20px;
+  background: #ffffff;
+  text-align: right;
+  border-bottom: 1px solid #d4d4d4;
+  -moz-box-shadow: 0px 10px 15px 0px #d8d9d9;
+  -webkit-box-shadow: 0px 10px 15px 0px #d8d9d9;
+  box-shadow: 0px 10px 15px 0px #d8d9d9;
+}
+/* line 23, ../sass/_style.scss */
+.app .header .logo {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 29px;
+  line-height: 36px;
+  letter-spacing: -1.6px;
+  color: #e58000;
+  text-transform: uppercase;
+  float: left;
+  padding: 15px 0;
+  margin-left: 20px;
+}
+/* line 28, ../sass/_style.scss */
+.app .header .burger {
+  padding: 21px 30px;
+  background: #fff;
+  color: #000111;
+  font-size: 24px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+/* line 31, ../sass/_style.scss */
+.app .header .burger:hover, .app .header .burger:active, .app .header .burger:focus, .app .header .burger:active:focus {
+  background: #000111;
+  color: #fff;
+}
+/* line 36, ../sass/_style.scss */
+.app .header .nav li {
+  margin: 0;
+}
+/* line 38, ../sass/_style.scss */
+.app .header .nav li.active a {
+  background: #000111;
+}
+/* line 39, ../sass/_style.scss */
+.app .header .nav li a {
+  font-family: Cabin-Regular;
+  font-size: 28px;
+  line-height: 40px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 10px 11px;
+  background: #171921;
+  display: block;
+  text-align: center;
+}
+/* line 42, ../sass/_style.scss */
+.app .header .nav li a:hover, .app .header .nav li a:active, .app .header .nav li a:focus, .app .header .nav li a:active:focus {
+  background: #000111;
+}
+/* line 50, ../sass/_style.scss */
+.app .header-section {
+  background: #fff;
+  margin-top: -20px;
+}
+/* line 56, ../sass/_style.scss */
+.app .header-section .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 57, ../sass/_style.scss */
+.app .header-section ul {
+  background: #fff;
+}
+/* line 62, ../sass/_style.scss */
+.app .header-section ul li:before {
+  content: ">";
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 19px;
+  line-height: 36px;
+  letter-spacing: 0px;
+  color: #666666;
+  margin: 0px 17px 0 12px;
+}
+/* line 68, ../sass/_style.scss */
+.app .header-section ul li:first-child:before {
+  content: "";
+  display: none;
+}
+/* line 70, ../sass/_style.scss */
+.app .header-section ul li a {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 20px;
+  line-height: 40px;
+  letter-spacing: -0.2px;
+  color: #666666;
+}
+/* line 72, ../sass/_style.scss */
+.app .header-section ul li a:hover {
+  color: #333;
+}
+/* line 74, ../sass/_style.scss */
+.app .header-section ul li span {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 20px;
+  line-height: 40px;
+  letter-spacing: -0.2px;
+  color: #161e2f;
+}
+/* line 78, ../sass/_style.scss */
+.app .header-section .title {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 36px;
+  line-height: 64px;
+  letter-spacing: 1.6px;
+  color: #fefefe;
+  text-transform: uppercase;
+  text-align: center;
+  width: auto;
+  background: #44aab1;
+  display: block;
+}
+/* line 89, ../sass/_style.scss */
+.app .section h1 {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 56px;
+  line-height: 64px;
+  letter-spacing: 0px;
+  color: #395467;
+  text-align: center;
+  margin-bottom: 12px;
+}
+/* line 94, ../sass/_style.scss */
+.app .section hr {
+  background: none;
+  border-top: 1px dashed #b8b8b8;
+}
+/* line 101, ../sass/_style.scss */
+.app .section .breadcrumbs {
+  text-align: center;
+  margin-bottom: 48px;
+}
+/* line 105, ../sass/_style.scss */
+.app .section .breadcrumbs li {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #aab7c1;
+}
+/* line 109, ../sass/_style.scss */
+.app .section .breadcrumbs li a {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #aab7c1;
+}
+/* line 109, ../sass/_style.scss */
+.app .section .breadcrumbs li a:hover {
+  text-decoration: underline;
+}
+/* line 110, ../sass/_style.scss */
+.app .section .breadcrumbs li i {
+  font-size: 24px;
+  margin: 0 8px 0 5px;
+}
+/* line 111, ../sass/_style.scss */
+.app .section .breadcrumbs li span {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #aab7c1;
+}
+/* line 117, ../sass/_style.scss */
+.app .section .centred_title {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 33px;
+  line-height: 44px;
+  letter-spacing: 0.4px;
+  color: #3d4951;
+  text-align: center;
+  margin-bottom: 60px;
+}
+/* line 121, ../sass/_style.scss */
+.app .section .centred_title span {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 34px;
+  line-height: 34px;
+  letter-spacing: 0.6px;
+  color: #e58000;
+  margin-left: 10px;
+}
+@media only screen and (max-width: 481px) {
+  /* line 121, ../sass/_style.scss */
+  .app .section .centred_title span {
+    font-size: 28px;
+  }
+  /* line 124, ../sass/_style.scss */
+  .app .section .centred_title span:before {
+    content: "";
+    display: block;
+  }
+}
+/* line 128, ../sass/_style.scss */
+.app .section .centred_title strong {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+/* line 135, ../sass/_style.scss */
+.app .section .form h3 {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 38px;
+  line-height: 40px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  display: block;
+}
+/* line 143, ../sass/_style.scss */
+.app .section .form label {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: 0.2px;
+  color: #3d4951;
+  text-transform: uppercase;
+}
+/* line 145, ../sass/_style.scss */
+.app .section .form input[type="text"],
+.app .section .form input[type="password"] {
+  font-family: Cabin-Bold;
+  font-size: 30px;
+  line-height: 60px;
+  letter-spacing: 0px;
+  color: #999999;
+  display: block;
+  width: auto;
+  height: 84px;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 1px solid #dfdfe0;
+  -moz-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  -webkit-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  box-shadow: 0px 0px 0px 1px #9e9fa3;
+}
+/* line 152, ../sass/_style.scss */
+.app .section .form input[type="text"]:active, .app .section .form input[type="text"]:focus, .app .section .form input[type="text"]:active:focus,
+.app .section .form input[type="password"]:active,
+.app .section .form input[type="password"]:focus,
+.app .section .form input[type="password"]:active:focus {
+  outline: none;
+}
+/* line 158, ../sass/_style.scss */
+.app .section .form input[type="checkbox"] + label {
+  padding: 0 0 0 65px;
+  margin-left: 20px;
+  background: url(../img/uncheck.png) 0 10% no-repeat;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 2px;
+  margin-bottom: 15px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 60px;
+}
+/* line 168, ../sass/_style.scss */
+.app .section .form input[type="checkbox"] {
+  position: absolute;
+  left: -9999px;
+}
+/* line 173, ../sass/_style.scss */
+.app .section .form input[type="checkbox"]:checked + label {
+  background: url(../img/check.png) 0 10% no-repeat;
+}
+/* line 183, ../sass/_style.scss */
+.app .section .form .days input[type="checkbox"] + label {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 27px;
+  line-height: 36px;
+  letter-spacing: 0px;
+  color: #000000;
+  text-transform: uppercase;
+  padding: 8px 7px;
+  background: #fff;
+  height: auto;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #e4e4e4;
+}
+@media only screen and (max-width: 481px) {
+  /* line 183, ../sass/_style.scss */
+  .app .section .form .days input[type="checkbox"] + label {
+    font-size: 12px;
+    padding: 8px 5px;
+  }
+}
+/* line 191, ../sass/_style.scss */
+.app .section .form .days input[type="checkbox"]:checked + label {
+  background: #414141;
+  border-color: #414141;
+  color: #ffffff;
+}
+/* line 194, ../sass/_style.scss */
+.app .section .form .days li {
+  margin: 0 13px 0 0;
+}
+/* line 195, ../sass/_style.scss */
+.app .section .form .days li:last-child {
+  margin: 0;
+}
+/* line 202, ../sass/_style.scss */
+.app .section .form .form-sizes {
+  margin-bottom: 0;
+  width: 920px;
+}
+/* line 207, ../sass/_style.scss */
+.app .section .form .form-sizes li {
+  text-align: center;
+  width: 200px;
+  margin: 0 32px 10px 0;
+  background: #fff;
+  border: 1px solid #c9cbcc;
+}
+/* line 212, ../sass/_style.scss */
+.app .section .form .form-sizes li:last-child {
+  margin-right: 0;
+}
+/* line 216, ../sass/_style.scss */
+.app .section .form .form-sizes li:hover .up, .app .section .form .form-sizes li:hover .down, .app .section .form .form-sizes li:hover input {
+  opacity: 1;
+}
+/* line 217, ../sass/_style.scss */
+.app .section .form .form-sizes li .up, .app .section .form .form-sizes li .down, .app .section .form .form-sizes li input {
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  opacity: 0.6;
+}
+/* line 219, ../sass/_style.scss */
+.app .section .form .form-sizes li span {
+  line-height: 12px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 0 !important;
+}
+/* line 223, ../sass/_style.scss */
+.app .section .form .form-sizes li span i {
+  color: #d6d6d6;
+}
+/* line 226, ../sass/_style.scss */
+.app .section .form .form-sizes li .up {
+  font-size: 40px;
+  display: block;
+  margin: 5px 0 32px 0;
+}
+/* line 232, ../sass/_style.scss */
+.app .section .form .form-sizes li .down {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 8px;
+}
+/* line 238, ../sass/_style.scss */
+.app .section .form .form-sizes li input {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 90px;
+  line-height: 90px;
+  letter-spacing: 0px;
+  color: #999999;
+  text-align: center;
+  width: 160px;
+  height: auto;
+  margin: 0;
+  padding: 0px;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+/* line 243, ../sass/_style.scss */
+.app .section .form .form-sizes li input:active, .app .section .form .form-sizes li input:focus, .app .section .form .form-sizes li input:active:focus {
+  border: none;
+  outline: none;
+}
+/* line 249, ../sass/_style.scss */
+.app .section .form .form-sizes li em {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 23px;
+  line-height: 70px;
+  letter-spacing: 0px;
+  color: #999999;
+  text-transform: uppercase;
+}
+/* line 253, ../sass/_style.scss */
+.app .section .form .form-sizes li strong {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 34px;
+  line-height: 44px;
+  letter-spacing: 0px;
+  color: #fff;
+  text-transform: uppercase;
+  display: block;
+  background: #414141;
+}
+/* line 263, ../sass/_style.scss */
+.app .section .form .form-block {
+  margin: 60px 0 120px 0;
+}
+/* line 265, ../sass/_style.scss */
+.app .section .form .form-block:nth-child(4) {
+  margin-bottom: 0;
+}
+/* line 269, ../sass/_style.scss */
+.app .section .form .form-block .icons-profile {
+  margin: -94px auto 0 auto;
+  display: block;
+}
+/* line 270, ../sass/_style.scss */
+.app .section .form .form-block .icons-parcel {
+  margin: -82px auto 0 auto;
+  display: block;
+}
+/* line 271, ../sass/_style.scss */
+.app .section .form .form-block .icons-timing {
+  margin: -82px auto 0 auto;
+  display: block;
+}
+/* line 272, ../sass/_style.scss */
+.app .section .form .form-block .icons-insurrance {
+  margin: -82px auto 0 auto;
+  display: block;
+}
+/* line 274, ../sass/_style.scss */
+.app .section .form .form-block h3 {
+  padding-left: 20px;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 38px;
+  line-height: 40px;
+  margin-bottom: 8px;
+}
+/* line 279, ../sass/_style.scss */
+.app .section .form .form-block p {
+  position: relative;
+  margin-bottom: 34px;
+  padding-left: 20px;
+  border: 1px solid #dfdfe0;
+  -moz-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  -webkit-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  box-shadow: 0px 0px 0px 1px #9e9fa3;
+}
+/* line 283, ../sass/_style.scss */
+.app .section .form .form-block p input[type="checkbox"] + .map_checkbox {
+  font-family: Cabin-Bold;
+  font-size: 31px;
+  line-height: 32px;
+  letter-spacing: -1.2px;
+  color: #000000;
+  padding: 0px 75px;
+  height: 83px;
+  text-transform: none;
+  background: url(../img/icon-map.png) 0 14px no-repeat;
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 289, ../sass/_style.scss */
+.app .section .form .form-block p input[type="checkbox"] {
+  position: absolute;
+  left: -9999px;
+}
+/* line 294, ../sass/_style.scss */
+.app .section .form .form-block p input[type="checkbox"]:checked + .map_checkbox {
+  background: url(../img/icon-map-point.png) 0 14px no-repeat;
+  text-transform: none;
+}
+/* line 304, ../sass/_style.scss */
+.app .section .form .form-block > input[type="text"] {
+  width: 100%;
+}
+/* line 308, ../sass/_style.scss */
+.app .section .form .form-block .packetshop, .app .section .form .form-block .timing, .app .section .form .form-block .declare {
+  font-family: Cabin-Italic;
+  font-size: 27px;
+  line-height: 30px;
+  letter-spacing: 1.8px;
+  color: #000000;
+  text-transform: none;
+  text-decoration: underline;
+  position: relative;
+  left: 20px;
+  padding-right: 26px;
+}
+/* line 311, ../sass/_style.scss */
+.app .section .form .form-block .packetshop:hover, .app .section .form .form-block .packetshop:active, .app .section .form .form-block .packetshop:focus, .app .section .form .form-block .packetshop:active:focus, .app .section .form .form-block .timing:hover, .app .section .form .form-block .timing:active, .app .section .form .form-block .timing:focus, .app .section .form .form-block .timing:active:focus, .app .section .form .form-block .declare:hover, .app .section .form .form-block .declare:active, .app .section .form .form-block .declare:focus, .app .section .form .form-block .declare:active:focus {
+  text-decoration: none;
+}
+/* line 318, ../sass/_style.scss */
+.app .section .form .form-block .orange_button {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 24px;
+  line-height: 44px;
+  letter-spacing: 0px;
+  color: #fff;
+  margin: 32px 20px 0 20px;
+  display: block;
+  border-bottom: none;
+}
+/* line 332, ../sass/_style.scss */
+.app .section .form .form-block .about {
+  padding-left: 7px;
+}
+/* line 334, ../sass/_style.scss */
+.app .section .form .form-block .about h3 {
+  margin: 10px 0 16px 1px;
+}
+/* line 338, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker {
+  position: relative;
+}
+/* line 341, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body {
+  height: 435px;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+/* line 348, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body h4 {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 21px;
+  line-height: 25px;
+  letter-spacing: 0;
+  color: #fff;
+  text-transform: uppercase;
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  z-index: 1;
+}
+/* line 353, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body strong {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.6px;
+  color: #000;
+  text-transform: uppercase;
+  font-weight: 600;
+  position: absolute;
+  top: 388px;
+}
+/* line 359, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body input {
+  position: absolute;
+  top: 375px;
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #484848;
+  padding: 2px 5px;
+  margin: 0 0 9px;
+  width: 50px;
+  height: 33px;
+  background: #f9f9f9;
+  -moz-box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+/* line 367, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body input:focus {
+  color: #000;
+  font-weight: 600;
+}
+/* line 369, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body .time_at {
+  left: 98px;
+}
+/* line 370, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body .time_to {
+  right: 50px;
+}
+/* line 371, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body .time {
+  left: 32px;
+}
+/* line 372, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body .at {
+  left: 77px;
+}
+/* line 373, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body .to {
+  right: 121px;
+}
+/* line 375, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker .form-datepicker-body em {
+  position: absolute;
+  top: 415px;
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0;
+  color: #666666;
+  text-align: left;
+  padding: 0 38px;
+  display: block;
+}
+/* line 383, ../sass/_style.scss */
+.app .section .form .form-block .form-datepicker:nth-child(3) {
+  margin-left: 50px;
+}
+/* line 386, ../sass/_style.scss */
+.app .section .form .form-block .insurrance {
+  padding: 48px 0 0 3px;
+}
+/* line 388, ../sass/_style.scss */
+.app .section .form .form-block .insurrance h3 {
+  margin-bottom: 18px;
+}
+/* line 397, ../sass/_style.scss */
+.app .section .status {
+  padding: 0;
+  height: auto;
+  margin-bottom: 30px;
+  text-align: center;
+  min-height: 60px;
+  margin-top: 60px;
+}
+/* line 405, ../sass/_style.scss */
+.app .section .status span, .app .section .status .span {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  display: inline-block;
+  height: 16px;
+  width: 168px;
+  padding: 10px;
+  background: #4bbfc3;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  position: relative;
+  top: -19px;
+}
+/* line 413, ../sass/_style.scss */
+.app .section .status strong {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+/* line 417, ../sass/_style.scss */
+.app .section .status strong em {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #000;
+  margin: 0 0 0 5px;
+  border-bottom: none;
+}
+/* line 423, ../sass/_style.scss */
+.app .section .status a {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1.6px;
+  color: #000;
+  text-transform: uppercase;
+  border-bottom: 1px solid #9f9f9f;
+  display: inline-block;
+  margin-bottom: 30px;
+}
+/* line 432, ../sass/_style.scss */
+.app .section .profile {
+  width: 180px;
+  display: block;
+  margin: -68px auto 0;
+}
+/* line 434, ../sass/_style.scss */
+.app .section .profile img {
+  max-width: 150px;
+}
+/* line 435, ../sass/_style.scss */
+.app .section .profile .uplad_image {
+  display: none;
+}
+/* line 437, ../sass/_style.scss */
+.app .section .profile .uplad_image + label {
+  font-family: ProximaNova-RegularIt;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.6px;
+  color: #010000;
+  cursor: pointer;
+  border-bottom: 1px dashed #010000;
+}
+/* line 441, ../sass/_style.scss */
+.app .section .profile .uplad_image + label:hover, .app .section .profile .uplad_image + label:active, .app .section .profile .uplad_image + label:focus, .app .section .profile .uplad_image + label:active:focus {
+  border-bottom: 1px dashed #fff;
+}
+/* line 448, ../sass/_style.scss */
+.app .section .form-margined h3 {
+  text-transform: none;
+}
+/* line 451, ../sass/_style.scss */
+.app .section .form-margined label {
+  text-transform: none;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+/* line 456, ../sass/_style.scss */
+.app .section .form-margined .orange_button {
+  margin-bottom: 12px;
+}
+/* line 457, ../sass/_style.scss */
+.app .section .form-margined .more {
+  font-family: ProximaNova-RegularIt;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.6px;
+  color: #010000;
+  border-bottom: 1px dashed #010000;
+  display: block;
+  width: 220px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 461, ../sass/_style.scss */
+.app .section .form-margined .more:hover, .app .section .form-margined .more:active, .app .section .form-margined .more:focus, .app .section .form-margined .more:active:focus {
+  border-bottom: 1px dashed #f3f3f3;
+}
+/* line 466, ../sass/_style.scss */
+.app .section .form-margined input[type="text"] {
+  width: 100%;
+}
+/* line 471, ../sass/_style.scss */
+.app .section .form-block h3 {
+  margin-top: 16px;
+  text-align: center;
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 28px;
+  line-height: 28px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  display: block;
+}
+/* line 481, ../sass/_style.scss */
+.app .section .form-block p {
+  position: relative;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border: 1px solid #dfdfe0;
+  -moz-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  -webkit-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  box-shadow: 0px 0px 0px 1px #9e9fa3;
+}
+/* line 485, ../sass/_style.scss */
+.app .section .form-block p.conf_p {
+  border: 1px solid #474955;
+  -moz-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  -webkit-box-shadow: 0px 0px 0px 1px #9e9fa3;
+  box-shadow: 0px 0px 0px 1px #9e9fa3;
+}
+/* line 487, ../sass/_style.scss */
+.app .section .form-block p.conf_p span {
+  color: #fff;
+}
+/* line 488, ../sass/_style.scss */
+.app .section .form-block p.conf_p .icons-arrow-right {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  cursor: pointer;
+}
+/* line 492, ../sass/_style.scss */
+.app .section .form-block p .icons-arrow {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  cursor: pointer;
+}
+/* line 495, ../sass/_style.scss */
+.app .section .form-block p span {
+  font-family: Cabin-Bold;
+  font-size: 30px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  display: table-cell;
+  vertical-align: middle;
+  height: 83px;
+  padding-right: 65px;
+}
+/* line 501, ../sass/_style.scss */
+.app .section .form-block input[type='datetime-local'] {
+  font-family: Cabin-Bold;
+  font-size: 30px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  padding: 2px 10px;
+  margin-bottom: 17px;
+  width: 100%;
+  height: 87px;
+  box-sizing: border-box;
+  background: transparent url("../img/icons/arrow.png") 98% center no-repeat;
+  border: 1px solid #dfdfe0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-box-shadow: 0 0 0 1px #9e9fa3;
+  -webkit-box-shadow: 0 0 0 1px #9e9fa3;
+  box-shadow: 0 0 0 1px #9e9fa3;
+}
+/* line 509, ../sass/_style.scss */
+.app .section .form-block input[type='datetime-local']:focus {
+  color: #000;
+}
+/* line 510, ../sass/_style.scss */
+.app .section .form-block input[type='datetime-local']:focus, .app .section .form-block input[type='datetime-local']:active {
+  outline: none;
+}
+@media only screen and (max-width: 481px) {
+  /* line 501, ../sass/_style.scss */
+  .app .section .form-block input[type='datetime-local'] {
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+/* line 525, ../sass/_style.scss */
+.app .section .faq_accordion {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  padding: 0 0 60px 5px;
+}
+/* line 529, ../sass/_style.scss */
+.app .section .faq_accordion li {
+  padding-bottom: 15px;
+}
+/* line 532, ../sass/_style.scss */
+.app .section .faq_accordion li span {
+  color: #395467;
+  font-size: 19px;
+  display: block;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+/* line 536, ../sass/_style.scss */
+.app .section .faq_accordion li span:hover {
+  color: #111;
+}
+/* line 538, ../sass/_style.scss */
+.app .section .faq_accordion li span i {
+  top: 5px;
+  left: -5px;
+}
+/* line 540, ../sass/_style.scss */
+.app .section .faq_accordion li p {
+  color: #000000;
+  font-size: 18px;
+  line-height: 21px;
+  padding: 0 0 15px 0;
+}
+/* line 544, ../sass/_style.scss */
+.app .section .faq_accordion li p:first-letter {
+  padding-left: 12px;
+}
+/* line 546, ../sass/_style.scss */
+.app .section .faq_accordion li p a {
+  color: #395467;
+  text-decoration: underline;
+}
+/* line 549, ../sass/_style.scss */
+.app .section .faq_accordion li p a:hover {
+  text-decoration: none;
+}
+/* line 554, ../sass/_style.scss */
+.app .section .faq_select {
+  margin-bottom: 20px;
+}
+/* line 557, ../sass/_style.scss */
+.app .section .faq_select .faq_select-ul {
+  width: 220px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+/* line 560, ../sass/_style.scss */
+.app .section .faq_select .faq_select-ul li {
+  float: left;
+  padding: 0 5px;
+  border-right: 1px solid #a2a2a2;
+}
+/* line 564, ../sass/_style.scss */
+.app .section .faq_select .faq_select-ul li:last-child {
+  border: none;
+}
+/* line 566, ../sass/_style.scss */
+.app .section .faq_select .faq_select-ul li a {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 17px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #395467;
+}
+/* line 566, ../sass/_style.scss */
+.app .section .faq_select .faq_select-ul li a:hover {
+  text-decoration: underline;
+}
+/* line 573, ../sass/_style.scss */
+.app .section .offers {
+  text-align: center;
+  float: left;
+  width: 319px;
+  margin: 7px;
+}
+/* line 577, ../sass/_style.scss */
+.app .section .offers figure {
+  position: relative;
+  margin-bottom: 35px;
+}
+/* line 581, ../sass/_style.scss */
+.app .section .offers figure figcaption {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 14px;
+  letter-spacing: 0px;
+  color: #ffffff;
+  margin: 0 auto;
+  padding: 10px 37px;
+  position: absolute;
+  left: 75px;
+  top: 160px;
+  background: #4cbfc6;
+}
+/* line 588, ../sass/_style.scss */
+.app .section .offers strong {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 19px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #000000;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+/* line 589, ../sass/_style.scss */
+.app .section .offers ul {
+  margin: 10px 0;
+}
+/* line 591, ../sass/_style.scss */
+.app .section .offers ul li {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: #000000;
+}
+/* line 593, ../sass/_style.scss */
+.app .section .offers .more {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #000000;
+}
+/* line 595, ../sass/_style.scss */
+.app .section .offers .more i {
+  top: 2px;
+  left: -5px;
+}
+/* line 598, ../sass/_style.scss */
+.app .section .offers a.orange_button {
+  width: 170px;
+  font-size: 24px;
+  line-height: 28px;
+  padding: 10px 0;
+}
+/* line 600, ../sass/_style.scss */
+.app .section .offers-more {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #010000;
+  font-style: italic;
+  display: block;
+  width: 160px;
+  margin: 20px auto 30px auto;
+  border-bottom: 1px dashed #010000;
+}
+/* line 604, ../sass/_style.scss */
+.app .section .offers-more:hover, .app .section .offers-more:active, .app .section .offers-more:focus, .app .section .offers-more:active:focus {
+  border-bottom: 1px dashed #fff;
+}
+/* line 610, ../sass/_style.scss */
+.app .section .confirmation {
+  background: #1c1e2e;
+  margin: 0;
+}
+/* line 614, ../sass/_style.scss */
+.app .section .confirmation h3 {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 37px;
+  line-height: 40px;
+  letter-spacing: -0.4px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 12px 0 5px;
+}
+/* line 619, ../sass/_style.scss */
+.app .section .confirmation hr {
+  border: 1px solid #fff;
+  margin: 0 -20px;
+}
+/* line 622, ../sass/_style.scss */
+.app .section .confirmation select {
+  background: transparent url("../img/select-arrow.png") right center no-repeat;
+}
+/* line 627, ../sass/_style.scss */
+.app .section .confirmation input {
+  font-family: Cabin-Bold;
+  font-size: 31px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  color: #fff;
+  padding: 5px 13px 0 13px;
+  margin-bottom: 17px;
+  width: 100%;
+  height: 87px;
+  box-sizing: border-box;
+  background: transparent url("../img/select-arrow-mobile.png") 95.5% center no-repeat;
+  border: 1px solid #797a7d;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-box-shadow: inset 0 0 0 1px #373841;
+  -webkit-box-shadow: inset 0 0 0 1px #373841;
+  box-shadow: inset 0 0 0 1px #373841;
+}
+/* line 635, ../sass/_style.scss */
+.app .section .confirmation input:focus {
+  color: #fff;
+}
+/* line 636, ../sass/_style.scss */
+.app .section .confirmation input:focus, .app .section .confirmation input:active {
+  outline: none;
+}
+@media only screen and (max-width: 481px) {
+  /* line 627, ../sass/_style.scss */
+  .app .section .confirmation input {
+    font-size: 16px;
+    line-height: 21px;
+  }
+}
+/* line 653, ../sass/_style.scss */
+.app .section .confirmation input[type="radio"] + label {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 30px;
+  line-height: 52px;
+  letter-spacing: 0;
+  color: #000;
+  text-transform: uppercase;
+  padding: 2px 7px 3px 7px;
+  background: #fff;
+  margin-bottom: 15px;
+  cursor: pointer;
+  display: inline-block;
+}
+/* line 659, ../sass/_style.scss */
+.app .section .confirmation input[type="radio"] {
+  position: absolute;
+  left: -9999px;
+}
+/* line 664, ../sass/_style.scss */
+.app .section .confirmation input[type="radio"]:checked + label {
+  background: #4d5f7a;
+  color: #fff;
+}
+/* line 673, ../sass/_style.scss */
+.app .section .confirmation .confirmation-selected {
+  padding: 0 0 26px;
+}
+/* line 674, ../sass/_style.scss */
+.app .section .confirmation .confirmation-selected h3 {
+  margin: 0 20px 6px 20px;
+  text-align: center;
+}
+/* line 678, ../sass/_style.scss */
+.app .section .confirmation .confirmation-delivery {
+  padding: 12px 0 7px 0;
+}
+/* line 681, ../sass/_style.scss */
+.app .section .confirmation .confirmation-delivery h3 {
+  margin: 2px 0 7px 10px;
+  text-align: left;
+}
+/* line 685, ../sass/_style.scss */
+.app .section .confirmation .confirmation-delivery .span_to, .app .section .confirmation .confirmation-time .span_to {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0;
+  color: #fff;
+  margin: 0 4px;
+}
+/* line 688, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time {
+  text-align: center;
+  padding: 0 0 19px 0;
+  margin: 0 50px 0 0;
+}
+/* line 694, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body {
+  width: 313px;
+  padding: 0 0 16px 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #fff;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 1;
+}
+/* line 702, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .confirmation-clock-header {
+  padding: 11px 0;
+  margin-bottom: 12px;
+  background: #414141;
+  border: 1px solid #fff;
+  -moz-box-shadow: inset 0 0 0 1px #686974;
+  -webkit-box-shadow: inset 0 0 0 1px #686974;
+  box-shadow: inset 0 0 0 1px #686974;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+/* line 710, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .confirmation-clock-header span {
+  color: #fff;
+  font-size: 21px;
+  line-height: 25px;
+}
+/* line 713, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body span {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0;
+  color: #000;
+  text-transform: uppercase;
+}
+/* line 717, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .to {
+  margin: 0 8px;
+}
+/* line 718, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .time {
+  margin-left: -13px;
+}
+/* line 719, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .at {
+  margin: 0px 3px 0px 5px;
+}
+/* line 721, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body input {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #484848;
+  padding: 2px 5px;
+  margin: 0 0 9px;
+  width: 63px;
+  height: 38px;
+  background: #f9f9f9;
+  -moz-box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+/* line 728, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body input:focus {
+  color: #000;
+  font-weight: 600;
+}
+/* line 731, ../sass/_style.scss */
+.app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body em {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0;
+  color: #666666;
+  text-align: left;
+  padding: 0 38px;
+  display: block;
+}
+/* line 741, ../sass/_style.scss */
+.app .section .confirmation .confirmation-calendar, .app .section .confirmation .confirmation-clock {
+  position: relative;
+}
+/* line 744, ../sass/_style.scss */
+.app .section .confirmation .confirmation-calendar i, .app .section .confirmation .confirmation-clock i {
+  color: #fff;
+  font-size: 24px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+/* line 751, ../sass/_style.scss */
+.app .section .confirmation .confirmation-calendar .confirmation-calendar-body {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  border: 1px solid #FFF;
+  box-shadow: 0px 0px 0px 1px #686974 inset;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  border-top-left-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+/* line 759, ../sass/_style.scss */
+.app .section .confirmation .confirmation-calendar .confirmation-calendar-body h4 {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 21px;
+  line-height: 25px;
+  letter-spacing: 0;
+  color: #fff;
+  text-transform: uppercase;
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  z-index: 1;
+}
+/* line 767, ../sass/_style.scss */
+.app .section .confirmation .confirmation-departure .white_span, .app .section .confirmation .confirmation-destination .white_span, .app .section .confirmation .confirmation-time .white_span {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.6px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+/* line 770, ../sass/_style.scss */
+.app .section .confirmation .confirmation-departure {
+  text-align: center;
+}
+/* line 774, ../sass/_style.scss */
+.app .section .confirmation .confirmation-destination {
+  text-align: center;
+}
+/* line 777, ../sass/_style.scss */
+.app .section .confirmation .confirmation-destination h3 {
+  margin: 27px 0 2px;
+}
+/* line 783, ../sass/_style.scss */
+.app .section .confirmation .confirmation-confirm-title {
+  margin: 22px 0 12px 0;
+}
+/* line 786, ../sass/_style.scss */
+.app .section .confirmation .confirmation-confirm-title ul {
+  margin-left: 12px;
+}
+/* line 787, ../sass/_style.scss */
+.app .section .confirmation .confirmation-confirm-title li {
+  text-transform: uppercase;
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 25px;
+  line-height: 30px;
+  letter-spacing: 2.4px;
+  color: #fff;
+}
+/* line 789, ../sass/_style.scss */
+.app .section .confirmation .confirmation-confirm-title li span {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.6px;
+  color: #fff;
+  margin-left: 8px;
+  text-transform: none;
+}
+/* line 795, ../sass/_style.scss */
+.app .section .confirmation .confirmation-confirm-total {
+  padding: 14px 16px 15px;
+  margin: 0 20px 0 13px;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px dashed #e58000;
+}
+/* line 799, ../sass/_style.scss */
+.app .section .confirmation .confirmation-confirm-total h4 {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 25px;
+  line-height: 30px;
+  letter-spacing: 2.4px;
+  color: #fff;
+}
+/* line 801, ../sass/_style.scss */
+.app .section .confirmation .confirmation-confirm-total h4 span {
+  text-transform: uppercase;
+}
+/* line 804, ../sass/_style.scss */
+.app .section .confirmation .orange_button {
+  margin: 30px 33px 33px 18px;
+  font-size: 34px;
+  line-height: 74px;
+  display: block;
+}
+/* line 809, ../sass/_style.scss */
+.app .section .order {
+  text-align: center;
+  padding: 10px 0 22px 0;
+}
+/* line 813, ../sass/_style.scss */
+.app .section .order h3 {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.6px;
+  color: #3d4951;
+  margin-bottom: 20px;
+}
+/* line 816, ../sass/_style.scss */
+.app .section .order h3 span {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  color: #000000;
+}
+/* line 819, ../sass/_style.scss */
+.app .section .order ul {
+  margin-bottom: 23px;
+}
+/* line 822, ../sass/_style.scss */
+.app .section .order ul li {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 1px;
+  color: #3d4951;
+}
+/* line 825, ../sass/_style.scss */
+.app .section .order ul li strong {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: 1.2px;
+  color: #000000;
+  display: block;
+}
+/* line 833, ../sass/_style.scss */
+.app .section .order .total {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 1.1px;
+  color: #000000;
+  border: 1px dashed #000000;
+  padding: 5px;
+  display: inline-block;
+}
+/* line 839, ../sass/_style.scss */
+.app .section .payment {
+  width: auto;
+  margin: 40px auto 68px;
+}
+/* line 842, ../sass/_style.scss */
+.app .section .payment li {
+  text-align: center;
+  position: relative;
+}
+/* line 845, ../sass/_style.scss */
+.app .section .payment li label {
+  background: none;
+  padding: 0 15px;
+}
+/* line 849, ../sass/_style.scss */
+.app .section .payment li label i {
+  font-size: 80px;
+  color: #3d4951;
+  line-height: 76px;
+  margin: 0px;
+  cursor: pointer;
+}
+/* line 854, ../sass/_style.scss */
+.app .section .payment li label i:hover {
+  color: #4cbfc6;
+}
+/* line 857, ../sass/_style.scss */
+.app .section .payment li label i.active {
+  color: #4cbfc6;
+}
+/* line 860, ../sass/_style.scss */
+.app .section .payment li input[type="radio"] {
+  transition: all 1s ease 1s;
+  position: absolute;
+  left: -9999px;
+}
+/* line 863, ../sass/_style.scss */
+.app .section .payment li input[type="radio"] ~ label.check {
+  background: url(../img/checkbox.png) 0 0 no-repeat;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 0px;
+  left: 2px;
+  cursor: pointer;
+  display: none;
+}
+/* line 870, ../sass/_style.scss */
+.app .section .payment li input[type="radio"]:checked ~ label.check {
+  background-position: 0 -53px;
+}
+/* line 875, ../sass/_style.scss */
+.app .section .payment li input[type="radio"]:checked + label i {
+  color: #4cbfc6;
+}
+/* line 882, ../sass/_style.scss */
+.app .section .js-tabs {
+  display: block;
+  -webkit-box-shadow: 0px 0px 0px 1px #161e2f;
+  -moz-box-shadow: 0px 0px 0px 1px #161e2f;
+  box-shadow: 0px 0px 0px 1px #161e2f;
+  border-top: 1px solid #a9acb2;
+  border-bottom: 1px solid #a9acb2;
+}
+/* line 893, ../sass/_style.scss */
+.app .section .js-tabs li.active a {
+  background-color: #161e2f;
+  color: #fff;
+  border-left: 1px solid #161e2f;
+  border-right: 1px solid #161e2f;
+}
+/* line 900, ../sass/_style.scss */
+.app .section .js-tabs li a {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 36px;
+  letter-spacing: 1px;
+  color: #161e2f;
+  display: block;
+  text-transform: uppercase;
+  background-color: #fff;
+  text-align: center;
+  border-left: 1px solid #a9acb2;
+  border-right: 1px solid #a9acb2;
+}
+/* line 906, ../sass/_style.scss */
+/* line 917, ../sass/_style.scss */
+.app .section .sender {
+  position: relative;
+  margin: 20px 0 60px 0;
+}
+/* line 920, ../sass/_style.scss */
+.app .section .sender:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: url(../img/pattern.jpg) repeat-x;
+  margin: 30px 0;
+}
+/* line 928, ../sass/_style.scss */
+.app .section .sender .filters {
+  background: #1c1e2e;
+  padding: 20px;
+}
+/* line 933, ../sass/_style.scss */
+.app .section .sender h3 {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 26px;
+  line-height: 30px;
+  letter-spacing: 1px;
+  color: #000000;
+  margin: 15px 0 10px 0;
+}
+/* line 936, ../sass/_style.scss */
+.app .section .sender h3 + ul {
+  margin-bottom: 10px;
+}
+/* line 940, ../sass/_style.scss */
+.app .section .sender .sender-list li {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+/* line 943, ../sass/_style.scss */
+.app .section .sender .sender-list li em {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 26px;
+  line-height: 31px;
+  letter-spacing: 0px;
+  color: #000000;
+  border-bottom: 1px solid #989898;
+  text-transform: uppercase;
+}
+/* line 948, ../sass/_style.scss */
+.app .section .sender .sender-list li strong {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #000000;
+  text-transform: uppercase;
+}
+/* line 953, ../sass/_style.scss */
+.app .section .sender .sender-list .no-margin {
+  margin-bottom: 3px;
+}
+/* line 957, ../sass/_style.scss */
+.app .section .sender .sender-name figure {
+  position: relative;
+  width: 154px;
+  float: left;
+}
+/* line 961, ../sass/_style.scss */
+.app .section .sender .sender-name figure span {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  color: #3d4951;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+/* line 965, ../sass/_style.scss */
+.app .section .sender .sender-name figure img {
+  max-width: 100%;
+}
+/* line 968, ../sass/_style.scss */
+.app .section .sender .sender-name figure figcaption {
+  display: block;
+  text-align: center;
+}
+/* line 971, ../sass/_style.scss */
+.app .section .sender .sender-name figure figcaption a {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 34px;
+  letter-spacing: 1px;
+  color: #fff;
+  background-color: #e58000;
+  display: block;
+  text-transform: uppercase;
+  position: relative;
+  top: -20px;
+}
+/* line 975, ../sass/_style.scss */
+.app .section .sender .sender-name figure figcaption a i {
+  margin-right: 5px;
+}
+/* line 979, ../sass/_style.scss */
+.app .section .sender .sender-name ul {
+  margin-left: 172px;
+  padding-top: 24px;
+}
+/* line 982, ../sass/_style.scss */
+.app .section .sender .sender-name ul li {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0.4px;
+  color: #3d4951;
+  margin-bottom: 18px;
+}
+@media only screen and (max-width: 481px) {
+  /* line 982, ../sass/_style.scss */
+  .app .section .sender .sender-name ul li {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+/* line 986, ../sass/_style.scss */
+.app .section .sender .sender-name ul li strong {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 26px;
+  line-height: 26px;
+  letter-spacing: 0.8px;
+  color: #000000;
+}
+@media only screen and (max-width: 481px) {
+  /* line 986, ../sass/_style.scss */
+  .app .section .sender .sender-name ul li strong {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+/* line 993, ../sass/_style.scss */
+.app .section .sender .orange_button {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  font-size: 26px;
+  line-height: 48px;
+}
+/* line 994, ../sass/_style.scss */
+.app .section .sender .note {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 24px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #666666;
+  display: block;
+  width: auto;
+  text-align: center;
+  margin: 0 auto 0 auto;
+}
+/* line 1001, ../sass/_style.scss */
+.app .section .pagination {
+  display: block;
+  margin: 30px 0 30px 0;
+  text-align: center;
+}
+/* line 1005, ../sass/_style.scss */
+.app .section .pagination li {
+  display: inline-block;
+  margin: 0 1px;
+}
+/* line 1008, ../sass/_style.scss */
+.app .section .pagination li a {
+  font-family: Cabin-Bold;
+  font-size: 30px;
+  line-height: 40px;
+  letter-spacing: 0px;
+  color: #fff;
+  display: block;
+  background: #c9cbcc;
+  text-align: center;
+  width: 40px;
+}
+/* line 1014, ../sass/_style.scss */
+.app .section .pagination li a:hover, .app .section .pagination li a:active, .app .section .pagination li a:focus, .app .section .pagination li a:active:focus {
+  background: #777;
+}
+/* line 1020, ../sass/_style.scss */
+.app .section .pagination .active a {
+  background: #e58000;
+}
+/* line 1022, ../sass/_style.scss */
+.app .section .pagination .active a:hover, .app .section .pagination .active a:active, .app .section .pagination .active a:focus, .app .section .pagination .active a:active:focus {
+  background: #e58000;
+}
+/* line 1028, ../sass/_style.scss */
+.app .section .pagination .prev a, .app .section .pagination .next a {
+  background: #a0a0a0;
+}
+/* line 1030, ../sass/_style.scss */
+.app .section .pagination .prev a:hover, .app .section .pagination .prev a:active, .app .section .pagination .prev a:focus, .app .section .pagination .prev a:active:focus, .app .section .pagination .next a:hover, .app .section .pagination .next a:active, .app .section .pagination .next a:focus, .app .section .pagination .next a:active:focus {
+  background: #777;
+}
+/* line 1038, ../sass/_style.scss */
+.app .section .login {
+  width: auto;
+  text-align: center;
+  border: 1px solid #c9cbcc;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  margin: 0 30px 60px 30px;
+  padding: 0 20px 30px;
+}
+@media only screen and (max-width: 481px) {
+  /* line 1038, ../sass/_style.scss */
+  .app .section .login {
+    margin: 0 0 60px 0;
+    padding: 0 10px 30px;
+  }
+}
+/* line 1045, ../sass/_style.scss */
+.app .section .login i {
+  position: relative;
+  top: -50px;
+}
+/* line 1049, ../sass/_style.scss */
+.app .section .login h3 {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 28px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-align: left;
+  text-transform: none;
+  margin: -32px 0 24px 0;
+}
+/* line 1054, ../sass/_style.scss */
+.app .section .login label {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: #3d4951;
+  text-transform: uppercase;
+  text-align: left;
+  display: block;
+  margin-bottom: 6px;
+}
+/* line 1060, ../sass/_style.scss */
+.app .section .login input[type="text"] {
+  width: 100%;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  background: url(../img/letter.png) no-repeat 96% 52%;
+}
+/* line 1064, ../sass/_style.scss */
+.app .section .login input[type="password"] {
+  width: 100%;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  background: url(../img/pass.png) no-repeat 95.4% 52%;
+}
+/* line 1069, ../sass/_style.scss */
+.app .section .login .orange_button {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+/* line 1073, ../sass/_style.scss */
+.app .section .login a {
+  font-family: ProximaNova-RegularIt;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #010000;
+  border-bottom: 1px dashed #010000;
+  text-transform: uppercase;
+}
+/* line 1077, ../sass/_style.scss */
+.app .section .login a:hover {
+  border: none;
+}
+/* line 1079, ../sass/_style.scss */
+.app .section .login span {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 10px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-transform: uppercase;
+}
+/* line 1086, ../sass/_style.scss */
+.app .section .transporter {
+  width: auto;
+  margin: 0 auto;
+}
+/* line 1089, ../sass/_style.scss */
+.app .section .transporter h3 {
+  margin: 20px 0;
+}
+/* line 1092, ../sass/_style.scss */
+.app .section .transporter label {
+  margin-bottom: 6px;
+  display: inline-block;
+}
+/* line 1096, ../sass/_style.scss */
+.app .section .transporter input[type="text"],
+.app .section .transporter input[type="password"] {
+  width: 100%;
+}
+/* line 1101, ../sass/_style.scss */
+.app .section .transporter .form-info {
+  margin-bottom: 35px;
+}
+/* line 1103, ../sass/_style.scss */
+.app .section .transporter .form-info li {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 28px;
+  letter-spacing: 0px;
+  color: #3d4951;
+  text-transform: uppercase;
+}
+/* line 1106, ../sass/_style.scss */
+.app .section .transporter .form-info li strong {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #000000;
+  text-transform: uppercase;
+}
+/* line 1113, ../sass/_style.scss */
+.app .section .transporter .form-withdraw label {
+  display: block;
+}
+/* line 1116, ../sass/_style.scss */
+.app .section .transporter .form-withdraw input[type="text"] {
+  display: inline-block;
+  width: 100%;
+  margin-right: 20px;
+}
+/* line 1121, ../sass/_style.scss */
+.app .section .transporter .form-withdraw button.blue_button {
+  width: 100%;
+}
+/* line 1125, ../sass/_style.scss */
+.app .section .transporter .form-withdraw + .orange_button {
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+/* line 1133, ../sass/_style.scss */
+.app .promo {
+  text-align: center;
+  padding: 20px 0;
+  background: #4cbfc6;
+}
+/* line 1138, ../sass/_style.scss */
+.app .promo h2 {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+/* line 1139, ../sass/_style.scss */
+.app .promo p {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 33px;
+  line-height: 40px;
+  letter-spacing: 0px;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+/* line 1140, ../sass/_style.scss */
+.app .promo a {
+  font-family: "ProximaNova-Regular", sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+  text-transform: uppercase;
+  padding: 10px 60px;
+  border: 1px solid #ffffff;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+/* line 1146, ../sass/_style.scss */
+.app .promo a:hover {
+  color: #318D93;
+  border: 1px solid #fff;
+  background: #fff;
+}
+/* line 1150, ../sass/_style.scss */
+.app .promo a:active, .app .promo a:focus, .app .promo a:active:focus {
+  color: #318D93;
+  border: 1px solid #fff;
+  background: #fff;
+}
+/* line 1159, ../sass/_style.scss */
+.app .footer {
+  padding: 20px 0 90px 0;
+  background: #242529;
+}
+/* line 1163, ../sass/_style.scss */
+.app .footer .nav {
+  width: 184px;
+  margin: 0 auto;
+}
+/* line 1167, ../sass/_style.scss */
+.app .footer .nav li {
+  display: block;
+  text-align: center;
+}
+/* line 1169, ../sass/_style.scss */
+.app .footer .nav li a {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 26px;
+  line-height: 58px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+}
+/* line 1172, ../sass/_style.scss */
+.app .footer .nav li:nth-child(2) {
+  border-bottom: 1px solid #9e9fa3;
+  border-top: 1px solid #9e9fa3;
+}
+/* line 1177, ../sass/_style.scss */
+.app .footer .title {
+  font-family: "ProximaNova-Bold", sans-serif;
+  font-size: 42px;
+  line-height: 50px;
+  letter-spacing: 0px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  display: block;
+  margin: 72px 0 30px 0;
+}
+/* line 1182, ../sass/_style.scss */
+.app .footer .copyright {
+  display: block;
+}
+/* line 1185, ../sass/_style.scss */
+.app .footer .copyright small {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 1.5px;
+  color: #8e8f93;
+  text-align: center;
+  text-transform: uppercase;
+  display: block;
+  padding-left: 4px;
+  margin-bottom: 11px;
+}
+/* line 1190, ../sass/_style.scss */
+.app .footer .copyright em {
+  font-family: "Cabin-Regular", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 1.5px;
+  color: #8e8f93;
+  text-align: center;
+  display: block;
+  padding-left: 6px;
+}
+
+/* Welcome to Compass. Use this file to define print styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/css/print.css" media="print" rel="stylesheet" type="text/css" /> */
+
+.confirmation-select-mobile {position: relative; z-index: 1;}
+.confirmation-select-mobile .placeholder1,
+.confirmation-select-mobile .placeholder2 {
+    position: absolute; left: 30px; display: block;
+    color: #fff;
+    font-family: Cabin-Bold;
+    font-size: 31px;
+    height: 44px;
+    letter-spacing: 0;
+    line-height: 36px;
+    z-index: -1;
+}
+.confirmation-select-mobile .placeholder1 {top: 24px;}
+.confirmation-select-mobile .placeholder2 {top: 128px;}
+
+
+.form-block.bordered .confirmation-select-mobile .placeholder1,
+.form-block.bordered .confirmation-select-mobile .placeholder2 {color: #3d4951;}

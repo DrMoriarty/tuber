@@ -1,4 +1,4 @@
-extend layoutsite
+extend layoutm
 
 block content
   // content
@@ -57,7 +57,7 @@ block content
           input(type='hidden', name='driver', value='#{driver}')
           p#err11000(style='color: red; display: none;') USER ALREADY REGISTERED
           button.orange_button CONFIRM YOUR DATAS
-          a.more(href='/') GO TO &ldquo;SEND MY PARCEL&rdquo;
+          a.more(href='/?m=1') GO TO &ldquo;SEND MY PARCEL&rdquo;
   // promo
   section.promo
     .container
@@ -66,7 +66,7 @@ block content
         | Tuber is a parcels delivery service for p2p fast delivery.
         br
         | Check for details
-      a(href='/')
+      a(href='/?m=1')
         | SUBSCRIBE
         br
         | HERE
@@ -104,7 +104,7 @@ block script
           console.log('Registered', data);
           $.post('/login', regdata, function(data) {
             console.log('Login performed', data);
-            location.href = '/';
+            location.href = '/?m=1';
           });
         },
         error: function(err) {
@@ -115,3 +115,4 @@ block script
         }});
       return false;
     });
+

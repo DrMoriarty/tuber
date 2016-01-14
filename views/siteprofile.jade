@@ -19,18 +19,14 @@ block content
       form.form.js-validate(action='/api/user/#{user.id}', method='POST')
         figure.profile
           img(src='img/profile.png', alt='')
-          input#uplad_image.uplad_image(type='file')
-          label(for='uplad_image') Upload my picture
+          //input#uplad_image.uplad_image(type='file')
+          //label(for='uplad_image') Upload my picture
         .form-margined
           h3 About me
           label(for='first_name') FIRST NAME*
           input#first_name.required(type='text', placeholder='Thierrry', name='firstname', value='#{user.firstname}')
           label(for='last_name') LAST NAME*
           input#last_name.required(type='text', placeholder='Delesalle', name='lastname', value='#{user.lastname}')
-          label(for='first_name') COMPANY (optional)
-          input#first_name(type='text', name='company', value='#{user.company}')
-          label(for='vat') VAT (optional)
-          input#vat(type='text', placeholder='DE123456789', name='vat', value='#{user.vat}')
           label(for='address_str') ADDRESS (street)*
           input#address_str.required(type='text', placeholder='Bruhlstr', name='address1', value='#{user.address1}')
           label(for='address_num') ADDRESS (number)*
@@ -46,8 +42,11 @@ block content
           label(for='email') E-MAIL*
           input#email.required.email(type='text', name='email', value='#{user.email}')
           p#err11000(style='color: red; display: none;') EMAIL ALREADY USED
-          button.orange_button CONFIRM YOUR DATAS
-          a.more(href='/') GO TO &ldquo;SEND MY PARCEL&rdquo;
+          label(for='first_name') COMPANY (optional)
+          input#first_name(type='text', name='company', value='#{user.company}')
+          label(for='vat') VAT (optional)
+          input#vat(type='text', placeholder='DE123456789', name='vat', value='#{user.vat}')
+          button.orange_button CONFIRM
   // promo
   section.promo
     .container

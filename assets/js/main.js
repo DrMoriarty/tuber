@@ -111,6 +111,11 @@ $(document).ready(function() {
 		$(this).siblings('input').val(newVal);
 	});
 
+    // filter for numbers
+    $('input.numbers').keypress(function(event) {
+        return /\d/.test(String.fromCharCode(event.keyCode));
+    });
+
 	// toggle hidden address
 	$('.hidden_address1').hide();
 	$('.js-toggle_address1').click(function() {

@@ -66,7 +66,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100', name='weight')
+                input.numbers(type='text', placeholder='100', name='weight')
                 em kg
                 span.down
                   i.fa.fa-chevron-down
@@ -74,7 +74,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100', name='length')
+                input.numbers(type='text', placeholder='100', name='length')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
@@ -82,7 +82,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100', name='width')
+                input.numbers(type='text', placeholder='100', name='width')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
@@ -90,13 +90,13 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input(type='text', value='100', name='depth')
+                input.numbers(type='text', placeholder='100', name='depth')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
                 strong Depth
-            input#declare(type='checkbox', name='userAgreementContent')
-            label.declare(for='declare')
+            //input#declare(type='checkbox', name='userAgreementContent')
+            //label.declare(for='declare')
               | I officially declare that non of the products transported areprohibited neither in origin country, neither in destination country. It is under my responsabili
         .form-block
           .left
@@ -124,15 +124,15 @@ block content
                 input.time_to(type='text', placeholder=' 18:00 ', name='arriveTime2')
                 em *Period must be have more than two hours.
             input#timing(type='checkbox', name='userAgreementTimes')
-            label(for='timing') I am ware that the time frame influences TUber prices.
+            label(for='timing') I am aware that the time frame influences TUber prices.
         .clear
         .form-block
-          .left
+          //.left
             i.icons-insurrance
-          .right.insurrance
+          //.right.insurrance
             h3 About insurrance
             input.required(type='text', placeholder='Packet is insured until the value XXX€', name='insurance')
-            button.orange_button Go to &quot;best proposal&quot;
+          button.orange_button Go to &quot;best proposal&quot;
         .clear
 
 block script

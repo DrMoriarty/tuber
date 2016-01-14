@@ -29,7 +29,7 @@ html
     //if lt IE 7 
       script(type='text/javascript').
         window.location.href="/ie6_close/index_ru.html";
-    title TUBER P2P
+    title PARCEL24
     block head
   body
     //if lt IE 10
@@ -43,14 +43,15 @@ html
     .app
       // header
       header.header
-        a.logo(href='/') Tuber P2P
+        a.logo(href='/') PARCEL24
         ul.nav
           li
             a(href='/') Home
           li
-            a(href='/dashboard')
-              | My Parcels - 
-              span 2
+            if user && user.parcelCount
+              a(href='/dashboard')
+                | My Parcels - 
+                span #{user.parcelCount}
           li
             a(href='/faq') FAQ
           li

@@ -9,7 +9,10 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     User.findOne({ id: id } , function (err, user) {
-        done(err, user);
+        Parcel.count({owner: id, status: {'!': 'archive'}}).exec( function (err, count) {
+            user.parcelCount = count;
+            done(err, user);
+        });
     });
 });
 

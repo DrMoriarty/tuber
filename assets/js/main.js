@@ -72,6 +72,8 @@ $(document).ready(function() {
 	$('.js-datetime-body').each(function() {
 		var el = $(this);
 		el.datepicker({
+            minDate: 0,
+            maxDate: "+1M",
 			dateFormat: "dd MM yy",
 			onSelect: function(text, e) {
 				if (el.find('.time_at').length && el.find('.time_at').val() != '') {

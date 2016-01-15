@@ -7,13 +7,13 @@ block header
     .container
       ul
         li
-          a(href='/price/#{parcel.id}') 1. Price offers
+          a(href='/price/#{parcel.id}?m=1') 1. Price offers
         li
           span 2. Confirmation
         li
-          a(href='/payment/#{parcel.id}') 3. Payment
+          a(href='#') 3. Payment
         li
-          a(href='/dashboard') 4. Dashboard
+          a(href='/dashboard?m=1') 4. Dashboard
 
 block content
   // content
@@ -30,67 +30,71 @@ block content
         .confirmation-delivery.plc
           h3 Departure and arrivals dates
           .confirmation-select-mobile
-            span.placeholder1 22.12.2015, 22:34
-            span.placeholder2 22.12.2015, 22:34
-            input.change_placeholder.pl1(type='datetime-local', name='date_dep')
-            input.change_placeholder.pl2(type='datetime-local', name='date_arr')
+            //span.placeholder1 22.12.2015, 22:34
+            //span.placeholder2 22.12.2015, 22:34
+            input.change_placeholder.pl1(type='datetime-local', name='pickupDate', placeholder='#{moment().format("DD.MM.YYYY")}', value='#{moment(parcel.pickupDate).format("DD.MM.YYYY")}')
+            input.change_placeholder.pl2(type='datetime-local', name='arriveDate', placeholder='#{moment().format("DD.MM.YYYY")}', value='#{moment(parcel.arriveDate).format("DD.MM.YYYY")}')
         hr
         .confirmation-departure
           h3 From:
           input#postbox(type='radio', name='adress-from', value='postbox')
           label.postbox(for='postbox') Postbox
-          input#home-adress(type='radio', name='adress-from', value='home-adress')
+          input#home-adress(type='radio', name='adress-from', value='home-adress', checked=true)
           label.home-adress(for='home-adress') Home adress
           input#post-office(type='radio', name='adress-from', value='post_office')
           label.post-office(for='post-office') Post office
           .form-block
             .confirmation-select-mobile
               select.js-select1
-                option Postbox Bremen friedrich missler str.,1
-                option Home Bremen friedrich missler str.,1
-                option office Bremen friedrich missler str.,1
+                if parcel.fromPerson
+                  option #{parcel.fromPersonAddress()}
+                else
+                  option #{parcel.ownerAddress()}
         .confirmation-destination
           h3 To:
           input#postbox1(type='radio', name='adress-to', value='postbox')
           label.postboxs(for='postbox1') Postbox
-          input#home-adress1(type='radio', name='adress-to', value='home-adress')
+          input#home-adress1(type='radio', name='adress-to', value='home-adress', checked=true)
           label.home-adresss(for='home-adress1') Home adress
           input#post-office1(type='radio', name='adress-to', value='post_office')
           label.post-offices(for='post-office1') Post office
           .form-block
             .confirmation-select-mobile.confirmation-select-last
               select.js-select2
-                option Postbox Hamburg, Niedergeorgswerder Deich 73, 4
-                option Home Hamburg, Niedergeorgswerder Deich 73, 4
-                option office Hamburg, Niedergeorgswerder Deich 73, 4
+                if parcel.toPerson
+                  option #{parcel.toPersonAddress()}
+                else
+                  option #{parcel.ownerAddress()}
         hr
         .confirmation-confirm-title
           ul
             li
               | SENDING DETAILS:
-              span 2kg, 60cm x 60cm x 60cm
+              span #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
             li
               | INSURRANCE:
-              span Standart (until 520&euro;)
+              span Standart (until #{parcel.insurance}&euro;)
             li
               | DELIVERY OPTIONS:
-              span +30&euro; to home adress
+              span +0&euro; to home adress
         .confirmation-confirm-total
           h4
             span TOTAL AMOUNT 
-            | (Including VAT): 186&euro;
-        a.orange_button(href='payment.html') CONFIRM ORDER
+            | (Including VAT): 
+            span#totalPrice #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
+              span &euro;
+        a.orange_button(onClick='javascript:confirmation();') CONFIRM
   // maps
   section.maps
-    .maps-left
-      .wr-map
+    .maps-left#map1block
+      //.wr-map
         #map1
         .maps-sign FROM: POSTBOX
-      .wr-map
+      //.wr-map
         #map2
         .maps-sign TO: HOME ADRESS
-    .maps-right
-      .wr-map
+    .maps-right#map2block
+      //.wr-map
         #map3
         .maps-sign PACKAGE ROUTE
 
@@ -121,16 +125,10 @@ block script
       document.getElementById('map2block'));
     function confirmation () {
       // update parcel
-      values = $('input.js-datetime');
+      values = $('input.change_placeholder');
       var data = {};
-      data.pickupDate = moment(values[0].value, 'DD MMMM YYYY').format();
-      data.arriveDate = moment(values[1].value, 'DD MMMM YYYY').format();
-      var times = values[2].value.split(' - ');
-      data.pickupTime1 = times[0];
-      data.pickupTime2 = times[1];
-      times = values[3].value.split(' - ');
-      data.arriveTime1 = times[0];
-      data.arriveTime2 = times[1];
+      data.pickupDate = moment(values[0].value, 'DD.MM.YYYY').format();
+      data.arriveDate = moment(values[1].value, 'DD.MM.YYYY').format();
       data.status = 'published';
       console.log('Data', data);
       $.post('/api/parcel/#{parcel.id}', data, function(data, status) {
@@ -143,7 +141,7 @@ block script
           if(status == 'success') {
             $.post('/api/parcel/#{parcel.id}', {request:request.id}, function(data, status) {
               if(status == 'success') {
-                location.href='/payment/'+request.id;
+                location.href='/payment/'+request.id+'?m=1';
               } else {
                 console.log('Parcel result', data);
               }

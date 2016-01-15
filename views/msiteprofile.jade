@@ -1,0 +1,84 @@
+extend layoutm
+
+block content
+  // content
+  section.section
+    h1 Tuber parcels delivery
+    ul.breadcrumbs
+      li You are here
+      li
+        i.fa.fa-angle-double-right
+        span About me
+    h2.centred_title
+      | Call us on  
+      span +49 (0) 511 936 000 00
+      br
+      strong or
+      |  fill in an enquiry below.
+    .container.bordered
+      form.form.js-validate(action='/api/user/#{user.id}', method='POST')
+        figure.profile
+          img(src='/img/profile.png', alt='')
+          //input#uplad_image.uplad_image(type='file')
+          //label(for='uplad_image') Upload my picture
+        .form-margined
+          h3 About me
+          label(for='first_name') FIRST NAME*
+          input#first_name.required(type='text', placeholder='Thierrry', name='firstname', value='#{user.firstname}')
+          label(for='last_name') LAST NAME*
+          input#last_name.required(type='text', placeholder='Delesalle', name='lastname', value='#{user.lastname}')
+          label(for='address_str') ADDRESS (street)*
+          input#address_str.required(type='text', placeholder='Bruhlstr', name='address1', value='#{user.address1}')
+          label(for='address_num') ADDRESS (number)*
+          input#address_num.required(type='text', placeholder='11', name='address2', value='#{user.address2}')
+          label(for='zip') ZIP CODE*
+          input#zip.required(type='text', placeholder='30169', name='zip', value='#{user.zip}')
+          label(for='city') CITY*
+          input#city.required(type='text', placeholder='Hannover', name='city', value='#{user.city}')
+          label(for='country') COUNTRY*
+          input#country.required(type='text', placeholder='Germany', name='country', value='#{user.country}')
+          label(for='mobile') MOBILE PHONE*
+          input#mobile.required(type='text', placeholder='0049 151 4611 8937', name='phone', value='#{user.phone}')
+          label(for='email') E-MAIL*
+          input#email.required.email(type='text', name='email', value='#{user.email}')
+          p#err11000(style='color: red; display: none;') EMAIL ALREADY USED
+          label(for='first_name') COMPANY (optional)
+          input#first_name(type='text', name='company', value='#{user.company}')
+          label(for='vat') VAT (optional)
+          input#vat(type='text', placeholder='DE123456789', name='vat', value='#{user.vat}')
+          button.orange_button CONFIRM
+  // promo
+  section.promo
+    .container
+      h2 Parcel delivery
+      p
+        | Tuber is a parcels delivery service for p2p fast delivery.
+        br
+        | Check for details
+      a(href='/?m=1')
+        | SUBSCRIBE
+        br
+        | HERE
+
+block script
+  script(type='text/javascript').
+    $('.js-validate').submit(function() {
+      $('#err11000').hide();
+      regdata = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: this.action,
+        data: regdata,
+        success: function(data) {
+          console.log('Change profile', data);
+          location.href = '/?m=1';
+        },
+        error: function(err) {
+          console.log("Registration error", err);
+          if(err.responseJSON.raw.code == 11000) {
+            $('#err11000').show();
+          }
+        }});
+      return false;
+    });
+

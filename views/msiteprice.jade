@@ -3,7 +3,7 @@ extend layoutm
 block header
   // header section
   section.header-section
-    span.title Wilhelm  Meier
+    span.title #{user.firstname} #{user.lastname}
     .container
       ul
         li
@@ -11,7 +11,7 @@ block header
         li
           a(href='/confirmation/#{parcel.id}?m=1') 2. Confirmation
         li
-          a(href='/payment/#{parcel.id}?m=1') 3. Payment
+          a(href='#') 3. Payment
         li
           a(href='/dashboard?m=1') 4. Dashboard
 

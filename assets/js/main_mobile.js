@@ -187,6 +187,7 @@ $(document).ready(function() {
 
 $(window).load(function() {
 	// maps
+    /*
 	if ($('#map1').length) {
 		var mapCanvas1 = document.getElementById('map1');
 		var mapOptions1 = {
@@ -250,4 +251,5 @@ $(window).load(function() {
 		}
 		var map4 = new google.maps.Map(mapCanvas4, mapOptions4);
 	}	
+    */
 });

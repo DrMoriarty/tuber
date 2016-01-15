@@ -13,7 +13,10 @@ module.exports =
         mobile = req.param('mobile') or req.param('m') or false
         if req.user?
             if req.user.driver
-                res.view 'sitedriver', {user: req.user}
+                if mobile
+                    res.view 'msitedriver', {user: req.user}
+                else
+                    res.view 'sitedriver', {user: req.user}
             else
                 if mobile
                     res.view 'msiteparcel', {user: req.user}
@@ -131,15 +134,18 @@ module.exports =
         if req.user?
             filter = {owner: req.user.id, status: {'!': 'archive'}}
             Parcel.count(filter).exec (err, count) ->
-              Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
-                  if err
-                      console.log err
-                      return res.negotiate err
-                  Parcel.find({owner: req.user.id, status: 'archive'}).populateAll().exec (err, archive) ->
-                      if err
-                          console.log err
-                          return res.negotiate err
-                      res.view 'sitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                    if err
+                        console.log err
+                        return res.negotiate err
+                    Parcel.find({owner: req.user.id, status: 'archive'}).populateAll().exec (err, archive) ->
+                        if err
+                            console.log err
+                            return res.negotiate err
+                        if mobile
+                            res.view 'msitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                        else
+                            res.view 'sitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
         else
             if mobile
                 res.redirect '/?m=1'
@@ -187,7 +193,10 @@ module.exports =
                         if err?
                             console.log err
                             return res.negotiate err
-                        res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver}
+                        if mobile
+                            res.view 'msitepayment', {user: req.user, parcel: parcel, request: request, driver: driver}
+                        else
+                            res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver}
         else
             if mobile
                 res.redirect '/?m=1'
@@ -207,11 +216,24 @@ module.exports =
                         res.redirect '/payment/'+requests[0].id+'?m=1'
                     else
                         res.redirect '/payment/'+requests[0].id
+        else
+            if mobile
+                res.redirect '/?m=1'
+            else
+                res.redirect '/'
 
     profile: (req, res) ->
         mobile = req.param('mobile') or req.param('m') or false
         if req.user?
-            res.view 'siteprofile', {user: req.user}
+            if mobile?
+                res.view 'msiteprofile', {user: req.user}
+            else
+                res.view 'siteprofile', {user: req.user}
+        else
+            if mobile
+                res.redirect '/?m=1'
+            else
+                res.redirect '/'
 
     makeParcel: (req, res) ->
         data = req.body

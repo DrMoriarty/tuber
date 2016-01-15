@@ -1,0 +1,79 @@
+extend layoutm
+
+
+block header
+  // header section
+  section.header-section
+    span.title #{user.firstname} #{user.lastname}
+    .container
+      ul
+        li
+          a(href='/price/#{parcel.id}?m=1') 1. Price offers
+        li
+          a(href='/confirmation/#{parcel.id}?m=1') 2. Confirmation
+        li
+          span 3. Payment
+        li
+          a(href='/dashboard?m=1') 4. Dashboard
+
+block content
+  // content
+  section.section
+    h1 Payment of the order
+    hr
+    .container
+      .order
+        h3
+          | SUMMARY OF THE ORDER: 
+          span &euro;#{driver.getPrice(parcel.pathLength)}
+        ul
+          li
+            | FROM:  
+            if parcel.fromPerson
+              strong #{parcel.fromPersonAddress()}
+            else
+              strong #{parcel.ownerAddress()}
+          li
+            | TO:  
+            if parcel.toPerson
+              strong #{parcel.toPersonAddress()}
+            else
+              strong #{parcel.ownerAddress()}
+        ul
+          li
+            | SENDING DETAILS: 
+            strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+          li
+            | INSURRANCE: 
+            strong Standart (until #{parcel.insurance}&euro;)
+        span.total TOTAL AMOUNT (Including VAT): #{request.price}&euro;
+    hr
+    .container
+      form.form.js-validate(action='', method='')
+        ul.payment
+          li
+            input#paypal(type='radio', name='cards')
+            label(for='paypal')
+              i.fa.fa-cc-paypal
+            input#card1(type='radio', name='cards')
+            label(for='card1')
+              i.fa.fa-cc-mastercard
+            input#card2(type='radio', name='cards')
+            label(for='card2')
+              i.fa.fa-cc-visa
+            input#card3(type='radio', name='cards')
+            label(for='card3')
+              i.fa.fa-cc-amex
+            label.check(for='#')
+        #wrap_hide
+          label(for='first_name') CARDHOLDER FIRST NAME*
+          input#first_name(type='text', placeholder='Thierrry')
+          label(for='last_name') CARDHOLDER LAST NAME*
+          input#last_name(type='text', placeholder='Shtutgartz')
+          label(for='card') CARD NAMBER*
+          input#card(type='text', placeholder='4556614505116697')
+          label(for='card_date') EXPIRATION DATE*
+          input#card_date(type='text', placeholder='02/16')
+          label(for='last_name') SECURITY CODE*
+          input#last_name(type='text', placeholder='660 (The 3 digits after the card number on the signature panel of your card)')
+        a#pay_form_button.orange_button(href='/dashboard?m=1') CONFIRM ORDER

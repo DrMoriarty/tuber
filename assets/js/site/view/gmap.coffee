@@ -11,20 +11,28 @@ GMap = React.createClass
                 div {className: 'maps-sign'}, 'TO: ', @props.title2
 
     componentDidMount: ->
+        p1 = new google.maps.LatLng(@props.lat1, @props.lon1)
         mapOptions1 = {
-            center: new google.maps.LatLng(@props.lat1, @props.lon1),
+            center: p1,
             zoom: 8,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             disableDefaultUI: true
         }
         map1 = new google.maps.Map(@refs.map1, mapOptions1);
+        marker1 = new google.maps.Marker
+            position: p1
+            map: map1
+        p2 = new google.maps.LatLng(@props.lat2, @props.lon2)
         mapOptions2 = {
-            center: new google.maps.LatLng(@props.lat2, @props.lon2),
+            center: p2,
             zoom: 8,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             disableDefaultUI: true
         }
         map2 = new google.maps.Map(@refs.map2, mapOptions2);
+        marker2 = new google.maps.Marker
+            position: p2
+            map: map2
 
 GPath = React.createClass
     render: ->

@@ -153,9 +153,9 @@ block content
                         strong #{parcel.toPerson.phone}
                 .clear
                 if parcel.status == 'draft'
-                  a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}"') CONTINUE
+                  a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}?m=1"') CONTINUE
                 else if parcel.status == 'published'
-                  a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}"') PROCESS PAYMENT
+                  a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}"&m=1') PROCESS PAYMENT
                 else if parcel.status == 'accepted'
                   a.orange_button.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') CANCEL THIS ORDER
                   span.note * If you canceled this order now, You must pay 500&euro;

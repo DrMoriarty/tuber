@@ -92,6 +92,12 @@ module.exports =
         toAddress = parcel.toPerson || parcel.owner
         parcelSizes = sprintf('%03d%03d%03d', parseInt(parcel.length), parseInt(parcel.width), parseInt(parcel.depth)) # in cm
         weight = roundInt(parcel.weight * 100)
+        fromAddress.zip = fromAddress.zip or ''
+        fromAddress.phone = fromAddress.phone or ''
+        fromAddress.email = fromAddress.email or ''
+        toAddress.zip = toAddress.zip or ''
+        toAddress.phone = toAddress.phone or ''
+        toAddress.email = toAddress.email or ''
         data = 
         """<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ShipmentService/3.2">
             <soapenv:Header>
@@ -118,7 +124,7 @@ module.exports =
                                 <name2>#{fromAddress.lastname}</name2>
                                 <street>#{fromAddress.address1}</street>
                                 <houseNo>#{fromAddress.address2}</houseNo>
-                                <country>#{fromAddress.country}</country>
+                                <country>#{fromAddress.countryCode}</country>
                                 <zipCode>#{fromAddress.zip}</zipCode>
                                 <city>#{fromAddress.city}</city>
                                 <customerNumber>12345679</customerNumber>
@@ -130,7 +136,7 @@ module.exports =
                                 <name2>#{toAddress.lastname}</name2>
                                 <street>#{toAddress.address1}</street>
                                 <houseNo>#{toAddress.address2}</houseNo>
-                                <country>#{toAddress.country}</country>
+                                <country>#{toAddress.countryCode}</country>
                                 <zipCode>#{toAddress.zip}</zipCode>
                                 <city>#{toAddress.city}</city>
                                 <phone>#{toAddress.phone}</phone>

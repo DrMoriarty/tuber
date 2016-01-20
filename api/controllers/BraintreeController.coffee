@@ -40,10 +40,11 @@ module.exports =
                         else
                             res.json result
                             if requestId?
+                                DepartureService.processRequest requestId
                                 Request.update({id: requestId}, {'paid': true, invoice: JSON.stringify(result)}).exec (err, result) ->
                                     if err?
                                         console.log err 
                                     else
                                         MessagingService.invoicePaid requestId
-                                Parcel.update({id: request.parcel}, {status: 'accepted'}).exec (err, result) ->
+                                Parcel.update({id: request.parcel}, {status: 'accepted', driver: request.driver}).exec (err, result) ->
                                     console.log err if err?

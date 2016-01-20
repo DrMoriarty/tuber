@@ -40,6 +40,7 @@ block content
                 th(onclick='javascript:location.href="/admin/request?sort=senderAccepted"') Sender accepted
                 th(onclick='javascript:location.href="/admin/request?sort=driverAccepted"') Carrier accepted
                 th(onclick='javascript:location.href="/admin/request?sort=paid"') Paid
+                th(onclick='javascript:location.href="/admin/request?sort=trackingNumber"') Tracking number
                 th Delete
             tbody
               if result
@@ -61,6 +62,7 @@ block content
                     td= it.senderAccepted
                     td= it.driverAccepted
                     td= it.paid
+                    td= it.trackingNumber
                     td
                       a(href='javascript:window.currentRequestId = "#{it.id}";')
                         button.btn.btn-danger(class='button', data-toggle='modal', data-target='#rmModal') X

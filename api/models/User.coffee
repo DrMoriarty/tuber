@@ -7,6 +7,7 @@
 
 bcrypt = require 'bcrypt'
 util = require 'util'
+async = require 'async'
 
 module.exports = 
 	_config: 
@@ -42,6 +43,8 @@ module.exports =
             type: 'string'
             required: true
             defaultsTo: ''
+        countryCode:
+            type: 'string'
         phone: 
             type: 'string'
             required: true
@@ -153,35 +156,52 @@ module.exports =
                         GeoService.zipGeo user.zip, user.country, (lat, lng) ->
                             user.latitude = lat
                             user.longitude = lng
-                            cb null, user
+                            GeoService.countryCode user.country, (code) ->
+                                user.countryCode = code
+                                cb null, user
         else
             delete user.password
             GeoService.zipGeo user.zip, user.country, (lat, lng) ->
                 user.latitude = lat
                 user.longitude = lng
-                cb null, user
+                GeoService.countryCode user.country, (code) ->
+                    user.countryCode = code
+                    cb null, user
 
     beforeUpdate: (user, cb) ->
-        if user.password? and user.password.length > 0
-            user.passwordCopy = password  # DEBUG !!!
-            #console.log 'Change password', user.password, 'for', user
-            bcrypt.genSalt 10, (err, salt) ->
-                bcrypt.hash user.password, salt, (err, hash) ->
-                    if (err)
-                        console.log err
-                        cb err
-                    else
-                        user.password = hash
-                        GeoService.zipGeo user.zip, user.country, (lat, lng) ->
-                            user.latitude = lat
-                            user.longitude = lng
-                            cb null, user
-        else
-            delete user.password
-            GeoService.zipGeo user.zip, user.country, (lat, lng) ->
-                user.latitude = lat
-                user.longitude = lng
-                cb null, user
+        async.series( [
+            (callback) ->
+                if user.password? and user.password.length > 0
+                    user.passwordCopy = password  # DEBUG !!!
+                    #console.log 'Change password', user.password, 'for', user
+                    bcrypt.genSalt 10, (err, salt) ->
+                        bcrypt.hash user.password, salt, (err, hash) ->
+                            if (err)
+                                console.log err
+                                callback err, null
+                            else
+                                user.password = hash
+                                callback null, user
+                else
+                    callback null, user
+            (callback) ->
+                if user.zip? and user.country?
+                   GeoService.zipGeo user.zip, user.country, (lat, lng) ->
+                        user.latitude = lat
+                        user.longitude = lng
+                        callback null, user
+                else
+                    callback null, user
+            (callback) ->
+                if user.country?
+                    GeoService.countryCode user.country, (code) ->
+                        user.countryCode = code
+                        callback null, user
+                else
+                    callback null, user
+        ], (err, result) ->
+            cb null, user
+        )
 
     afterCreate: (object, cb) ->
         LogService.saveLog 'Create', 'User', JSON.stringify(object)

@@ -4,6 +4,7 @@
  @description :: TODO: You might write a short summary of how this model works and what it represents here.
  @docs        :: http://sailsjs.org/#!documentation/models
 """
+async = require 'async'
 
 module.exports = 
     attributes:
@@ -36,6 +37,8 @@ module.exports =
         country:
             type: 'string'
             required: true
+        countryCode:
+            type: 'string'
         phone:
             type: 'string'
             required: true
@@ -59,10 +62,28 @@ module.exports =
         GeoService.zipGeo person.zip, person.country, (lat, lng) ->
             person.latitude = lat
             person.longitude = lng
-            cb null, person
+            GeoService.countryCode person.country, (code) ->
+                person.countryCode = code
+                cb null, person
 
     beforeUpdate: (person, cb) ->
-        GeoService.zipGeo person.zip, person.country, (lat, lng) ->
-            person.latitude = lat
-            person.longitude = lng
+        async.series( [
+            (callback) ->
+                if person.zip? and person.country? 
+                    GeoService.zipGeo person.zip, person.country, (lat, lng) ->
+                        person.latitude = lat
+                        person.longitude = lng
+                        callback null, {lat, lng}
+                else
+                    callback null
+            (callback) ->
+                if person.country?
+                    GeoService.countryCode person.country, (code) ->
+                        person.countryCode = code
+                        callback null, code
+                else
+                    callback null, null
+        ], (err, result) ->
+            console.log err if err?
             cb null, person
+        )

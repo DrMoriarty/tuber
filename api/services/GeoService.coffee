@@ -3,6 +3,20 @@ query_overpass = require 'query-overpass'
 util = require 'util'
 
 module.exports = 
+    countryCode: (country, callback) ->
+        geocoder.geocode country, (err, data) ->
+            if err?
+                console.log err
+            else
+                console.log 'Geocode country', JSON.stringify(data)
+                for r in  data.results
+                    if r.address_components?
+                        for address in r.address_components
+                            if address.short_name
+                                callback address.short_name
+                                return
+                callback null
+
     zipGeoFromGoogle: (zip, country, callback) ->
         # reverse geocoding by zip (using google maps)
         address = zip

@@ -107,6 +107,12 @@ block content
                   option(value='RU') Russia
                   option(value='DE') Germany
             .form-group
+              label.control-label Country code
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                .form-control-static.text-muted=  result.countryCode
+            .form-group
               input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
 
 block script

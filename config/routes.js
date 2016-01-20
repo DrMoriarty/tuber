@@ -64,7 +64,7 @@ module.exports.routes = {
     'get /api/parcel/:parcelId/pdf': 'ParcelController.shipmentLabel',
 
     'get /braintree/token': 'BraintreeController.clientToken',
-    '/braintree/transaction': 'BraintreeController.transaction',
+    '/braintree/transaction/:id': 'BraintreeController.transaction',
 
     'all /search/driver': 'SearchController.searchDriver',
     'all /search/parcel': 'SearchController.searchParcel',

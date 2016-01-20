@@ -193,10 +193,12 @@ module.exports =
                         if err?
                             console.log err
                             return res.negotiate err
-                        if mobile
-                            res.view 'msitepayment', {user: req.user, parcel: parcel, request: request, driver: driver}
-                        else
-                            res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver}
+                        BraintreeService.clientToken req.user.id, (token, err) ->
+                            console.log err if err?
+                            if mobile
+                                res.view 'msitepayment', {user: req.user, parcel: parcel, request: request, driver: driver, token: token}
+                            else
+                                res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver, token: token}
         else
             if mobile
                 res.redirect '/?m=1'

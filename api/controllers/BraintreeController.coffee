@@ -17,27 +17,33 @@ module.exports =
                 res.json {token: response.clientToken}
 
     transaction: (req, res) ->
-        nonce = req.body.payment_method or req.body.payment_method_nonce or 'fake-valid-nonce'
-        amount = req.body.amount or 1.0
-        requestId = req.body.request_id
-        if not requestId or not amount or not nonce
+        requestId = req.param('id')
+        nonce = req.param('payment_method') or req.param('payment_method_nonce') or 'fake-valid-nonce'
+        if not requestId or not nonce
             res.status 400
             res.json {error: 'Bad request'}
         else
-            gateway.transaction.sale { amount: amount, paymentMethodNonce: nonce}, (err, result) ->
+            Request.findOne(requestId).exec (err, request) ->
                 if err?
                     console.log err
-                    res.status 400
-                    res.json {error: err}
-                else if not result.success
-                    console.log result
-                    res.status 400
-                    res.json result
+                    res.negotiate err
                 else
-                    res.json result
-                    if requestId?
-                        Request.update({id: requestId}, {'paid': true, invoice: result}).exec (err, result) ->
-                            if err?
-                                console.log err 
-                            else
-                                MessagingService.invoicePaid requestId
+                    gateway.transaction.sale { amount: request.price, paymentMethodNonce: nonce}, (err, result) ->
+                        if err?
+                            console.log err
+                            res.status 400
+                            res.json {error: err}
+                        else if not result.success
+                            console.log result
+                            res.status 400
+                            res.json result
+                        else
+                            res.json result
+                            if requestId?
+                                Request.update({id: requestId}, {'paid': true, invoice: JSON.stringify(result)}).exec (err, result) ->
+                                    if err?
+                                        console.log err 
+                                    else
+                                        MessagingService.invoicePaid requestId
+                                Parcel.update({id: request.parcel}, {status: 'accepted'}).exec (err, result) ->
+                                    console.log err if err?

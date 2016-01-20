@@ -12,14 +12,14 @@ $(document).ready(function() {
 	$('#paypal').change(function() {
 		if ($(this).prop('checked')) {
 			$('#wrap_hide').slideUp('fast');
-			$('#pay_form_button').attr('href', 'https://www.paypal.com').attr('target', '_blank');
+			//$('#pay_form_button').attr('href', 'https://www.paypal.com').attr('target', '_blank');
 		}
 	});
 
 	$('#card1, #card2, #card3').change(function() {
 		if ($(this).prop('checked')) {
 			$('#wrap_hide').slideDown('fast');
-			$('#pay_form_button').attr('href', 'Sender_dashboard_4.html').attr('target', '');
+			//$('#pay_form_button').attr('href', 'Sender_dashboard_4.html').attr('target', '');
 		}
 	});	
 	
@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 	// form validation
 	$('.js-validate').feelform({
-		notificationType: 'class',
+		notificationType: 'class, errorIcon',
 		validateOnTheFly: true,
 		clearAfterSubmit: false
 	});

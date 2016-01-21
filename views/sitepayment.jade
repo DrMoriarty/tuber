@@ -82,15 +82,29 @@ block content
           label(for='last_name') SECURITY CODE*
           input#cvv_code(data-braintree-name="cvv", type='text', placeholder='660 (The 3 digits after the card number on the signature panel of your card)')
         button#pay_form_button.orange_button CONFIRM ORDER
+      #want_popup_box.popup_box
+        span
+          | YOUR PAYMENT HAVE BEEN COMPLETE
+          strong #{request.price}&euro;
+        br
+        strong The carrier will receive a message about that
+        br
+        em * We will inform you about your order status
+        br
+        a.orange_button(href='/dashboard') OK
 
 block script
   script(src="https://js.braintreegateway.com/v2/braintree.js")
   script(type='text/javascript').
+    $('.want_popup').click(function() {
+      return false;
+    });
     var clientToken = '#{token}';
     var client = new braintree.api.Client({clientToken: clientToken});
     //braintree.setup(clientToken, 'custom', {id: 'payment-form'});
     $("#payment-form").submit(function(event) {
-      //console.log('Submit', this);
+      event.preventDefault();
+      
       if(this[4].value.length <=1)
         $('#first_name').addClass('error');
       else
@@ -128,7 +142,11 @@ block script
             data: {payment_method_nonce: nonce},
             success: function(data) {
               console.log('Payment complete', data);
-              location.href = '/dashboard';
+              $('#want_popup_box').bPopup({
+                easing: 'easeOutBack', //uses jQuery easing plugin
+                  speed: 450,
+                  transition: 'slideDown'
+              });
             },
             error: function(err) {
               console.log('Payment error', err);
@@ -136,7 +154,6 @@ block script
           });
         }
       });
-      event.preventDefault();
       return false;
     });
     

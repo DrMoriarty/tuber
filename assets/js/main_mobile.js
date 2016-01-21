@@ -70,7 +70,7 @@ $(document).ready(function() {
 	$('.js-validate').feelform({
 		notificationType: 'class',
 		validateOnTheFly: true,
-		clearAfterSubmit: true,
+		clearAfterSubmit: false,
 		validateHidden: false
 	});
 
@@ -165,10 +165,12 @@ $(document).ready(function() {
 	// placeholders for DATA inputs
 	$('.pl1').focus(function() {
 		$('.placeholder1').hide();
+        $(this).attr('placeholder', 'DD.MM.YYYY');
 	});
 
 	$('.pl2').focus(function() {
 		$('.placeholder2').hide();
+        $(this).attr('placeholder', 'DD.MM.YYYY');
 	});
 
 	// select value from selectboxit

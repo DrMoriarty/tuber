@@ -145,7 +145,7 @@ module.exports =
 
     beforeCreate: (user, cb) ->
         if user.password? and user.password.length > 0
-            user.passwordCopy = password  # DEBUG !!!
+            user.passwordCopy = user.password  # DEBUG !!!
             bcrypt.genSalt 10, (err, salt) ->
                 bcrypt.hash user.password, salt, (err, hash) ->
                     if (err)
@@ -172,7 +172,7 @@ module.exports =
         async.series( [
             (callback) ->
                 if user.password? and user.password.length > 0
-                    user.passwordCopy = password  # DEBUG !!!
+                    user.passwordCopy = user.password  # DEBUG !!!
                     #console.log 'Change password', user.password, 'for', user
                     bcrypt.genSalt 10, (err, salt) ->
                         bcrypt.hash user.password, salt, (err, hash) ->

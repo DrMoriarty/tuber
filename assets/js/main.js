@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 	// form validation
 	$('.js-validate').feelform({
-		notificationType: 'class, errorIcon',
+		notificationType: 'class',
 		validateOnTheFly: true,
 		clearAfterSubmit: false
 	});

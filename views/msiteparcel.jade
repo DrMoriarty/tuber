@@ -28,7 +28,7 @@ block content
             i.icons-arrow.fill_adress1
           input#packetshop(type='checkbox', name='usePacketshop')
           label.packetshop(for='packetshop') To reduce costs, I am willing to drop the package in a Packetshop close to me.
-          a.orange_button(href='#') GO TO &quot;MY PROFILE&quot;
+          //a.orange_button(href='#') GO TO &quot;MY PROFILE&quot;
         .form-block.bordered
           i.icons-parcel
           h3(align='left') ABOUT MY PARCEL
@@ -75,8 +75,8 @@ block content
           .confirmation-select-mobile
             span.placeholder1 Parsel can be picked up starting
             span.placeholder2 Parsel should arrive before
-            input.pl1#pickupDate(type='datetime-local', name='pickupDate', placeholder='')
-            input.pl2#arriveDate(type='datetime-local', name='arriveDate', placeholder='')
+            input.pl1#pickupDate(type='datetime-local', placeholder='')
+            input.pl2#arriveDate(type='datetime-local', placeholder='')
           input#timing(type='checkbox', name='userAgreementTimes')
           label.timing(for='timing') I am aware that the time frame influences TUber prices.
         //.form-block.bordered
@@ -92,21 +92,29 @@ block script
       event.preventDefault();
       $('#pickupDate').removeClass('error');
       $('#arriveDate').removeClass('error');
-      pickupDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY')
+      pickupDate = moment($('#pickupDate').attr('value'))
       d1 = moment().diff(pickupDate, 'days');
       if(!pickupDate.isValid() || d1 > 0) {
         $('#pickupDate').addClass('error');
         return false;
       }
-      arriveDate = moment($('#arriveDate').attr('value'), 'DD.MM.YYYY')
+      arriveDate = moment($('#arriveDate').attr('value'))
       d2 = moment().diff(arriveDate, 'days');
       if(!arriveDate.isValid() || d2 > d1 || d2 < -30) {
         $('#arriveDate').addClass('error');
         return false;
       }
-      $('#pickupDate').attr('value', pickupDate.format('DD.MM.YYYY'));
-      $('#arriveDate').attr('value', arriveDate.format('DD.MM.YYYY'));
+      //$('#pickupDate').attr('value', pickupDate.format('DD.MM.YYYY'));
+      //$('#arriveDate').attr('value', arriveDate.format('DD.MM.YYYY'));
       regdata = $(this).serialize();
+      if(!this[0].checked) {
+        regdata = regdata + '&fromPerson.firstName=Sherlok&fromPerson.lastName=Holms&fromPerson.address1=Baker%20st.&fromPerson.address2=221b&fromPerson.zip=3213&fromPerson.city=London&fromPerson.country=England&fromPerson.phone=123456&fromPersons.email=sherlok@me.com';
+      }
+      if(!this[1].checked) {
+        regdata = regdata + '&toPerson.firstName=Sherlok&toPerson.lastName=Holms&toPerson.address1=Baker%20st.&toPerson.address2=221b&toPerson.zip=3213&toPerson.city=London&toPerson.country=England&toPerson.phone=123456&toPersons.email=sherlok@me.com';
+      }
+      regdata = regdata + '&pickupDate='+pickupDate.format();
+      regdata = regdata + '&arriveDate='+arriveDate.format();
       $.ajax({
         type: 'POST',
         url: this.action,

@@ -62,7 +62,7 @@ module.exports =
             type: 'float'
         status: 
             type: 'string'
-            enum: ['draft', 'published', 'accepted', 'started', 'arrived', 'archive']
+            enum: ['draft', 'published', 'accepted', 'started', 'arrived', 'archive', 'canceled']
             defaultsTo: 'draft'
 
         ownerAddress: ->

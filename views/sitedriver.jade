@@ -120,7 +120,7 @@ block script
         data: regdata,
         success: function(data) {
           console.log('Result', data);
-          location.reload();
+          location.href = '/dashboard';
         },
         error: function(err) {
           console.log("Error", err);

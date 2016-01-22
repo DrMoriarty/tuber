@@ -6,14 +6,18 @@ block header
     span.title #{user.firstname} #{user.lastname}
     .container
       ul
-        li
-          a(href='javascript:;') 1. Price offers
-        li
-          a(href='javascript:;') 2. Confirmation
-        li
-          a(href='javascript:;') 3. Payment
-        li
-          span 4. Dashboard
+        if user.driver
+          li
+            span Dashboard
+        if !user.driver
+          li
+            a(href='javascript:;') 1. Price offers
+          li
+            a(href='javascript:;') 2. Confirmation
+          li
+            a(href='javascript:;') 3. Payment
+          li
+            span 4. Dashboard
 
 block content
   // content
@@ -28,7 +32,7 @@ block content
           li
             a(href='#') My payments
           li.active
-            a(href='#') My insurrance
+            a(href='#') My archive
       .content
         // tab
         .js-tab-body
@@ -234,11 +238,17 @@ block content
                     select.js-select
                       option(value='') WITHIN AN AREA OF 1000 km
                       option(value='') WITHIN AN AREA OF 1000 km
-                h3 SA12345678
+                if parcel.request && parcel.request.trackingNumber
+                  h3 parcel.request.trackingNumber
+                else
+                  h3 NO TRACKING NUMBER
                 ul.sender-list
                   li
-                    | CURRENT: 
-                    em 1 kg postage, now on the way to Hamburg, expected delivery in 8 hours
+                    | STATUS:
+                    if parcel.status == 'archive'
+                      em  Arrived
+                    if parcel.status == 'canceled'
+                      em  Canceled
                   li
                     | SENDING DETAILS: 
                     strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
@@ -265,23 +275,53 @@ block content
                     strong Standart (until #{parcel.insurance}&euro;)
                   li
                     | DELIVERY OPTIONS: 
-                    strong +30&euro; to home adress
+                    strong +0&euro; to home adress
                   li
                     | TOTAL AMOUNT (Including VAT): 
-                    strong 186&euro;
-                a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
-                span.note * You myst delivery this order to 23/11/2015
+                    strong #{parcel.request.price}&euro;
+                //a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
+                //span.note * You myst delivery this order to 23/11/2015
                 .pattern
           else
             .sender
               .clear
               h3 YOU HAVE NO ARCHIVED PARCELS YET
               .clear
+      #cancel_box.popup_box
+        span
+          | YOU CANCELLED ORDER
+          //strong SA12345678.
+        br
+        strong ARE YOU SURE? You can not undo this action.
+        br
+        em * If you canceled this order, you will be refunded 75% delivery price
+        br
+        a.orange_button(href='javascript:reallyCancelOrder();') YES, CANCEL THIS ORDER
+        a.gray_button.b-close(href='#') NO, LEAVE MY ORDER
 
 block script
   script(type='text/javascript').
     function cancelOrder(id) {
+      window.cancelledOrderId = id
       console.log('Cancel order', id);
+      $('#cancel_box').bPopup({
+        easing: 'easeOutBack',
+        speed: 450,
+        transition: 'slideDown'
+      });
+    }
+    function reallyCancelOrder() {
+      $.ajax({
+        type: 'POST',
+        url: '/api/parcel/'+window.cancelledOrderId,
+        data: {'status': 'canceled'},
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
     }
     function confirmOrder(id) {
       console.log('Confirm order', id);

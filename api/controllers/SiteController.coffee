@@ -131,14 +131,29 @@ module.exports =
     dashboard: (req, res) ->
         mobile = req.param('mobile') or req.param('m') or false
         page = req.param('page') or 1
-        if req.user?
-            filter = {owner: req.user.id, status: {'!': 'archive'}}
+        if req.user? and not req.user.driver
+            filter = {owner: req.user.id, status: {'!': ['archive', 'canceled']}}
             Parcel.count(filter).exec (err, count) ->
                 Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                     if err
                         console.log err
                         return res.negotiate err
-                    Parcel.find({owner: req.user.id, status: 'archive'}).populateAll().exec (err, archive) ->
+                    Parcel.find({owner: req.user.id, status: ['archive', 'canceled']}).populateAll().exec (err, archive) ->
+                        if err
+                            console.log err
+                            return res.negotiate err
+                        if mobile
+                            res.view 'msitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                        else
+                            res.view 'sitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+        else if req.user? and req.user.driver
+            filter = {driver: req.user.id, status: {'!': ['archive', 'canceled']}}
+            Parcel.count(filter).exec (err, count) ->
+                Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                    if err
+                        console.log err
+                        return res.negotiate err
+                    Parcel.find({driver: req.user.id, status: ['archive', 'canceled']}).populateAll().exec (err, archive) ->
                         if err
                             console.log err
                             return res.negotiate err

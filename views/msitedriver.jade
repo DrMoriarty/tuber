@@ -18,7 +18,7 @@ block content
             li
               span.up
                 i.fa.fa-chevron-up
-              input(name='maxWeight', type='text', value='#{user.maxWeight}')
+              input(name='maxWeight', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxWeight}')
               em kg
               span.down
                 i.fa.fa-chevron-down
@@ -26,7 +26,7 @@ block content
             li
               span.up
                 i.fa.fa-chevron-up
-              input(name='maxLength', type='text', value='#{user.maxLength}')
+              input(name='maxLength', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxLength}')
               em cm
               span.down
                 i.fa.fa-chevron-down
@@ -34,7 +34,7 @@ block content
             li
               span.up
                 i.fa.fa-chevron-up
-              input(name='maxWidth', type='text', value='#{user.maxWidth}')
+              input(name='maxWidth', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxWidth}')
               em cm
               span.down
                 i.fa.fa-chevron-down
@@ -42,7 +42,7 @@ block content
             li
               span.up
                 i.fa.fa-chevron-up
-              input(name='maxDepth', type='text', value='#{user.maxDepth}')
+              input(name='maxDepth', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxDepth}')
               em cm
               span.down
                 i.fa.fa-chevron-down
@@ -119,7 +119,7 @@ block script
         data: regdata,
         success: function(data) {
           console.log('Result', data);
-          location.reload();
+          location.href = '/dashboard?m=1';
         },
         error: function(err) {
           console.log("Error", err);

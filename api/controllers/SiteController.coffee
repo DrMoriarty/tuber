@@ -274,29 +274,39 @@ module.exports =
         if data.fromPersonProfile and data.toPersonProfile
             console.log 'Incorrect addresses (both set to profile address)'
             return res.badRequest {error: 'Incorrect addresses (both set to profile address)'}
-        fromPerson = {firstname: data['fromPerson.firstName'], lastname: data['fromPerson.lastName'], phone: data['fromPerson.phone'], country: data['fromPerson.country'], city: data['fromPerson.city'], address1: data['fromPerson.address1'], address2: data['fromPerson.address2'], owner: req.user.id}
-        toPerson = {firstname: data['toPerson.firstName'], lastname: data['toPerson.lastName'], phone: data['toPerson.phone'], country: data['toPerson.country'], city: data['toPerson.city'], address1: data['toPerson.address1'], address2: data['toPerson.address2'], owner: req.user.id}
+        fromPerson = {firstname: data['fromPerson.firstName'], lastname: data['fromPerson.lastName'], phone: data['fromPerson.phone'], country: data['fromPerson.country'], city: data['fromPerson.city'], address1: data['fromPerson.address1'], address2: data['fromPerson.address2'], zip: data['fromPerson.zip'], owner: req.user.id}
+        toPerson = {firstname: data['toPerson.firstName'], lastname: data['toPerson.lastName'], phone: data['toPerson.phone'], country: data['toPerson.country'], city: data['toPerson.city'], address1: data['toPerson.address1'], address2: data['toPerson.address2'], zip: data['toPerson.zip'], owner: req.user.id}
         async.series( [
             (cb) ->
                 if data.fromPersonProfile
                     return cb(null, null)
                 else
-                    Person.create(fromPerson).exec (err, address) ->
-                        if err?
-                            console.log err
-                            return cb(err, null)
-                        else
-                            return cb(null, address.id)
+                    GeoService.zipGeo fromPerson.zip, fromPerson.country, (lat, lng) ->
+                        if not lat? or not lng?
+                            return cb('From address error', null)
+                        fromPerson.latitude = lat
+                        fromPerson.longitude = lng
+                        Person.create(fromPerson).exec (err, address) ->
+                            if err?
+                                console.log err
+                                return cb(err, null)
+                            else
+                                return cb(null, address.id)
             (cb) ->
                 if data.toPersonProfile
                     return cb(null, null)
                 else
-                    Person.create(toPerson).exec (err, address) ->
-                        if err?
-                            console.log err
-                            return cb(err, null)
-                        else
-                            return cb(null, address.id)
+                    GeoService.zipGeo toPerson.zip, toPerson.country, (lat, lng) ->
+                        if not lat? or not lng?
+                            return cb('To address error', null)
+                        toPerson.latitude = lat
+                        toPerson.longitude = lng
+                        Person.create(toPerson).exec (err, address) ->
+                            if err?
+                                console.log err
+                                return cb(err, null)
+                            else
+                                return cb(null, address.id)
         ], (err, result) ->
             if err?
                 console.log err

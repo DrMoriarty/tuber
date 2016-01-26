@@ -73,45 +73,78 @@ block content
 
 block script
   script(type='text/javascript').
-    $('.js-validate').submit(function() {
+    $('.js-validate').submit(function(event) {
+      event.preventDefault();
+      $('#zip').removeClass('error');
+      $('#email').removeClass('error');
+      $('#email_again').removeClass('error');
+      $('#password').removeClass('error');
+      $('#password_again').removeClass('error');
+      $('#email_differs').hide();
+      $('#password_differs').hide();
+      $('#password_tooshort').hide();
       $('#err11000').hide();
+
       if(this[11].value != this[12].value) {
         // email differs
         $('#email_differs').show();
+        $('#email').addClass('error');
+        $('#email_again').addClass('error');
         return false;
-      } else {
-        $('#email_differs').hide();
       }
       if(this[13].value != this[14].value) {
         // password differs
         $('#password_differs').show();
+        $('#password').toggleClass('error');
+        $('#password_again').toggleClass('error');
         return false;  
-      } else {
-        $('#password_differs').hide();
       }
-      if(this[13].value.length < 4) {
+      if(this[13].value.length < 5) {
         $('#password_tooshort').show();
+        $('#password').toggleClass('error');
         return false;
-      } else {
-        $('#password_tooshort').hide();
       }
       regdata = $(this).serialize();
+      var country = this[9].value;
+      var zip = this[7].value;
+      var regurl = this.action;
       $.ajax({
         type: 'POST',
-        url: this.action,
-        data: regdata,
-        success: function(data) {
-          console.log('Registered', data);
-          $.post('/login', regdata, function(data) {
-            console.log('Login performed', data);
-            location.href = '/';
-          });
-        },
-        error: function(err) {
-          console.log("Registration error", err);
-          if(err.responseJSON.raw.code == 11000) {
-            $('#err11000').show();
+        url: '/search/zip',
+        data: 'zip='+zip+'&country='+country,
+        success: function(geodata) {
+          if(geodata.latitude && geodata.longitude) {
+            regdata = regdata + '&latitude='+geodata.latitude+'&longitude='+geodata.longitude;
+            console.log('Found zip coordinates', geodata);
+            $.ajax({
+              type: 'POST',
+              url: regurl,
+              data: regdata,
+              success: function(data) {
+                console.log('Registered', data);
+                $.post('/login', regdata, function(data) {
+                  console.log('Login performed', data);
+                  location.href = '/';
+                });
+              },
+              error: function(err) {
+                console.log("Registration error", err);
+                var json = err.responseJSON;
+                if(!json && err.responseText) {
+                  json = JSON.parse(err.responseText);
+                }
+                if(json && json.raw.code == 11000) {
+                  $('#err11000').show();
+                }
+              }});
+          } else {
+            $('#zip').addClass('error');
+            console.log('Zip error', geodata);
           }
-        }});
+        },
+        error: function() {
+          $('#zip').addClass('error');
+        }
+      });
       return false;
     });

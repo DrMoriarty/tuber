@@ -144,29 +144,33 @@ module.exports =
             return obj
 
     beforeCreate: (user, cb) ->
-        if user.password? and user.password.length > 0
-            user.passwordCopy = user.password  # DEBUG !!!
-            bcrypt.genSalt 10, (err, salt) ->
-                bcrypt.hash user.password, salt, (err, hash) ->
-                    if (err)
-                        console.log err
-                        cb err
-                    else
-                        user.password = hash
-                        GeoService.zipGeo user.zip, user.country, (lat, lng) ->
-                            user.latitude = lat
-                            user.longitude = lng
-                            GeoService.countryCode user.country, (code) ->
-                                user.countryCode = code
-                                cb null, user
-        else
-            delete user.password
-            GeoService.zipGeo user.zip, user.country, (lat, lng) ->
-                user.latitude = lat
-                user.longitude = lng
-                GeoService.countryCode user.country, (code) ->
-                    user.countryCode = code
-                    cb null, user
+        async.series( [
+            (callback) ->
+                if user.password? and user.password.length > 0
+                    user.passwordCopy = user.password  # DEBUG !!!
+                    bcrypt.genSalt 10, (err, salt) ->
+                        bcrypt.hash user.password, salt, (err, hash) ->
+                            if (err)
+                                console.log err
+                                callback err, null
+                            else
+                                user.password = hash
+                                callback null, user
+                else
+                    callback null, user
+            (callback) ->
+                if user.zip? and user.country?
+                    GeoService.zipGeo user.zip, user.country, (lat, lng) ->
+                        user.latitude = lat
+                        user.longitude = lng
+                        GeoService.countryCode user.country, (code) ->
+                            user.countryCode = code
+                            callback null, user
+                else
+                    callback null, user
+        ], (err, result) ->
+            cb null, user
+        )
 
     beforeUpdate: (user, cb) ->
         async.series( [

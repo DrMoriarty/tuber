@@ -11,8 +11,11 @@
 
 module.exports.bootstrap = (cb) ->
 
-    GeoService.countryCode 'The Russian Federation', (data) ->
-        console.log('Country code', data)
+    GeoService.zipGeoFromGoogle '30166', 'Germany', (lat, lng) ->
+        console.log('Google said', lat, lng)
+
+    GeoService.zipGeoFromOSM '30166', 'Germany', (lat, lng) ->
+        console.log('OSM said', lat, lng)
 
     Person.find({}).exec (err, persons) ->
         if err?

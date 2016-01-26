@@ -71,6 +71,7 @@ module.exports.policies = {
         '*': 'isAuthenticated'
     },
     'SearchController': {
+        'lookupZip': true,
         '*': 'isAuthenticated'
     },
     'TrackingController': {

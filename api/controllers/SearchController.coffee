@@ -128,3 +128,15 @@ module.exports =
                         # we need to remove all other requests from this driver
                         finishRequest(parcel.owner.id, parcelId, driverId)
 
+    lookupZip: (req, res) ->
+        zip = req.param('zip')
+        country = req.param('country')
+        if not zip? 
+            return res.badRequest('zip required')
+        if not country?
+            return res.badRequest('country required')
+        GeoService.zipGeo zip, country, (lat, lng) ->
+            if lat? and lng?
+                res.json {latitude: lat, longitude: lng}
+            else
+                res.json {error: 'Address not found'}

@@ -83,13 +83,11 @@ block content
                   i.fa.fa-globe
                 input#city.form-control.city(name='city', type='text', placeholder='City', required='')
             .form-group.has-warning
-              label.control-label(for='country') Country
+              label(for='country') Country
               .input-group
                 span.input-group-addon
                   i.fa.fa-globe
-                select#selectcountry(name='country', required='')
-                  option(value='RU') Russia
-                  option(value='DE') Germany
+                input#selectcountry.form-control.country(name='country', type='text', placeholder='Country', required='')
             input(type='hidden', name='driver', value='false')
             .form-group
               input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
@@ -107,7 +105,4 @@ block script
         }
       });
       $('.phone').mask('+9 (999) 999-9999');
-      $('#selectcountry').multiselect({
-      enableFiltering: true,
-      });
     });

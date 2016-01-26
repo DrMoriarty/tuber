@@ -59,12 +59,15 @@ module.exports =
         cb()
 
     beforeCreate: (person, cb) ->
-        GeoService.zipGeo person.zip, person.country, (lat, lng) ->
-            person.latitude = lat
-            person.longitude = lng
-            GeoService.countryCode person.country, (code) ->
-                person.countryCode = code
-                cb null, person
+        if person.zip? and person.country? and (not person.latitude or not person.longitude)
+            GeoService.zipGeo person.zip, person.country, (lat, lng) ->
+                person.latitude = lat
+                person.longitude = lng
+                GeoService.countryCode person.country, (code) ->
+                    person.countryCode = code
+                    cb null, person
+        else
+            cb null, person
 
     beforeUpdate: (person, cb) ->
         async.series( [

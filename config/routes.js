@@ -73,6 +73,7 @@ module.exports.routes = {
     '/tracking': 'TrackingController.track',
     'all /accept/parcel/:parcelId/carrier/:driverId': 'SearchController.acceptDriver',
     'all /accept/carrier/parcel/:parcelId': 'SearchController.acceptParcel',
+    'all /search/zip': 'SearchController.lookupZip',
 
     'get /admin': 'AdminController.main',
     'get /admin/profile': 'AdminController.profile',

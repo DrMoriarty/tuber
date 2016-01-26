@@ -111,13 +111,11 @@ block content
                   i.fa.fa-globe
                 input#city.form-control.city(name='city', type='text', placeholder='City', required='', value='#{result.city}')
             .form-group.has-warning
-              label.control-label(for='country') Country
+              label(for='country') Country
               .input-group
                 span.input-group-addon
                   i.fa.fa-globe
-                select#selectcountry(name='country', required='')
-                  option(value='RU') Russia
-                  option(value='DE') Germany
+                input#selectcountry.form-control.country(name='country', type='text' placeholder='Country', required='', value='#{result.country}')
 
             .form-group.has-warning
               label(for='vehicleNum') Number of vehicles
@@ -240,9 +238,6 @@ block script
         }
       });
       //$('.phone').mask('+9 (999) 999-9999');
-      $('#selectcountry').multiselect({
-      enableFiltering: true,
-      });
     });
     window.removeItem = function() {
       $.ajax({

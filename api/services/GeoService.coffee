@@ -22,17 +22,21 @@ module.exports =
         address = zip
         if country?
             address = address + ', ' + country
-        geocoder.geocode address, (err, data) ->
-            console.log err if err?
-            latitude = undefined
-            longitude = undefined
-            if not err and data
-                if data.results? and data.results.length > 0
-                    res = data.results[0]
-                    if res.geometry?.location?
-                        latitude = res.geometry.location.lat
-                        longitude = res.geometry.location.lng
-            callback latitude, longitude
+        geocoder.geocode address,
+            (err, data) ->
+                console.log err if err?
+                latitude = undefined
+                longitude = undefined
+                if not err and data
+                    if data.results? and data.results.length > 0
+                        res = data.results[0]
+                        if res.geometry?.location?
+                            latitude = res.geometry.location.lat
+                            longitude = res.geometry.location.lng
+                callback latitude, longitude
+            {
+                components: 'country:'+country+'|postal_code:'+zip
+            }
     
     zipGeoFromOSM: (zip, country, callback, strict=true) ->
         # reverse geocoding by zip (using openstreetmap overpass)
@@ -44,7 +48,7 @@ module.exports =
             console.log err if err?
             latitude = undefined
             longitude = undefined
-            console.log 'Overpass data', util.inspect(data, {showHidden: false, depth: null})
+            # console.log 'Overpass data', util.inspect(data, {showHidden: false, depth: null})
             if not err and data and data.features?.length > 0
                 feature = data.features[0]
                 if feature.geometry?.type == 'Point'
@@ -52,9 +56,8 @@ module.exports =
                     latitude = feature.geometry.coordinates[1]
             else if strict
                 # no data, try to call non strict request
-                GeoService.zipGeoFromOSM zip, country, callback, false
-            else
-                callback latitude, longitude
+                return GeoService.zipGeoFromOSM zip, country, callback, false
+            callback latitude, longitude
 
     zipGeo: (zip, country, callback) ->
         found = false
@@ -66,7 +69,7 @@ module.exports =
                 return callback lat, lng
             if not found and count == 2
                 # both methods founded nothing
-                callback 0, 0
+                callback null, null
         GeoService.zipGeoFromGoogle zip, country, (lat, lng) ->
             count += 1
             if not found and lat? and lng?
@@ -74,4 +77,4 @@ module.exports =
                 return callback lat, lng
             if not found and count == 2
                 # both methods founded nothing
-                callback 0, 0
+                callback null, null

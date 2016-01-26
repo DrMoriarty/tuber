@@ -59,12 +59,14 @@ module.exports.http = {
         ],
 
         mobileChecker: function (req, res, next) {
-            console.log('Host', req.host);
+            //console.log('Host', req.host, sails.getBaseurl(), req.headers);
             m = req.param('m') || req.param('mobile');
             if(m) {
                 req.mobile = (m == '1' || m == 'true');
             } else {
-                req.mobile = (req.host.indexOf('m.') == 0);
+		var host = req.headers['x-host'] || req.host;
+		//console.log('Host >>>', host);
+                req.mobile = (host.indexOf('m.') == 0);
             }
             console.log('Set mobile', req.mobile);
             return next();

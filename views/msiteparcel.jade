@@ -18,14 +18,14 @@ block content
           i.icons-profile
           h3 From
           p
-            input#address(type='checkbox', name='fromPersonProfile')
-            label.map_checkbox(for='address') Choose my profile address
-            i.icons-arrow.fill_adress1
+            input#address1(type='checkbox', name='fromPersonProfile')
+            label.map_checkbox(for='address1') Choose my profile address
+            i.icons-arrow.fill_adress1#address1btn
           h3 To
           p
-            input#address1(type='checkbox', name='toPersonProfile')
-            label.map_checkbox(for='address1') Choose my profile address
-            i.icons-arrow.fill_adress1
+            input#address2(type='checkbox', name='toPersonProfile')
+            label.map_checkbox(for='address2') Choose my profile address
+            i.icons-arrow.fill_adress1#address2btn
           input#packetshop(type='checkbox', name='usePacketshop')
           label.packetshop(for='packetshop') To reduce costs, I am willing to drop the package in a Packetshop close to me.
           //a.orange_button(href='#') GO TO &quot;MY PROFILE&quot;
@@ -89,8 +89,8 @@ block content
         h3
           span.b-close Cancel
           |  Fill the adress form below 
-          a(href='#') Done
-        .popup_address1
+          a(href='javascript:saveAddress1();') Done
+        form.popup_address1#formAddress1
           input(type='text', placeholder='First name, for ex.: “George”', name='fromPerson.firstName')
           input(type='text', placeholder='Last name, for ex.: “Bohorquez”', name='fromPerson.lastName')
           input(type='text', placeholder='Adress (street), for ex.: “Way to the ocean”', name='fromPerson.address1')
@@ -104,8 +104,8 @@ block content
         h3
           span.b-close Cancel
           |  Fill the adress form below 
-          a(href='#') Done
-        .popup_address1
+          a(href='javascript:saveAddress2();') Done
+        form.popup_address1#formAddress2
           input(type='text', placeholder='First name, for ex.: “George”', name='toPerson.firstName')
           input(type='text', placeholder='Last name, for ex.: “Bohorquez”', name='toPerson.lastName')
           input(type='text', placeholder='Adress (street), for ex.: “Way to the ocean”', name='toPerson.address1')
@@ -118,12 +118,30 @@ block content
 
 block script
   script(type='text/javascript').
-    $('#address').click(function() {$('#fill_address1').bPopup();});
-    $('#address1').click(function() {$('#fill_address2').bPopup();});
+    function saveAddress1() {
+      form = $('#formAddress1').serialize();
+      console.log('Save address1', form);
+      window.formAddress1 = form;
+      window.address1Modal.close();
+    }
+    function saveAddress2() {
+      form = $('#formAddress2').serialize();
+      console.log('Save address2', form);
+      window.formAddress2 = form;
+      window.address2Modal.close();
+    }
+    $('#address1btn').click(function() {
+      window.address1Modal = $('#fill_address1').bPopup({follow: [false, true], position: [0, 0]});
+    });
+    $('#address2btn').click(function() {
+      window.address2Modal = $('#fill_address2').bPopup({follow: [false, true], position: [0, 0]});
+    });
     $('#inputform').submit(function(event) {
       event.preventDefault();
       $('#pickupDate').removeClass('error');
       $('#arriveDate').removeClass('error');
+      $('#address1').removeClass('error');
+      $('#address2').removeClass('error');
       pickupDate = moment($('#pickupDate').attr('value'))
       if(!pickupDate.isValid()) {
         pickupDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY, HH:mm')
@@ -146,10 +164,12 @@ block script
       //$('#arriveDate').attr('value', arriveDate.format('DD.MM.YYYY'));
       regdata = $(this).serialize();
       if(!this[0].checked) {
-        regdata = regdata + '&fromPerson.firstName=Sherlok&fromPerson.lastName=Holms&fromPerson.address1=Friedrich%20Missler%20Strasse&fromPerson.address2=1&fromPerson.zip=28211&fromPerson.city=Bremen&fromPerson.country=England&fromPerson.phone=123456&fromPersons.email=sherlok@me.com';
+        regdata = regdata + '&' + window.formAddress1;
+        //regdata = regdata + '&fromPerson.firstName=Sherlok&fromPerson.lastName=Holms&fromPerson.address1=Friedrich%20Missler%20Strasse&fromPerson.address2=1&fromPerson.zip=28211&fromPerson.city=Bremen&fromPerson.country=England&fromPerson.phone=123456&fromPersons.email=sherlok@me.com';
       }
       if(!this[1].checked) {
-        regdata = regdata + '&toPerson.firstName=Sherlok&toPerson.lastName=Holms&toPerson.address1=Friedrich Missler Strasse&toPerson.address2=1&toPerson.zip=28211&toPerson.city=Bremen&toPerson.country=England&toPerson.phone=123456&toPersons.email=sherlok@me.com';
+        regdata = regdata + '&' + window.formAddress2;
+        //regdata = regdata + '&toPerson.firstName=Sherlok&toPerson.lastName=Holms&toPerson.address1=Friedrich Missler Strasse&toPerson.address2=1&toPerson.zip=28211&toPerson.city=Bremen&toPerson.country=England&toPerson.phone=123456&toPersons.email=sherlok@me.com';
       }
       regdata = regdata + '&pickupDate='+pickupDate.format();
       regdata = regdata + '&arriveDate='+arriveDate.format();
@@ -163,6 +183,11 @@ block script
         },
         error: function(err) {
           console.log("Error", err);
+          if(err.responseText == 'From address error') {
+            $('#address1').addClass('error');
+          } else if(err.responseText == 'To address error') {
+            $('#address2').addClass('error');
+          }
         }});
       return false;
     });

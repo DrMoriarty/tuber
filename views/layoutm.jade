@@ -57,6 +57,9 @@ html
             a(href='/faq?m=1') FAQ
           li
             a(href='/?m=1') Prices
+          if user
+            li
+              a(href='/logout') LOGOUT
       // header section
       block header  
       // content

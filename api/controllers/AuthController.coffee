@@ -32,7 +32,7 @@ module.exports =
         fn(req, res)
     logout: (req, res) ->
         req.logout()
-        res.redirect('/login')
+        res.redirect('/')
 
     loginFb: (req, res) ->
         fn = passport.authenticate('facebook')

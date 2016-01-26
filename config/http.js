@@ -48,6 +48,7 @@ module.exports.http = {
             'handleBodyParserError',
             'compress',
             'methodOverride',
+            'mobileChecker',
             'poweredBy',
             '$custom',
             'router',
@@ -55,7 +56,19 @@ module.exports.http = {
             'favicon',
             '404',
             '500'
-        ]
+        ],
+
+        mobileChecker: function (req, res, next) {
+            console.log('Host', req.host);
+            m = req.param('m') || req.param('mobile');
+            if(m) {
+                req.mobile = (m == '1' || m == 'true');
+            } else {
+                req.mobile = (req.host.indexOf('m.') == 0);
+            }
+            console.log('Set mobile', req.mobile);
+            return next();
+        }
 
   /****************************************************************************
   *                                                                           *

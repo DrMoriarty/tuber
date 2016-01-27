@@ -10,6 +10,7 @@
  */
 
 var moment = require('moment');
+var device = require('express-device');
 
 module.exports.http = {
 
@@ -28,6 +29,7 @@ module.exports.http = {
         passportInit    : require('passport').initialize(),
         passportSession : require('passport').session(),
         responseTime    : require('response-time')({suffix: false}),
+        device          : device.capture(),
 
   /***************************************************************************
   *                                                                          *
@@ -48,6 +50,7 @@ module.exports.http = {
             'handleBodyParserError',
             'compress',
             'methodOverride',
+            'device',
             'mobileChecker',
             'poweredBy',
             '$custom',
@@ -59,16 +62,22 @@ module.exports.http = {
         ],
 
         mobileChecker: function (req, res, next) {
+            //console.log('Device', req.device.type);
             //console.log('Host', req.host, sails.getBaseurl(), req.headers);
+            var mobdev = req.device.type != 'desktop';
             m = req.param('m') || req.param('mobile');
             if(m) {
                 req.mobile = (m == '1' || m == 'true');
             } else {
-		var host = req.headers['x-host'] || req.host;
-		//console.log('Host >>>', host);
+		        var host = req.headers['x-host'] || req.host;
+		        //console.log('Host >>>', host);
                 req.mobile = (host.indexOf('m.') == 0);
+                if(host == 'packet24.com' && !req.mobile) {
+                    req.redirect('http://m.packet24.com'+req.path);
+                    return;
+                }
             }
-            console.log('Set mobile', req.mobile);
+            //console.log('Set mobile', req.mobile);
             return next();
         }
 

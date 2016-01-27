@@ -32,8 +32,8 @@ block content
           .confirmation-select-mobile
             //span.placeholder1 22.12.2015, 22:34
             //span.placeholder2 22.12.2015, 22:34
-            input.change_placeholder.pl1(type='datetime-local', name='pickupDate', placeholder='#{moment().format("DD.MM.YYYY")}', value='#{moment(parcel.pickupDate).format("DD.MM.YYYY")}')
-            input.change_placeholder.pl2(type='datetime-local', name='arriveDate', placeholder='#{moment().format("DD.MM.YYYY")}', value='#{moment(parcel.arriveDate).format("DD.MM.YYYY")}')
+            input.change_placeholder.pl1(type='datetime-local', placeholder='#{moment().format("DD.MM.YYYY")}', value='#{moment(parcel.pickupDate).format("DD.MM.YYYY")}')
+            input.change_placeholder.pl2(type='datetime-local', placeholder='#{moment().format("DD.MM.YYYY")}', value='#{moment(parcel.arriveDate).format("DD.MM.YYYY")}')
         hr
         .confirmation-departure
           h3 From:
@@ -128,14 +128,16 @@ block script
       values = $('input.change_placeholder');
       var data = {};
 
-      data.pickupDate = moment($('#pickupDate').attr('value'))
+      data.pickupDate = moment($('#pickupDate').attr('value'));
       if(!data.pickupDate.isValid()) {
-        data.pickupDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY, HH:mm')
+        data.pickupDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY, HH:mm');
       }
-      data.arriveDate = moment($('#pickupDate').attr('value'))
+      data.arriveDate = moment($('#pickupDate').attr('value'));
       if(!data.arriveDate.isValid()) {
-        data.arriveDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY, HH:mm')
+        data.arriveDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY, HH:mm');
       }
+      data.pickupDate = data.pickupDate.format();
+      data.arriveDate = data.arriveDate.format();
 
       data.status = 'published';
       console.log('Data', data);

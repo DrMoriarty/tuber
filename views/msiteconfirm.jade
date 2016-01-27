@@ -127,8 +127,16 @@ block script
       // update parcel
       values = $('input.change_placeholder');
       var data = {};
-      data.pickupDate = moment(values[0].value, 'DD.MM.YYYY').format();
-      data.arriveDate = moment(values[1].value, 'DD.MM.YYYY').format();
+
+      data.pickupDate = moment($('#pickupDate').attr('value'))
+      if(!data.pickupDate.isValid()) {
+        data.pickupDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY, HH:mm')
+      }
+      data.arriveDate = moment($('#pickupDate').attr('value'))
+      if(!data.arriveDate.isValid()) {
+        data.arriveDate = moment($('#pickupDate').attr('value'), 'DD.MM.YYYY, HH:mm')
+      }
+
       data.status = 'published';
       console.log('Data', data);
       $.post('/api/parcel/#{parcel.id}', data, function(data, status) {

@@ -137,6 +137,10 @@ module.exports =
             type: 'string'
         getPrice: (pathLength) ->
             if @defaultPrice > 0 then @defaultPrice else @pricePerKm * pathLength
+        bankAccount: 'string'
+        bankCode: 'string'
+        bankName: 'string'
+        bankClientName: 'string'
         toJSON: ->
             obj = this.toObject()
             delete obj.password

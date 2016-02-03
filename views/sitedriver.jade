@@ -95,19 +95,16 @@ block content
         //input#price_country.required(type='text', placeholder='XX')
         label(for='price_ft') PRICE FROM/TO (€):
         input#price_ft.required(name='defaultPrice', type='text', placeholder='XX', value='#{user.defaultPrice}')
-        button.orange_button Save details
         h3 My Payment Data
-        ul.form-info
-          li
-            | CARD NUMBER IS: 
-            strong XXXX XXXX XXXX XXXX
-          li
-            | TUBER BALANCE: 
-            strong #{user.balance}&euro;
-        .form-withdraw
-          label(for='withdraw') I WANT withdrawal:
-          input#withdraw(type='text')
-          a.blue_button(href='#') SEND
+        label(for='accountNumber') YOUR BANK ACCOUNT NUMBER:
+        input#accountNumber.required(name='bankAccount', type='text', placeholder='', value='#{user.bankAccount || ""}')
+        label(for='bankCode') BLZ (BANK CODE NUMBER):
+        input#bankCode.required(name='bankCode', type='text', placeholder='', value='#{user.bankCode || ""}')
+        label(for='bankName') BANK NAME:
+        input#bankName.required(name='bankName', type='text', placeholder='', value='#{user.bankName || ""}')
+        label(for='personName') ACCOUNT OWNER:
+        input#personName.required(name='bankClientName', type='text', placeholder='', value='#{user.bankClientName || user.fullname()}')
+        button.orange_button Save details
 
 block script
   script(src="https://maps.googleapis.com/maps/api/js")

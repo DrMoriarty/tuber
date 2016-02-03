@@ -1,4 +1,5 @@
 async = require 'async'
+moment = require 'moment'
 pageSize = 20
 
 finishRequest = (senderId, parcelId, driverId) ->
@@ -255,3 +256,61 @@ module.exports =
     logs: (req, res) ->
         LogService.lastLogs 25, (err, result) ->
             res.view 'logs', {user: req.user, result: result}
+
+    payments: (req, res) ->
+        page = req.param('page') or 1
+        sort = req.param('sort') or 'createdAt'
+        fromDate = req.param('fromDate')
+        toDate = req.param('toDate')
+        enableDone = if req.param('enableDone')? then JSON.parse(req.param('enableDone')) else true
+        enableDoing = if req.param('enableDoing')? then JSON.parse(req.param('enableDoing')) else true
+        filter = {}
+        if fromDate? and toDate?
+            filter.createdAt = {'>=': fromDate, '<=': toDate}
+        else if fromDate?
+            filter.createdAt = {'>=': fromDate}
+        else if toDate?
+            filter.createdAt = {'<=': toDate}
+        if not enableDoing and not enableDone
+            return res.view 'payments', {user: req.user, result: [], sort: sort, page: 0, pages: 1, fromDate: fromDate, toDate: toDate, enableDoing: enableDoing, enableDone: enableDone}
+        else if enableDone and not enableDoing
+            filter.status = 'done';
+        else if enableDoing and not enableDone
+            filter.status = {$ne: 'done'};
+        Request.count(filter).exec (err, count) ->
+            Request.find(filter).sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                res.view 'payments', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1, fromDate: fromDate, toDate: toDate, enableDoing: enableDoing, enableDone: enableDone}
+
+    paymentsFile: (req, res) ->
+        fromDate = req.param('fromDate')
+        toDate = req.param('toDate')
+        enableDone = if req.param('enableDone')? then JSON.parse(req.param('enableDone')) else true
+        enableDoing = if req.param('enableDoing')? then JSON.parse(req.param('enableDoing')) else true
+        filter = {}
+        if fromDate? and toDate?
+            filter.createdAt = {'>=': fromDate, '<=': toDate}
+        else if fromDate?
+            filter.createdAt = {'>=': fromDate}
+        else if toDate?
+            filter.createdAt = {'<=': toDate}
+        s = 'Carrier;Sender;Receiver;Arrive Date;Paid;Competed;Sum;\n'
+        if not enableDoing and not enableDone
+            res.attachment('report.csv')
+            res.send new Buffer(s)
+            return
+        else if enableDone and not enableDoing
+            filter.status = 'done';
+        else if enableDoing and not enableDone
+            filter.status = {$ne: 'done'};
+        Request.find(filter).populateAll().exec (err, result) ->
+            for r in result
+                from = if r.parcel? and r.parcel.fromPerson? then r.parcel.fromPerson else r.sender
+                to = if r.parcel? and r.parcel.toPerson? then r.parcel.toPerson else r.sender
+                arrivedate = if r.parcel? then moment(r.parcel.arriveDate).format('LL') else ''
+                s = s +
+                """
+                #{r.driver.firstname} #{r.driver.lastname};#{from.firstname} #{from.lastname};#{to.firstname} #{to.lastname};#{arrivedate};#{r.paid};#{r.status};#{r.price}\n
+                """
+            console.log 'Filter', filter
+            res.attachment('report.csv')
+            res.send new Buffer(s)

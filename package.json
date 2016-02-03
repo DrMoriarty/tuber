@@ -38,6 +38,7 @@
     "passport-facebook": "^2.0.0",
     "passport-local": "^1.0.0",
     "password-generator": "^2.0.2",
+    "paypal-rest-sdk": "^1.6.8",
     "query-overpass": "^1.0.0",
     "rc": "~0.5.0",
     "react": "^0.14.3",

@@ -65,6 +65,9 @@ module.exports.routes = {
 
     'get /braintree/token': 'BraintreeController.clientToken',
     '/braintree/transaction/:id': 'BraintreeController.transaction',
+    'all /paypal/create': 'PaypalController.paymentPaypal',
+    'all /paypal/execute': 'PaypalController.execute',
+    'all /paypal/cancel': 'PaypalController.cancel',
 
     'all /search/driver': 'SearchController.searchDriver',
     'all /search/parcel': 'SearchController.searchParcel',
@@ -104,6 +107,8 @@ module.exports.routes = {
     'get /admin/servertests': 'AdminController.serverTests',
     'all /admin/stresstest': 'AdminController.stressTest',
     'all /admin/logs': 'AdminController.logs',
+    'all /admin/payments': 'AdminController.payments',
+    'all /admin/paymentsFile': 'AdminController.paymentsFile',
     'all /dpd/getAuth': 'DpdController.getAuth',
     'all /dpd/storeOrders': 'DpdController.storeOrders',
     'all /dpd/getTrackingData': 'DpdController.getTrackingData',

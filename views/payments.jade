@@ -1,0 +1,157 @@
+extend layout
+
+block head
+  link(rel='stylesheet', type='text/css', href='/css/pickmeup.min.css')
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-active
+        a(href='/admin/payments') Payments
+  .topbar-right
+    ol.breadcrumb
+      a(href='#')
+        button.btn.btn-info(class='button', onclick='downloadData()') Download
+
+block content
+  .row
+    .col-md-12
+      button.btn.btn-info(class='button', onclick='javascript:reloadPage({fromDate:"#{moment().startOf("week").format()}", toDate:"#{moment().format()}"});') Current week
+      | 
+      button.btn.btn-info(class='button', onclick='javascript:reloadPage({fromDate:"#{moment().subtract(15, "days").format()}", toDate:"#{moment().format()}"});') Last 15 days
+      | 
+      button.btn.btn-info(class='button', onclick='javascript:reloadPage({fromDate:"#{moment().startOf("month").format()}", toDate:"#{moment().format()}"});') Current month
+      | 
+      button.btn.btn-info(class='button', onclick='javascript:reloadPage({fromDate:"#{moment().subtract(30, "days").format()}", toDate:"#{moment().format()}"});') Last 30 days
+      | 
+      button.btn.btn-info(class='button', onclick='javascript:selectDates();') Select period
+      | 
+      .cBox.cBox-inline(onclick='javascript:reloadPage({enableDoing: #{!enableDoing}});')
+        if enableDoing
+          input#ordersDoing(type='checkbox', checked)
+        else
+          input#ordersDoing(type='checkbox')
+        label(for='ordersDoing')
+          | For execute
+      .cBox.cBox-inline(onclick='javascript:reloadPage({enableDone: #{!enableDone}});')
+        if enableDone
+          input#ordersDone(type='checkbox', checked)
+        else
+          input#ordersDone(type='checkbox')
+        label(for='ordersDone')
+          | Completed
+      #datePicker
+      button.btn.btn-info#dateApply(class='button', onclick='javascript:applyDates();') Apply
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            if fromDate && toDate
+              | From #{moment(fromDate).format('LL')} to #{moment(toDate).format('LL')}
+            else
+              | All payments
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th(onclick='javascript:reloadPage({sort:"id"});') #
+                th(onclick='javascript:reloadPage({sort:"driver"});') Carrier
+                th(onclick='javascript:reloadPage({sort:"sender"});') Sender
+                th(onclick='javascript:reloadPage({sort:"sender"});') Receiver
+                th(onclick='javascript:reloadPage({sort:"email"});') Arrive date
+                th(onclick='javascript:reloadPage({sort:"paid"});') Paid
+                th(onclick='javascript:reloadPage({sort:"status"});') Completed
+            tbody
+              if result
+                each it in result
+                  tr
+                    td= it.id
+                    td #{it.driver.firstname} #{it.driver.lastname}
+                    if it.parcel && it.parcel.fromPerson
+                      td #{it.parcel.fromPerson.firstname} #{it.parcel.fromPerson.lastname}
+                    else
+                      td #{it.sender.firstname} #{it.sender.lastname}
+                    if it.parcel && it.parcel.toPerson
+                      td #{it.parcel.toPerson.firstname} #{it.parcel.toPerson.lastname}
+                    else
+                      td #{it.sender.firstname} #{it.sender.lastname}
+                    if it.parcel
+                      td= moment(it.parcel.arriveDate).format('LL')
+                    else
+                      td
+                    td= it.paid
+                    td= it.status
+          .dataTables_info
+            | Page #{page}
+          .dataTables_paginate.paging_bs_normal
+            ul.pagination.pagination-sm
+              - for (var i=1; i<=pages; i++)
+                if (i == page)
+                  li.active
+                    a(href='javascript:reloadPage({page:#{i}});') #{i}
+                else
+                  li
+                    a(href='javascript:reloadPage({page:#{i}});') #{i}
+
+block script
+  script(type='text/javascript', src='/js/jquery.pickmeup.min.js')
+  script(type='text/javascript', src='/vendor/moment/moment-with-locales.min.js')
+  script(type='text/javascript').
+    $('#dateApply').hide();
+    function reloadPage(params) {
+      params = params || {};
+      params.sort = params.sort || '#{sort}';
+      params.fromDate = params.fromDate || '#{fromDate}';
+      params.toDate = params.toDate || '#{toDate}';
+      params.enableDone = params.hasOwnProperty('enableDone') ? params.enableDone : #{!!enableDone};
+      params.enableDoing = params.hasOwnProperty('enableDoing') ? params.enableDoing : #{!!enableDoing};
+      params.page = params.page || #{page}
+      if(params.fromDate.length <= 0) delete params.fromDate;
+      if(params.toDate.length <= 0) delete params.toDate;
+      url = '/admin/payments?';
+      for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+          url = url + key + '=' + encodeURIComponent(params[key]) + '&';
+        }
+      }
+      //console.log('Params:', params);
+      location.href = url;
+    }
+    function downloadData() {
+      fromDate = '#{fromDate}';
+      toDate = '#{toDate}';
+      url = "/admin/paymentsFile?enableDone=#{enableDone}&enableDoing=#{enableDoing}&";
+      if(fromDate.length > 0)
+        url = url + '&fromDate='+encodeURIComponent(fromDate);
+      if(toDate.length > 0)
+        url = url + '&toDate='+encodeURIComponent(toDate);
+      window.open(url, "_blank");
+    }
+    function dateSelected(date) {
+      console.log('Date', date);
+      window.selectedDates = date;
+    }
+    function selectDates() {
+      console.log('Select dates');
+      if(window.datesPickerShown) {
+        $('#datePicker').pickmeup('destroy');
+        $('#dateApply').hide();
+        window.datesPickerShown = false;
+      } else {
+        $('#datePicker').pickmeup({flat: true, mode: 'range', change: dateSelected});
+        $('#dateApply').show();
+        window.datesPickerShown = true;
+      }
+    }
+    function applyDates() {
+      if(window.selectedDates && window.selectedDates.length == 2) {
+        d1 = moment(window.selectedDates[0], 'DD-MM-YYYY');
+        d2 = moment(window.selectedDates[1], 'DD-MM-YYYY');
+        reloadPage({fromDate:d1.format(), toDate:d2.format()});
+      } else {
+        console.log('Dates not selected');
+      }
+    }

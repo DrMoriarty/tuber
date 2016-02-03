@@ -25,6 +25,7 @@ html
     //if lt IE 9
       script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
       script(src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js')
+    block head
   body
     // Start: Header
     header.navbar.navbar-fixed-top
@@ -100,6 +101,10 @@ html
               a(href='/admin/person/new')
                 span.glyphicons.glyphicons-user_add
                 span.sidebar-title Register a person
+            li
+              a(href='/admin/payments')
+                span.glyphicons.glyphicons-coins
+                span.sidebar-title Payments
             li
               a(href='/admin/servertests')
                 span.glyphicons.glyphicons-stats

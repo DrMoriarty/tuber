@@ -14,6 +14,18 @@ block topbar
         button.btn.btn-info(class='button') Create new
 
 block content
+  .modal.fade#rmModal(tabindex='-1', role='dialog', aria-labelledby='rmModalLabel')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close', onClick='delete window.currentRequestId;')
+            span(aria-hidden='true') x
+          h4 Remove this item?
+        .modal-body
+          | You can not undone this operation
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal', type='button', onClick='delete window.currentRequestId;') Cancel
+          button.btn.btn-primary(data-dismiss='modal', type='button', onClick='javascript:removeItem();') Remove
   .row
     .col-md-12
       .panel.panel-visible
@@ -32,10 +44,11 @@ block content
                 th(onclick='javascript:location.href="/admin/carrier?sort=email"') E-mail
                 th.btn-danger Password
                 th Find parcels
+                th Delete
             tbody
               if result
                 each it in result
-                  tr(onclick='javascript:location.href="/admin/carrier/#{it.id}"')
+                  tr(onclick='javascript:if(!window.currentRequestId){location.href="/admin/carrier/#{it.id}";}')
                     td= it.id
                     td= it.firstname
                     td= it.lastname
@@ -46,6 +59,9 @@ block content
                       a(href='/admin/findparcels/#{it.id}')
                         button.btn.btn-info.btn-gradient(type='button')
                           i.glyphicon.glyphicon-gift
+                    td
+                      a(href='javascript:; ', onclick='window.currentRequestId = "#{it.id}";')
+                        button.btn.btn-danger(class='button', data-toggle='modal', data-target='#rmModal') X
           .dataTables_info
             | Page #{page}
           .dataTables_paginate.paging_bs_normal
@@ -57,3 +73,15 @@ block content
                 else
                   li
                     a(href='/admin/carrier?sort=#{sort}&page=#{i}') #{i}
+
+block script
+  script(type='text/javascript').
+    window.removeItem = function() {
+      $.ajax({
+        url: '/api/user/'+window.currentRequestId,
+        type: 'DELETE',
+        success: function() {
+          location.reload();
+        }
+      });
+    };

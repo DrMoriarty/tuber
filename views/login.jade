@@ -103,7 +103,7 @@ html
           $.post(form.action, $(form).serialize(), function(data, status) {
             if(data && data.user && data.user.id) {
               console.log('Logged in');
-              location.href = '/admin';
+              location.href = '/admin/carrier';
             } else {
               console.log('Login error');
               $('#password').val('');

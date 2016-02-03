@@ -62,7 +62,7 @@ html
                     .input-group
                       span.input-group-addon
                         span.glyphicon.glyphicon-lock
-                      input.form-control(type='password', placeholder='Password', name="password")
+                      input.form-control#password(type='password', placeholder='Password', name="password")
                 .panel-footer
                   span.text-muted.fs12.lh30
                     a  Forgotten Password?
@@ -101,7 +101,14 @@ html
         submitHandler: function(form) {
           Pace.restart();
           $.post(form.action, $(form).serialize(), function(data, status) {
-            location.href = '/admin';
+            if(data && data.user && data.user.id) {
+              console.log('Logged in');
+              location.href = '/admin';
+            } else {
+              console.log('Login error');
+              $('#password').val('');
+              console.log(data, status);
+            }
           });
         }
       });

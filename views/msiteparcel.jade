@@ -37,7 +37,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input.numbers(type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='weight', value='1')
+                input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='weight', value='1')
                 em kg
                 span.down
                   i.fa.fa-chevron-down
@@ -45,7 +45,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input.numbers(type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='length', value='20')
+                input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='length', value='20')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
@@ -53,7 +53,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input.numbers(type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='width', value='5')
+                input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='width', value='5')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
@@ -61,7 +61,7 @@ block content
               li
                 span.up
                   i.fa.fa-chevron-up
-                input.numbers(type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='depth', value='5')
+                input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='depth', value='5')
                 em cm
                 span.down
                   i.fa.fa-chevron-down
@@ -118,6 +118,15 @@ block content
 
 block script
   script(type='text/javascript').
+    $(document).keypress(function(event) {
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13') {
+        if(window.address1Modal)
+          window.address1Modal.close();
+        if(window.address2Modal)
+          window.address2Modal.close();
+      }
+    });
     function saveAddress1() {
       form = $('#formAddress1').serialize();
       console.log('Save address1', form);

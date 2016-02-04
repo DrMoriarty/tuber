@@ -96,13 +96,13 @@ block content
                       strong #{parcel.toPersonAddress()}
                     else
                       strong #{parcel.ownerAddress()}
-                  li.no-margin
+                  //li.no-margin
                     | INSURRANCE: 
                     strong Standart (until #{parcel.insurance}&euro;)
-                  li
-                    | DELIVERY OPTIONS: 
-                    if parcel.request && parcel.request.deliveryPrice
-                      strong +#{parcel.request.deliveryPrice}&euro; #{parcel.request.deliveryOption}
+                  //li
+                  //  | DELIVERY OPTIONS: 
+                  //  if parcel.request && parcel.request.deliveryPrice
+                  //    strong +#{parcel.request.deliveryPrice}&euro; #{parcel.request.deliveryOption}
                   li
                     | TOTAL AMOUNT (Including VAT): 
                     if parcel.request
@@ -111,8 +111,8 @@ block content
                   .sender-name(style='min-height: 221px;')
                     figure
                       span THE SENDER:
-                      img(src='img/person.png', alt='')
-                      figcaption
+                      //img(src='img/person.png', alt='')
+                      //figcaption
                         a(href='tel://#{parcel.fromPerson.phone}')
                           i.fa.fa-phone-square
                           | call
@@ -120,7 +120,7 @@ block content
                       li
                         | NAME: 
                         strong #{parcel.fromPerson.firstname} #{parcel.fromPerson.lastname}
-                      li
+                      //li
                         | RAITE: 
                         span.rating
                           span &star;
@@ -135,8 +135,8 @@ block content
                   .sender-name(style='min-height: 221px;')
                     figure
                       span THE SENDER:
-                      img(src='img/person.png', alt='')
-                      figcaption
+                      //img(src='img/person.png', alt='')
+                      //figcaption
                         a(href='tel://#{parcel.toPerson.phone}')
                           i.fa.fa-phone-square
                           | call
@@ -144,7 +144,7 @@ block content
                       li
                         | NAME: 
                         strong #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
-                      li
+                      //li
                         | RAITE: 
                         span.rating
                           span &star;

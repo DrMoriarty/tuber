@@ -12,19 +12,23 @@ module.exports =
                         if err?
                             console.log err
                         else
-                            result = data['soap:Envelope']['soap:Body'][0]['ns2:storeOrdersResponse'][0].orderResult[0]
-                            fileContent = new Buffer(result.parcellabelsPDF[0], 'base64')
-                            fs.writeFile 'upload/'+request.parcel.id+'.pdf', fileContent, (err) ->
-                                console.log err if err?
-                            shipmentData =
-                                type: 'DPD'
-                                identificationNumber: result.shipmentResponses[0].identificationNumber[0]
-                                mpsId: result.shipmentResponses[0].mpsId[0]
-                                parcelLabelNumber: result.shipmentResponses[0].parcelInformation[0].parcelLabelNumber[0]
-                            console.log 'Shipment data', shipmentData
-                            Parcel.update({id: request.parcel.id}, {shipment: shipmentData}).exec (err, result) ->
-                                console.log err if err?
-                            Request.update({id: requestId}, {trackingNumber: shipmentData.parcelLabelNumber}).exec (err, res) ->
-                                console.log err if err?
+                            try
+                                result = data['soap:Envelope']['soap:Body'][0]['ns2:storeOrdersResponse'][0].orderResult[0]
+                                fileContent = new Buffer(result.parcellabelsPDF[0], 'base64')
+                                fs.writeFile 'upload/'+request.parcel.id+'.pdf', fileContent, (err) ->
+                                    console.log err if err?
+                                shipmentData =
+                                    type: 'DPD'
+                                    identificationNumber: result.shipmentResponses[0].identificationNumber[0]
+                                    mpsId: result.shipmentResponses[0].mpsId[0]
+                                    parcelLabelNumber: result.shipmentResponses[0].parcelInformation[0].parcelLabelNumber[0]
+                                console.log 'Shipment data', shipmentData
+                                Parcel.update({id: request.parcel.id}, {shipment: shipmentData}).exec (err, result) ->
+                                    console.log err if err?
+                                Request.update({id: requestId}, {trackingNumber: shipmentData.parcelLabelNumber}).exec (err, res) ->
+                                    console.log err if err?
+                            catch error
+                                console.log error
+                                LogService.saveLog 'Error', 'DPD processing', data
                 else
                     console.log 'Private carrier. No need processing.'

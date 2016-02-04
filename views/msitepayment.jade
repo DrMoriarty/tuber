@@ -49,7 +49,7 @@ block content
         span.total TOTAL AMOUNT (Including VAT): #{request.price}&euro;
     hr
     .container
-      form.form.js-validate(action='', method='')
+      form.form#payment-form(action='/braintree/transaction/#{request.id}', method='POST')
         ul.payment
           li
             input#paypal(type='radio', name='cards')
@@ -67,13 +67,81 @@ block content
             label.check(for='#')
         #wrap_hide
           label(for='first_name') CARDHOLDER FIRST NAME*
-          input#first_name(type='text', placeholder='Thierrry')
-          label(for='last_name') CARDHOLDER LAST NAME*
-          input#last_name(type='text', placeholder='Shtutgartz')
-          label(for='card') CARD NAMBER*
-          input#card(type='text', placeholder='4556614505116697')
+          input#first_name(data-braintree-name="cardholder_name", type='text', placeholder='Thierrry Shtutgartz', autocomplete='cc-name')
+          label(for='card') CARD NUMBER*
+          input#card(data-braintree-name='number', type='text', placeholder='4556614505116697', inputmode='numeric', maxlength="19", x-autocompletetype="cc-number", autocompletetype="cc-number", autocorrect="off", spellcheck="off", autocapitalize="off", autocomplete="cc-number")
           label(for='card_date') EXPIRATION DATE*
-          input#card_date(type='text', placeholder='02/16')
+          input#card_date(data-braintree-name='expiration_date', type='text', placeholder='02/16', autocomplete='cc-exp')
           label(for='last_name') SECURITY CODE*
-          input#last_name(type='text', placeholder='660 (The 3 digits after the card number on the signature panel of your card)')
-        a#pay_form_button.orange_button(href='/dashboard?m=1') CONFIRM ORDER
+          input#cvv_code(data-braintree-name="cvv", type='text', placeholder='660 (The 3 digits after the card number on the signature panel of your card)')
+        button#pay_form_button.orange_button CONFIRM ORDER
+
+block script
+  script(src="https://js.braintreegateway.com/v2/braintree.js")
+  script(type='text/javascript').
+    $('.want_popup').click(function() {
+      return false;
+    });
+    var clientToken = '#{token}';
+    var client = new braintree.api.Client({clientToken: clientToken});
+    //braintree.setup(clientToken, 'custom', {id: 'payment-form'});
+    $("#payment-form").submit(function(event) {
+      event.preventDefault();
+
+      if($('#paypal').prop('checked')) {
+        location.href = '/paypal/create?request=#{request.id}';
+        return;
+      }
+      
+      if(this[4].value.length <=1)
+        $('#first_name').addClass('error');
+      else
+        $('#first_name').removeClass('error');
+      if(this[5].value.length <=1)
+        $('#card').addClass('error');
+      else
+        $('#card').removeClass('error');
+      if(this[6].value.length <=1)
+        $('#card_date').addClass('error');
+      else
+        $('#card_date').removeClass('error');
+      if(this[7].value.length <=1)
+        $('#cvv_code').addClass('error');
+      else
+        $('#cvv_code').removeClass('error');
+
+      url = this.action;
+      client.tokenizeCard({
+        number: this[5].value,
+        cardholderName: this[4].value,
+        // You can use either expirationDate
+        expirationDate: this[6].value,
+        // CVV if required
+        cvv: this[7].value,
+      }, function (err, nonce) {
+        // Send nonce to your server
+        if(err) {
+          console.log('Billing error', err);
+        } else {
+          console.log('Nonce', nonce);
+          $.ajax({
+            type: 'POST',
+            url: url,
+            data: {payment_method_nonce: nonce},
+            success: function(data) {
+              console.log('Payment complete', data);
+              $('#want_popup_box').bPopup({
+                easing: 'easeOutBack', //uses jQuery easing plugin
+                  speed: 450,
+                  transition: 'slideDown'
+              });
+            },
+            error: function(err) {
+              console.log('Payment error', err);
+            }
+          });
+        }
+      });
+      return false;
+    });
+    

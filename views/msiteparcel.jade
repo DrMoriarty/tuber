@@ -131,10 +131,10 @@ block script
       window.address2Modal.close();
     }
     $('#address1btn').click(function() {
-      window.address1Modal = $('#fill_address1').bPopup({follow: [false, true], position: [0, 0]});
+      window.address1Modal = $('#fill_address1').bPopup({follow: [false, false], position: [0, 0]});
     });
     $('#address2btn').click(function() {
-      window.address2Modal = $('#fill_address2').bPopup({follow: [false, true], position: [0, 0]});
+      window.address2Modal = $('#fill_address2').bPopup({follow: [false, false], position: [0, 0]});
     });
     $('#inputform').submit(function(event) {
       event.preventDefault();

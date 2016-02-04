@@ -104,6 +104,11 @@ block script
     //braintree.setup(clientToken, 'custom', {id: 'payment-form'});
     $("#payment-form").submit(function(event) {
       event.preventDefault();
+
+      if($('#paypal').prop('checked')) {
+        location.href = '/paypal/create?request=#{request.id}';
+        return;
+      }
       
       if(this[4].value.length <=1)
         $('#first_name').addClass('error');

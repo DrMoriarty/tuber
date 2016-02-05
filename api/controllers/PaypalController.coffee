@@ -1,7 +1,7 @@
 paypal = require 'paypal-rest-sdk'
 
 paypal.configure({
-  'mode': 'sandbox' #sandbox or live
+  'mode': 'live' #sandbox or live
   #'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM'
   #'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
   'client_id': 'AZbqv_U8f3JeJooJJceTSfVbG8XoDaUmuG4kXqx12Tbj8ic_KEv_6DQF3yUNlSPVAmazuVip5LWV-vcF'

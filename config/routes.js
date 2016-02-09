@@ -113,6 +113,10 @@ module.exports.routes = {
     'all /dpd/storeOrders': 'DpdController.storeOrders',
     'all /dpd/getTrackingData': 'DpdController.getTrackingData',
     'all /dpd/getParcelLabelNumber': 'DpdController.getParcelLabelNumber',
+    'all /dpd/findParcelShops': 'DpdController.findParcelShops',
+    'all /dpd/findParcelShopsByGeoData': 'DpdController.findParcelShopsByGeoData',
+    'all /dpd/findCities': 'DpdController.findCities',
+    'all /dpd/getAvailableServices': 'DpdController.getAvailableServices',
 
     /***************************************************************************
      *                                                                          *

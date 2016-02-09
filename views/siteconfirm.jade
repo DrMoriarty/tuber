@@ -93,6 +93,8 @@ block content
                 option #{parcel.fromPersonAddress()}
               else
                 option #{parcel.ownerAddress()}
+              each fromShop in fromShops
+                option #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
         .confirmation-destination
           span.white_span.from TO:
           input#postbox2(name='post2', type='radio')
@@ -107,6 +109,8 @@ block content
                 option #{parcel.toPersonAddress()}
               else
                 option #{parcel.ownerAddress()}
+              each toShop in toShops
+                option #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
         .clear
         hr
         .confirmation-confirm

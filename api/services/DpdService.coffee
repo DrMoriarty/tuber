@@ -52,16 +52,16 @@ module.exports =
                 console.log err
                 cb err, null
             else
-                console.log body
+                console.log '[getAuth]: ', body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result
                     if err?
                         console.log err
                         cb err, body
                     else
-                        cb null, result
                         token = result['soap:Envelope']['soap:Body'][0]['ns2:getAuthResponse'][0].return[0].authToken
                         self.authToken = token
+                        cb null, result
 
     storeOrders: (parcelId, cb) ->
         self = @
@@ -243,3 +243,192 @@ module.exports =
                 console.log body
                 cb null, body
         
+    #
+    # Find the DPD parcel shops by country/countries, zipCode and city and additional criteria like flags for properties of parcel shops. The search country can either domestic country or cross border country/countries for the search.
+    # 
+    findParcelShops: (cb) ->
+        if not @authToken?
+            self = @
+            @getAuth (data) ->
+                self.findParcelShopsRequest cb
+        else
+            @findParcelShopsRequest cb
+
+    findParcelShopsRequest: (cb) ->
+        username = 'delti130'
+        token = DpdService.authToken
+        lang = 'en_US'   # en_US or de_DE
+        data = """
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ParcelShopFinderService/5.0">
+            <soapenv:Header>
+                <ns:authentication>
+                    <delisId>#{username}</delisId>
+                    <authToken>#{token}</authToken>
+                    <messageLanguage>#{lang}</messageLanguage>
+                </ns:authentication>
+            </soapenv:Header>
+            <soapenv:Body>
+                <ns1:findParcelShops>
+                    <country>DE</country>
+                    <zipCode>60388</zipCode>
+                    <street>Casimirstraße</street>
+                    <limit>10</limit>
+                    <availabilityDate>2014-11-10 16:00</availabilityDate>
+                    <hideClosed>true</hideClosed>
+                </ns1:findParcelShops>
+            </soapenv:Body>
+        </soapenv:Envelope>
+        """
+        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShops', form: data}, (err, httpResponse, body) ->
+            if err?
+                console.log err
+                cb err, null
+            else
+                console.log '[findParcelShops]: ', body
+                parseString body, (err, result) ->
+                    console.log 'XML to JSON', err, result
+                    if err?
+                        console.log err
+                        cb err, body
+                    else
+                        cb null, result
+
+    #
+    # Find the DPD parcel shops by geo data and additional criteria like flags for properties of parcel shops. The search country can either domestic country or cross border country/countries for the search.
+    # 
+    findParcelShopsByGeoData: (lat, lng, cb) ->
+        if not @authToken?
+            self = @
+            @getAuth (data) ->
+                self.findParcelShopsByGeoDataRequest lat, lng, cb
+        else
+            @findParcelShopsByGeoDataRequest lat, lng, cb
+
+    findParcelShopsByGeoDataRequest: (lat, lng, cb) ->
+        username = 'delti130'
+        token = DpdService.authToken
+        lang = 'en_US'   # en_US or de_DE
+        data = """
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ParcelShopFinderService/5.0">
+            <soapenv:Header>
+                <ns:authentication>
+                    <delisId>#{username}</delisId>
+                    <authToken>#{token}</authToken>
+                    <messageLanguage>#{lang}</messageLanguage>
+                </ns:authentication>
+            </soapenv:Header>
+            <soapenv:Body>
+                <ns1:findParcelShopsByGeoData>
+                    <longitude>#{lng}</longitude>
+                    <latitude>#{lat}</latitude>
+                    <limit>3</limit>
+                </ns1:findParcelShopsByGeoData>
+            </soapenv:Body>
+        </soapenv:Envelope>
+        """
+        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShopsByGeoData', form: data}, (err, httpResponse, body) ->
+            if err?
+                console.log err
+                cb err, null
+            else
+                console.log body
+                parseString body, (err, result) ->
+                    console.log 'XML to JSON', err, result
+                    if err?
+                        console.log err
+                        cb err, body
+                    else
+                        cb null, result
+
+    #
+    # Find cities with DPD parcel shops by country, zipCode and city.
+    # 
+    findCities: (cb) ->
+        if not @authToken?
+            self = @
+            @getAuth (data) ->
+                self.findCitiesRequest cb
+        else
+            @findCitiesRequest cb
+
+    findCitiesRequest: (cb) ->
+        username = 'delti130'
+        token = DpdService.authToken
+        lang = 'en_US'   # en_US or de_DE
+        data = """
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ParcelShopFinderService/5.0">
+            <soapenv:Header>
+                <ns:authentication>
+                    <delisId>#{username}</delisId>
+                    <authToken>#{token}</authToken>
+                    <messageLanguage>#{lang}</messageLanguage>
+                </ns:authentication>
+            </soapenv:Header>
+            <soapenv:Body>
+                <ns1:findCities>
+                    <country>DE</country>
+                    <zipCode>63741</zipCode>
+                    <city>Aschaffenburg</city>
+                    <limit>1</limit>
+                    <order>NAME</order>
+                </ns1:findCities>
+            </soapenv:Body>
+        </soapenv:Envelope>
+        """
+        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findCities', form: data}, (err, httpResponse, body) ->
+            if err?
+                console.log err
+                cb err, null
+            else
+                console.log body
+                parseString body, (err, result) ->
+                    console.log 'XML to JSON', err, result
+                    if err?
+                        console.log err
+                        cb err, body
+                    else
+                        cb null, result
+
+    #
+    # Find available services of DPD parcel shops by country.
+    #
+    getAvailableServices: (cb) ->
+        if not @authToken?
+            self = @
+            @getAuth (data) ->
+                self.getAvailableServicesRequest cb
+        else
+            @getAvailableServicesRequest cb
+
+    getAvailableServicesRequest: (cb) ->
+        username = 'delti130'
+        token = DpdService.authToken
+        lang = 'en_US'   # en_US or de_DE
+        data = """
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/Authentication/2.0" xmlns:ns1="http://dpd.com/common/service/types/ParcelShopFinderService/5.0">
+            <soapenv:Header>
+                <ns:authentication>
+                    <delisId>#{username}</delisId>
+                    <authToken>#{token}</authToken>
+                    <messageLanguage>#{lang}</messageLanguage>
+                </ns:authentication>
+            </soapenv:Header>
+            <soapenv:Body>
+                <ns1:getAvailableServices />
+            </soapenv:Body>
+        </soapenv:Envelope>
+        """
+        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/getAvailableServices', form: data}, (err, httpResponse, body) ->
+            if err?
+                console.log err
+                cb err, null
+            else
+                console.log body
+                parseString body, (err, result) ->
+                    console.log 'XML to JSON', err, result
+                    if err?
+                        console.log err
+                        cb err, body
+                    else
+                        cb null, result
+

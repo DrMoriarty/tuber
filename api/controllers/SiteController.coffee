@@ -172,11 +172,19 @@ module.exports =
                 SearchService.searchDriver parcelId, (err, drivers) ->
                     if err?
                         console.log err
-                        res.negotiate err
-                    if req.mobile
-                        res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId}
-                    else
-                        res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId}
+                        return res.negotiate err
+                    fromAddress = if parcel.fromPerson? then parcel.fromPerson else parcel.owner
+                    toAddress = if parcel.toPerson? then parcel.toPerson else parcel.owner
+                    DpdService.findParcelShopsByGeoData fromAddress.latitude, fromAddress.longitude, (err, data) ->
+                        console.log err if err?
+                        fromParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
+                        DpdService.findParcelShopsByGeoData toAddress.latitude, toAddress.longitude, (err, data) ->
+                            console.log err if err?
+                            toParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
+                            if req.mobile
+                                res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: fromParcelShops, toShops: toParcelShops}
+                            else
+                                res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: fromParcelShops, toShops: toParcelShops}
         else
             if req.mobile
                 res.redirect '/?m=1'

@@ -48,3 +48,39 @@ module.exports =
                 res.json err
             else
                 res.json data
+
+    findParcelShops: (req, res) ->
+        DpdService.findParcelShops (err, data) ->
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data
+
+    findParcelShopsByGeoData: (req, res) ->
+        lat = req.param('latitude')
+        lng = req.param('longitude')
+        if not lat or not lng
+            return res.badRequest()
+        DpdService.findParcelShopsByGeoData lat, lng, (err, data) ->
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data
+
+    findCities: (req, res) ->
+        DpdService.findCities (err, data) ->
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data
+
+    getAvailableServices: (req, res) ->
+        DpdService.getAvailableServices (err, data) ->
+            if err?
+                #res.setHeader( "Content-type", "text/xml" )
+                res.json err
+            else
+                res.json data

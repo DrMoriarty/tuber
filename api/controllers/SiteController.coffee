@@ -175,16 +175,33 @@ module.exports =
                         return res.negotiate err
                     fromAddress = if parcel.fromPerson? then parcel.fromPerson else parcel.owner
                     toAddress = if parcel.toPerson? then parcel.toPerson else parcel.owner
-                    DpdService.findParcelShopsByGeoData fromAddress.latitude, fromAddress.longitude, (err, data) ->
-                        console.log err if err?
-                        fromParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
-                        DpdService.findParcelShopsByGeoData toAddress.latitude, toAddress.longitude, (err, data) ->
-                            console.log err if err?
-                            toParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
-                            if req.mobile
-                                res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: fromParcelShops, toShops: toParcelShops}
-                            else
-                                res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: fromParcelShops, toShops: toParcelShops}
+                    async.series( [
+                        (cb) ->
+                            DpdService.findParcelShopsByGeoData fromAddress.latitude, fromAddress.longitude, (err, data) ->
+                                if err?
+                                    console.log err 
+                                    return cb(err, null)
+                                try
+                                    fromParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
+                                    return cb(null, fromParcelShops)
+                                catch e
+                                    return cb(e, null)
+                        (cb) ->
+                            DpdService.findParcelShopsByGeoData toAddress.latitude, toAddress.longitude, (err, data) ->
+                                if err?
+                                    console.log err
+                                    return cb(err, null)
+                                try 
+                                    toParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
+                                    return cb(null, toParcelShops)
+                                catch e
+                                    return cb(e, null)
+                    ], (err, result) ->
+                        if req.mobile
+                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or []}
+                        else
+                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or []}
+                    )
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -320,3 +337,6 @@ module.exports =
                 else
                     res.json {status: 'ok', parcel: result.id}
         )
+
+    subscript: (req, res) ->
+        res.render 'sitescript', {user: req.user}

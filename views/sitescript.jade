@@ -1,0 +1,94 @@
+extend layoutsite
+
+block header
+  // header section
+  section.header-section
+    .container
+      ul
+        li
+          span 1. Price offers
+        li
+          a(href='/confirmation/#{parcel.id}') 2. Confirmation
+        li
+          a(href='#') 3. Payment
+        li
+          a(href='/dashboard') 4. Dashboard
+      span.title #{user.firstname} #{user.lastname}
+
+block content
+  // content
+  section.section
+    h1 Price Offers
+    .container
+      article.offers
+        figure
+          img(src='/img/price_cheap.png', alt='')
+          if drivers.cheapest.available
+            figcaption FROM &euro;#{drivers.cheapest.price}
+          else
+            figcaption Not found
+        strong cheapest
+        ul
+          li Expected dates:
+          li Departure: #{drivers.cheapest.pickupDate}
+          li Arrival: #{drivers.cheapest.arriveDate}
+        if drivers.cheapest.available
+          a.more(href='#')
+            i.icons-plus
+            | MORE INFO
+          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.cheapest.id}')
+            | GET IT
+            br
+            | NOW
+        else
+          a.orange_button(href='#')
+            | NOT FOUND
+      article.offers
+        figure
+          img(src='/img/price_fast.png', alt='')
+          if drivers.fastest.available
+            figcaption FROM &euro;#{drivers.fastest.price}
+          else
+            figcaption Not found
+        strong fastest
+        ul
+          li Expected dates:
+          li Departure: #{drivers.fastest.pickupDate}
+          li Arrival: #{drivers.fastest.arriveDate}
+        if drivers.fastest.available
+          a.more(href='#')
+            i.icons-plus
+            | MORE INFO
+          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.fastest.id}')
+            | GET IT
+            br
+            | NOW
+        else
+          a.orange_button(href='#')
+            | NOT FOUND
+    article.offers
+        figure
+          img(src='/img/price_eco.png', alt='')
+          if drivers.ecologiest.available
+            figcaption FROM &euro;#{drivers.ecologiest.price}
+          else
+            figcaption Not found
+        strong ecologiest
+        ul
+          li Expected dates:
+          li Departure: #{drivers.ecologiest.pickupDate}
+          li Arrival: #{drivers.ecologiest.arriveDate}
+        if drivers.ecologiest.available
+          a.more(href='#')
+            i.icons-plus
+            | MORE INFO
+          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.ecologiest.id}')
+            | GET IT
+            br
+            | NOW
+        else
+          a.orange_button(href='#')
+            | NOT FOUND
+      .clear
+      if more
+        a.offers-more(href='#') SEE MORE OFFERS

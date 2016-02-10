@@ -88,13 +88,13 @@ block content
           input#postoffice(name='post', type='radio')
           label(for='postoffice') POST OFFICE
           .confirmation-select
-            select.js-select
+            select.js-select#addressSelect1
               if parcel.fromPerson
-                option #{parcel.fromPersonAddress()}
+                option#homeAddress1(value='home') #{parcel.fromPersonAddress()}
               else
-                option #{parcel.ownerAddress()}
+                option#homeAddress1(value='home') #{parcel.ownerAddress()}
               each fromShop in fromShops
-                option #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
+                option.pboxAddress1 #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
         .confirmation-destination
           span.white_span.from TO:
           input#postbox2(name='post2', type='radio')
@@ -104,13 +104,13 @@ block content
           input#postoffice2(name='post2', type='radio')
           label(for='postoffice2') POST OFFICE
           .confirmation-select
-            select.confirmation-select.js-select
+            select.confirmation-select.js-select#addressSelect2
               if parcel.toPerson
-                option #{parcel.toPersonAddress()}
+                option#homeAddress2(value='home') #{parcel.toPersonAddress()}
               else
-                option #{parcel.ownerAddress()}
+                option#homeAddress2(value='home') #{parcel.ownerAddress()}
               each toShop in toShops
-                option #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
+                option.pboxAddress2 #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
         .clear
         hr
         .confirmation-confirm
@@ -151,6 +151,18 @@ block script
   script(src="https://maps.googleapis.com/maps/api/js")
   script(type='text/javascript').
     // TODO
+    $('#home').on('click', function() {
+      console.log('Home 1', $(this).prop('checked'));
+      $('#addressSelect1').val('home');
+    });
+    $('#home2').on('click', function() {
+      console.log('Home 2', $(this).prop('checked'));
+      $('#addressSelect2').val('home');
+    });
+    $('#postbox').on('click', function() {
+    });
+    $('#postbox2').on('click', function() {
+    });
     document.currentDriverId = '#{drivers[0].id}';
     document.currentTotalPrice = #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)};
     ReactDOM.render(React.createElement(DateBlock, {pdate:'#{parcel.pickupDate}', adate:'#{parcel.arriveDate}'}), document.getElementById('dateblock'));

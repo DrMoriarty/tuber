@@ -6,6 +6,7 @@
 moment = require 'moment'
 async = require 'async'
 gps = require 'gps-util'
+fs = require 'fs'
 pageSize = 3
 
 module.exports = 
@@ -137,24 +138,26 @@ module.exports =
                             console.log err
                             return res.negotiate err
                         if req.mobile
-                            res.view 'msitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                            view = 'msitedashboard'
                         else
-                            res.view 'sitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                            view = 'sitedashboard'
+                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
         else if req.user? and req.user.driver
-            filter = {driver: req.user.id, status: {'!': ['archive', 'canceled']}}
+            filter = {driver: req.user.id, status: {'!': ['arrived', 'archive', 'canceled']}}
             Parcel.count(filter).exec (err, count) ->
                 Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                     if err
                         console.log err
                         return res.negotiate err
-                    Parcel.find({driver: req.user.id, status: ['archive', 'canceled']}).populateAll().exec (err, archive) ->
+                    Parcel.find({driver: req.user.id, status: ['arrived', 'archive', 'canceled']}).populateAll().exec (err, archive) ->
                         if err
                             console.log err
                             return res.negotiate err
                         if req.mobile
-                            res.view 'msitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                            view = 'msitedriverdashboard'
                         else
-                            res.view 'sitedashboard', {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                            view = 'sitedriverdashboard'
+                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -339,4 +342,40 @@ module.exports =
         )
 
     subscript: (req, res) ->
-        res.render 'sitescript', {user: req.user}
+        if not req.user?
+            if req.mobile
+                return res.redirect '/?m=1'
+            else
+                return res.redirect '/'
+        parcelId = req.param('parcel')
+        Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+            console.log err if err?
+            res.render 'sitescript', {user: req.user, parcel: parcel}
+
+    makeSubscript: (req, res) ->
+        if not req.user?
+            res.badRequest()
+        parcelId = req.param('parcel')
+        if not parcelId?
+            return res.badRequest 'parcel required'
+        pngFile = req.param('subscript')
+        if not pngFile? or pngFile.length < 22
+            return res.badRequest('subscript required')
+        Request.find({parcel: parcelId, senderAccepted: true}).exec (err, requests) ->
+            if err?
+                console.log err
+                return res.negotiate err
+            if requests? and requests.length > 0
+                request = requests[0]
+                pngFile = pngFile.substring(22)
+                fileContent = new Buffer(pngFile, 'base64')
+                fs.writeFile 'upload/subscript_'+request.id+'.png', fileContent, (err) ->
+                    console.log err if err?
+                Parcel.update({id: parcelId}, {status: 'arrived'}).exec (err, data) ->
+                    if err?
+                        console.log err
+                        res.negotiate err
+                    else
+                        res.json {status: 'success'}
+            else
+                res.notFound()

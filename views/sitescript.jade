@@ -4,91 +4,92 @@ block header
   // header section
   section.header-section
     .container
-      ul
-        li
-          span 1. Price offers
-        li
-          a(href='/confirmation/#{parcel.id}') 2. Confirmation
-        li
-          a(href='#') 3. Payment
-        li
-          a(href='/dashboard') 4. Dashboard
       span.title #{user.firstname} #{user.lastname}
 
 block content
   // content
   section.section
-    h1 Price Offers
+    h1 Delivery confirmation
+    if parcel.toPerson
+      h1 #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
+    else
+      h1 #{parcel.owner.firstname} #{parcel.owner.lastname}
     .container
+      canvas#canvas(width='1000', height='300', style='background:white;')
       article.offers
-        figure
-          img(src='/img/price_cheap.png', alt='')
-          if drivers.cheapest.available
-            figcaption FROM &euro;#{drivers.cheapest.price}
-          else
-            figcaption Not found
-        strong cheapest
-        ul
-          li Expected dates:
-          li Departure: #{drivers.cheapest.pickupDate}
-          li Arrival: #{drivers.cheapest.arriveDate}
-        if drivers.cheapest.available
-          a.more(href='#')
-            i.icons-plus
-            | MORE INFO
-          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.cheapest.id}')
-            | GET IT
-            br
-            | NOW
-        else
-          a.orange_button(href='#')
-            | NOT FOUND
+        a.orange_button(href='javascript:clearCanvas();')
+          | CLEAR
       article.offers
-        figure
-          img(src='/img/price_fast.png', alt='')
-          if drivers.fastest.available
-            figcaption FROM &euro;#{drivers.fastest.price}
-          else
-            figcaption Not found
-        strong fastest
-        ul
-          li Expected dates:
-          li Departure: #{drivers.fastest.pickupDate}
-          li Arrival: #{drivers.fastest.arriveDate}
-        if drivers.fastest.available
-          a.more(href='#')
-            i.icons-plus
-            | MORE INFO
-          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.fastest.id}')
-            | GET IT
-            br
-            | NOW
-        else
-          a.orange_button(href='#')
-            | NOT FOUND
-    article.offers
-        figure
-          img(src='/img/price_eco.png', alt='')
-          if drivers.ecologiest.available
-            figcaption FROM &euro;#{drivers.ecologiest.price}
-          else
-            figcaption Not found
-        strong ecologiest
-        ul
-          li Expected dates:
-          li Departure: #{drivers.ecologiest.pickupDate}
-          li Arrival: #{drivers.ecologiest.arriveDate}
-        if drivers.ecologiest.available
-          a.more(href='#')
-            i.icons-plus
-            | MORE INFO
-          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.ecologiest.id}')
-            | GET IT
-            br
-            | NOW
-        else
-          a.orange_button(href='#')
-            | NOT FOUND
+      article.offers
+        a.orange_button(href='javascript:saveCanvas();')
+          | DONE
       .clear
-      if more
-        a.offers-more(href='#') SEE MORE OFFERS
+
+block script
+  script(type='text/javascript').
+    //context = $('#canvas').getContext('2d');
+    context = document.getElementById('canvas').getContext("2d");
+    var clickX = new Array();
+    var clickY = new Array();
+    var clickDrag = new Array();
+    var paint;
+    function saveCanvas() {
+      var c = document.getElementById('canvas');
+      var pngData = c.toDataURL('image/png');
+      $.post('/make/subscript', {parcel:'#{parcel.id}', subscript: pngData}, function(data, status) {
+        if(status == 'success') {
+          location.href='/dashboard';
+        } else {
+          console.log('Subscript result', data);
+        }
+      });
+    }
+    function clearCanvas() {
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+      clickX = new Array();
+      clickY = new Array();
+      clickDrag = new Array();
+    }
+    function redraw(){
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+  
+      context.strokeStyle = "#264bdf";
+      context.lineJoin = "round";
+      context.lineWidth = 5;
+			
+      for(var i=0; i < clickX.length; i++) {		
+        context.beginPath();
+        if(clickDrag[i] && i){
+          context.moveTo(clickX[i-1], clickY[i-1]);
+        } else {
+          context.moveTo(clickX[i]-1, clickY[i]);
+        }
+        context.lineTo(clickX[i], clickY[i]);
+        context.closePath();
+        context.stroke();
+      }
+    }
+    offset = $('#canvas').offset();
+    function processTouch(e, dragging) {
+      var mouseX = e.pageX - offset.left;
+      var mouseY = e.pageY - offset.top;
+      clickX.push(mouseX);
+      clickY.push(mouseY);
+      clickDrag.push(dragging);
+      redraw();
+    }
+    $('#canvas').mousedown(function(e) {
+      paint = true;
+      processTouch(e);
+    });
+    $('#canvas').mousemove(function(e) {
+      if(paint){
+        processTouch(e, true);
+      }
+    });
+    $('#canvas').mouseup(function(e) {
+      paint = false;
+    });
+    $('#canvas').mouseleave(function(e) {
+      paint = false;
+    });

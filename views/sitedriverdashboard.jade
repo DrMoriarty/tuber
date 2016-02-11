@@ -1,0 +1,355 @@
+extend layoutsite
+
+block header
+  // header section
+  section.header-section
+    .container
+      ul
+        if user.driver
+          li
+            span Dashboard
+        if !user.driver
+          li
+            a(href='javascript:;') 1. Price offers
+          li
+            a(href='javascript:;') 2. Confirmation
+          li
+            a(href='javascript:;') 3. Payment
+          li
+            span 4. Dashboard
+      span.title #{user.firstname} #{user.lastname}
+
+block content
+  // content
+  section.section
+    .container
+      .sitebar.js-tabs
+        ul.nav
+          li
+            a(href='#') My parameters
+          li.active
+            a(href='#') MY ORDERS/Status/details
+          li
+            a(href='#') My payments
+          li
+            a(href='#') My archive
+      .content
+        // tab
+        .js-tab-body
+          .sender
+            ul
+              li
+                | NAME:
+                strong #{user.firstname} #{user.lastname}
+              li
+                | COMPANY (optional):
+                strong #{user.company}
+              li
+                | VAT (optional):
+                strong #{user.vat}
+              li
+                | ADRESS:
+                strong #{user.zip} #{user.city} #{user.address1} #{user.address2}
+              li
+                | MOBILE PHONE:
+                strong #{user.phone}
+              li
+                | E-MAIL:
+                strong #{user.email}
+              li
+                | SUBSCRIBE:
+                strong YES
+            a.orange_button(href='/profile') CHANGE MY INFO
+            .pattern
+        // tab
+        .js-tab-body(style='display: block;')
+          if parcels && parcels.length
+            each parcel in parcels
+              .sender
+                if parcel.request && parcel.request.trackingNumber
+                  h3 parcel.request.trackingNumber
+                else
+                  h3 NO TRACKING NUMBER
+                ul
+                  if parcel.request && parcel.request.status
+                    li
+                      | CURRENT: 
+                      em #{parcel.request.status}
+                  li
+                    | SENDING DETAILS: 
+                    strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+                  li.no-margin
+                    | DEPARTURE DATE: 
+                    strong #{moment(parcel.pickupDate).format('LL')}
+                  li
+                    | ARRIVAL DATE: 
+                    strong #{moment(parcel.arriveDate).format('LL')}
+                  li.no-margin
+                    | FROM: 
+                    if parcel.fromPerson
+                      strong #{parcel.fromPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  li
+                    | TO: 
+                    if parcel.toPerson
+                      strong #{parcel.toPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  //li.no-margin
+                    | INSURRANCE: 
+                    strong Standart (until #{parcel.insurance}&euro;)
+                  //li
+                  //  | DELIVERY OPTIONS:
+                  //  if parcel.request && parcel.request.deliveryPrice
+                  //    strong +#{parcel.request.deliveryPrice}&euro; #{parcel.request.deliveryOption}
+                  li
+                    | TOTAL AMOUNT (Including VAT):
+                    if parcel.request
+                      strong #{parcel.request.price}&euro;
+                if parcel.fromPerson
+                  .sender-name
+                    figure
+                      span THE SENDER:
+                      //img(src='/img/person.png', alt='')
+                      //figcaption
+                        a(href='tel://#{parcel.fromPerson.phone}')
+                          i.fa.fa-phone-square
+                          | call
+                    ul
+                      li
+                        | NAME: 
+                        strong #{parcel.fromPerson.firstname} #{parcel.fromPerson.lastname}
+                      //li
+                        | RAITE: 
+                        span.rating
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                      li
+                        | PHONENUMBER: 
+                        strong #{parcel.fromPerson.phone}
+                if parcel.toPerson
+                  .sender-name
+                    figure
+                      span THE RECIPIENT:
+                      //img(src='/img/person.png', alt='')
+                      //figcaption
+                        a(href='tel://#{parcel.toPerson.phone}')
+                          i.fa.fa-phone-square
+                          | call
+                    ul
+                      li
+                        | NAME: 
+                        strong #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
+                      //li
+                        | RAITE: 
+                        span.rating
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                          span &star;
+                      li
+                        | PHONENUMBER: 
+                        strong #{parcel.toPerson.phone}
+                .clear
+                if parcel.status == 'draft'
+                  //a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}"') CONTINUE
+                  h3 THE ORDER NOT COMPLETED
+                else if parcel.status == 'published'
+                  //a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}"') PROCESS PAYMENT
+                  h3 THE ORDER NOT PAID
+                else if parcel.status == 'accepted'
+                  a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') ORDER PICKED UP
+                else if parcel.status == 'started'
+                  a.orange_button.cansel_order(href='#', onClick='location.href="/subscript?parcel=#{parcel.id}"') CONFIRM DELIVERY
+                //else if parcel.status == 'arrived'
+                //  a.orange_button.cansel_order(href='#', onClick='archiveOrder("#{parcel.id}")') ARCHIVE RECORD
+                //else
+                //  a.orange_button.cansel_order(href='#', onClick='deleteOrder("#{parcel.id}")') DELETE
+                .pattern
+            ul.pagination
+              li.prev
+                a(href='/dashboard')
+                  i.fa.fa-angle-double-left
+              - for (var i=1; i<=pages; i++)
+                if (i == page)
+                  li.active
+                    a(href='/dashboard?page=#{i}') #{i}
+                else
+                  li
+                    a(href='/dashboard?page=#{i}') #{i}
+              li.next
+                a(href='/dashboard?page=#{pages}')
+                  i.fa.fa-angle-double-right
+          else
+            .sender
+              .clear
+              h3 YOU HAVE NO PARCELS YET
+              .clear
+        // tab
+        .js-tab-body
+          if payments && payments.length
+            each payment in payments
+              .sender
+                ul
+                  li
+                    | ORDER NO: 
+                    strong SA12345678
+                  li
+                    | PAYMENT STATUS 
+                    em Pay Success
+                  li.no-margin
+                    | TOTAL AMOUNT:
+                    strong 186&euro;
+                  li
+                    | Received:
+                    strong 186&euro; 
+                  li.no-margin
+                    | Payment Method: 
+                    strong Credit Card
+                  li
+                    | Date Received: 
+                    strong 11/10/2015
+                .pattern
+          else
+            .sender
+              .clear
+              h3 YOU HAVE NO PAYMENTS YET
+              .clear
+        // tab
+        .js-tab-body
+          if archive && archive.length
+            each parcel in archive
+              .sender
+                if parcel.request && parcel.request.trackingNumber
+                  h3 parcel.request.trackingNumber
+                else
+                  h3 NO TRACKING NUMBER
+                ul
+                  li
+                    | STATUS:
+                    if parcel.status == 'archive'
+                      em  Arrived
+                    if parcel.status == 'canceled'
+                      em  Canceled
+                  li
+                    | SENDING DETAILS: 
+                    strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+                  li.no-margin
+                    | DEPARTURE DATE: 
+                    strong #{moment(parcel.pickupDate).format('LL')}
+                  li
+                    | ARRIVAL DATE: 
+                    strong #{moment(parcel.arriveDate).format('LL')}
+                  li.no-margin
+                    | FROM: 
+                    if parcel.fromPerson
+                      strong #{parcel.fromPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  li
+                    | TO: 
+                    if parcel.toPerson
+                      strong #{parcel.toPersonAddress()}
+                    else
+                      strong #{parcel.ownerAddress()}
+                  li.no-margin
+                    | INSURRANCE: 
+                    strong Standart (until #{parcel.insurance}&euro;)
+                  li
+                    | DELIVERY OPTIONS: 
+                    strong +0&euro; to home adress
+                  li
+                    | TOTAL AMOUNT (Including VAT): 
+                    strong #{parcel.request.price}&euro;
+                //a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
+                //span.note * You must delivery this order to 23/11/2015
+                .pattern
+          else
+            .sender
+              .clear
+              h3 YOU HAVE NO ARCHIVED PARCELS YET
+              .clear
+      #cancel_box.popup_box
+        span
+          | CONFIRMATION
+          //strong SA12345678.
+        br
+        strong Confirm that you picked up the order
+        br
+        em * Mark order as picked up only after you really get the parcel
+        br
+        a.orange_button(href='javascript:reallyStartOrder();') PICK UP THE ORDER
+        a.gray_button.b-close(href='#') NOT YET
+
+block script
+  script(type='text/javascript').
+    function startOrder(id) {
+      window.startedOrderId = id
+      console.log('Start order', id);
+      $('#cancel_box').bPopup({
+        easing: 'easeOutBack',
+        speed: 450,
+        transition: 'slideDown'
+      });
+    }
+    function reallyStartOrder() {
+      $.ajax({
+        type: 'POST',
+        url: '/api/parcel/'+window.startedOrderId,
+        data: {'status': 'started'},
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
+    function confirmOrder(id) {
+      console.log('Confirm order', id);
+      $.ajax({
+        type: 'POST',
+        url: '/api/parcel/'+id,
+        data: {'status': 'arrived'},
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
+    /*
+    function archiveOrder(id) {
+      console.log('Archive order', id);
+      $.ajax({
+        type: 'POST',
+        url: '/api/parcel/'+id,
+        data: {'status': 'archive'},
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
+    function deleteOrder(id) {
+      console.log('Delete order', id);
+      $.ajax({
+        type: 'DELETE',
+        url: '/api/parcel/'+id,
+        success: function(data) {
+          location.reload();
+        },
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
+    */

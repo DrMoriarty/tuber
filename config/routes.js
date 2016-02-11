@@ -43,6 +43,7 @@ module.exports.routes = {
     'get /payment': 'SiteController.findPayment',
     'get /profile': 'SiteController.profile',
     'post /make/parcel': 'SiteController.makeParcel',
+    'post /make/subscript': 'SiteController.makeSubscript',
     'get /subscript': 'SiteController.subscript',
     
     'get /login': {

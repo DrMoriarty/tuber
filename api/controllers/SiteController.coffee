@@ -350,7 +350,10 @@ module.exports =
         parcelId = req.param('parcel')
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
             console.log err if err?
-            res.render 'sitescript', {user: req.user, parcel: parcel}
+            if req.mobile
+                res.render 'msitescript', {user: req.user, parcel: parcel}
+            else
+                res.render 'sitescript', {user: req.user, parcel: parcel}
 
     makeSubscript: (req, res) ->
         if not req.user?

@@ -1,0 +1,95 @@
+extend layoutm
+
+block header
+  // header section
+  section.header-section
+    span.title #{user.firstname} #{user.lastname}
+
+block content
+  // content
+  section.section
+    h1 Delivery confirmation
+    if parcel.toPerson
+      h1 #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
+    else
+      h1 #{parcel.owner.firstname} #{parcel.owner.lastname}
+    .container
+      canvas#canvas(width='750', height='300', style='background:white;')
+      .form-sizes_scroll
+        .scroll-size
+          article.offers
+            a.orange_button(href='javascript:clearCanvas();')
+              | CLEAR
+          article.offers
+            a.orange_button(href='javascript:saveCanvas();')
+              | DONE
+          .clear
+
+block script
+  script(type='text/javascript').
+    //context = $('#canvas').getContext('2d');
+    context = document.getElementById('canvas').getContext("2d");
+    var clickX = new Array();
+    var clickY = new Array();
+    var clickDrag = new Array();
+    var paint;
+    function saveCanvas() {
+      var c = document.getElementById('canvas');
+      var pngData = c.toDataURL('image/png');
+      $.post('/make/subscript', {parcel:'#{parcel.id}', subscript: pngData}, function(data, status) {
+        if(status == 'success') {
+          location.href='/dashboard';
+        } else {
+          console.log('Subscript result', data);
+        }
+      });
+    }
+    function clearCanvas() {
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+      clickX = new Array();
+      clickY = new Array();
+      clickDrag = new Array();
+    }
+    function redraw(){
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+  
+      context.strokeStyle = "#264bdf";
+      context.lineJoin = "round";
+      context.lineWidth = 5;
+			
+      for(var i=0; i < clickX.length; i++) {		
+        context.beginPath();
+        if(clickDrag[i] && i){
+          context.moveTo(clickX[i-1], clickY[i-1]);
+        } else {
+          context.moveTo(clickX[i]-1, clickY[i]);
+        }
+        context.lineTo(clickX[i], clickY[i]);
+        context.closePath();
+        context.stroke();
+      }
+    }
+    function processTouch(e, dragging) {
+      offset = $('#canvas').offset();
+      var mouseX = e.pageX - offset.left;
+      var mouseY = e.pageY - offset.top;
+      clickX.push(mouseX);
+      clickY.push(mouseY);
+      clickDrag.push(dragging);
+      redraw();
+    }
+    $('#canvas').mousedown(function(e) {
+      paint = true;
+      processTouch(e);
+    });
+    $('#canvas').mousemove(function(e) {
+      if(paint){
+        processTouch(e, true);
+      }
+    });
+    $('#canvas').mouseup(function(e) {
+      paint = false;
+    });
+    $('#canvas').mouseleave(function(e) {
+      paint = false;
+    });

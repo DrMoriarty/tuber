@@ -2,6 +2,7 @@ soap = require 'soap'
 {parseString} = require 'xml2js'
 sprintf = require('sprintf-js').sprintf
 request = require 'request'
+iconv = require 'iconv-lite'
 
 roundInt = (x) ->
     x = Number(x)
@@ -47,11 +48,12 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {url: 'https://public-ws-stage.dpd.com/services/LoginService/V2_0/getAuth', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url: 'https://public-ws-stage.dpd.com/services/LoginService/V2_0/getAuth', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log '[getAuth]: ', body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result
@@ -165,11 +167,12 @@ module.exports =
                                 <language>DE</language>
                             </proactiveNotification>
         """
-        request.post {url:'https://public-ws-stage.dpd.com/services/ShipmentService/V3_2/storeOrders', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ShipmentService/V3_2/storeOrders', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result
@@ -207,11 +210,12 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelLifeCycleService/V2_0/getTrackingData', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelLifeCycleService/V2_0/getTrackingData', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result
@@ -234,11 +238,12 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelLifeCycleService/V2_0/getParcelLabelNumberForWebNumber', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelLifeCycleService/V2_0/getParcelLabelNumberForWebNumber', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log httpResponse
                 console.log body
                 cb null, body
@@ -279,11 +284,12 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShops', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShops', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log '[findParcelShops]: ', body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result
@@ -326,11 +332,12 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShopsByGeoData', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShopsByGeoData', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result
@@ -375,11 +382,12 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findCities', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findCities', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result
@@ -418,11 +426,12 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/getAvailableServices', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/getAvailableServices', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
             else
+                body = iconv.decode(body, 'iso-8859-1')
                 console.log body
                 parseString body, (err, result) ->
                     console.log 'XML to JSON', err, result

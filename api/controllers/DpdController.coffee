@@ -67,6 +67,7 @@ module.exports =
                 #res.setHeader( "Content-type", "text/xml" )
                 res.json err
             else
+                #res.setHeader( "Content-type", "text/xml" )
                 res.json data
 
     findCities: (req, res) ->

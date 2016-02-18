@@ -67,7 +67,9 @@ block content
             each parcel in parcels
               .sender
                 if parcel.request && parcel.request.trackingNumber
-                  h3 parcel.request.trackingNumber
+                  h3 TRACKING NUMBER: #{parcel.request.trackingNumber}
+                else if parcel.shipment && parcel.shipment.parcelLabelNumber
+                  h3 TRACKING NUMBER: #{parcel.shipment.parcelLabelNumber}
                 else
                   h3 NO TRACKING NUMBER
                 ul.sender-list
@@ -169,6 +171,11 @@ block content
                   a.orange_button.cansel_order(href='#', onClick='archiveOrder("#{parcel.id}")') ARCHIVE RECORD
                 else
                   a.orange_button.cansel_order(href='#', onClick='deleteOrder("#{parcel.id}")') DELETE
+                if parcel.shipment
+                  p(style={'text-align': 'center'})
+                    u
+                      a(href='/upload/#{parcel.id}.pdf', target='_blank')
+                        | Open parcel label
                 .pattern
             .clear
             ul.pagination
@@ -239,7 +246,9 @@ block content
                       option(value='') WITHIN AN AREA OF 1000 km
                       option(value='') WITHIN AN AREA OF 1000 km
                 if parcel.request && parcel.request.trackingNumber
-                  h3 parcel.request.trackingNumber
+                  h3 TRACKING NUMBER: #{parcel.request.trackingNumber}
+                else if parcel.shipment && parcel.shipment.parcelLabelNumber
+                  h3 TRACKING NUMBER: #{parcel.shipment.parcelLabelNumber}
                 else
                   h3 NO TRACKING NUMBER
                 ul.sender-list

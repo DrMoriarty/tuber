@@ -96,25 +96,25 @@ module.exports =
             defaultsTo: 0
         workDay0: 
             type: 'boolean'
-            defaultsTo: false
+            defaultsTo: true
         workDay1:
             type: 'boolean'
-            defaultsTo: false
+            defaultsTo: true
         workDay2:
             type: 'boolean'
-            defaultsTo: false
+            defaultsTo: true
         workDay3:
             type: 'boolean'
-            defaultsTo: false
+            defaultsTo: true
         workDay4:
             type: 'boolean'
-            defaultsTo: false
+            defaultsTo: true
         workDay5:
             type: 'boolean'
-            defaultsTo: false
+            defaultsTo: true
         workDay6:
             type: 'boolean'
-            defaultsTo: false
+            defaultsTo: true
         averageSpeed:
             type: 'float'
             defaultsTo: 0

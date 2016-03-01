@@ -1,0 +1,82 @@
+doctype html
+html
+  head
+    // META
+    meta(charset='utf-8')
+    meta(name='viewport', content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, minimal-ui=1")
+    // FAVICON
+    link(rel='icon', href='/favicon.ico', type='image/x-icon')
+    link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
+    // SEO
+    meta(name='Description', content='')
+    meta(name='Rating', content='')
+    meta(name='Author', content='')
+    meta(name='Robots', content='index,follow')
+    // CONFIG
+    meta(name='format-detection', content='telephone=no')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    // CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    //link(rel='stylesheet', href='/css/lib/font-awesome.min.css')
+    link(rel='stylesheet', href='/css/lib/jquery-ui.min.css')
+    link(rel='stylesheet', href='/css/lib/jquery.selectBoxIt.css')
+    link(rel='stylesheet', href='/css/main_mobile.css')
+    // we can live with IE
+    //if lt IE 9
+      script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    //if lte IE 8
+      link(rel='stylesheet', type='text/css', href='/css/ie.css')
+    //if lt IE 7 
+      script(type='text/javascript').
+        window.location.href="ie6_close/index_ru.html";
+    title TUBER P2P
+  body(style='position:auto;')
+    //if lt IE 10
+      p.browsehappy
+        | You are using an 
+        strong outdated
+        |  browser. Please 
+        a(href='http://browsehappy.com/') upgrade your browser
+        |  to improve your experience.
+    // app
+    .app
+      // header
+      header.header
+        a.logo(href='/?m=1') PACKET24
+        i.fa.fa-align-justify.burger
+        ul.nav.burger_nav
+          li
+            a(href='/?m=1') Home
+          li
+            if user && user.parcelCount
+              a(href='/dashboard?m=1')
+                | My Parcels - 
+                span #{user.parcelCount}
+          li
+            a(href='/faq?m=1') FAQ
+          li
+            a(href='/?m=1') Prices
+          if user
+            li
+              a(href='/logout') LOGOUT
+      // header section
+      block header  
+      // content
+      block content
+    // /app
+    // JS
+    //script(src='https://maps.googleapis.com/maps/api/js')
+    script(src='/vendor/jquery/jquery-1.9.1.min.js')
+    script(src='/vendor/jquery/jquery-migrate-1.1.1.min.js')
+    script(src='/vendor/jquery/jquery.maskedinput-1.2.2.min.js')
+    script(src='/vendor/jquery/jquery.ui.core.min.js')
+    script(src='/vendor/jquery/jquery.ui.widget.min.js')
+    script(src='/vendor/jquery/jquery.selectBoxIt.min.js')
+    script(src='/vendor/jquery/jquery.ui.datepicker.min.js')
+    script(src='/vendor/jquery/feelform.min.js')
+    script(src='/vendor/jquery/jquery.bpopup.min.js')
+    script(src='/vendor/jquery/jquery.easing.min.js')
+    script(src='/vendor/moment/moment-with-locales.min.js')
+    script(src='/js/main_mobile.js')
+    block script

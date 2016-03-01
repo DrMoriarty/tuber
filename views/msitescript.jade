@@ -1,38 +1,39 @@
-extend layoutm
+extend layoutm-footless
 
 block header
   // header section
   section.header-section
-    span.title #{user.firstname} #{user.lastname}
+    span.title(style='font-size:18pt;line-height:28pt;') #{user.firstname} #{user.lastname}
 
 block content
   // content
   section.section
-    h1 Delivery confirmation
-    if parcel.toPerson
-      h1 #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
-    else
-      h1 #{parcel.owner.firstname} #{parcel.owner.lastname}
     .container
-      canvas#canvas(width='750', height='300', style='background:white;')
-      .form-sizes_scroll
-        .scroll-size
-          article.offers
-            a.orange_button(href='javascript:clearCanvas();')
-              | CLEAR
-          article.offers
-            a.orange_button(href='javascript:saveCanvas();')
-              | DONE
-          .clear
+      h2 Delivery confirmation:
+      if parcel.toPerson
+        h2 #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
+      else
+        h2 #{parcel.owner.firstname} #{parcel.owner.lastname}
+      canvas#canvas(style='background:white;width:100%;height:200px;')
+      a.orange_button(href='javascript:clearCanvas();', style='margin:8px 0 8px 0;line-height:17pt;')
+        | CLEAR
+      a.orange_button(href='javascript:saveCanvas();', style='margin:8px 0 8px 0;line-height:17pt;')
+        | DONE
 
 block script
   script(type='text/javascript').
     //context = $('#canvas').getContext('2d');
-    context = document.getElementById('canvas').getContext("2d");
+    var context;
     var clickX = new Array();
     var clickY = new Array();
     var clickDrag = new Array();
     var paint;
+    $(document).ready(function() {
+      var cnvs = document.getElementById('canvas');
+      context = cnvs.getContext("2d");
+      context.canvas.width = cnvs.clientWidth;
+      context.canvas.height = cnvs.clientHeight;
+    });
     function saveCanvas() {
       var c = document.getElementById('canvas');
       var pngData = c.toDataURL('image/png');
@@ -93,3 +94,21 @@ block script
     $('#canvas').mouseleave(function(e) {
       paint = false;
     });
+
+    $('#canvas').on('touchstart', function(e) {
+      paint = true;
+      processTouch(e.originalEvent);
+    });
+    $('#canvas').on('touchmove', function(e) {
+      if(paint){
+        processTouch(e.originalEvent, true);
+      }
+    });
+    $('#canvas').on('touchend', function(e) {
+      paint = false;
+    });
+    document.ontouchmove = function(event){
+      if(paint) {
+        event.preventDefault();
+      }
+    }

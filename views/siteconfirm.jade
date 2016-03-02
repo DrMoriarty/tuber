@@ -178,7 +178,11 @@ block script
       lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
       lon1: #{parcel.fromPerson ? parcel.fromPerson.longitude : parcel.owner.longitude},
       lat2: #{parcel.toPerson ? parcel.toPerson.latitude : parcel.owner.latitude},
-      lon2: #{parcel.toPerson ? parcel.toPerson.longitude : parcel.owner.longitude}}),
+      lon2: #{parcel.toPerson ? parcel.toPerson.longitude : parcel.owner.longitude},
+      lat3: #{drivers[0].latitude},
+      lon3: #{drivers[0].longitude},
+      radius3: #{drivers[0].coverageDistance}
+      }),
       document.getElementById('map2block'));
     function confirmation () {
       // update parcel

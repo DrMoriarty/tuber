@@ -101,7 +101,7 @@ block script
     });
     $('#canvas').on('touchmove', function(e) {
       if(paint){
-        processTouch(e.originalEvent, true);
+        processTouch(e.originalEvent.targetTouches[0], true);
       }
     });
     $('#canvas').on('touchend', function(e) {

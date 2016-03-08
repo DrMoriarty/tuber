@@ -1,5 +1,9 @@
 extend layoutsite
 
+block head
+  link(rel="stylesheet", href="css/easy-autocomplete.min.css")
+  link(rel="stylesheet", href="css/easy-autocomplete.themes.min.css")
+
 block content
   // content
   section.section
@@ -136,7 +140,21 @@ block content
         .clear
 
 block script
+  script(src="vendor/jquery/jquery.easy-autocomplete.min.js")
   script(type='text/javascript').
+    var options = {
+      url: "/countries_es.json",
+      getValue: "name",
+      list: { 
+        match: {
+          enabled: true
+        }
+      },
+      theme: "square"
+    };
+    $("#fromCountry").easyAutocomplete(options);
+    $("#toCountry").easyAutocomplete(options);
+
     $('.js-validate').submit(function() {
       $('#fromZip').removeClass('error');
       $('#fromCity').removeClass('error');

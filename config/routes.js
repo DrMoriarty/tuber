@@ -45,6 +45,7 @@ module.exports.routes = {
     'post /make/parcel': 'SiteController.makeParcel',
     'post /make/subscript': 'SiteController.makeSubscript',
     'get /subscript': 'SiteController.subscript',
+    'get /passwordrestore': 'SiteController.restorePassword',
     
     'get /login': {
         view: 'login'
@@ -58,8 +59,10 @@ module.exports.routes = {
         view: 'signup'
     },
 
+    // Password recovery
     'post /recovery': 'AuthController.generatePasswordRecovery',
     'get /recovery': 'AuthController.usePasswordRecovery',
+
     'get /auth/facebook': 'AuthController.loginFb',
     'get /auth/facebook/callback': 'AuthController.loginFbCallback',
     'get /install': 'AuthController.install',

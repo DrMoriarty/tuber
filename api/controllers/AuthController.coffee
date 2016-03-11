@@ -58,7 +58,7 @@ module.exports =
                             console.log err
                             res.negotiate(err)
                         else
-                            MailingService.sendEmail email, 'Password recovery', 'Some one used your email address to recovery password. \nIf you want to reset your password go to this link\nhttp://5.101.119.187/recovery?hash='+hash
+                            MailingService.sendEmail email, 'Password recovery', 'Someone used your email address to recovery password. \nIf you want to reset your password go to this link\nhttp://packet24.com/recovery?hash='+hash
                             res.json {status: 'Email was sent'}
         else
             res.status(400)
@@ -67,20 +67,27 @@ module.exports =
     usePasswordRecovery: (req, res) ->
         hash = req.param('hash')
         if hash? and hash.length >= 36
-            User.findOne({recoveryHash: hash}).exec (err, result) ->
-                if err? or not result
+            User.findOne({recoveryHash: hash}).exec (err, user) ->
+                if err? or not user
                     console.log err
                     res.status(404)
                     res.json {error: 'Hash not found'}
                 else
                     newpasswd = generatePassword(8)
-                    User.update({id: result.id}, {password: newpasswd, recoveryHash: ''}).exec (err, result) ->
+                    User.update({id: user.id}, {password: newpasswd, recoveryHash: ''}).exec (err, result) ->
                         if err? or not result
                             console.log err
                             res.negotiate(err)
                         else
-                            MailingService.sendEmail result.email, 'Your shiny new password', 'For your account new password was set: ' + newpasswd
-                            res.json {status: 'Email with new password was sent'}
+                            MailingService.sendEmail user.email, 'Your shiny new password', 'For your account new password was set: ' + newpasswd
+                            if req.wantsJSON
+                                res.json {status: 'Email with new password was sent'}
+                            else
+                                if req.mobile
+                                    res.render 'msitepassword', {password: newpasswd}
+                                else
+                                    res.render 'sitepassword', {password: newpasswd}
+
         else
             res.status(400)
             res.json {error: 'Hash required'}

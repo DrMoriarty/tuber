@@ -27,7 +27,7 @@ block content
           label(for='send_password') Password
           input#send_password.required(type='password', name='password')
           button.orange_button(type='submit') Send
-          a(href='#') Forgot your password? 
+          a(href='/passwordrestore?m=1') Forgot your password? 
           span or
           a(href='/registration?driver=false&m=1')  Register
       .login
@@ -39,7 +39,7 @@ block content
           label(for='transport_password') Password
           input#transport_password.required(type='password', name='password')
           button.orange_button(type='submit') Send
-          a(href='#') Forgot your password? 
+          a(href='/passwordrestore?m=1') Forgot your password? 
           span or
           a(href='/registration?driver=true&m=1')  Register
   // promo

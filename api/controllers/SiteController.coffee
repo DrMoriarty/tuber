@@ -382,3 +382,10 @@ module.exports =
                         res.json {status: 'success'}
             else
                 res.notFound()
+
+    restorePassword: (req, res) ->
+        if req.mobile
+            res.render 'msiterecovery', {}
+        else
+            res.render 'siterecovery', {}
+        

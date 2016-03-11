@@ -1,0 +1,46 @@
+extend layoutsite
+
+block content
+  // content
+  section.section
+    h1 Password recovery
+    | 
+    .container
+      form.form.transporter.js-validate(action='/recovery', method='POST')
+        h3 Enter your email. We will send a recovery link to this email address.
+        label(for='Email') Email
+        input#Email.required(name='email', type='text', placeholder='me@at.com', value='')
+        button.orange_button Send
+      #want_popup_box.popup_box
+        span
+          | THE RECOVERY EMAIL WAS SENT TO YOUR EMAIL ADDRESS
+          strong 
+        br
+        strong In order to continue open the link from the email
+        br
+        em * The link in email will valid only 3 days
+        br
+        a.orange_button(href='/') OK
+
+block script
+  script(type='text/javascript').
+    $('.js-validate').submit(function() {
+      regdata = $(this).serialize();
+      $.ajax({
+        type: 'POST',
+        url: this.action,
+        data: regdata,
+        success: function(data) {
+          console.log('Result', data);
+          $('#want_popup_box').bPopup({
+            easing: 'easeOutBack', //uses jQuery easing plugin
+            speed: 450,
+            transition: 'slideDown'
+          });
+          //location.href = '/dashboard';
+        },
+        error: function(err) {
+          console.log("Error", err);
+        }});
+      return false;
+    });

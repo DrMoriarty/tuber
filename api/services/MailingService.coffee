@@ -2,15 +2,15 @@ nodemailer = require 'nodemailer'
 
 module.exports =
     transporter: nodemailer.createTransport
-        host: 'smtp.yandex.ru'
+        host: 'smtp2.delti.com'
         port: 25
         auth:
-            user: 'noanswer@apppilgrim.com'
-            pass: 'fazedumizu'
+            user: 'svc_packet24'
+            pass: ''
 
     sendEmail: (recipient, subject, text) ->
         MailingService.transporter.sendMail
-            from: 'noanswer@apppilgrim.com'
+            from: 'info@packet24.com'
             to: recipient
             subject: subject
             text: text

@@ -9,7 +9,7 @@ block header
 block content
   // content
   section.section
-    h1 Delivery confirmation
+    h1 #{__('Delivery confirmation')}
     if parcel.toPerson
       h1 #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
     else
@@ -18,11 +18,11 @@ block content
       canvas#canvas(width='1000', height='300', style='background:white;')
       article.offers
         a.orange_button(href='javascript:clearCanvas();')
-          | CLEAR
+          | #{__('CLEAR')}
       article.offers
       article.offers
         a.orange_button(href='javascript:saveCanvas();')
-          | DONE
+          | #{__('DONE')}
       .clear
 
 block script

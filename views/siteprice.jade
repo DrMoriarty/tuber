@@ -6,89 +6,89 @@ block header
     .container
       ul
         li
-          span 1. Price offers
+          span 1. #{__('Price offers')}
         li
-          a(href='/confirmation/#{parcel.id}') 2. Confirmation
+          a(href='/confirmation/#{parcel.id}') 2. #{__('Confirmation')}
         li
-          a(href='#') 3. Payment
+          a(href='#') 3. #{__('Payment')}
         li
-          a(href='/dashboard') 4. Dashboard
+          a(href='/dashboard') 4. #{__('Dashboard')}
       span.title #{user.firstname} #{user.lastname}
 
 block content
   // content
   section.section
-    h1 Price Offers
+    h1 #{__('Price Offers')}
     .container
       article.offers
         figure
           img(src='/img/price_cheap.png', alt='')
           if drivers.cheapest.available
-            figcaption FROM &euro;#{drivers.cheapest.price}
+            figcaption #{__('FROM')} &euro;#{drivers.cheapest.price}
           else
-            figcaption Not found
-        strong cheapest
+            figcaption #{__('Not found')}
+        strong #{__('cheapest')}
         ul
-          li Expected dates:
-          li Departure: #{drivers.cheapest.pickupDate}
-          li Arrival: #{drivers.cheapest.arriveDate}
+          li #{__('Expected dates:')}
+          li #{__('Departure:')} #{drivers.cheapest.pickupDate}
+          li #{__('Arrival:')} #{drivers.cheapest.arriveDate}
         if drivers.cheapest.available
           a.more(href='#')
             i.icons-plus
-            | MORE INFO
+            | #{__('MORE INFO')}
           a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.cheapest.id}')
-            | GET IT
+            | #{__('GET IT')}
             br
-            | NOW
+            | #{__('NOW')}
         else
           a.orange_button(href='#')
-            | NOT FOUND
+            | #{__('NOT FOUND')}
       article.offers
         figure
           img(src='/img/price_fast.png', alt='')
           if drivers.fastest.available
-            figcaption FROM &euro;#{drivers.fastest.price}
+            figcaption #{__('FROM')} &euro;#{drivers.fastest.price}
           else
-            figcaption Not found
-        strong fastest
+            figcaption #{__('Not found')}
+        strong #{__('fastest')}
         ul
-          li Expected dates:
-          li Departure: #{drivers.fastest.pickupDate}
-          li Arrival: #{drivers.fastest.arriveDate}
+          li #{__('Expected dates:')}
+          li #{__('Departure:')} #{drivers.fastest.pickupDate}
+          li #{__('Arrival:')} #{drivers.fastest.arriveDate}
         if drivers.fastest.available
           a.more(href='#')
             i.icons-plus
-            | MORE INFO
+            | #{__('MORE INFO')}
           a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.fastest.id}')
-            | GET IT
+            | #{__('GET IT')}
             br
-            | NOW
+            | #{__('NOW')}
         else
           a.orange_button(href='#')
-            | NOT FOUND
+            | #{__('NOT FOUND')}
     article.offers
         figure
           img(src='/img/price_eco.png', alt='')
           if drivers.ecologiest.available
-            figcaption FROM &euro;#{drivers.ecologiest.price}
+            figcaption #{__('FROM')} &euro;#{drivers.ecologiest.price}
           else
-            figcaption Not found
-        strong ecologiest
+            figcaption #{__('Not found')}
+        strong #{__('ecologiest')}
         ul
-          li Expected dates:
-          li Departure: #{drivers.ecologiest.pickupDate}
-          li Arrival: #{drivers.ecologiest.arriveDate}
+          li #{__('Expected dates:')}
+          li #{__('Departure:')} #{drivers.ecologiest.pickupDate}
+          li #{__('Arrival:')} #{drivers.ecologiest.arriveDate}
         if drivers.ecologiest.available
           a.more(href='#')
             i.icons-plus
-            | MORE INFO
+            | #{__('MORE INFO')}
           a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.ecologiest.id}')
-            | GET IT
+            | #{__('GET IT')}
             br
-            | NOW
+            | #{__('NOW')}
         else
           a.orange_button(href='#')
-            | NOT FOUND
+            | #{__('NOT FOUND')}
       .clear
       if more
-        a.offers-more(href='#') SEE MORE OFFERS
+        a.offers-more(href='#') #{__('SEE MORE OFFERS')}

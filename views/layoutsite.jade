@@ -45,22 +45,22 @@ html
     .app
       // header
       header.header
-        a.logo(href='/') PACKET24
+        a.logo(href='/') #{__('PACKET24')}
         ul.nav
           li
-            a(href='/') Home
+            a(href='/') #{__('Home')}
           li
             if user && user.parcelCount
               a(href='/dashboard')
-                | My Parcels - 
+                | #{__('My Parcels')} - 
                 span #{user.parcelCount}
           li
-            a(href='/faq') FAQ
+            a(href='/faq') #{__('FAQ')}
           li
-            a(href='/') Prices
+            a(href='/') #{__('Prices')}
           if user
             li
-              a(href='/logout') Logout
+              a(href='/logout') #{__('Logout')}
       // header section
       block header  
       // content
@@ -69,48 +69,48 @@ html
       footer.footer
         .container
           .nav
-            h4 HOME
+            h4 #{__('HOME')}
             ul
               li
-                a(href='/') Send a parcel
+                a(href='/') #{__('Send a parcel')}
               li
-                a(href='/') Deliver parcel
+                a(href='/') #{__('Deliver parcel')}
               li.devider
               li
-                a(href='/') Parcel status
+                a(href='/') #{__('Parcel status')}A
           .nav
-            h4 FAQ
+            h4 #{__('FAQ')}
             ul
               li
-                a(href='/faq') How it works?
+                a(href='/faq') #{__('How it works?')}
               li
-                a(href='/faq') How to register?
+                a(href='/faq') #{__('How to register?')}
               li
-                a(href='/faq') Terms and conditions
+                a(href='/faq') #{__('Terms and conditions')}
           .nav
-            h4 PRICES
+            h4 #{__('PRICES')}
             ul
               li
                 a(href='/')
-                  | Common prices 
+                  | #{__('Common prices')} 
                   br
-                  | for Germany
+                  | #{__('for Germany')}
               li
-                a(href='#') Why better than Post?
+                a(href='#') #{__('Why better than Post?')}
           .clear
           ul.terms
             li
               a(href='/')
                 i.fa.fa-align-left
-                |  Booking Terms &amp; Conditions
+                |  #{__('Booking Terms &amp; Conditions')}
             li
               a(href='/')
                 i.fa.fa-align-left
-                |  Web usage Terms &amp; Conditions
-          span.title Tuber P2P
+                |  #{__('Web usage Terms &amp; Conditions')}
+          span.title #{__('Tuber P2P')}
           span.copyright
-            small &copy; 2015 Delticom. ALL RIGHTS RESERVED.
-            em Hanover, Germany
+            small &copy; #{__('2015 Delticom. ALL RIGHTS RESERVED.')}
+            em #{__('Hanover, Germany')}
     // /app
     // JS
     script(src='/vendor/jquery/jquery-1.9.1.min.js')

@@ -7,29 +7,29 @@ block head
 block content
   // content
   section.section
-    h1 Tuber parcels delivery
+    h1 #{__('Tuber parcels delivery')}
     ul.breadcrumbs
-      li You are here
+      li #{__('You are here')}
       li
         i.fa.fa-angle-double-right
-        a(href='/') Home
+        a(href='/') #{__('Home')}
       li
         i.fa.fa-angle-double-right
-        span About my parcel
+        span #{__('About my parcel')}
     .container.bordered
       form.form.js-validate(action='/make/parcel', method='POST')
         .form-block
           .left
             i.icons-profile
-            a(href='/profile') GO IN TO MY PROFILE
+            a(href='/profile') #{__('GO IN TO MY PROFILE')}
           .right
-            h3 From 
+            h3 #{__('From')} 
             input#address(type='checkbox', name='fromPersonProfile')
-            label(for='address') Choose my profile address
+            label(for='address') #{__('Choose my profile address')}
             br
-            span or 
+            span #{__('or')} 
             a.more.js-toggle_address1(href='#')
-              | FILL ADDRESS FORM 
+              | #{__('FILL ADDRESS FORM')} 
               i +
             .hidden_address1
               input(type='text', placeholder='First name, for ex.: “George”', name='fromPerson.firstName')
@@ -41,13 +41,13 @@ block content
               input#fromCountry(type='text', placeholder='Country, for ex.: “United States”', name='fromPerson.country')
               input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”', name='fromPerson.phone')
               input(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='fromPersons.email')
-            h3 To 
+            h3 #{__('To')} 
             input#address1(type='checkbox', name='toPersonProfile')
-            label(for='address1') Choose my profile address
+            label(for='address1') #{__('Choose my profile address')}
             br
-            span or 
+            span #{__('or')} 
             a.more.js-toggle_address2(href='#')
-              | FILL ADDRESS FORM 
+              | #{__('FILL ADDRESS FORM')} 
               i +
             .hidden_address2
               input(type='text', placeholder='First name, for ex.: “George”', name='toPerson.firstName')
@@ -60,83 +60,83 @@ block content
               input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”', name='toPerson.phone')
               input(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='toPerson.email')
             input#packetshop(type='checkbox', name='usePacketshop')
-            label.packetshop(for='packetshop') To reduce costs, I am willing to drop the package in a Packetshop close to me.
+            label.packetshop(for='packetshop') #{__('To reduce costs, I am willing to drop the package in a Packetshop close to me.')}
         .form-block
           .left
             i.icons-parcel
           .right
-            h3(align='left') ABOUT MY PARCEL
+            h3(align='left') #{__('ABOUT MY PARCEL')}
             ul.form-sizes
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', placeholder='0', name='weight', value='1')
-                em kg
+                em #{__('kg')}
                 span.down
                   i.fa.fa-chevron-down
-                strong Weight
+                strong #{__('Weight')}
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', placeholder='0', name='length', value='20')
-                em cm
+                em #{__('cm')}
                 span.down
                   i.fa.fa-chevron-down
-                strong Length
+                strong #{__('Length')}
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', placeholder='0', name='width', value='5')
-                em cm
+                em #{__('cm')}
                 span.down
                   i.fa.fa-chevron-down
-                strong Width
+                strong #{__('Width')}
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', placeholder='0', name='depth', value='5')
-                em cm
+                em #{__('cm')}
                 span.down
                   i.fa.fa-chevron-down
-                strong Depth
+                strong #{__('Depth')}
             //input#declare(type='checkbox', name='userAgreementContent')
             //label.declare(for='declare')
-              | I officially declare that non of the products transported areprohibited neither in origin country, neither in destination country. It is under my responsabili
+              | #{__('I officially declare that non of the products transported areprohibited neither in origin country, neither in destination country. It is under my responsabili')}
         .form-block
           .left
             i.icons-timing
           .right.about
-            h3 About the timing
+            h3 #{__('About the timing')}
             .form-datepicker
               input.time.js-datetime.required(type='text', placeholder='Parcel can be picked up starring', name='pickupDate')
               .form-datepicker-body.js-datetime-body.hide
-                h4 Your check in Date
-                strong.time TIME:
-                strong.at at
+                h4 #{__('Your check in Date')}
+                strong.time #{__('TIME:')}
+                strong.at #{__('at')}
                 input.time_at(type='text', placeholder=' 14:00 ', name='pickupTime1')
-                strong.to to
+                strong.to #{__('to')}
                 input.time_to(type='text', placeholder=' 17:00 ', name='pickupTime2')
-                em *Period must be have more than two hours.
+                em #{__('*Period must be have more than two hours.')}
             .form-datepicker
               input.time.js-datetime.time-right.required(type='text', placeholder='Parcel should arrived before', name='arriveDate')
               .form-datepicker-body.calendar-right.js-datetime-body.hide
-                h4 Your check in Date
-                strong.time TIME:
-                strong.at at
+                h4 #{__('Your check in Date')}
+                strong.time #{__('TIME:')}
+                strong.at #{__('at')}
                 input.time_at(type='text', placeholder=' 15:00 ', name='arriveTime1')
-                strong.to to
+                strong.to #{__('to')}
                 input.time_to(type='text', placeholder=' 18:00 ', name='arriveTime2')
-                em *Period must be have more than two hours.
+                em #{__('*Period must be have more than two hours.')}
             input#timing(type='checkbox', name='userAgreementTimes')
-            label(for='timing') I am aware that the time frame influences TUber prices.
+            label(for='timing') #{__('I am aware that the time frame influences TUber prices.')}
         .clear
         .form-block
           //.left
             i.icons-insurrance
           //.right.insurrance
-            h3 About insurrance
+            h3 #{__('About insurrance')}
             input.required(type='text', placeholder='Packet is insured until the value XXX€', name='insurance')
-          button.orange_button Send!
+          button.orange_button #{__('Send!')}
         .clear
 
 block script

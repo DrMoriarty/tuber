@@ -7,13 +7,13 @@ block header
     .container
       ul
         li
-          a(href='/price/#{parcel.id}?m=1') 1. Price offers
+          a(href='/price/#{parcel.id}?m=1') 1. #{__('Price offers')}
         li
-          span 2. Confirmation
+          span 2. #{__('Confirmation')}
         li
-          a(href='#') 3. Payment
+          a(href='#') 3. #{__('Payment')}
         li
-          a(href='/dashboard?m=1') 4. Dashboard
+          a(href='/dashboard?m=1') 4. #{__('Dashboard')}
 
 block content
   // content
@@ -21,14 +21,14 @@ block content
     .confirmation
       .container
         .confirmation-selected
-          h3 YOU HAVE SELECTED
+          h3 #{__('YOU HAVE SELECTED')}
           .confirmation-select-mobile
             select.js-select(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel.pathLength)}') cheapest delivery ---  &euro;#{driver.getPrice(parcel.pathLength)}
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel.pathLength)}') #{__('cheapest delivery')} ---  &euro;#{driver.getPrice(parcel.pathLength)}
         hr
         .confirmation-delivery.plc
-          h3 Departure and arrivals dates
+          h3 #{__('Departure and arrivals dates')}
           .confirmation-select-mobile
             //span.placeholder1 22.12.2015, 22:34
             //span.placeholder2 22.12.2015, 22:34
@@ -38,11 +38,11 @@ block content
         .confirmation-departure
           h3 From:
           input#postbox(type='radio', name='adress-from', value='postbox')
-          label.postbox(for='postbox') Postbox
+          label.postbox(for='postbox') #{__('Postbox')}
           input#home-adress(type='radio', name='adress-from', value='home-adress', checked=true)
-          label.home-adress(for='home-adress') Home adress
+          label.home-adress(for='home-adress') #{__('Home adress')}
           //input#post-office(type='radio', name='adress-from', value='post_office')
-          //label.post-office(for='post-office') Post office
+          //label.post-office(for='post-office') #{__('Post office')}
           .form-block
             .confirmation-select-mobile
               select.js-select1
@@ -55,11 +55,11 @@ block content
         .confirmation-destination
           h3 To:
           input#postbox1(type='radio', name='adress-to', value='postbox')
-          label.postboxs(for='postbox1') Postbox
+          label.postboxs(for='postbox1') #{__('Postbox')}
           input#home-adress1(type='radio', name='adress-to', value='home-adress', checked=true)
-          label.home-adresss(for='home-adress1') Home adress
+          label.home-adresss(for='home-adress1') #{__('Home adress')}
           //input#post-office1(type='radio', name='adress-to', value='post_office')
-          //label.post-offices(for='post-office1') Post office
+          //label.post-offices(for='post-office1') #{__('Post office')}
           .form-block
             .confirmation-select-mobile.confirmation-select-last
               select.js-select2
@@ -73,34 +73,34 @@ block content
         .confirmation-confirm-title
           ul
             li
-              | SENDING DETAILS:
-              span #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+              | #{__('SENDING DETAILS:')}
+              span #{parcel.weight}#{__('kg')}, #{parcel.width}#{__('cm')} x #{parcel.length}#{__('cm')} x #{parcel.depth}#{__('cm')}
             li
-              | INSURRANCE:
-              span Standart (until #{parcel.insurance}&euro;)
+              | #{__('INSURRANCE:')}
+              span #{__('Standard')} (#{__('until')} #{parcel.insurance}&euro;)
             li
-              | DELIVERY OPTIONS:
-              span +0&euro; to home adress
+              | #{__('DELIVERY OPTIONS:')}
+              span +0&euro; #{__('to home adress')}
         .confirmation-confirm-total
           h4
-            span TOTAL AMOUNT 
-            | (Including VAT): 
+            span #{__('TOTAL AMOUNT')} 
+            | #{__('(Including VAT):')} 
             span#totalPrice #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
               span &euro;
-        a.orange_button(onClick='javascript:confirmation();') CONFIRM
+        a.orange_button(onClick='javascript:confirmation();') #{__('CONFIRM')}
   // maps
   section.maps
     .maps-left#map1block
       //.wr-map
         #map1
-        .maps-sign FROM: POSTBOX
+        .maps-sign #{__('FROM: POSTBOX')}
       //.wr-map
         #map2
-        .maps-sign TO: HOME ADRESS
+        .maps-sign #{__('TO:')} #{__('HOME ADRESS')}
     .maps-right#map2block
       //.wr-map
         #map3
-        .maps-sign PACKAGE ROUTE
+        .maps-sign #{__('PACKAGE ROUTE')}
 
 block script
   script(src="/vendor/react/react-with-addons.js")
@@ -118,8 +118,8 @@ block script
 
     //ReactDOM.render(React.createElement(DateBlock, {pdate:'#{parcel.pickupDate}', adate:'#{parcel.arriveDate}'}), document.getElementById('dateblock'));
     ReactDOM.render(React.createElement(GMap, {
-      title1: 'HOME ADDRESS',
-      title2: 'HOME ADDRESS',
+      title1: "#{__('HOME ADDRESS')}",
+      title2: "#{__('HOME ADDRESS')}",
       lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
       lon1: #{parcel.fromPerson ? parcel.fromPerson.longitude : parcel.owner.longitude},
       lat2: #{parcel.toPerson ? parcel.toPerson.latitude : parcel.owner.latitude},

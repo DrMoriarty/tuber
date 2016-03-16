@@ -44,23 +44,23 @@ html
     .app
       // header
       header.header
-        a.logo(href='/?m=1') PACKET24
+        a.logo(href='/?m=1') #{__('PACKET24')}
         i.fa.fa-align-justify.burger
         ul.nav.burger_nav
           li
-            a(href='/?m=1') Home
+            a(href='/?m=1') #{__('Home')}
           li
             if user && user.parcelCount
               a(href='/dashboard?m=1')
-                | My Parcels - 
+                | #{__('My Parcels')} - 
                 span #{user.parcelCount}
           li
-            a(href='/faq?m=1') FAQ
+            a(href='/faq?m=1') #{__('FAQ')}
           li
-            a(href='/?m=1') Prices
+            a(href='/?m=1') #{__('Prices')}
           if user
             li
-              a(href='/logout') LOGOUT
+              a(href='/logout') #{__('LOGOUT')}
       // header section
       block header  
       // content
@@ -70,15 +70,15 @@ html
         .container
           ul.nav
             li
-              a(href='/?m=1') HOME
+              a(href='/?m=1') #{__('HOME')}
             li
-              a(href='/faq?m=1') FAQ
+              a(href='/faq?m=1') #{__('FAQ')}
             li
-              a(href='/?m=1') PRICES
-          span.title Tuber P2P
+              a(href='/?m=1') #{__('PRICES')}
+          span.title #{__('Tuber P2P')}
           span.copyright
-            small &copy; 2015 Delticom. ALL RIGHTS RESERVED.
-            em Hanover, Germany
+            small &copy; #{__('2015 Delticom. ALL RIGHTS RESERVED.')}
+            em #{__('Hanover, Germany')}
     // /app
     // JS
     //script(src='https://maps.googleapis.com/maps/api/js')

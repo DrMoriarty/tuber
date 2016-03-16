@@ -7,23 +7,23 @@ block head
 block content
   // content
   section.section
-    h1 Tuber parcels delivery
+    h1 #{__('Tuber parcels delivery')}
     ul.breadcrumbs
-      li You are here
+      li #{__('You are here')}
       li
         i.fa.fa-angle-double-right
-        a(href='/?m=1') Home
+        a(href='/?m=1') #{__('Home')}
       li
         i.fa.fa-angle-double-right
-        span About my parcel
+        span #{__('About my parcel')}
     .container
       form.form#inputform(action='/make/parcel', method='POST')
         .form-block.bordered
           i.icons-profile
-          h3 From
+          h3 #{__('From')}
           p
             input#address1(type='checkbox', name='fromPersonProfile')
-            label.map_checkbox(for='address1') Choose my profile address
+            label.map_checkbox(for='address1') #{__('Choose my profile address')}
             i.icons-arrow.fill_adress1.js-toggle_address1#address1btn
           .hidden_address1
             input(type='text', placeholder='First name, for ex.: “George”', name='fromPerson.firstName')
@@ -35,10 +35,10 @@ block content
             input#fromCountry(type='text', placeholder='Country, for ex.: “United States”', name='fromPerson.country')
             input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”', name='fromPerson.phone')
             input(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='fromPerson.email')
-          h3 To
+          h3 #{__('To')}
           p
             input#address2(type='checkbox', name='toPersonProfile')
-            label.map_checkbox(for='address2') Choose my profile address
+            label.map_checkbox(for='address2') #{__('Choose my profile address')}
             i.icons-arrow.fill_adress1.js-toggle_address2#address2btn
           .hidden_address2
             input(type='text', placeholder='First name, for ex.: “George”', name='toPerson.firstName')
@@ -51,69 +51,69 @@ block content
             input(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”', name='toPerson.phone')
             input(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='toPerson.email')
           input#packetshop(type='checkbox', name='usePacketshop')
-          label.packetshop(for='packetshop') To reduce costs, I am willing to drop the package in a Packetshop close to me.
+          label.packetshop(for='packetshop') #{__('To reduce costs, I am willing to drop the package in a Packetshop close to me.')}
           //a.orange_button(href='#') GO TO &quot;MY PROFILE&quot;
         .form-block.bordered
           i.icons-parcel
-          h3(align='left') ABOUT MY PARCEL
+          h3(align='left') #{__('ABOUT MY PARCEL')}
           .form-sizes_scroll
             ul.form-sizes
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='weight', value='1')
-                em kg
+                em #{__('kg')}
                 span.down
                   i.fa.fa-chevron-down
-                strong Weight
+                strong #{__('Weight')}
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='length', value='20')
-                em cm
+                em #{__('cm')}
                 span.down
                   i.fa.fa-chevron-down
-                strong Length
+                strong #{__('Length')}
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='width', value='5')
-                em cm
+                em #{__('cm')}
                 span.down
                   i.fa.fa-chevron-down
-                strong Width
+                strong #{__('Width')}
               li
                 span.up
                   i.fa.fa-chevron-up
                 input.numbers(type='text', pattern='[0-9]*', inputmode='numeric', placeholder='0', name='depth', value='5')
-                em cm
+                em #{__('cm')}
                 span.down
                   i.fa.fa-chevron-down
                 strong Depth
           //input#declare(type='checkbox', name='userAgreementContent')
           //label.declare(for='declare')
-            | I officially declare that non of the products transported areprohibited neither in origin country, neither in destination country. It is under my responsabili
+            | #{__('I officially declare that non of the products transported areprohibited neither in origin country, neither in destination country. It is under my responsabili')}
         .form-block.bordered
           i.icons-timing
-          h3 About the timing
+          h3 #{__('About the timing')}
           .confirmation-select-mobile
-            span.placeholder1 Parsel can be picked up starting
-            span.placeholder2 Parsel should arrive before
+            span.placeholder1 #{__('Parcel can be picked up starting')}
+            span.placeholder2 #{__('Parcel should arrive before')}
             input.pl1#pickupDate(type='datetime-local', placeholder='')
             input.pl2#arriveDate(type='datetime-local', placeholder='')
           input#timing(type='checkbox', name='userAgreementTimes')
-          label.timing(for='timing') I am aware that the time frame influences TUber prices.
+          label.timing(for='timing') #{__('I am aware that the time frame influences TUber prices.')}
         //.form-block.bordered
           i.icons-insurrance
-          h3 About insurrance
+          h3 #{__('About insurrance')}
           input(type='text', placeholder='Packet is insured until the value XXX€', name='insurrance')
-        button.orange_button Send
+        button.orange_button #{__('Send')}
         .clear
       #fill_address1.popup_adress
         h3
-          span.b-close Cancel
-          |  Fill the adress form below 
-          a(href='javascript:saveAddress1();') Done
+          span.b-close #{__('Cancel')}
+          |  #{__('Fill the adress form below')} 
+          a(href='javascript:saveAddress1();') #{__('Done')}
         form.popup_address1#formAddress1
           input(type='text', placeholder='First name, for ex.: “George”', name='fromPerson.firstName')
           input(type='text', placeholder='Last name, for ex.: “Bohorquez”', name='fromPerson.lastName')
@@ -126,9 +126,9 @@ block content
           input(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='fromPerson.email')
       #fill_address2.popup_adress
         h3
-          span.b-close Cancel
-          |  Fill the adress form below 
-          a(href='javascript:saveAddress2();') Done
+          span.b-close #{__('Cancel')}
+          |  #{__('Fill the adress form below')} 
+          a(href='javascript:saveAddress2();') #{__('Done')}
         form.popup_address1#formAddress2
           input(type='text', placeholder='First name, for ex.: “George”', name='toPerson.firstName')
           input(type='text', placeholder='Last name, for ex.: “Bohorquez”', name='toPerson.lastName')

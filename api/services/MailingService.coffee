@@ -4,9 +4,10 @@ module.exports =
     transporter: nodemailer.createTransport
         host: 'smtp2.delti.com'
         port: 25
+        #secure: true
         auth:
             user: 'svc_packet24'
-            pass: 'buC2Mied0r'
+            pass: 'WaeZaeh4qu' #'buC2Mied0r'
 
     sendEmail: (recipient, subject, text) ->
         options = 

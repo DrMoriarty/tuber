@@ -43,23 +43,23 @@ html
     .app
       // header
       header.header
-        a.logo(href='/?m=1') PACKET24
+        a.logo(href='/?m=1') #{__('PACKET24')}
         i.fa.fa-align-justify.burger
         ul.nav.burger_nav
           li
-            a(href='/?m=1') Home
+            a(href='/?m=1') #{__('Home')}
           li
             if user && user.parcelCount
               a(href='/dashboard?m=1')
-                | My Parcels - 
+                | #{__('My Parcels')} - 
                 span #{user.parcelCount}
           li
-            a(href='/faq?m=1') FAQ
+            a(href='/faq?m=1') #{__('FAQ')}
           li
-            a(href='/?m=1') Prices
+            a(href='/?m=1') #{__('Prices')}
           if user
             li
-              a(href='/logout') LOGOUT
+              a(href='/logout') #{__('LOGOUT')}
       // header section
       block header  
       // content

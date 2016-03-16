@@ -3,107 +3,107 @@ extend layoutm
 block content
   // content
   section.section
-    h1 Transporter Parameters
+    h1 #{__('Transporter Parameters')}
     .container
       form.form.transporter.js-validate(action='/api/user/#{user.id}', method='POST')
-        h3 Transport coverage
-        label(for='nb_vehicle') NB OF VEHICLE:
+        h3 #{__('Transport coverage')}
+        label(for='nb_vehicle') #{__('NB OF VEHICLE:')}
         input#nb_vehicle.required(name='vehicleNum', type='text', placeholder='1', value='#{user.vehicleNum}')
-        label(for='type_vehicle') TYPE OF VEHICLE:
+        label(for='type_vehicle') #{__('TYPE OF VEHICLE:')}
         input#type_vehicle.required(name='vehicleType', type='text', placeholder='Car', value='#{user.vehicleType}')
-        h3 Volume coverage
-        label MAXI PARCEL SIZE:
+        h3 #{__('Volume coverage')}
+        label #{__('MAXI PARCEL SIZE:')}
         .form-sizes_scroll
           ul.form-sizes
             li
               span.up
                 i.fa.fa-chevron-up
               input(name='maxWeight', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxWeight}')
-              em kg
+              em #{__('kg')}
               span.down
                 i.fa.fa-chevron-down
-              strong Weight
+              strong #{__('Weight')}
             li
               span.up
                 i.fa.fa-chevron-up
               input(name='maxLength', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxLength}')
-              em cm
+              em #{__('cm')}
               span.down
                 i.fa.fa-chevron-down
-              strong Length
+              strong #{__('Length')}
             li
               span.up
                 i.fa.fa-chevron-up
               input(name='maxWidth', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxWidth}')
-              em cm
+              em #{__('cm')}
               span.down
                 i.fa.fa-chevron-down
-              strong Width
+              strong #{__('Width')}
             li
               span.up
                 i.fa.fa-chevron-up
               input(name='maxDepth', type='number', pattern='[0-9]*', inputmode='numeric', placeholder='0', value='#{user.maxDepth}')
-              em cm
+              em #{__('cm')}
               span.down
                 i.fa.fa-chevron-down
-              strong Depth
-        label(for='nb_max') NB OF MAXI PARCEL PER DAY
+              strong #{__('Depth')}
+        label(for='nb_max') #{__('NB OF MAXI PARCEL PER DAY')}
         input#nb_max.required(name='parcelsPerDay', type='text', placeholder='', value='#{user.parcelsPerDay}')
-        h3 Geography coverage
+        h3 #{__('Geography coverage')}
         div
-          label I CAN TRANSPORT THOUGH:
+          label #{__('I CAN TRANSPORT THOUGH:')}
           input.required(name='country', type='text', placeholder='Country', value='#{user.country}')
           input.required(name='zip', type='text', placeholder='Zip Code', value='#{user.zip}')
-          label(for='place') WITHIN AN AREA OF:
+          label(for='place') #{__('WITHIN AN AREA OF:')}
           input#place.required(name='coverageDistance', type='text', placeholder='Coverage distance', value='#{user.coverageDistance}')
-          label ON DAYS:
+          label #{__('ON DAYS:')}
           ul.days
             li
               input#mon(name='workDay0', type='checkbox', value='true', checked=user.workDay0)
-              label(for='mon') Mon
+              label(for='mon') #{__('Mon')}
             li
               input#tue(name='workDay1', type='checkbox', value='true', checked=user.workDay1)
-              label(for='tue') Tue
+              label(for='tue') #{__('Tue')}
             li
               input#wed(name='workDay2', type='checkbox', value='true', checked=user.workDay2)
-              label(for='wed') Wed
+              label(for='wed') #{__('Wed')}
             li
               input#thu(name='workDay3', type='checkbox', value='true', checked=user.workDay3)
-              label(for='thu') Thu
+              label(for='thu') #{__('Thu')}
             li
               input#fri(name='workDay4', type='checkbox', value='true', checked=user.workDay4)
-              label(for='fri') Fri
+              label(for='fri') #{__('Fri')}
             li
               input#sat(name='workDay5', type='checkbox', value='true', checked=user.workDay5)
-              label(for='sat') Sat
+              label(for='sat') #{__('Sat')}
             li
               input#sun(name='workDay6', type='checkbox', value='true', checked=user.workDay6)
-              label(for='sun') Sun
+              label(for='sun') #{__('Sun')}
         .map
-          h3 geography data:
+          h3 #{__('geography data:')}
           #map4
-        h3 Time coverage
-        label(for='speed') MY SPEED IS ROUGHLY:
+        h3 #{__('Time coverage')}
+        label(for='speed') #{__('MY SPEED IS ROUGHLY:')}
         input#speed.required(name='averageSpeed', type='text', placeholder='XXXX', value='#{user.averageSpeed}')
-        label(for='max_speed') MY MAXI KM PER DAY:
+        label(for='max_speed') #{__('MY MAXI KM PER DAY:')}
         input#max_speed.required(name='averageDayDistance', type='text', placeholder='XXXX', value='#{user.averageDayDistance}')
-        h3 Pricing
-        label(for='price_km') PRICE PER KM (€):
+        h3 #{__('Pricing')}
+        label(for='price_km') #{__('PRICE PER KM (€):')}
         input#price_km.required(name='pricePerKm', type='text', placeholder='XX', value='#{user.pricePerKm}')
-        //label(for='price_country') PRICE PER COUNTRY:
+        //label(for='price_country') #{__('PRICE PER COUNTRY:')}
         //input#price_country.required(type='text', placeholder='10€')
-        label(for='price_ft') PRICE FROM/TO (€):
+        label(for='price_ft') #{__('PRICE FROM/TO (€):')}
         input#price_ft.required(name='defaultPrice', type='text', placeholder='XX', value='#{user.defaultPrice}')
-        h3 My Payment Data
-        label(for='accountNumber') YOUR BANK ACCOUNT NUMBER:
+        h3 #{__('My Payment Data')}
+        label(for='accountNumber') #{__('YOUR BANK ACCOUNT NUMBER:')}
         input#accountNumber.required(name='bankAccount', type='text', placeholder='', value='#{user.bankAccount || ""}')
-        label(for='bankCode') BLZ (BANK CODE NUMBER):
+        label(for='bankCode') #{__('BLZ (BANK CODE NUMBER):')}
         input#bankCode.required(name='bankCode', type='text', placeholder='', value='#{user.bankCode || ""}')
-        label(for='bankName') BANK NAME:
+        label(for='bankName') #{__('BANK NAME:')}
         input#bankName.required(name='bankName', type='text', placeholder='', value='#{user.bankName || ""}')
-        label(for='personName') ACCOUNT OWNER:
+        label(for='personName') #{__('ACCOUNT OWNER:')}
         input#personName.required(name='bankClientName', type='text', placeholder='', value='#{user.bankClientName || user.fullname()}')
-        button.orange_button Save details
+        button.orange_button #{__('Save details')}
 
 block script
   script(src="https://maps.googleapis.com/maps/api/js")

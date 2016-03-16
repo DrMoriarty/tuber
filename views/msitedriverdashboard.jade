@@ -8,16 +8,16 @@ block header
       ul
         if user.driver
           li
-            span Dashboard
+            span #{__('Dashboard')}
         if !user.driver
           li
-            a(href='javascript:;') 1. Price offers
+            a(href='javascript:;') 1. #{__('Price offers')}
           li
-            a(href='javascript:;') 2. Confirmation
+            a(href='javascript:;') 2. #{__('Confirmation')}
           li
-            a(href='javascript:;') 3. Payment
+            a(href='javascript:;') 3. #{__('Payment')}
           li
-            span 4. Dashboard
+            span 4. #{__('Dashboard')}
 
 block content
   // content
@@ -26,40 +26,40 @@ block content
       .js-tabs
         ul.nav
           li
-            a(href='#') My parameters
+            a(href='#') #{__('My parameters')}
           li
-            a(href='#') MY ORDERS/Status/details
+            a(href='#') #{__('MY ORDERS/Status/details')}
           li
-            a(href='#') My payments
+            a(href='#') #{__('My payments')}
           li.active
-            a(href='#') My archive
+            a(href='#') #{__('My archive')}
       .content
         // tab
         .js-tab-body
           .sender
             ul.sender-list
               li
-                | NAME:
+                | #{__('NAME:')}
                 strong #{user.firstname} #{user.lastname}
               li
-                | COMPANY (optional):
+                | #{__('COMPANY (optional):')}
                 strong #{user.company}
               li
-                | VAT (optional):
+                | #{__('VAT (optional):')}
                 strong #{user.vat}
               li
-                | ADRESS:
+                | #{__('ADRESS:')}
                 strong #{user.zip} #{user.city} #{user.address1} #{user.address2}
               li
-                | MOBILE PHONE:
+                | #{__('MOBILE PHONE:')}
                 strong #{user.phone}
               li
-                | E-MAIL:
+                | #{__('E-MAIL:')}
                 strong #{user.email}
               li
-                | SUBSCRIBE:
-                strong YES
-            a.orange_button(href='/profile?m=1') CHANGE MY INFO
+                | #{__('SUBSCRIBE:')}
+                strong #{__('YES')}
+            a.orange_button(href='/profile?m=1') #{__('CHANGE MY INFO')}
             .pattern
         // tab
         .js-tab-body
@@ -69,59 +69,59 @@ block content
                 if parcel.request && parcel.request.trackingNumber
                   h3 parcel.request.trackingNumber
                 else
-                  h3 NO TRACKING NUMBER
+                  h3 #{__('NO TRACKING NUMBER')}
                 ul.sender-list
                   if parcel.request && parcel.request.status
                     li
-                      | CURRENT: 
+                      | #{__('CURRENT:')} 
                       em #{parcel.request.status}
                   li
-                    | SENDING DETAILS: 
+                    | #{__('SENDING DETAILS:')} 
                     strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
                   li.no-margin
-                    | DEPARTURE DATE: 
+                    | #{__('DEPARTURE DATE:')} 
                     strong #{moment(parcel.pickupDate).format('LL')}
                   li
-                    | ARRIVAL DATE: 
+                    | #{__('ARRIVAL DATE:')} 
                     strong #{moment(parcel.arriveDate).format('LL')}
                   li.no-margin
-                    | FROM: 
+                    | #{__('FROM:')} 
                     if parcel.fromPerson
                       strong #{parcel.fromPersonAddress()}
                     else
                       strong #{parcel.ownerAddress()}
                   li
-                    | TO: 
+                    | #{__('TO:')} 
                     if parcel.toPerson
                       strong #{parcel.toPersonAddress()}
                     else
                       strong #{parcel.ownerAddress()}
                   //li.no-margin
-                    | INSURRANCE: 
-                    strong Standart (until #{parcel.insurance}&euro;)
+                    | #{__('INSURRANCE:')} 
+                    strong #{__('Standard')} (#{__('until')} #{parcel.insurance}&euro;)
                   //li
                   //  | DELIVERY OPTIONS: 
                   //  if parcel.request && parcel.request.deliveryPrice
                   //    strong +#{parcel.request.deliveryPrice}&euro; #{parcel.request.deliveryOption}
                   li
-                    | TOTAL AMOUNT (Including VAT): 
+                    | #{__('TOTAL AMOUNT (Including VAT):')} 
                     if parcel.request
                       strong #{parcel.request.price}&euro;
                 if parcel.fromPerson
                   .sender-name(style='min-height: 221px;')
                     figure
-                      span THE SENDER:
+                      span #{__('THE SENDER:')}
                       //img(src='img/person.png', alt='')
                       //figcaption
                         a(href='tel://#{parcel.fromPerson.phone}')
                           i.fa.fa-phone-square
-                          | call
+                          | #{__('call')}
                     ul
                       li
-                        | NAME: 
+                        | #{__('NAME:')} 
                         strong #{parcel.fromPerson.firstname} #{parcel.fromPerson.lastname}
                       //li
-                        | RAITE: 
+                        | #{__('RAITE:')} 
                         span.rating
                           span &star;
                           span &star;
@@ -129,23 +129,23 @@ block content
                           span &star;
                           span &star;
                       li
-                        | PHONENUMBER: 
+                        | #{__('PHONENUMBER:')} 
                         strong #{parcel.fromPerson.phone}
                 if parcel.toPerson
                   .sender-name(style='min-height: 221px;')
                     figure
-                      span THE SENDER:
+                      span #{__('THE SENDER:')}
                       //img(src='img/person.png', alt='')
                       //figcaption
                         a(href='tel://#{parcel.toPerson.phone}')
                           i.fa.fa-phone-square
-                          | call
+                          | #{__('call')}
                     ul
                       li
-                        | NAME: 
+                        | #{__('NAME:')} 
                         strong #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
                       //li
-                        | RAITE: 
+                        | #{__('RAITE:')} 
                         span.rating
                           span &star;
                           span &star;
@@ -153,19 +153,19 @@ block content
                           span &star;
                           span &star;
                       li
-                        | PHONENUMBER: 
+                        | #{__('PHONENUMBER:')} 
                         strong #{parcel.toPerson.phone}
                 .clear
                 if parcel.status == 'draft'
                   //a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}?m=1"') CONTINUE
-                  h3 THE ORDER NOT COMPLETED
+                  h3 #{__('THE ORDER NOT COMPLETED')}
                 else if parcel.status == 'published'
                   //a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') PROCESS PAYMENT
-                  h3 THE ORDER NOT PAID
+                  h3 #{__('THE ORDER NOT PAID')}
                 else if parcel.status == 'accepted'
-                  a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') ORDER PICKED UP
+                  a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') #{__('ORDER PICKED UP')}
                 else if parcel.status == 'started'
-                  a.orange_button.cansel_order(href='#', onClick='location.href="/subscript?parcel=#{parcel.id}&m=1"') CONFIRM DELIVERY
+                  a.orange_button.cansel_order(href='#', onClick='location.href="/subscript?parcel=#{parcel.id}&m=1"') #{__('CONFIRM DELIVERY')}
                 //else if parcel.status == 'arrived'
                 //  a.orange_button.cansel_order(href='#', onClick='archiveOrder("#{parcel.id}")') ARCHIVE RECORD
                 //else
@@ -189,7 +189,7 @@ block content
           else
             .sender
               .clear
-              h3 YOU HAVE NO PARCELS YET
+              h3 #{__('YOU HAVE NO PARCELS YET')}
               .clear
         // tab
         .js-tab-body
@@ -198,28 +198,28 @@ block content
              .sender
                 ul.sender-list
                   li
-                    | ORDER NO: 
+                    | #{__('ORDER NO:')} 
                     strong SA12345678
                   li
-                    | PAYMNET STATUS 
+                    | #{__('PAYMENT STATUS')} 
                     em Pay Success
                   li.no-margin
-                    | TOTAL AMOUNT:
+                    | #{__('TOTAL AMOUNT:')}
                     strong 186&euro;
                   li
-                    | Received:
+                    | #{__('Received:')}
                     strong 186&euro; 
                   li.no-margin
-                    | Payment Method: 
-                    strong Credit Card
+                    | #{__('Payment Method:')} 
+                    strong #{__('Credit Card')}
                   li
-                    | Date Received: 
+                    | #{__('Date Received:')} 
                     strong 11/10/2015
                 .pattern
           else
             .sender
               .clear
-              h3 YOU HAVE NO PAYMENTS YET
+              h3 #{__('YOU HAVE NO PAYMENTS YET')}
               .clear
         // tab
         .js-tab-body(style='display: block;')
@@ -242,43 +242,43 @@ block content
                 if parcel.request && parcel.request.trackingNumber
                   h3 parcel.request.trackingNumber
                 else
-                  h3 NO TRACKING NUMBER
+                  h3 #{__('NO TRACKING NUMBER')}
                 ul.sender-list
                   li
-                    | STATUS:
+                    | #{__('STATUS:')}
                     if parcel.status == 'archive'
-                      em  Arrived
+                      em  #{__('Arrived')}
                     if parcel.status == 'canceled'
-                      em  Canceled
+                      em  #{__('Canceled')}
                   li
-                    | SENDING DETAILS: 
-                    strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+                    | #{__('SENDING DETAILS:')} 
+                    strong #{parcel.weight}#{__('kg')}, #{parcel.width}#{__('cm')} x #{parcel.length}#{__('cm')} x #{parcel.depth}#{__('cm')}
                   li.no-margin
-                    | DEPARTURE DATE: 
+                    | #{__('DEPARTURE DATE:')} 
                     strong #{moment(parcel.pickupDate).format('LL')}
                   li
-                    | ARRIVAL DATE: 
+                    | #{__('ARRIVAL DATE:')} 
                     strong #{moment(parcel.arriveDate).format('LL')}
                   li.no-margin
-                    | FROM: 
+                    | #{__('FROM:')} 
                     if parcel.fromPerson
                       strong #{parcel.fromPersonAddress()}
                     else
                       strong #{parcel.ownerAddress()}
                   li
-                    | TO: 
+                    | #{__('TO:')} 
                     if parcel.toPerson
                       strong #{parcel.toPersonAddress()}
                     else
                       strong #{parcel.ownerAddress()}
                   li.no-margin
-                    | INSURRANCE: 
-                    strong Standart (until #{parcel.insurance}&euro;)
+                    | #{__('INSURRANCE:')} 
+                    strong #{__('Standard')} (until #{parcel.insurance}&euro;)
                   li
-                    | DELIVERY OPTIONS: 
-                    strong +0&euro; to home adress
+                    | #{__('DELIVERY OPTIONS:')} 
+                    strong +0&euro; #{__('to home adress')}
                   li
-                    | TOTAL AMOUNT (Including VAT): 
+                    | #{__('TOTAL AMOUNT (Including VAT):')} 
                     strong #{parcel.request.price}&euro;
                 //a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
                 //span.note * You myst delivery this order to 23/11/2015
@@ -286,19 +286,19 @@ block content
           else
             .sender
               .clear
-              h3 YOU HAVE NO ARCHIVED PARCELS YET
+              h3 #{__('YOU HAVE NO ARCHIVED PARCELS YET')}
               .clear
       #cancel_box.popup_box
         span
-          | CONFIRMATION
+          | #{__('CONFIRMATION')}
           //strong SA12345678.
         br
-        strong Confirm that you picked up the order
+        strong #{__('Confirm that you picked up the order')}
         br
-        em * Mark order as picked up only after you really get the parcel
+        em * #{__('Mark order as picked up only after you really get the parcel')}
         br
-        a.orange_button(href='javascript:reallyStartOrder();') PICK UP THE ORDER
-        a.gray_button.b-close(href='#') NOT YET
+        a.orange_button(href='javascript:reallyStartOrder();') #{__('PICK UP THE ORDER')}
+        a.gray_button.b-close(href='#') #{__('NOT YET')}
 
 block script
   script(type='text/javascript').

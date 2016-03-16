@@ -7,46 +7,46 @@ block header
     .container
       ul
         li
-          a(href='/price/#{parcel.id}') 1. Price offers
+          a(href='/price/#{parcel.id}') 1. #{__('Price offers')}
         li
-          a(href='/confirmation/#{parcel.id}') 2. Confirmation
+          a(href='/confirmation/#{parcel.id}') 2. #{__('Confirmation')}
         li
-          span 3. Payment
+          span 3. #{__('Payment')}
         li
-          a(href='/dashboard') 4. Dashboard
+          a(href='/dashboard') 4. #{__('Dashboard')}
       span.title #{user.firstname} #{user.lastname}
 
 block content
   // content
   section.section
-    h1 Payment of the order
+    h1 #{__('Payment of the order')}
     hr
     .container
       .order
         h3
-          | SUMMARY OF THE ORDER: 
+          | #{__('SUMMARY OF THE ORDER:')} 
           span &euro;#{driver.getPrice(parcel.pathLength)}
         ul
           li
-            | FROM:  
+            | #{__('FROM:')}  
             if parcel.fromPerson
               strong #{parcel.fromPersonAddress()}
             else
               strong #{parcel.ownerAddress()}
           li
-            | TO:  
+            | #{__('TO:')}  
             if parcel.toPerson
               strong #{parcel.toPersonAddress()}
             else
               strong #{parcel.ownerAddress()}
         ul
           li
-            | SENDING DETAILS: 
-            strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
+            | #{__('SENDING DETAILS:')} 
+            strong #{parcel.weight}#{__('kg')}, #{parcel.width}#{__('cm')} x #{parcel.length}#{__('cm')} x #{parcel.depth}#{__('cm')}
           //li
-            | INSURRANCE: 
-            strong Standart (until #{parcel.insurance}&euro;)
-        span.total TOTAL AMOUNT (Including VAT): #{request.price}&euro;
+            | #{__('INSURRANCE:')} 
+            strong #{__('Standart')} (#{__('until')} #{parcel.insurance}&euro;)
+        span.total #{__('TOTAL AMOUNT (Including VAT):')} #{request.price}&euro;
     hr
     .container
       form.form#payment-form(action='/braintree/transaction/#{request.id}', method='POST')
@@ -73,25 +73,25 @@ block content
             // <i class="icon-visa active"></i>
             // <i class="icon-express"></i>
         #wrap_hide
-          label(for='first_name') CARDHOLDER NAME*
+          label(for='first_name') #{__('CARDHOLDER NAME*')}
           input#first_name(data-braintree-name="cardholder_name", type='text', placeholder='Thierrry Shtutgartz', autocomplete='cc-name')
-          label(for='card') CARD NUMBER*
+          label(for='card') #{__('CARD NUMBER*')}
           input#card(data-braintree-name='number', type='text', placeholder='4556614505116697', inputmode='numeric', maxlength="19", x-autocompletetype="cc-number", autocompletetype="cc-number", autocorrect="off", spellcheck="off", autocapitalize="off", autocomplete="cc-number")
-          label(for='card_date') EXPIRATION DATE*
+          label(for='card_date') #{__('EXPIRATION DATE*')}
           input#card_date(data-braintree-name='expiration_date', type='text', placeholder='02/16', autocomplete='cc-exp')
-          label(for='last_name') SECURITY CODE*
+          label(for='last_name') #{__('SECURITY CODE*')}
           input#cvv_code(data-braintree-name="cvv", type='text', placeholder='660 (The 3 digits after the card number on the signature panel of your card)')
-        button#pay_form_button.orange_button CONFIRM ORDER
+        button#pay_form_button.orange_button #{__('CONFIRM ORDER')}
       #want_popup_box.popup_box
         span
-          | YOUR PAYMENT HAVE BEEN COMPLETE
+          | #{__('YOUR PAYMENT HAVE BEEN COMPLETE')}
           strong #{request.price}&euro;
         br
-        strong The carrier will receive a message about that
+        strong #{__('The carrier will receive a message about that')}
         br
-        em * We will inform you about your order status
+        em * #{__('We will inform you about your order status')}
         br
-        a.orange_button(href='/dashboard') OK
+        a.orange_button(href='/dashboard') #{__('OK')}
 
 block script
   script(src="https://js.braintreegateway.com/v2/braintree.js")

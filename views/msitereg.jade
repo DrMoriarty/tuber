@@ -3,73 +3,73 @@ extend layoutm
 block content
   // content
   section.section
-    h1 Tuber parcels delivery
+    h1 #{__('Tuber parcels delivery')}
     ul.breadcrumbs
-      li You are here
+      li #{__('You are here')}
       li
         i.fa.fa-angle-double-right
-        span Registration
+        span #{__('Registration')}
     h2.centred_title
-      | Call us on  
+      | #{__('Call us on')}  
       span +49 511 879 893 02
       br
       strong or
-      |  fill in an enquiry below.
+      |  #{__('fill in an enquiry below.')}
     .container.bordered
       form.form.js-validate(action='/api/user', method='POST')
         figure.profile
           img(src='/img/profile.png', alt='')
           input#uplad_image.uplad_image(type='file')
-          label(for='uplad_image') Upload my picture
+          label(for='uplad_image') #{__('Upload my picture')}
         .form-margined
-          h3 About me
-          label(for='first_name') FIRST NAME*
+          h3 #{__('About me')}
+          label(for='first_name') #{__('FIRST NAME*')}
           input#first_name.required(type='text', placeholder='Thierrry', name='firstname')
-          label(for='last_name') LAST NAME*
+          label(for='last_name') #{__('LAST NAME*')}
           input#last_name.required(type='text', placeholder='Delesalle', name='lastname')
-          label(for='first_name') COMPANY (optional)
+          label(for='first_name') #{__('COMPANY (optional)')}
           input#first_name(type='text', name='company')
-          label(for='vat') VAT (optional)
+          label(for='vat') #{__('VAT (optional)')}
           input#vat(type='text', placeholder='DE123456789', name='vat')
-          label(for='address_str') ADDRESS (street)*
+          label(for='address_str') #{__('ADDRESS (street)*')}
           input#address_str.required(type='text', placeholder='Bruhlstr', name='address1')
-          label(for='address_num') ADDRESS (number)*
+          label(for='address_num') #{__('ADDRESS (number)*')}
           input#address_num.required(type='text', placeholder='11', name='address2')
-          label(for='zip') ZIP CODE*
+          label(for='zip') #{__('ZIP CODE*')}
           input#zip.required(type='text', placeholder='30169', name='zip')
-          label(for='city') CITY*
+          label(for='city') #{__('CITY*')}
           input#city.required(type='text', placeholder='Hannover', name='city')
-          label(for='country') COUNTRY*
+          label(for='country') #{__('COUNTRY*')}
           input#country.required(type='text', placeholder='Germany', name='country')
-          label(for='mobile') MOBILE PHONE*
+          label(for='mobile') #{__('MOBILE PHONE*')}
           input#mobile.required(type='text', placeholder='0049 151 4611 8937', name='phone')
-          label(for='email') E-MAIL*
+          label(for='email') #{__('E-MAIL*')}
           input#email.required.email(type='text', name='email')
-          label(for='email_again') E-MAIL CONFIRMATION*
+          label(for='email_again') #{__('E-MAIL CONFIRMATION*')}
           input#email_again.required.email(type='text')
-          p#email_differs(style='color: red; display: none;') E-MAILS DIFFERS
-          label(for='password') PASSWORD*
+          p#email_differs(style='color: red; display: none;') #{__('E-MAILS DIFFERS')}
+          label(for='password') #{__('PASSWORD*')}
           input#password.required(type='password', name='password')
-          p#password_tooshort(style='color: red; display: none;') PASSWORD TOO SHORT
-          label(for='password_again') PASSWORD CONFIRMATION*
+          p#password_tooshort(style='color: red; display: none;') #{__('PASSWORD TOO SHORT')}
+          label(for='password_again') #{__('PASSWORD CONFIRMATION*')}
           input#password_again.required(type='password')
-          p#password_differs(style='color: red; display: none;') PASSWORDS DIFFERS
+          p#password_differs(style='color: red; display: none;') #{__('PASSWORDS DIFFERS')}
           input(type='hidden', name='driver', value='#{driver}')
-          p#err11000(style='color: red; display: none;') USER ALREADY REGISTERED
-          button.orange_button CONFIRM YOUR DATAS
-          a.more(href='/?m=1') GO TO &ldquo;SEND MY PARCEL&rdquo;
+          p#err11000(style='color: red; display: none;') #{__('USER ALREADY REGISTERED')}
+          button.orange_button #{__('CONFIRM YOUR DATAS')}
+          a.more(href='/?m=1') #{__('GO TO &ldquo;SEND MY PARCEL&rdquo;')}
   // promo
   section.promo
     .container
-      h2 Parcel delivery
+      h2 #{__('Parcel delivery')}
       p
-        | Tuber is a parcels delivery service for p2p fast delivery.
+        | #{__('Tuber is a parcels delivery service for p2p fast delivery.')}
         br
-        | Check for details
+        | #{__('Check for details')}
       a(href='/?m=1')
-        | SUBSCRIBE
+        | #{__('SUBSCRIBE')}
         br
-        | HERE
+        | #{__('HERE')}
 
 block script
   script(type='text/javascript').

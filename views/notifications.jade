@@ -1,0 +1,92 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-active
+        a(href='/admin/notification') Notifications
+  .topbar-right
+    ol.breadcrumb
+      a(href='/admin/notification/new')
+        button.btn.btn-info(class='button') Create new
+
+block content
+  .modal.fade#rmModal(tabindex='-1', role='dialog', aria-labelledby='rmModalLabel')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') x
+          h4 Remove this item?
+        .modal-body
+          | You can not undone this operation
+        .modal-footer
+          button.btn.btn-default(data-dismiss='modal', type='button') Cancel
+          button.btn.btn-primary(data-dismiss='modal', type='button', onClick='javascript:removeItem();') Remove
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Requests
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th(onclick='javascript:location.href="/admin/notification?sort=id"') #
+                th(onclick='javascript:location.href="/admin/notification?sort=lang"') Language
+                th(onclick='javascript:location.href="/admin/notification?sort=event"') Event type
+                th(onclick='javascript:location.href="/admin/notification?sort=subject"') Subject
+                th(onclick='javascript:location.href="/admin/notification?sort=text"') Text
+                th Delete
+            tbody
+              if result
+                each it in result
+                  tr(onclick='javascript:location.href="/admin/notification/#{it.id}"')
+                    td= it.id
+                    if it.lang
+                      td= it.lang
+                    else
+                      td None
+                    if it.event
+                      td= it.event
+                    else
+                      td None
+                    if it.subject
+                      td= it.subject
+                    else
+                      td None
+                    if it.text
+                      td= it.text
+                    else
+                      td None
+                    td
+                      a(href='javascript:window.currentRequestId = "#{it.id}";')
+                        button.btn.btn-danger(class='button', data-toggle='modal', data-target='#rmModal') X
+          .dataTables_info
+            | Page #{page}
+          .dataTables_paginate.paging_bs_normal
+            ul.pagination.pagination-sm
+              - for (var i=1; i<=pages; i++)
+                if (i == page)
+                  li.active
+                    a(href='/admin/notification?sort=#{sort}&page=#{i}') #{i}
+                else
+                  li
+                    a(href='/admin/notification?sort=#{sort}&page=#{i}') #{i}
+
+block script
+  script(type='text/javascript').
+    window.removeItem = function() {
+      $.ajax({
+        url: '/api/notification/'+window.currentRequestId,
+        type: 'DELETE',
+        success: function() {
+          location.reload();
+        }
+      });
+    };

@@ -46,19 +46,20 @@ module.exports =
     generatePasswordRecovery: (req, res) ->
         email = req.param('email')
         if email?
-            User.findOne({email: email}).exec (err, result) ->
-                if err? or not result
+            User.findOne({email: email}).exec (err, user) ->
+                if err? or not user
                     console.log err
                     res.status(404)
                     res.json {error: 'Email not found'}
                 else
                     hash = uuid.v1()
-                    User.update({id: result.id}, {recoveryHash: hash}).exec (err, result) ->
+                    User.update({id: user.id}, {recoveryHash: hash}).exec (err, result) ->
                         if err?
                             console.log err
                             res.negotiate(err)
                         else
-                            MailingService.sendEmail email, 'Password recovery', 'Someone used your email address to recovery password. \nIf you want to reset your password go to this link\nhttp://packet24.com/recovery?hash='+hash
+                            #MailingService.sendEmail email, 'Password recovery', 'Someone used your email address to recovery password. \nIf you want to reset your password go to this link\nhttp://packet24.com/recovery?hash='+hash
+                            MailingService.processEvent user.email, 'passwordRestore', user.lang, '\nhttp://packet24.com/recovery?hash='+hash
                             res.json {status: 'Email was sent'}
         else
             res.status(400)
@@ -79,7 +80,8 @@ module.exports =
                             console.log err
                             res.negotiate(err)
                         else
-                            MailingService.sendEmail user.email, 'Your shiny new password', 'For your account new password was set: ' + newpasswd
+                            #MailingService.sendEmail user.email, 'Your shiny new password', 'For your account new password was set: ' + newpasswd
+                            MailingService.processEvent user.email, 'passwordGenerated', user.lang, '\n' + newpasswd
                             if req.wantsJSON
                                 res.json {status: 'Email with new password was sent'}
                             else

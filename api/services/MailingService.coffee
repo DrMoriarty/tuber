@@ -19,3 +19,19 @@ module.exports =
             console.log 'MailingService error', err if err?
             console.log 'Message sent', info.response if info?
         console.log 'Start email sending:', recipient, subject, text
+
+    processEvent: (recipient, eventType, lang, additionalText) ->
+        if not recipient?
+            console.log 'Can not send ', eventType, 'to nobody!'
+            return
+        if not lang?
+            lang = 'en'
+        Notification.find({lang:lang, event: eventType}).exec (err, result) ->
+            if err or !result
+                console.log 'Event text not found!', lang, eventType
+            else if result.length > 0
+                nt = result[0]
+                text = nt.text
+                if additionalText?
+                    text += additionalText
+                MailingService.sendEmail recipient, nt.subject, text

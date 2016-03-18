@@ -141,6 +141,9 @@ module.exports =
         bankCode: 'string'
         bankName: 'string'
         bankClientName: 'string'
+        lang:
+            type: 'string'
+            defaultsTo: 'en'
         toJSON: ->
             obj = this.toObject()
             delete obj.password
@@ -212,13 +215,14 @@ module.exports =
         )
 
     afterCreate: (object, cb) ->
-        LogService.saveLog 'Create', 'User', JSON.stringify(object)
         cb()
+        LogService.saveLog 'Create', 'User', JSON.stringify(object)
+        MailingService.processEvent object.email, 'registrationComplete', object.lang
 
     afterUpdate: (object, cb) ->
-        LogService.saveLog 'Update', 'User', JSON.stringify(object)
         cb()
+        LogService.saveLog 'Update', 'User', JSON.stringify(object)
 
     afterDestroy: (object, cb) ->
-        LogService.saveLog 'Delete', 'User', JSON.stringify(object)
         cb()
+        LogService.saveLog 'Delete', 'User', JSON.stringify(object)

@@ -55,6 +55,7 @@ block content
           input#password_again.required(type='password')
           p#password_differs(style='color: red; display: none;') #{__('PASSWORDS DIFFERS')}
           input(type='hidden', name='driver', value='#{driver}')
+          input(type='hidden', name='lang', value='#{lang}')
           p#err11000(style='color: red; display: none;') #{__('USER ALREADY REGISTERED')}
           button.orange_button #{__('CONFIRM YOUR DATAS')}
           a.more(href='/?m=1') #{__('GO TO &ldquo;SEND MY PARCEL&rdquo;')}

@@ -37,9 +37,9 @@ module.exports =
     registration: (req, res) ->
         driver = req.param('driver') or false
         if req.mobile
-            res.view 'msitereg', {driver: driver}
+            res.view 'msitereg', {driver: driver, lang: req.getLocale()}
         else
-            res.view 'sitereg', {driver: driver}
+            res.view 'sitereg', {driver: driver, lang: req.getLocale()}
 
     parcel: (req, res) ->
         if req.user?

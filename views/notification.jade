@@ -1,0 +1,79 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb-link
+        a(href='/admin/notification') Notifications
+      li.crumb-active
+        a(href='/admin/notification/new') Notification [#{result.lang}] - #{result.event}
+
+block content
+  .row
+    .col-md-12
+      .panel
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-pencil
+            |  New notification
+        .panel-body
+          .alert.alert-theme Yellow fields are required!
+          form#altForm.cmxform(method='post', action='/api/notification/#{result.id}')
+            .form-group.has-warning
+              label.control-label(for='lang') Language
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                select#selectlang(name='lang', required='')
+                  option(value='en', selected=result.lang == 'en') English
+                  option(value='de', selected=result.lang == 'de') Deutsch
+            .form-group.has-warning
+              label.control-label(for='event') Event type
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-globe
+                select#selectevent(name='event', required='')
+                  option(value='registrationComplete', selected=result.event == 'registrationComplete') Complete registration
+                  option(value='passwordRestore', selected=result.event == 'passwordRestore')  Restore password
+                  option(value='passwordGenerated', selected=result.event == 'passwordGenerated') Generate password
+                  option(value='orderAccepted', selected=result.event == 'orderAccepted') Accept order
+                  option(value='orderPayed', selected=result.event == 'orderPayed') Complete payment
+                  option(value='orderArrived', selected=result.event == 'orderArrived') Arrive parcel
+            .form-group.has-warning
+              label(for='subject') Subject
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                input#subject.form-control(name='subject', type='text', maxlength='200', placeholder='', required='', value='#{result.subject}')
+            .form-group.has-warning
+              label(for='text') Notification text
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-user
+                textarea#text.form-control(name='text', type='text', rows='10', placeholder='', required='')
+                  | #{result.text}
+            .form-group
+              input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
+
+block script
+  script(type='text/javascript').
+    jQuery(document).ready(function () {
+      // validate the comment form when it is submitted
+      $("#altForm").validate({
+        submitHandler: function(form) {
+          Pace.restart();
+          $.post(form.action, $(form).serialize(), function(data, status) {
+            location.href = '/admin/notification';
+          });
+        }
+      });
+      $('#selectlang').multiselect({
+        enableFiltering: false,
+      });
+      $('#selectevent').multiselect({
+        enableFiltering: false,
+      });
+    });

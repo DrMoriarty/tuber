@@ -314,3 +314,21 @@ module.exports =
             console.log 'Filter', filter
             res.attachment('report.csv')
             res.send new Buffer(s)
+
+    notifications: (req, res) ->
+        page = req.param('page') or 1
+        sort = req.param('sort') or 'createdAt'
+        Notification.count().exec (err, count) ->
+            Notification.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                res.view 'notifications', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+
+    newNotification: (req, res) ->
+        res.view 'newNotification', {user: req.user}
+
+    notification: (req, res) ->
+        id = req.param('id')
+        Notification.findOne(id).exec (err, result) ->
+            if err or !result
+                res.notFound()
+            else
+                res.view 'notification', {user: req.user, result: result}

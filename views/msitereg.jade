@@ -7,7 +7,7 @@ block head
 block content
   // content
   section.section
-    h1 #{__('Tuber parcels delivery')}
+    h1 #{__('Packet24 parcels delivery')}
     ul.breadcrumbs
       li #{__('You are here')}
       li
@@ -28,9 +28,9 @@ block content
         .form-margined
           h3 #{__('About me')}
           label(for='first_name') #{__('FIRST NAME*')}
-          input#first_name.required(type='text', placeholder='Thierrry', name='firstname')
+          input#first_name.required(type='text', placeholder='#{__("Name")}', name='firstname')
           label(for='last_name') #{__('LAST NAME*')}
-          input#last_name.required(type='text', placeholder='Delesalle', name='lastname')
+          input#last_name.required(type='text', placeholder='#{__("Family name")}', name='lastname')
           label(for='first_name') #{__('COMPANY (optional)')}
           input#first_name(type='text', name='company')
           label(for='vat') #{__('VAT (optional)')}
@@ -68,7 +68,7 @@ block content
     .container
       h2 #{__('Parcel delivery')}
       p
-        | #{__('Tuber is a parcels delivery service for p2p fast delivery.')}
+        | #{__('Packet24 is a parcels delivery service for p2p fast delivery.')}
         br
         | #{__('Check for details')}
       a(href='/?m=1')

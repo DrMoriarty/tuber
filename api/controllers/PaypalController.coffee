@@ -45,7 +45,7 @@ module.exports =
                             "total": request.price,
                             "currency": "EUR"
                         },
-                        "description": "Tuber"
+                        "description": "Packet24"
                     }]
                 };
                 paypal.payment.create payment, (error, payment) ->

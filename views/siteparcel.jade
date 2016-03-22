@@ -113,19 +113,19 @@ block content
                 h4 #{__('Your check in Date')}
                 strong.time #{__('TIME:')}
                 strong.at #{__('at')}
-                input.time_at(type='text', placeholder=' 14:00 ', name='pickupTime1')
+                input.time_at(type='text', placeholder=' 14:00 ', name='pickupTime1', value='10:00')
                 strong.to #{__('to')}
-                input.time_to(type='text', placeholder=' 17:00 ', name='pickupTime2')
+                input.time_to(type='text', placeholder=' 17:00 ', name='pickupTime2', value='17:00')
                 em #{__('*Period must be have more than two hours.')}
             .form-datepicker
-              input.time.js-datetime.time-right.required(type='text', placeholder='Parcel should arrived before', name='arriveDate')
+              input.time.js-datetime.time-right(type='text', placeholder='Parcel should arrived before', name='arriveDate')
               .form-datepicker-body.calendar-right.js-datetime-body.hide
                 h4 #{__('Your check in Date')}
                 strong.time #{__('TIME:')}
                 strong.at #{__('at')}
-                input.time_at(type='text', placeholder=' 15:00 ', name='arriveTime1')
+                input.time_at(type='text', placeholder=' 15:00 ', name='arriveTime1', value='10:00')
                 strong.to #{__('to')}
-                input.time_to(type='text', placeholder=' 18:00 ', name='arriveTime2')
+                input.time_to(type='text', placeholder=' 18:00 ', name='arriveTime2', value='17:00')
                 em #{__('*Period must be have more than two hours.')}
             input#timing(type='checkbox', name='userAgreementTimes')
             label(for='timing') #{__('I am aware that the time frame influences Packet24 prices.')}

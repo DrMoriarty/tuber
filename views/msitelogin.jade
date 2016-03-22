@@ -31,7 +31,7 @@ block content
           span #{__('or')}
           a(href='/registration?driver=false&m=1')  #{__('Register')}
       .login
-        form.form.js-validate(action='transporter_parameters.html', method='get')
+        form.form.js-validate(action='/login', method='POST')
           i.icons-can_transport_parsel
           h3 #{__('I want to TRANSPORT a parcel')}
           label(for='transport_login') #{__('Login/E-mail adress')}

@@ -154,6 +154,16 @@ block script
     };
     $("#fromCountry").easyAutocomplete(options);
     $("#toCountry").easyAutocomplete(options);
+    $('#address').on('click', function(event) {
+      if(event.currentTarget.checked) {
+        $('#address1').prop('checked', false);
+      }
+    });
+    $('#address1').on('click', function(event) {
+      if(event.currentTarget.checked) {
+        $('#address').prop('checked', false);
+      }
+    });
 
     $('.js-validate').submit(function() {
       $('#fromZip').removeClass('error');

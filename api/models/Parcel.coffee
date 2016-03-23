@@ -66,7 +66,10 @@ module.exports =
             defaultsTo: 'draft'
 
         ownerAddress: ->
-            @owner.zip + ' ' + @owner.city + ' ' + @owner.address1 + ' ' + @owner.address2
+            if @owner?
+                return @owner.zip + ' ' + @owner.city + ' ' + @owner.address1 + ' ' + @owner.address2
+            else
+                return ''
         fromPersonAddress: ->
             (if @fromPerson.zip? then @fromPerson.zip else '') + ' ' + @fromPerson.city + ' ' + @fromPerson.address1 + ' ' + @fromPerson.address2
         toPersonAddress: ->

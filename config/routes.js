@@ -46,6 +46,7 @@ module.exports.routes = {
     'post /make/subscript': 'SiteController.makeSubscript',
     'get /subscript': 'SiteController.subscript',
     'get /passwordrestore': 'SiteController.restorePassword',
+    'post /setlanguage': 'SiteController.setLanguage',
     
     'get /login': {
         view: 'login'

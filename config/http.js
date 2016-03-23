@@ -52,6 +52,7 @@ module.exports.http = {
             'methodOverride',
             'device',
             'mobileChecker',
+            'langChecker',
             'poweredBy',
             '$custom',
             'router',
@@ -78,6 +79,13 @@ module.exports.http = {
                 }
             }
             //console.log('Set mobile', req.mobile);
+            return next();
+        },
+
+        langChecker: function(req, res, next) {
+            if(req.session.lang) {
+                req.locale = req.session.lang;
+            }
             return next();
         }
 

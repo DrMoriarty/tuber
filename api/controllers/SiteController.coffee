@@ -14,39 +14,39 @@ module.exports =
         if req.user?
             if req.user.driver
                 if req.mobile
-                    res.view 'msitedriver', {user: req.user}
+                    res.view 'msitedriver', {user: req.user, lang: req.getLocale(req)}
                 else
-                    res.view 'sitedriver', {user: req.user}
+                    res.view 'sitedriver', {user: req.user, lang: req.getLocale(req)}
             else
                 if req.mobile
-                    res.view 'msiteparcel', {user: req.user}
+                    res.view 'msiteparcel', {user: req.user, lang: req.getLocale(req)}
                 else
-                    res.view 'siteparcel', {user: req.user}
+                    res.view 'siteparcel', {user: req.user, lang: req.getLocale(req)}
         else
             if req.mobile
-                res.view 'msitelogin'
+                res.view 'msitelogin', {lang: req.getLocale(req)}
             else
-                res.view 'sitelogin'
+                res.view 'sitelogin', {lang: req.getLocale(req)}
 
     faq: (req, res) ->
         if req.mobile
-            res.view 'msitefaq'
+            res.view 'msitefaq', {lang: req.getLocale(req)}
         else
-            res.view 'sitefaq'
+            res.view 'sitefaq', {lang: req.getLocale(req)}
 
     registration: (req, res) ->
         driver = req.param('driver') or false
         if req.mobile
-            res.view 'msitereg', {driver: driver, lang: req.getLocale()}
+            res.view 'msitereg', {driver: driver, lang: req.getLocale(req)}
         else
-            res.view 'sitereg', {driver: driver, lang: req.getLocale()}
+            res.view 'sitereg', {driver: driver, lang: req.getLocale(req)}
 
     parcel: (req, res) ->
         if req.user?
             if req.mobile
-                res.view 'msiteparcel', {user: req.user}
+                res.view 'msiteparcel', {user: req.user, lang: req.getLocale(req)}
             else
-                res.view 'siteparcel', {user: req.user}
+                res.view 'siteparcel', {user: req.user, lang: req.getLocale(req)}
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -115,9 +115,9 @@ module.exports =
                         console.log 'Prices', prices
                         moreAvailable = data.length > 3
                         if req.mobile
-                            res.view 'msiteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable}
+                            res.view 'msiteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable, lang: req.getLocale(req)}
                         else
-                            res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable}
+                            res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable, lang: req.getLocale(req)}
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -141,7 +141,7 @@ module.exports =
                             view = 'msitedashboard'
                         else
                             view = 'sitedashboard'
-                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1, lang: req.getLocale(req)}
         else if req.user? and req.user.driver
             filter = {driver: req.user.id, status: {'!': ['arrived', 'archive', 'canceled']}}
             Parcel.count(filter).exec (err, count) ->
@@ -157,7 +157,7 @@ module.exports =
                             view = 'msitedriverdashboard'
                         else
                             view = 'sitedriverdashboard'
-                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1}
+                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1, lang: req.getLocale(req)}
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -201,9 +201,9 @@ module.exports =
                                     return cb(e, null)
                     ], (err, result) ->
                         if req.mobile
-                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or []}
+                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: req.getLocale(req)}
                         else
-                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or []}
+                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: req.getLocale(req)}
                     )
         else
             if req.mobile
@@ -231,9 +231,9 @@ module.exports =
                         BraintreeService.clientToken req.user.id, (token, err) ->
                             console.log err if err?
                             if req.mobile
-                                res.view 'msitepayment', {user: req.user, parcel: parcel, request: request, driver: driver, token: token}
+                                res.view 'msitepayment', {user: req.user, parcel: parcel, request: request, driver: driver, token: token, lang: req.getLocale(req)}
                             else
-                                res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver, token: token}
+                                res.view 'sitepayment', {user: req.user, parcel: parcel, request: request, driver: driver, token: token, lang: req.getLocale(req)}
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -261,9 +261,9 @@ module.exports =
     profile: (req, res) ->
         if req.user?
             if req.mobile?
-                res.view 'msiteprofile', {user: req.user}
+                res.view 'msiteprofile', {user: req.user, lang: req.getLocale(req)}
             else
-                res.view 'siteprofile', {user: req.user}
+                res.view 'siteprofile', {user: req.user, lang: req.getLocale(req)}
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -389,3 +389,13 @@ module.exports =
         else
             res.render 'siterecovery', {}
         
+    setLanguage: (req, res) ->
+        lang = req.param('lang')
+        l = lang
+        if lang == 'en' or lang == 'English'
+            l = 'en'
+        else if lang == 'de' or lang == 'Deutch'
+            l = 'de'
+        req.session.lang = l
+        console.log 'Set language', l
+        res.json {language: l, status: 'ok'}

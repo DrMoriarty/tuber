@@ -81,16 +81,16 @@ module.exports =
             defaultsTo: 0
         maxLength:
             type: 'integer'
-            defaultsTo: 0
+            defaultsTo: 20
         maxWidth:
             type: 'integer'
-            defaultsTo: 0
+            defaultsTo: 20
         maxDepth:
             type: 'integer'
-            defaultsTo: 0
+            defaultsTo: 20
         maxWeight:
             type: 'integer'
-            defaultsTo: 0
+            defaultsTo: 1
         parcelsPerDay:
             type: 'integer'
             defaultsTo: 0

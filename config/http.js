@@ -73,8 +73,8 @@ module.exports.http = {
 		        var host = req.headers['x-host'] || req.host;
 		        //console.log('Host >>>', host);
                 req.mobile = (host.indexOf('m.') == 0);
-                if(host == 'packet24.com' && !req.mobile) {
-                    req.redirect('http://m.packet24.com'+req.path);
+                if(host == 'packet24.com' && mobdev) {
+                    res.redirect('http://m.packet24.com'+req.path);
                     return;
                 }
             }

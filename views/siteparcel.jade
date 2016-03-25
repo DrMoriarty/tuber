@@ -188,10 +188,21 @@ block script
             $('#fromZip').addClass('error');
             $('#fromCity').addClass('error');
             $('#fromCountry').addClass('error');
+            if(!$('.js-toggle_address1').hasClass('active')) {
+              $('.js-toggle_address1').toggleClass('active');
+              $('.hidden_address1').slideToggle('slow');
+            }
           } else if(err.responseText == 'To address error') {
             $('#toZip').addClass('error');
             $('#toCity').addClass('error');
             $('#toCountry').addClass('error');
+            if(!$('.js-toggle_address2').hasClass('active')) {
+              $('.js-toggle_address2').toggleClass('active');
+              $('.hidden_address2').slideToggle('slow');
+            }
+          } else {
+            var errMsg = JSON.parse(err.responseText);
+            console.log("Error message", errMsg);
           }
         }});
       return false;

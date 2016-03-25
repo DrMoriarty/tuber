@@ -92,6 +92,7 @@ block script
     $("#country").easyAutocomplete(options);
     $('.js-validate').submit(function(event) {
       event.preventDefault();
+      $('#country').removeClass('error');
       $('#zip').removeClass('error');
       $('#email').removeClass('error');
       $('#email_again').removeClass('error');
@@ -101,6 +102,40 @@ block script
       $('#password_differs').hide();
       $('#password_tooshort').hide();
       $('#err11000').hide();
+
+      var country = this[9].value;
+      if(country != "Austria" &&
+        country != "Belgium" &&
+        country != "Bulgaria" &&
+        country != "Croatia" &&
+        country != "Cyprus" &&
+        country != "Czech Republic" &&
+        country != "Denmark" &&
+        country != "Estonia" &&
+        country != "Finland" &&
+        country != "France" &&
+        country != "Germany" &&
+        country != "Greece" &&
+        country != "Hungary" &&
+        country != "Ireland" &&
+        country != "Italy" &&
+        country != "Latvia" &&
+        country != "Lithuania" &&
+        country != "Luxembourg" &&
+        country != "Malta" &&
+        country != "Netherlands" &&
+        country != "Poland" &&
+        country != "Portugal" &&
+        country != "Romania" &&
+        country != "Slovakia" &&
+        country != "Slovenia" &&
+        country != "Spain" &&
+        country != "Sweden" &&
+        country != "United Kingdom") {
+        $('#country').addClass('error');
+        return false;
+      }
+
 
       if(this[11].value != this[12].value) {
         // email differs

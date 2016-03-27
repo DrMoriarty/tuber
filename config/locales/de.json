@@ -162,7 +162,7 @@
 	"PASSWORDS DIFFERS": "PASSWÖRTER unterscheidet",
 	"USER ALREADY REGISTERED": "Benutzer bereits REGISTRIERT",
 	"CONFIRM YOUR DATAS": "PROFILDATEN SPEICHERN",
-	"GO TO &ldquo;SEND MY PARCEL&rdquo;": "WEITER ZU &ldquo;PAKET VERSENDEN&rdquo;", 
+	"GO TO &ldquo;SEND MY PARCEL&rdquo;": "WEITER ZU &ldquo;PAKET VERSENDEN&rdquo;",
 	"Enter your email. We will send a recovery link to this email address.": "Geben sie ihre E-Mail Adresse ein. Wir werden eine Erholung Link, um diese E-Mail-Adresse senden.",
 	"Email": "E-mail-adresse",
 	"THE RECOVERY EMAIL WAS SENT TO YOUR EMAIL ADDRESS": "THE RECOVERY EMAIL WAS SENT TO YOUR EMAIL ADDRESS",
@@ -260,5 +260,6 @@
 	"We will inform you about your order status": "Wir werden Sie über den Status Ihrer Bestellung informieren",
 	"CARDHOLDER FIRST NAME*": "NACHNAME DES KARTENINHABERS*",
 	"Name": "Name",
-	"Family name": "Familienname"
+	"Family name": "Familienname",
+	"YOUR IBAN NUMBER:": "YOUR IBAN NUMBER:"
 }

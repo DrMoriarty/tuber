@@ -1,0 +1,56 @@
+extend layoutsite
+
+block content
+  // content
+  section.section
+    h1 #{__('PayPal payment error')}
+    ul.breadcrumbs
+      li #{__('You are here')}
+      li
+        i.fa.fa-angle-double-right
+        span #{__('PayPal error')}
+    .container
+      ul.faq_accordion
+        if user
+          li
+            span
+              | User:
+            p
+              #{user.firstname} #{user.lastname} #{user.email}
+        li
+          span
+            | HTTP Status Code:
+          p
+            | #{httpStatusCode}
+        li
+          span
+            | PayPal Error name:
+          p
+            |  #{name}
+        li
+          span
+            | Error Message:
+          p
+            | #{message} 
+        li
+          span
+            | Additional Information:
+          p
+            a(href='#{information_link}') #{information_link}
+        li
+          span
+            | PayPal debug ID: 
+          p
+            | #{debug_id}
+  // promo
+  section.promo
+    .container
+      h2 #{__('Parcel delivery')}
+      p
+        | #{__('Packet24 is a parcels delivery service for p2p fast delivery.')}
+        br
+        | #{__('Check for details')}
+      a(href='#')
+        | #{__('SUBSCRIBE')}
+        br
+        | #{__('HERE')}

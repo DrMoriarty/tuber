@@ -1,0 +1,39 @@
+extend layoutm
+
+block content
+  // content
+  section.section
+    h1 #{__('PayPal payment error')}
+    .container
+      ul.faq_accordion
+        if user
+          li
+            span
+              | User:
+            p
+              #{user.firstname} #{user.lastname} #{user.email}
+        li
+          span
+            | HTTP Status Code:
+          p
+            | #{httpStatusCode}
+        li
+          span
+            | PayPal Error name:
+          p
+            |  #{name}
+        li
+          span
+            | Error Message:
+          p
+            | #{message} 
+        li
+          span
+            | Additional Information:
+          p
+            a(href='#{information_link}') #{information_link}
+        li
+          span
+            | PayPal debug ID: 
+          p
+            | #{debug_id}

@@ -106,7 +106,13 @@ module.exports =
         paypal.payment.execute paymentId, details, (error, payment) ->
             if error?
                 console.log(error);
-                res.json(error);
+                #res.json(error);
+                data = error.response
+                data.user = req.user
+                if req.mobile
+                    res.view 'mpaypalerror', data
+                else
+                    res.view 'paypalerror', data
             else
                 console.log 'Paypal payment', payment
                 if requestId?

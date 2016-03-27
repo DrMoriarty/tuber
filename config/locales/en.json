@@ -261,5 +261,8 @@
 	"CARDHOLDER FIRST NAME*": "CARDHOLDER FIRST NAME*",
 	"Name": "Name",
 	"Family name": "Family name",
-	"CONTINUE": "CONTINUE"
+	"CONTINUE": "CONTINUE",
+	"YOUR IBAN NUMBER:": "YOUR IBAN NUMBER:",
+	"PayPal payment error": "PayPal payment error",
+	"PayPal error": "PayPal error"
 }

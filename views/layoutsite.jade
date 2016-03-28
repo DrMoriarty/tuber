@@ -61,7 +61,13 @@ html
           if user
             li
               a(href='/logout') #{__('Logout')}
-          li
+          if lang != 'en'
+            li
+              a(href='javascript:setLanguage("en");') EN
+          if lang != 'de'
+            li
+              a(href='javascript:setLanguage("de");') DE
+          //li
             select#langSelect
               option(selected=lang == 'de') Deutch
               option(selected=lang == 'en') English
@@ -129,12 +135,11 @@ html
     script(src='/vendor/moment/moment-with-locales.min.js')
     script(src='/js/main.js')
     script(type='text/javascript').
-      $('#langSelect').on('change', function(event) {
-        console.log('Lang select', event.currentTarget.value);
+      function setLanguage(lang) {
         $.ajax({
           url: '/setlanguage',
           type: 'POST',
-          data: {lang: event.currentTarget.value},
+          data: {lang: lang},
           success: function(data) {
             console.log('Set language result:', data);
             // reload
@@ -144,5 +149,9 @@ html
             console.log('Set language error:', err);
           }
         });
+      }
+      $('#langSelect').on('change', function(event) {
+        console.log('Lang select', event.currentTarget.value);
+        setLanguage(event.currentTarget.value);
       });
     block script

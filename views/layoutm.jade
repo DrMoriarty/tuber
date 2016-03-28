@@ -61,6 +61,12 @@ html
           if user
             li
               a(href='/logout') #{__('LOGOUT')}
+          if lang != 'en'
+            li
+              a(href='javascript:setLanguage("en");') EN
+          if lang != 'de'
+            li
+              a(href='javascript:setLanguage("de");') DE
       // header section
       block header  
       // content
@@ -94,4 +100,20 @@ html
     script(src='/vendor/jquery/jquery.easing.min.js')
     script(src='/vendor/moment/moment-with-locales.min.js')
     script(src='/js/main_mobile.js')
+    script(type='text/javascript').
+      function setLanguage(lang) {
+        $.ajax({
+          url: '/setlanguage',
+          type: 'POST',
+          data: {lang: lang},
+          success: function(data) {
+            console.log('Set language result:', data);
+            // reload
+            location.reload();
+          },
+          error: function(err) {
+            console.log('Set language error:', err);
+          }
+        });
+      }
     block script

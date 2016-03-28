@@ -60,6 +60,12 @@ html
           if user
             li
               a(href='/logout') #{__('LOGOUT')}
+          if lang != 'en'
+            li
+              a(href='javascript:setLanguage("en");') EN
+          if lang != 'de'
+            li
+              a(href='javascript:setLanguage("de");') DE
       // header section
       block header  
       // content

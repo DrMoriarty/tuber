@@ -30,8 +30,10 @@ block content
         strong #{__('cheapest')}
         ul
           li #{__('Expected dates:')}
-          li #{__('Departure:')} #{drivers.cheapest.pickupDate}
-          li #{__('Arrival:')} #{drivers.cheapest.arriveDate}
+          //li #{__('Departure:')} #{drivers.cheapest.pickupDate}
+          //li #{__('Arrival:')} #{drivers.cheapest.arriveDate}
+          li #{__('Departure:')} #{moment(parcel.pickupDate).format('LL')}
+          li #{__('Arrival:')} #{moment(parcel.arriveDate).format('LL')}
         if drivers.cheapest.available
           a.more(href='#')
             i.icons-plus
@@ -53,8 +55,10 @@ block content
         strong #{__('fastest')}
         ul
           li #{__('Expected dates:')}
-          li #{__('Departure:')} #{drivers.fastest.pickupDate}
-          li #{__('Arrival:')} #{drivers.fastest.arriveDate}
+          //li #{__('Departure:')} #{drivers.fastest.pickupDate}
+          //li #{__('Arrival:')} #{drivers.fastest.arriveDate}
+          li #{__('Departure:')} #{moment(parcel.pickupDate).format('LL')}
+          li #{__('Arrival:')} #{moment(parcel.arriveDate).format('LL')}
         if drivers.fastest.available
           a.more(href='#')
             i.icons-plus
@@ -76,8 +80,10 @@ block content
         strong #{__('ecologiest')}
         ul
           li #{__('Expected dates:')}
-          li #{__('Departure:')} #{drivers.ecologiest.pickupDate}
-          li #{__('Arrival:')} #{drivers.ecologiest.arriveDate}
+          //li #{__('Departure:')} #{drivers.ecologiest.pickupDate}
+          //li #{__('Arrival:')} #{drivers.ecologiest.arriveDate}
+          li #{__('Departure:')} #{moment(parcel.pickupDate).format('LL')}
+          li #{__('Arrival:')} #{moment(parcel.arriveDate).format('LL')}
         if drivers.ecologiest.available
           a.more(href='#')
             i.icons-plus

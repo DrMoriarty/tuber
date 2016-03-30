@@ -364,7 +364,7 @@ module.exports =
         pngFile = req.param('subscript')
         if not pngFile? or pngFile.length < 22
             return res.badRequest('subscript required')
-        Request.find({parcel: parcelId, senderAccepted: true}).exec (err, requests) ->
+        Request.find({parcel: parcelId, senderAccepted: true}).populateAll().exec (err, requests) ->
             if err?
                 console.log err
                 return res.negotiate err
@@ -380,6 +380,7 @@ module.exports =
                         res.negotiate err
                     else
                         res.json {status: 'success'}
+                MailingService.processEvent request.sender.email, 'orderArrived', request.sender.lang
             else
                 res.notFound()
 

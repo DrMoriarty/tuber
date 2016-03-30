@@ -167,6 +167,7 @@ module.exports =
                                 <language>DE</language>
                             </proactiveNotification>
         """
+        console.log 'Store order request data', data
         request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ShipmentService/V3_2/storeOrders', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err

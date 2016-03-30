@@ -26,5 +26,5 @@ module.exports =
             else
                 Message.create({sender: result.driver.id, recipient: result.sender.id, text: 'Parcel has been paid', class: 'parcel', object: result.parcel.id}).exec (err, result) ->
                     console.log err if err?
-                MailingService.processEvent result.driver.email, 'orderPayed', result.driver.lang
+                MailingService.processEvent result.sender.email, 'orderPayed', result.sender.lang
     

@@ -1,15 +1,22 @@
 braintree = require 'braintree'
 
-gateway = braintree.connect({
-    environment:  braintree.Environment.Production,
-    merchantId:   '6y2m8cxqccs373b8',
-    publicKey:    '96dwxqd8tppggct6',
-    privateKey:   '2c38014ddf08d4a2849be745c6e96a41'
-})
+"""
+    gateway: braintree.connect
+        environment:  braintree.Environment.Production,
+        merchantId:   '6y2m8cxqccs373b8',
+        publicKey:    '96dwxqd8tppggct6',
+        privateKey:   '2c38014ddf08d4a2849be745c6e96a41'
+"""
 
 module.exports =
+    gateway: braintree.connect
+        environment: braintree.Environment.Sandbox
+        merchantId: 'vs3nz3h3jzk5b42m'
+        publicKey: 'kkhysrr54nrv2z3z'
+        privateKey: '9e95960119e025f7c1cade114eefb3b4'
+
     clientToken: (uid, cb) ->
-        gateway.clientToken.generate {}, (err, response) ->
+        BraintreeService.gateway.clientToken.generate {}, (err, response) ->
             if err?
                 console.log 'Braintree token error', err
                 cb null, err
@@ -24,7 +31,7 @@ module.exports =
             res.status 400
             res.json {error: 'Bad request'}
         else
-            gateway.transaction.sale { amount: amount, paymentMethodNonce: nonce}, (err, result) ->
+            BraintreeService.gateway.transaction.sale { amount: amount, paymentMethodNonce: nonce}, (err, result) ->
                 if err?
                     console.log err
                     res.status 400

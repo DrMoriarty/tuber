@@ -264,5 +264,7 @@
 	"CONTINUE": "CONTINUE",
 	"YOUR IBAN NUMBER:": "YOUR IBAN NUMBER:",
 	"PayPal payment error": "PayPal payment error",
-	"PayPal error": "PayPal error"
+	"PayPal error": "PayPal error",
+	"CANCEL THIS ORDER": "CANCEL THIS ORDER",
+	"If you canceled this order now, you will be refunded 75% of delivery price;": "If you canceled this order now, you will be refunded 75% of delivery price;"
 }

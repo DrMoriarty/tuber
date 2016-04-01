@@ -34,7 +34,7 @@ block content
             tbody
               if result
                 each it in result
-                  tr(onclick='javascript:location.href="/admin/carrier/#{it.id}"')
+                  tr(onclick='javascript:location.href="/admin/parcel/#{it.id}"')
                     td= it.id
                     td #{it.owner.firstname} #{it.owner.lastname}
                     td #{it.length} x #{it.width} x #{it.depth}

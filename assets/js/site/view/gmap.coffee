@@ -63,6 +63,7 @@ GPath = React.createClass
         );
 
         radius = parseInt(@props.radius3) * 1000
+        """
         mapCircle = new google.maps.Circle {
             strokeColor: '#FF0000'
             strokeOpacity: 0.8
@@ -73,3 +74,4 @@ GPath = React.createClass
             center: {lat: @props.lat3, lng: @props.lon3},
             radius: radius
         }
+        """

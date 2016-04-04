@@ -272,6 +272,8 @@
 	"ARCHIVE RECORD": "ARCHIVE RECORD",
 	"YOU HAVE NO PARCELS YET": "YOU HAVE NO PARCELS YET",
 	"Arrived": "Arrived",
-	"Canceled": "Canceled"
-	"Name, Family Name": "Name, Family Name"
+	"Canceled": "Canceled",
+	"Name, Family Name": "Name, Family Name",
+	"Not found": "Not found",
+	"NOT FOUND": "NOT FOUND"
 }

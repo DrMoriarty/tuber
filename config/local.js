@@ -82,6 +82,7 @@ module.exports = {
 
     // environment: process.env.NODE_ENV || 'development'
     
-    proxyHost: 'packet24.com'
+    proxyHost: 'packet24.com',
+    proxyPort: '80'
 
 };

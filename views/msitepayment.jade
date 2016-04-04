@@ -67,7 +67,7 @@ block content
             label.check(for='#')
         #wrap_hide
           label(for='first_name') #{__('CARDHOLDER FIRST NAME*')}
-          input#first_name(data-braintree-name="cardholder_name", type='text', placeholder='Thierrry Shtutgartz', autocomplete='cc-name')
+          input#first_name(data-braintree-name="cardholder_name", type='text', placeholder='#{__("Name, Family Name")}', autocomplete='cc-name')
           label(for='card') #{__('CARD NUMBER*')}
           input#card(data-braintree-name='number', type='text', placeholder='4556614505116697', inputmode='numeric', maxlength="19", x-autocompletetype="cc-number", autocompletetype="cc-number", autocorrect="off", spellcheck="off", autocapitalize="off", autocomplete="cc-number")
           label(for='card_date') #{__('EXPIRATION DATE*')}

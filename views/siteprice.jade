@@ -35,7 +35,7 @@ block content
           li #{__('Departure:')} #{moment(parcel.pickupDate).format('LL')}
           li #{__('Arrival:')} #{moment(parcel.arriveDate).format('LL')}
         if drivers.cheapest.available
-          a.more(href='#')
+          //a.more(href='#')
             i.icons-plus
             | #{__('MORE INFO')}
           a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.cheapest.id}')
@@ -60,7 +60,7 @@ block content
           li #{__('Departure:')} #{moment(parcel.pickupDate).format('LL')}
           li #{__('Arrival:')} #{moment(parcel.arriveDate).format('LL')}
         if drivers.fastest.available
-          a.more(href='#')
+          //a.more(href='#')
             i.icons-plus
             | #{__('MORE INFO')}
           a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.fastest.id}')
@@ -85,7 +85,7 @@ block content
           li #{__('Departure:')} #{moment(parcel.pickupDate).format('LL')}
           li #{__('Arrival:')} #{moment(parcel.arriveDate).format('LL')}
         if drivers.ecologiest.available
-          a.more(href='#')
+          //a.more(href='#')
             i.icons-plus
             | #{__('MORE INFO')}
           a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.ecologiest.id}')

@@ -23,8 +23,8 @@ block content
       form.form.js-validate(action='/api/user', method='POST')
         figure.profile
           img(src='/img/profile.png', alt='')
-          input#uplad_image.uplad_image(type='file')
-          label(for='uplad_image') #{__('Upload my picture')}
+          //input#uplad_image.uplad_image(type='file')
+          //label(for='uplad_image') #{__('Upload my picture')}
         .form-margined
           h3 #{__('About me')}
           label(for='first_name') #{__('FIRST NAME*')}
@@ -62,7 +62,7 @@ block content
           input(type='hidden', name='lang', value='#{lang}')
           p#err11000(style='color: red; display: none;') #{__('USER ALREADY REGISTERED')}
           button.orange_button #{__('CONFIRM YOUR DATAS')}
-          a.more(href='/?m=1') #{__('GO TO &ldquo;SEND MY PARCEL&rdquo;')}
+          //a.more(href='/?m=1') #{__('GO TO &ldquo;SEND MY PARCEL&rdquo;')}
   // promo
   section.promo
     .container

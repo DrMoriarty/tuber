@@ -90,11 +90,11 @@ block content
           .confirmation-select
             select.js-select#addressSelect1
               if parcel.fromPerson
-                option#homeAddress1(value='home') #{parcel.fromPersonAddress()}
+                option#homeAddress1(value='#{parcel.fromPerson.latitude},#{parcel.fromPerson.longitude}') #{parcel.fromPersonAddress()}
               else
-                option#homeAddress1(value='home') #{parcel.ownerAddress()}
+                option#homeAddress1(value='#{parcel.owner.latitude},#{parcel.owner.longitude}') #{parcel.ownerAddress()}
               each fromShop in fromShops
-                option.pboxAddress1 #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
+                option.pboxAddress1(value='#{fromShop.latitude},#{fromShop.longitude}') #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
         .confirmation-destination
           span.white_span.from #{__('TO:')}
           input#postbox2(name='post2', type='radio')
@@ -106,11 +106,11 @@ block content
           .confirmation-select
             select.confirmation-select.js-select#addressSelect2
               if parcel.toPerson
-                option#homeAddress2(value='home') #{parcel.toPersonAddress()}
+                option#homeAddress2(value='#{parcel.toPerson.latitude},#{parcel.toPerson.longitude}') #{parcel.toPersonAddress()}
               else
-                option#homeAddress2(value='home') #{parcel.ownerAddress()}
+                option#homeAddress2(value='#{parcel.owner.latitude},#{parcel.owner.longitude}') #{parcel.ownerAddress()}
               each toShop in toShops
-                option.pboxAddress2 #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
+                option.pboxAddress2(value='#{toShop.latitude},#{toShop.longitude}') #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
         .clear
         hr
         .confirmation-confirm
@@ -161,6 +161,14 @@ block script
     $('#postbox').on('click', function() {
     });
     $('#postbox2').on('click', function() {
+    });
+    $('#addressSelect1').on('change', function(event) {
+      var coords = event.target.value.split(',');
+      window.marker1.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
+    });
+    $('#addressSelect2').on('change', function(event) {
+      var coords = event.target.value.split(',');
+      window.marker2.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
     });
     document.currentDriverId = '#{drivers[0].id}';
     document.currentTotalPrice = #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)};

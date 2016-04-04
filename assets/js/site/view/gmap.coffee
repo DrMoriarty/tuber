@@ -19,7 +19,7 @@ GMap = React.createClass
             disableDefaultUI: true
         }
         map1 = new google.maps.Map(@refs.map1, mapOptions1);
-        marker1 = new google.maps.Marker
+        window.marker1 = new google.maps.Marker
             position: p1
             map: map1
         p2 = new google.maps.LatLng(@props.lat2, @props.lon2)
@@ -30,7 +30,7 @@ GMap = React.createClass
             disableDefaultUI: true
         }
         map2 = new google.maps.Map(@refs.map2, mapOptions2);
-        marker2 = new google.maps.Marker
+        window.marker2 = new google.maps.Marker
             position: p2
             map: map2
 

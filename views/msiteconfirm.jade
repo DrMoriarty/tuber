@@ -45,13 +45,13 @@ block content
           //label.post-office(for='post-office') #{__('Post office')}
           .form-block
             .confirmation-select-mobile
-              select.js-select1
+              select.js-select1#addressSelect1
                 if parcel.fromPerson
-                  option #{parcel.fromPersonAddress()}
+                  option(value='#{parcel.fromPerson.latitude},#{parcel.fromPerson.longitude}') #{parcel.fromPersonAddress()}
                 else
-                  option #{parcel.ownerAddress()}
+                  option(value='#{parcel.owner.latitude},#{parcel.owner.longitude}') #{parcel.ownerAddress()}
                 each fromShop in fromShops
-                  option #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
+                  option(value='#{fromShop.latitude},#{fromShop.longitude}') #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
         .confirmation-destination
           h3 To:
           input#postbox1(type='radio', name='adress-to', value='postbox')
@@ -62,13 +62,13 @@ block content
           //label.post-offices(for='post-office1') #{__('Post office')}
           .form-block
             .confirmation-select-mobile.confirmation-select-last
-              select.js-select2
+              select.js-select2#addressSelect2
                 if parcel.toPerson
-                  option #{parcel.toPersonAddress()}
+                  option(value='#{parcel.toPerson.latitude},#{parcel.toPerson.longitude}') #{parcel.toPersonAddress()}
                 else
-                  option #{parcel.ownerAddress()}
+                  option(value='#{parcel.owner.latitude},#{parcel.owner.longitude}') #{parcel.ownerAddress()}
                 each toShop in toShops
-                  option #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
+                  option(value='#{toShop.latitude},#{toShop.longitude}') #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
         hr
         .confirmation-confirm-title
           ul
@@ -117,6 +117,14 @@ block script
     $('.pl2').mask('99.99.9999, 99.99');
 
     //ReactDOM.render(React.createElement(DateBlock, {pdate:'#{parcel.pickupDate}', adate:'#{parcel.arriveDate}'}), document.getElementById('dateblock'));
+    $('#addressSelect1').on('change', function(event) {
+      var coords = event.target.value.split(',');
+      window.marker1.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
+    });
+    $('#addressSelect2').on('change', function(event) {
+      var coords = event.target.value.split(',');
+      window.marker2.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
+    });
     ReactDOM.render(React.createElement(GMap, {
       title1: "#{__('HOME ADDRESS')}",
       title2: "#{__('HOME ADDRESS')}",

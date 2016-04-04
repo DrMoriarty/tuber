@@ -137,28 +137,28 @@ block script
       }
 
 
-      if(this[11].value != this[12].value) {
+      if(this[10].value != this[11].value) {
         // email differs
         $('#email_differs').show();
         $('#email').addClass('error');
         $('#email_again').addClass('error');
         return false;
       }
-      if(this[13].value != this[14].value) {
+      if(this[12].value != this[13].value) {
         // password differs
         $('#password_differs').show();
         $('#password').toggleClass('error');
         $('#password_again').toggleClass('error');
         return false;  
       }
-      if(this[13].value.length < 5) {
+      if(this[12].value.length < 5) {
         $('#password_tooshort').show();
         $('#password').toggleClass('error');
         return false;
       }
       regdata = $(this).serialize();
-      var country = this[9].value;
-      var zip = this[7].value;
+      var country = this[8].value;
+      var zip = this[6].value;
       var regurl = this.action;
       $.ajax({
         type: 'POST',

@@ -261,5 +261,9 @@
 	"CARDHOLDER FIRST NAME*": "NACHNAME DES KARTENINHABERS*",
 	"Name": "Name",
 	"Family name": "Familienname",
-	"YOUR IBAN NUMBER:": "YOUR IBAN NUMBER:"
+	"YOUR IBAN NUMBER:": "YOUR IBAN NUMBER:",
+	"ORDER PICKED UP": "ORDER PICKED UP",
+	"STATUS:": "STATUS:",
+	"Arrived": "Arrived",
+	"Canceled": "Canceled"
 }

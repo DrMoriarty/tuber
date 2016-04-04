@@ -266,5 +266,11 @@
 	"PayPal payment error": "PayPal payment error",
 	"PayPal error": "PayPal error",
 	"CANCEL THIS ORDER": "CANCEL THIS ORDER",
-	"If you canceled this order now, you will be refunded 75% of delivery price;": "If you canceled this order now, you will be refunded 75% of delivery price;"
+	"If you canceled this order now, you will be refunded 75% of delivery price;": "If you canceled this order now, you will be refunded 75% of delivery price;",
+	"ORDER PICKED UP": "ORDER PICKED UP",
+	"STATUS:": "STATUS:",
+	"ARCHIVE RECORD": "ARCHIVE RECORD",
+	"YOU HAVE NO PARCELS YET": "YOU HAVE NO PARCELS YET",
+	"Arrived": "Arrived",
+	"Canceled": "Canceled"
 }

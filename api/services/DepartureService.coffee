@@ -15,7 +15,8 @@ module.exports =
                             try
                                 result = data['soap:Envelope']['soap:Body'][0]['ns2:storeOrdersResponse'][0].orderResult[0]
                                 fileContent = new Buffer(result.parcellabelsPDF[0], 'base64')
-                                fs.writeFile 'upload/'+request.parcel.id+'.pdf', fileContent, (err) ->
+                                fname = 'upload/'+request.parcel.id+'.pdf'
+                                fs.writeFile fname, fileContent, (err) ->
                                     console.log err if err?
                                 shipmentData =
                                     type: 'DPD'
@@ -27,6 +28,8 @@ module.exports =
                                     console.log err if err?
                                 Request.update({id: requestId}, {trackingNumber: shipmentData.parcelLabelNumber}).exec (err, res) ->
                                     console.log err if err?
+                                Parcel.findOne(request.parcel.id).populateAll().exec (err, parcel) ->
+                                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, sails.getBaseURL()+'/'+fname
                             catch error
                                 console.log error
                                 LogService.saveLog 'Error', 'DPD processing', data

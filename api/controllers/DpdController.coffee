@@ -31,6 +31,8 @@ module.exports =
                         res.negotiate(err)
                     else
                         res.json result
+                Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, req.host+'/upload/'+parcelId+'.pdf'
 
     getTrackingData: (req, res) ->
         labelNumber = req.param('labelnumber')

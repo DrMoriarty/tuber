@@ -123,14 +123,18 @@ block script
         }});
       return false;
     });
+    $('#place').on('change', function(event) {
+      var radius = parseInt(event.currentTarget.value) * 1000;
+      window.mapCircle.setRadius(radius);
+    });
     var mapCanvas4 = document.getElementById('map4');
     var mapOptions4 = {
       center: new google.maps.LatLng(#{user.latitude}, #{user.longitude}),
       zoom: 8,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-    var map4 = new google.maps.Map(mapCanvas4, mapOptions4);
-    mapCircle = new google.maps.Circle({
+    window.map4 = new google.maps.Map(mapCanvas4, mapOptions4);
+    window.mapCircle = new google.maps.Circle({
       strokeColor: '#0000FF',
       strokeOpacity: 0.8,
       strokeWeight: 2,

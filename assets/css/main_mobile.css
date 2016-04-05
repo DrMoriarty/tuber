@@ -3430,3 +3430,14 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 
 .form-block.bordered .confirmation-select-mobile .placeholder1,
 .form-block.bordered .confirmation-select-mobile .placeholder2 {color: #3d4951;}
+
+
+input[type="datetime-local"]:before{
+    color:black;
+    content:attr(placeholder);
+}
+
+input[type="datetime-local"].full:before {
+    color:black;
+    content:""!important;
+}

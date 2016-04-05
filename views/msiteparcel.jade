@@ -97,10 +97,10 @@ block content
           i.icons-timing
           h3 #{__('About the timing')}
           .confirmation-select-mobile
-            span.placeholder1 #{__('Parcel can be picked up starting')}
-            span.placeholder2 #{__('Parcel should arrive before')}
-            input.pl1#pickupDate(type='datetime-local', placeholder='')
-            input.pl2#arriveDate(type='datetime-local', placeholder='')
+            //span.placeholder1 #{__('Parcel can be picked up starting')}
+            //span.placeholder2 #{__('Parcel should arrive before')}
+            input.pl1#pickupDate(type='datetime-local', placeholder="#{__('Parcel can be picked up starting')}")
+            input.pl2#arriveDate(type='datetime-local', placeholder="#{__('Parcel should arrive before')}")
           input#timing(type='checkbox', name='userAgreementTimes')
           label.timing(for='timing') #{__('I am aware that the time frame influences Packet24 prices.')}
         //.form-block.bordered

@@ -129,7 +129,7 @@ module.exports =
         if req.user? and not req.user.driver
             filter = {owner: req.user.id, status: {'!': ['archive', 'canceled']}}
             Parcel.count(filter).exec (err, count) ->
-                Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                Parcel.find(filter).sort('createdAt DESC').paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                     if err
                         console.log err
                         return res.negotiate err
@@ -145,7 +145,7 @@ module.exports =
         else if req.user? and req.user.driver
             filter = {driver: req.user.id, status: {'!': ['arrived', 'archive', 'canceled']}}
             Parcel.count(filter).exec (err, count) ->
-                Parcel.find(filter).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                Parcel.find(filter).sort('createdAt DESC').paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                     if err
                         console.log err
                         return res.negotiate err

@@ -19,7 +19,7 @@ block content
       |  #{__('fill in an enquiry below.')}
     .container
       .login
-        form.form.js-validate(action='/login', method='POST')
+        form.form.js-validate#loginSender(action='/login', method='POST')
           i.icons-want_send_parsel
           h3 #{__('I want to SEND a parcel')}
           label(for='send_login') #{__('Login/E-mail adress')}
@@ -31,7 +31,7 @@ block content
           span #{__('or')}
           a(href='/registration?driver=false&m=1')  #{__('Register')}
       .login
-        form.form.js-validate(action='/login', method='POST')
+        form.form.js-validate#loginDriver(action='/login', method='POST')
           i.icons-can_transport_parsel
           h3 #{__('I want to TRANSPORT a parcel')}
           label(for='transport_login') #{__('Login/E-mail adress')}
@@ -57,10 +57,17 @@ block content
 
 block script
   script(type='text/javascript').
-    $('.js-validate').submit(function() {
+    $('#loginSender').submit(function() {
       $.post(this.action, $(this).serialize(), function(data) {
         console.log('Logged in', data);
         location.reload();
+      });
+      return false;
+    });
+    $('#loginDriver').submit(function() {
+      $.post(this.action, $(this).serialize(), function(data) {
+        console.log('Logged in', data);
+        location.href = '/dashboard?m=1';
       });
       return false;
     });

@@ -67,7 +67,7 @@ block content
             each parcel in parcels
               .sender
                 if parcel.request && parcel.request.trackingNumber
-                  h3 parcel.request.trackingNumber
+                  h3 #{parcel.request.trackingNumber}
                 else
                   h3 #{__('NO TRACKING NUMBER')}
                 ul.sender-list
@@ -240,7 +240,7 @@ block content
                       option(value='') WITHIN AN AREA OF 1000 km
                       option(value='') WITHIN AN AREA OF 1000 km
                 if parcel.request && parcel.request.trackingNumber
-                  h3 parcel.request.trackingNumber
+                  h3 #{parcel.request.trackingNumber}
                 else
                   h3 #{__('NO TRACKING NUMBER')}
                 ul.sender-list

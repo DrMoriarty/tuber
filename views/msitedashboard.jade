@@ -27,11 +27,11 @@ block content
         ul.nav
           li
             a(href='#') #{__('My parameters')}
-          li
+          li.active
             a(href='#') #{__('MY ORDERS/Status/details')}
           li
             a(href='#') #{__('My payments')}
-          li.active
+          li
             a(href='#') #{__('My archive')}
       .content
         // tab
@@ -62,7 +62,7 @@ block content
             a.orange_button(href='/profile?m=1') #{__('CHANGE MY INFO')}
             .pattern
         // tab
-        .js-tab-body
+        .js-tab-body(style='display: block;')
           if parcels && parcels.length
             each parcel in parcels
               .sender
@@ -228,7 +228,7 @@ block content
               h3 #{__('YOU HAVE NO PAYMENTS YET')}
               .clear
         // tab
-        .js-tab-body(style='display: block;')
+        .js-tab-body
           if archive && archive.length
             each parcel in archive
               .sender

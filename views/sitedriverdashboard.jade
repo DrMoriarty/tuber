@@ -67,7 +67,7 @@ block content
             each parcel in parcels
               .sender
                 if parcel.request && parcel.request.trackingNumber
-                  h3 parcel.request.trackingNumber
+                  h3 #{parcel.request.trackingNumber}
                 else
                   h3 #{__('NO TRACKING NUMBER')}
                 ul
@@ -226,7 +226,7 @@ block content
             each parcel in archive
               .sender
                 if parcel.request && parcel.request.trackingNumber
-                  h3 parcel.request.trackingNumber
+                  h3 #{parcel.request.trackingNumber}
                 else
                   h3 #{__('NO TRACKING NUMBER')}
                 ul

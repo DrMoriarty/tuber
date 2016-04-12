@@ -80,7 +80,7 @@ module.exports =
                     if result.shipment?.type?
                         return cb {error: 'The parcel already shipped', parcel: result}, null
                     self.storeOrderRequest result, cb
-        if not @authToken?
+        if not @authToken? or true
             @getAuth (data) ->
                 req()
         else
@@ -184,7 +184,7 @@ module.exports =
                         cb null, result
 
     getTrackingData: (labelNumber, cb) ->
-        if not @authToken?
+        if not @authToken? or true
             self = @
             @getAuth (data) ->
                 self.getTrackingDataRequest labelNumber, cb
@@ -253,7 +253,7 @@ module.exports =
     # Find the DPD parcel shops by country/countries, zipCode and city and additional criteria like flags for properties of parcel shops. The search country can either domestic country or cross border country/countries for the search.
     # 
     findParcelShops: (cb) ->
-        if not @authToken?
+        if not @authToken? or true
             self = @
             @getAuth (data) ->
                 self.findParcelShopsRequest cb
@@ -304,7 +304,7 @@ module.exports =
     # Find the DPD parcel shops by geo data and additional criteria like flags for properties of parcel shops. The search country can either domestic country or cross border country/countries for the search.
     # 
     findParcelShopsByGeoData: (lat, lng, cb) ->
-        if not @authToken?
+        if not @authToken? or true
             self = @
             @getAuth (data) ->
                 self.findParcelShopsByGeoDataRequest lat, lng, cb
@@ -352,7 +352,7 @@ module.exports =
     # Find cities with DPD parcel shops by country, zipCode and city.
     # 
     findCities: (cb) ->
-        if not @authToken?
+        if not @authToken? or true
             self = @
             @getAuth (data) ->
                 self.findCitiesRequest cb
@@ -402,7 +402,7 @@ module.exports =
     # Find available services of DPD parcel shops by country.
     #
     getAvailableServices: (cb) ->
-        if not @authToken?
+        if not @authToken? or true
             self = @
             @getAuth (data) ->
                 self.getAvailableServicesRequest cb

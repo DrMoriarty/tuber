@@ -86,7 +86,7 @@ module.exports =
                         pathLength = parcel.pathLength
                         for carrier in data
                             if cheapest?
-                                if carrier.getPrice(pathLength) < cheapest.getPrice(pathLength)
+                                if carrier.getPrice(parcel) < cheapest.getPrice(parcel)
                                     cheapest = carrier
                             else
                                 cheapest = carrier
@@ -102,15 +102,15 @@ module.exports =
                                 ecologiest = carrier
                         if cheapest?
                             prices.cheapest.id = cheapest.id
-                            prices.cheapest.price = cheapest.getPrice pathLength
+                            prices.cheapest.price = cheapest.getPrice parcel
                             prices.cheapest.available = true
                         if fastest?
                             prices.fastest.id = fastest.id
-                            prices.fastest.price = fastest.getPrice pathLength
+                            prices.fastest.price = fastest.getPrice parcel
                             prices.fastest.available = true
                         if ecologiest?
                             prices.ecologiest.id = ecologiest.id
-                            prices.ecologiest.price = ecologiest.getPrice pathLength
+                            prices.ecologiest.price = ecologiest.getPrice parcel
                             prices.ecologiest.available = true
                         console.log 'Prices', prices
                         moreAvailable = data.length > 3

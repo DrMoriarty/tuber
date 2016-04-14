@@ -1,12 +1,29 @@
 fs = require 'fs'
 
+dpd_prices = JSON.parse(fs.readFileSync('dpd_prices.json', 'utf8'));
+
 module.exports =
+    priceCalc:(driver, parcel) ->
+        if driver.company == DpdService.company
+            if dpd_prices? and dpd_prices.length > 0
+                price = 0
+                for dp in dpd_prices
+                    if price == 0 and parcel.weight <= dp.weight
+                        price = dp.price
+                if price == 0
+                    price = dpd_prices[dpd_prices.length-1].price
+                return price
+            else
+                console.log 'Can not DPD custom prices. Using default price calculation.'
+                return if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
+        else
+            if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
     processRequest: (requestId) ->
         Request.findOne(requestId).populateAll().exec (err, request) ->
             if err?
                 console.log err
             else
-                if request.driver.company == '__DPD__'
+                if request.driver.company == DpdService.company
                     console.log 'Process DPD parcel'
                     DpdService.storeOrders request.parcel.id, (err, data) ->
                         if err?

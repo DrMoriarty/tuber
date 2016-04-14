@@ -30,6 +30,17 @@ module.exports.bootstrap = (cb) ->
             if not user.countryCode?
                 User.update({id: user.id}, {country: user.country}).exec (err, result) ->
                     console.log err if err?
+
+    """
+    User.find({driver: true, company: DpdService.company}).exec (err, users) ->
+        console.log err if err?
+        if users? and users.length>0
+            driver = users[0]
+            Parcel.find({}).exec (err, parcels) ->
+                for parcel in parcels
+                    price = driver.getPrice parcel
+                    console.log 'Price', price, 'for', parcel.weight
+    """
                 
     # It's very important to trigger this callback method when you are finished
     # with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)

@@ -27,7 +27,7 @@ block content
           .confirmation-select.confirmation-first-select
             select.js-select(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel.pathLength)}') #{__('cheapest delivery')} ---  &euro;#{driver.getPrice(parcel.pathLength)}
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}') #{__('cheapest delivery')} ---  &euro;#{driver.getPrice(parcel)}
           .clear
         hr
         #dateblock
@@ -124,7 +124,7 @@ block content
           .confirmation-confirm-total
             h4
               span #{__('TOTAL AMOUNT (Including VAT):')}
-              span#totalPrice #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
+              span#totalPrice #{drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
               span &euro;
           a.orange_button(onClick='javascript:confirmation();') #{__('CONFIRM')}
           .clear
@@ -171,7 +171,7 @@ block script
       window.marker2.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
     });
     document.currentDriverId = '#{drivers[0].id}';
-    document.currentTotalPrice = #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)};
+    document.currentTotalPrice = #{drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)};
     ReactDOM.render(React.createElement(DateBlock, {pdate:'#{parcel.pickupDate}', adate:'#{parcel.arriveDate}'}), document.getElementById('dateblock'));
     ReactDOM.render(React.createElement(GMap, {
       title1: "#{__('HOME ADDRESS')}",

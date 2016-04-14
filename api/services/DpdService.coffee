@@ -9,6 +9,7 @@ roundInt = (x) ->
     (if x >= 0 then Math.floor(x) else Math.ceil(x))
 
 module.exports =
+    company: '__DPD__'
     loginClient: (cb) ->
         if @_cachedLoginClient?
             cb @_cachedLoginClient

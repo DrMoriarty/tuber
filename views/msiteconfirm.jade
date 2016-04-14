@@ -25,7 +25,7 @@ block content
           .confirmation-select-mobile
             select.js-select(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel.pathLength)}') #{__('cheapest delivery')} ---  &euro;#{driver.getPrice(parcel.pathLength)}
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}') #{__('cheapest delivery')} ---  &euro;#{driver.getPrice(parcel)}
         hr
         .confirmation-delivery.plc
           h3 #{__('Departure and arrivals dates')}
@@ -85,7 +85,7 @@ block content
           h4
             span #{__('TOTAL AMOUNT')} 
             | #{__('(Including VAT):')} 
-            span#totalPrice #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
+            span#totalPrice #{drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
               span &euro;
         a.orange_button(onClick='javascript:confirmation();') #{__('CONFIRM')}
   // maps
@@ -111,7 +111,7 @@ block script
   script(type='text/javascript').
     // TODO
     document.currentDriverId = '#{drivers[0].id}';
-    document.currentTotalPrice = #{drivers[0].getPrice(parcel.pathLength) + (parcel.insurancePrice ? parcel.insurancePrice : 0)};
+    document.currentTotalPrice = #{drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)};
 
     $('.pl1').mask('99.99.9999, 99.99');
     $('.pl2').mask('99.99.9999, 99.99');

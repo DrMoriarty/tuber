@@ -1,0 +1,9 @@
+[
+    {"weight": 3, "price": 3.34},
+    {"weight": 5, "price": 3.62},
+    {"weight": 10, "price": 4.01},
+    {"weight": 15, "price": 4.42},
+    {"weight": 20, "price": 4.77},
+    {"weight": 25, "price": 5.35},
+    {"weight": 31.5, "price": 6.06}
+]

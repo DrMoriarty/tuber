@@ -8,6 +8,14 @@ roundInt = (x) ->
     x = Number(x)
     (if x >= 0 then Math.floor(x) else Math.ceil(x))
 
+#dpdUserName = 'delti130'
+#dpdPassword = 'p9934g'
+dpdUserName = '2406008738'
+dpdPassword = 'kxra4'
+
+#API_DPD = 'https://public-ws-stage.dpd.com/'
+API_DPD = 'https://public-ws.dpd.com/'
+
 module.exports =
     company: '__DPD__'
     loginClient: (cb) ->
@@ -15,14 +23,14 @@ module.exports =
             cb @_cachedLoginClient
         else
             self = @
-            soap.createClient 'https://public-ws-stage.dpd.com/services/LoginService/V2_0?wsdl', (err, client) ->
+            soap.createClient API_DPD+'services/LoginService/V2_0?wsdl', (err, client) ->
                 self._cachedLoginClient = client
                 console.log 'New client', client.describe()
                 cb client
 
     login: (cb) ->
         DpdService.loginClient (client) ->
-            args = {delisId: 'delti130', password: 'p9934g'}
+            args = {delisId: dpdUserName, password: dpdPassword}
             client.getAuth args, (err, result) ->
                 if err?
                     console.log err
@@ -33,9 +41,8 @@ module.exports =
     
     getAuth: (cb) ->
         self = @
-        username = 'delti130'
-        #username = 'delticoma2'
-        password = 'p9934g'
+        username = dpdUserName
+        password = dpdPassword
         lang = 'en_US'   # en_US or de_DE
         data = """
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/LoginService/2.0">
@@ -49,7 +56,8 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {encoding: null, url: 'https://public-ws-stage.dpd.com/services/LoginService/V2_0/getAuth', form: data}, (err, httpResponse, body) ->
+        console.log 'Request data:', data
+        request.post {encoding: null, url: API_DPD+'services/LoginService/V2_0/getAuth', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
@@ -88,7 +96,7 @@ module.exports =
             req()
 
     storeOrderRequest: (parcel, cb) ->
-        username = 'delti130'
+        username = dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         fromAddress = parcel.fromPerson || parcel.owner
@@ -169,7 +177,7 @@ module.exports =
                             </proactiveNotification>
         """
         console.log 'Store order request data', data
-        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ShipmentService/V3_2/storeOrders', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:API_DPD+'services/ShipmentService/V3_2/storeOrders', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
@@ -193,7 +201,7 @@ module.exports =
             @getTrackingDataRequest labelNumber, cb
 
     getTrackingDataRequest: (labelNumber, cb) ->
-        username = 'delti130'
+        username = dpdUserName
         token = DpdService.authToken
         lang = 'en_EN'   # en_US or de_DE
         data = """
@@ -212,7 +220,7 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelLifeCycleService/V2_0/getTrackingData', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:API_DPD+'services/ParcelLifeCycleService/V2_0/getTrackingData', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
@@ -228,7 +236,7 @@ module.exports =
                         cb null, result
 
     getParcelLabelNumber: (cb) ->
-        username = 'delti130'
+        username = dpdUserName
         webnumber = 'IO1234567'
         data = """
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/ParcelLifeCycleService/2.0">
@@ -240,7 +248,7 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelLifeCycleService/V2_0/getParcelLabelNumberForWebNumber', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:API_DPD+'services/ParcelLifeCycleService/V2_0/getParcelLabelNumberForWebNumber', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
@@ -262,7 +270,7 @@ module.exports =
             @findParcelShopsRequest cb
 
     findParcelShopsRequest: (cb) ->
-        username = 'delti130'
+        username = dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """
@@ -286,7 +294,7 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShops', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:API_DPD+'services/ParcelShopFinderService/V5_0/findParcelShops', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
@@ -313,7 +321,7 @@ module.exports =
             @findParcelShopsByGeoDataRequest lat, lng, cb
 
     findParcelShopsByGeoDataRequest: (lat, lng, cb) ->
-        username = 'delti130'
+        username = dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """
@@ -334,7 +342,7 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findParcelShopsByGeoData', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:API_DPD+'services/ParcelShopFinderService/V5_0/findParcelShopsByGeoData', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
@@ -361,7 +369,7 @@ module.exports =
             @findCitiesRequest cb
 
     findCitiesRequest: (cb) ->
-        username = 'delti130'
+        username = dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """
@@ -384,7 +392,7 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/findCities', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:API_DPD+'services/ParcelShopFinderService/V5_0/findCities', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null
@@ -411,7 +419,7 @@ module.exports =
             @getAvailableServicesRequest cb
 
     getAvailableServicesRequest: (cb) ->
-        username = 'delti130'
+        username = dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """
@@ -428,7 +436,7 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
-        request.post {encoding: null, url:'https://public-ws-stage.dpd.com/services/ParcelShopFinderService/V5_0/getAvailableServices', form: data}, (err, httpResponse, body) ->
+        request.post {encoding: null, url:API_DPD+'services/ParcelShopFinderService/V5_0/getAvailableServices', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err
                 cb err, null

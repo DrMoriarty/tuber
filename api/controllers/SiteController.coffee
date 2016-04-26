@@ -399,4 +399,5 @@ module.exports =
             l = 'de'
         req.session.lang = l
         console.log 'Set language', l
+        res.cookie('language', l)
         res.json {language: l, status: 'ok'}

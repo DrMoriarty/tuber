@@ -28,35 +28,35 @@ block content
         .form-margined
           h3 #{__('About me')}
           label(for='first_name') #{__('FIRST NAME*')}
-          input#first_name.required(type='text', placeholder='#{__("Name")}', name='firstname')
+          input#first_name.required.minLength-3(type='text', placeholder='#{__("Name")}', name='firstname')
           label(for='last_name') #{__('LAST NAME*')}
-          input#last_name.required(type='text', placeholder='#{__("Family name")}', name='lastname')
+          input#last_name.required.minLength-3(type='text', placeholder='#{__("Family name")}', name='lastname')
           label(for='first_name') #{__('COMPANY (optional)')}
           input#first_name(type='text', name='company')
           label(for='vat') #{__('VAT (optional)')}
           input#vat(type='text', placeholder='DE000000000', name='vat')
           label(for='address_str') #{__('ADDRESS (street)*')}
-          input#address_str.required(type='text', placeholder='Bruhlstr', name='address1')
+          input#address_str.required.minLength-3(type='text', placeholder='Bruhlstr', name='address1')
           label(for='address_num') #{__('ADDRESS (number)*')}
-          input#address_num.required(type='text', placeholder='11', name='address2')
+          input#address_num.required.number(type='text', placeholder='11', name='address2')
           label(for='zip') #{__('ZIP CODE*')}
-          input#zip.required(type='text', placeholder='10557', name='zip')
+          input#zip.required.number.minLength-5(type='text', placeholder='10557', name='zip')
           label(for='city') #{__('CITY*')}
-          input#city.required(type='text', placeholder='Hannover', name='city')
+          input#city.required.minLength-3(type='text', placeholder='Hannover', name='city')
           label(for='country') #{__('COUNTRY*')}
           input#country.required(type='text', placeholder='Germany', name='country')
           label(for='mobile') #{__('MOBILE PHONE*')}
-          input#mobile.required(type='text', placeholder='+49 511 879 893 02', name='phone')
+          input#mobile.required.number.minLength-11(type='text', placeholder='+49 511 879 893 02', name='phone')
           label(for='email') #{__('E-MAIL*')}
           input#email.required.email(type='text', name='email')
           label(for='email_again') #{__('E-MAIL CONFIRMATION*')}
           input#email_again.required.email(type='text')
           p#email_differs(style='color: red; display: none;') #{__('E-MAILS DIFFERS')}
           label(for='password') #{__('PASSWORD*')}
-          input#password.required(type='password', name='password')
+          input#password.required.number.minLength-6(type='password', name='password')
           p#password_tooshort(style='color: red; display: none;') #{__('PASSWORD TOO SHORT')}
           label(for='password_again') #{__('PASSWORD CONFIRMATION*')}
-          input#password_again.required(type='password')
+          input#password_again.required.number.minLength-6(type='password')
           p#password_differs(style='color: red; display: none;') #{__('PASSWORDS DIFFERS')}
           input(type='hidden', name='driver', value='#{driver}')
           input(type='hidden', name='lang', value='#{lang}')
@@ -79,6 +79,10 @@ block content
 block script
   script(src="vendor/jquery/jquery.easy-autocomplete.min.js")
   script(type='text/javascript').
+    $('.js-validate').feelform({
+      notificationType: 'okIcon, errorIcon',
+      validateOnTheFly: true
+    });
     var options = {
       url: "/countries_es.json",
       getValue: "name",

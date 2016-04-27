@@ -3412,6 +3412,8 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
  * Import this file using the following HTML or equivalent:
  * <link href="/css/print.css" media="print" rel="stylesheet" type="text/css" /> */
 
+ input {color: #000000 !important;}
+
 .confirmation-select-mobile {position: relative; z-index: 1;}
 .confirmation-select-mobile .placeholder1,
 .confirmation-select-mobile .placeholder2 {
@@ -3432,12 +3434,24 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 .form-block.bordered .confirmation-select-mobile .placeholder2 {color: #3d4951;}
 
 
-input[type="datetime-local"]:before{
-    color:black;
-    content:attr(placeholder);
-}
+.hidden_address1,
+.hidden_address2 {padding:20px;}
+.hidden_address1 input,
+.hidden_address2 input {width: 100% !important;}
 
-input[type="datetime-local"].full:before {
-    color:black;
-    content:""!important;
+.easy-autocomplete-container ul {position: relative; top: -20px !important;}
+.easy-autocomplete-container ul li {padding: 20px;}
+.easy-autocomplete-container ul li .eac-item {
+    font-family: Cabin-Bold;
+    font-size: 30px;
+    letter-spacing: 0;
+    color: #999999;
+    font-weight: normal;
 }
+.easy-autocomplete-container ul li .eac-item b {color: #111111;}
+
+.app .section .form .form-sizes {width: auto;}
+.app .section .form .form-sizes li {width: 137px; margin: 0 10px 10px 0;}
+.app .section .form .form-sizes li strong {font-size: 24px;}
+.app .section .form .form-sizes li input {width: 137px; font-size: 60px; line-height: 60px;}
+

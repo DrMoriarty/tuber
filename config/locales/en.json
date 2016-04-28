@@ -160,7 +160,7 @@
 	"PASSWORD TOO SHORT": "PASSWORD TOO SHORT",
 	"PASSWORD CONFIRMATION*": "PASSWORD CONFIRMATION*",
 	"PASSWORDS DIFFERS": "PASSWORDS DIFFERS",
-	"USER ALREADY REGISTERED": "USER ALREADY REGISTERED",
+	"USER WITH SUCH EMAIL ALREADY EXISTS": "USER WITH SUCH EMAIL ALREADY EXISTS",
 	"CONFIRM YOUR DATAS": "CONFIRM YOUR DATAS",
 	"GO TO &ldquo;SEND MY PARCEL&rdquo;": "GO TO &ldquo;SEND MY PARCEL&rdquo;",
 	"Enter your email. We will send a recovery link to this email address.": "Enter your email. We will send a recovery link to this email address.",

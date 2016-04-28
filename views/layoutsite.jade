@@ -82,9 +82,9 @@ html
             h4 #{__('HOME')}
             ul
               li
-                a(href='/') #{__('Send a parcel')}
+                a(href='/registration?driver=false') #{__('Send a parcel')}
               li
-                a(href='/') #{__('Deliver parcel')}
+                a(href='/registration?driver=true') #{__('Deliver parcel')}
               li.devider
               li
                 a(href='/') #{__('Parcel status')}
@@ -108,15 +108,15 @@ html
               li
                 a(href='#') #{__('Why better than Post?')}
           .clear
-          ul.terms
+          //ul.terms
             li
               a(href='/')
                 i.fa.fa-align-left
-                |  #{__('Booking Terms &amp; Conditions')}
+                |  #{__('Booking Terms & Conditions')}
             li
               a(href='/')
                 i.fa.fa-align-left
-                |  #{__('Web usage Terms &amp; Conditions')}
+                |  #{__('Web usage Terms & Conditions')}
           span.title #{__('Packet24')}
           span.copyright
             small &copy; #{__('2015 Delticom. ALL RIGHTS RESERVED.')}

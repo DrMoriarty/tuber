@@ -30,9 +30,9 @@ module.exports =
 
     faq: (req, res) ->
         if req.mobile
-            res.view 'msitefaq', {lang: req.getLocale(req)}
+            res.view 'msitefaq', {user: req.user, lang: req.getLocale(req)}
         else
-            res.view 'sitefaq', {lang: req.getLocale(req)}
+            res.view 'sitefaq', {user: req.user, lang: req.getLocale(req)}
 
     registration: (req, res) ->
         driver = req.param('driver') or false

@@ -61,6 +61,7 @@ block content
           input(type='hidden', name='driver', value='#{driver}')
           input(type='hidden', name='lang', value='#{lang}')
           p#err11000(style='color: red; display: none;') #{__('USER ALREADY REGISTERED')}
+          p#addressError(style='color: red; display: none;') #{__('There is no such index in Germany')}
           button.orange_button #{__('CONFIRM YOUR DATAS')}
           //a.more(href='/?m=1') #{__('GO TO &ldquo;SEND MY PARCEL&rdquo;')}
   // promo
@@ -106,6 +107,7 @@ block script
       $('#password_differs').hide();
       $('#password_tooshort').hide();
       $('#err11000').hide();
+      $('#addressError').hide();
 
       var country = this[8].value;
       if(country != "Austria" &&
@@ -195,6 +197,7 @@ block script
         },
         error: function() {
           $('#zip').addClass('error');
+          $('#addressError').show();
         }
       });
       return false;

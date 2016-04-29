@@ -129,7 +129,7 @@ module.exports =
             defaultsTo: 0
         coverageDistance:
             type: 'float'
-            defaultsTo: 0
+            defaultsTo: 100
         balance:
             type: 'float'
             defaultsTo: 0

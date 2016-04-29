@@ -29,7 +29,7 @@ block content
             a(href='#') #{__('My parameters')}
           li.active
             a(href='#') #{__('MY ORDERS/Status/details')}
-          li
+          //li
             a(href='#') #{__('My payments')}
           li
             a(href='#') #{__('My archive')}
@@ -197,7 +197,7 @@ block content
               h3 #{__('YOU HAVE NO PARCELS YET')}
               .clear
         // tab
-        .js-tab-body
+        //.js-tab-body
           if payments && payments.length
             each payment in payments
               .sender
@@ -282,6 +282,10 @@ block content
               .clear
               h3 #{__('YOU HAVE NO ARCHIVED PARCELS YET')}
               .clear
+              h3 &nbsp;
+              h3 &nbsp;
+              h3 &nbsp;
+              h3 &nbsp;
       #cancel_box.popup_box
         span
           | #{__('YOU CANCELLED ORDER')}

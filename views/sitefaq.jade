@@ -10,7 +10,25 @@ block content
         i.fa.fa-angle-double-right
         span #{__('FAQ')}
     .container
-      .faq_select
+      if lang == 'en'
+        ul.faq_accordion.js-accordion
+          li
+            span
+              | Parcel24 revolutionises the market for parcel services - we bring couriers and customers together, so privately sent post gets better and faster from A to B. The idea behind our innovative concept: Everyone can carry letters and packages and make money. Simply register on parcel24.com and be informed when a parcel needs to be delivered in your area or on the route you have defined. Parcel24 is a new and interesting business model for those who want to be their own boss with a flexible schedule. All you need is a driver's license and a vehicle.
+            span
+              | Private customers, who want to send parcels, benefit from a quick delivery by Parcel24. After the one-time registration, you can choose from different options for each delivery: express, cheap or environmentally friendly. The price is determined by the transport route and duration. Whether from a post office to your home or from your grandmother’s to a parcel pick up station - everything is possible. Once a courier accepts the order, the letter or parcel sets off and you will be notified immediately. In general, the transport starts within 24 hours.
+            span
+              | Use Parcel24 for a reliable delivery of your parcels and letters or as an additional income opportunity with flexible working hours.
+      if lang == 'de'
+        ul.faq_accordion.js-accordion
+          li
+            span
+              | Parcel24 revolutioniert den Markt der Paketdienste – wir bringen Kuriere und Kunden zusammen, damit privat verschickte Post besser und schneller von A nach B gelangt. Die Idee hinter unserem innovativen Konzept: Jeder kann Briefe und Pakete transportieren und damit Geld verdienen. Einfach auf parcel24.de registrieren und informiert werden, wenn ein Paket in Ihrem Umkreis oder auf der von Ihnen definierten Route zugestellt werden muss. Parcel24 ist ein neues und interessantes Geschäftsmodell für alle, die gerne ihr eigener Chef sind und flexibel arbeiten wollen. Alles, was Sie dafür brauchen, sind Führerschein und Fahrzeug.
+            span
+              | Privatkunden, die Pakete verschicken wollen, profitieren ebenfalls durch Parcel24 von einer schnellen Zustellung. Nach der einmaligen Registrierung kann bei jedem Zustellwunsch zwischen verschiedenen Optionen gewählt werden: Express, günstig oder umweltfreundlich. Transportweg und -dauer bestimmen den Preis. Ob von einer Postfiliale nach Hause oder von der Oma zur Packstation – alles ist möglich. Sobald ein Zusteller den Auftrag annimmt, machen sich Brief oder Päckchen auf den Weg und Sie werden sofort informiert. In der Regel erfolgt die Annahme innerhalb von 24 Stunden.
+            span
+              | Nutzen Sie Parcel24 für die zuverlässige Zustellung Ihrer Pakete und Briefe oder als zusätzliche Verdienstmöglichkeit mit flexiblen Arbeitszeiten. 
+      //.faq_select
         span.faq_select-span #{__('View questions about:')}
         .faq_select-body
           select.js-select(name='')
@@ -23,7 +41,7 @@ block content
             a(href='#') #{__('Show all Answers')}
           li
             a(href='#') #{__('Hide all')}
-      ul.faq_accordion.js-accordion
+      //ul.faq_accordion.js-accordion
         li
           span
             i.icons-faq_arrow

@@ -157,7 +157,9 @@ module.exports =
                             view = 'msitedriverdashboard'
                         else
                             view = 'sitedriverdashboard'
-                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1, lang: req.getLocale(req)}
+                        Request.find({paid: true}).sort('createdAt DESC').populateAll().exec (err, requests) ->
+                            console.log 'Get completed requests', requests
+                            res.view view, {user: req.user, parcels: result, archive: archive, payments: requests, page: page, pages: Math.floor(count/pageSize)+1, lang: req.getLocale(req)}
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -188,7 +190,8 @@ module.exports =
                                     fromParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
                                     return cb(null, fromParcelShops)
                                 catch e
-                                    return cb(e, null)
+                                    console.log 'Parcel shops for ', fromAddress.latitude, fromAddress.longitude, ' not found!'
+                                    return cb(null, [])
                         (cb) ->
                             DpdService.findParcelShopsByGeoData toAddress.latitude, toAddress.longitude, (err, data) ->
                                 if err?
@@ -198,7 +201,8 @@ module.exports =
                                     toParcelShops = data["soap:Envelope"]["soap:Body"][0]["ns:findParcelShopsByGeoDataResponse"][0]["parcelShop"]
                                     return cb(null, toParcelShops)
                                 catch e
-                                    return cb(e, null)
+                                    console.log 'Parcel shops for ', toAddress.latitude, toAddress.longitude, ' not found!'
+                                    return cb(null, [])
                     ], (err, result) ->
                         if req.mobile
                             res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: req.getLocale(req)}

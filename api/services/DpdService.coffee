@@ -342,6 +342,7 @@ module.exports =
             </soapenv:Body>
         </soapenv:Envelope>
         """
+        console.log 'Request data:', data
         request.post {encoding: null, url:API_DPD+'services/ParcelShopFinderService/V5_0/findParcelShopsByGeoData', form: data}, (err, httpResponse, body) ->
             if err?
                 console.log err

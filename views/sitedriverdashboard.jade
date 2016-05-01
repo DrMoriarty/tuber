@@ -198,22 +198,22 @@ block content
                 ul
                   li
                     | #{__('ORDER NO:')} 
-                    strong SA12345678
+                    strong #{payment.trackingNumber}
                   li
                     | #{__('PAYMENT STATUS')} 
                     em #{__('Pay Success')}
                   li.no-margin
                     | #{__('TOTAL AMOUNT:')}
-                    strong 186&euro;
+                    strong #{payment.price} &euro;
                   li
                     | #{__('Received:')}
-                    strong 186&euro; 
+                    strong #{payment.price} &euro; 
                   li.no-margin
                     | #{__('Payment Method:')} 
                     strong #{__('Credit Card')}
                   li
                     | #{__('Date Received:')} 
-                    strong 11/10/2015
+                    strong #{moment(payment.updatedAt).format('LL')}
                 .pattern
           else
             .sender

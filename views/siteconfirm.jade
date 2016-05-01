@@ -81,10 +81,10 @@ block content
         hr
         .confirmation-departure
           span.white_span.to #{__('FROM:')}
-          input#postbox(name='post', type='radio')
+          input#postbox(name='post', type='radio', checked=true)
           label(for='postbox') #{__('POSTBOX')}
-          input#home(name='post', type='radio', checked=true)
-          label(for='home') #{__('HOME ADRESS')}
+          //input#home(name='post', type='radio', checked=true)
+          //label(for='home') #{__('HOME ADDRESS')}
           //input#postoffice(name='post', type='radio')
           //label(for='postoffice') #{__('POST OFFICE')}
           .confirmation-select
@@ -97,10 +97,10 @@ block content
                 option.pboxAddress1(value='#{fromShop.latitude},#{fromShop.longitude}') #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
         .confirmation-destination
           span.white_span.from #{__('TO:')}
-          input#postbox2(name='post2', type='radio')
+          input#postbox2(name='post2', type='radio', checked=true)
           label(for='postbox2') #{__('POSTBOX')}
-          input#home2(name='post2', type='radio', checked=true)
-          label(for='home2') #{__('HOME ADRESS')}
+          //input#home2(name='post2', type='radio', checked=true)
+          //label(for='home2') #{__('HOME ADDRESS')}
           //input#postoffice2(name='post2', type='radio')
           //label(for='postoffice2') #{__('POST OFFICE')}
           .confirmation-select

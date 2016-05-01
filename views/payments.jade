@@ -74,10 +74,14 @@ block content
                       td #{it.parcel.fromPerson.firstname} #{it.parcel.fromPerson.lastname}
                     else if it.sender
                       td #{it.sender.firstname} #{it.sender.lastname}
+                    else
+                      td None
                     if it.parcel && it.parcel.toPerson
                       td #{it.parcel.toPerson.firstname} #{it.parcel.toPerson.lastname}
                     else if it.sender
                       td #{it.sender.firstname} #{it.sender.lastname}
+                    else
+                      td None
                     if it.parcel
                       td= moment(it.parcel.arriveDate).format('LL')
                     else

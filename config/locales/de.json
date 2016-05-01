@@ -25,7 +25,7 @@
 	"PACKAGE ROUTE": "PAKETROUTE",
 	"HOME ADDRESS": "PRIVATADRESSE",
 	"My parameters": "Meine Parameter",
-	"MY ORDERS/Status/details": "MEINE AUFTRÄGE/STATUS/DETAILS",
+	"MY ORDERS/Status/details": "MEINE AUFTRÄGE",
 	"My payments": "Meine Zahlungen",
 	"My archive": "Mein Archiv",
 	"NAME:": "NAME:",
@@ -275,6 +275,14 @@
 	"Country, for ex.: “United States”": "Land, z. B. Deutschland",
 	"Mobile phone, for ex.: “001 999 4611 8937”": "Handynummer, z. B. 0049 151 1234567",
 	"E-mail, for ex.: “George@delti.com”": "E-Mail-Adresse, z. B. max@mustermann.de",
-    "Parcel can be picked up starring": "Frühester Abholtermin",
-    "Parcel should arrived before": "Spätester Zustelltermin"
+	"Parcel can be picked up starring": "Frühester Abholtermin",
+	"Parcel should arrived before": "Spätester Zustelltermin",
+	"ORDER NO:": "ORDER NO:",
+	"PAYMENT STATUS": "PAYMENT STATUS",
+	"Pay Success": "Pay Success",
+	"TOTAL AMOUNT:": "TOTAL AMOUNT:",
+	"Received:": "Received:",
+	"Payment Method:": "Payment Method:",
+	"Credit Card": "Credit Card",
+	"Date Received:": "Date Received:"
 }

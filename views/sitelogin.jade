@@ -53,14 +53,18 @@ block content
 block script
   script(type='text/javascript').
     $('#loginSender').submit(function() {
-      $.post(this.action, $(this).serialize(), function(data) {
+      var data = $(this).serialize()
+      data = data + '&login=' + encodeURIComponent($('#send_login').val());
+      $.post(this.action, data, function(data) {
         console.log('Logged in', data);
         location.reload();
       });
       return false;
     });
     $('#loginDriver').submit(function() {
-      $.post(this.action, $(this).serialize(), function(data) {
+      var data = $(this).serialize()
+      data = data + '&login=driver_' + encodeURIComponent($('#transport_login').val());
+      $.post(this.action, data, function(data) {
         console.log('Logged in', data);
         location.href = '/dashboard';
       });

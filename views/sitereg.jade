@@ -163,6 +163,11 @@ block script
         return false;
       }
       regdata = $(this).serialize();
+      if('#{driver}' == 'true') {
+        regdata = regdata + '&login=driver_'+encodeURIComponent($('#email').val())
+      } else {
+        regdata = regdata + '&login='+encodeURIComponent($('#email').val())
+      }
       var country = this[8].value;
       var zip = this[6].value;
       var regurl = this.action;

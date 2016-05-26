@@ -50,9 +50,12 @@ module.exports =
             required: true
             defaultsTo: ''
         birthdate: 'date'
+        login:
+            type: 'string'
+            unique: true
         email:
             type: 'email'
-            unique: true
+            unique: false
         fbId: 
             type: 'string'
             unique: true
@@ -152,6 +155,11 @@ module.exports =
             return obj
 
     beforeCreate: (user, cb) ->
+        if not user.login?
+            if user.driver
+                user.login = 'driver_'+user.email
+            else
+                user.login = user.email
         async.series( [
             (callback) ->
                 if user.password? and user.password.length > 0

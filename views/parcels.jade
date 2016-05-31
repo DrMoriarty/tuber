@@ -46,11 +46,12 @@ block content
                 th(onclick='javascript:location.href="/admin/parcel?sort=arriveDate"') Arrival time
                 th(onclick='javascript:location.href="/admin/parcel?sort=status"') Status
                 th Find carriers
+                th Edit
                 th Delete
             tbody
               if result
                 each it in result
-                  tr(onclick='javascript:if(!window.currentRequestId){location.href="/admin/parcel/#{it.id}";}')
+                  tr(onclick='javascript:if(!window.currentRequestId){location.href="/admin/parcel_log/#{it.id}";}')
                     td= it.id
                     if it.owner
                       td #{it.owner.firstname} #{it.owner.lastname}
@@ -70,6 +71,10 @@ block content
                         a(href='/admin/findcarriers/#{it.id}')
                           button.btn.btn-info.btn-gradient(type='button')
                             i.fa.fa-truck
+                    td
+                      a(href='/admin/parcel/#{it.id}')
+                        button.btn.btn-info(class='button') 
+                          span.glyphicons.glyphicons-edit
                     td
                       a(href='javascript:; ', onclick='window.currentRequestId = "#{it.id}";')
                         button.btn.btn-danger(class='button', data-toggle='modal', data-target='#rmModal') X

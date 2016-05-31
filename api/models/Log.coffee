@@ -9,5 +9,6 @@ module.exports =
     attributes: 
         type: 'string'
         method: 'string'
+        object: 'string'
         argument: 'string'
 

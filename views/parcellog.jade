@@ -1,0 +1,107 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb
+        a(href='/admin/parcel') Parcels
+      li.crumb-active
+        a(href='javascript:;') Parcel logs
+
+block content
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Logs for parcel #{parcel.pickupDate}
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th Date
+                th Action
+                th Object
+                th Argument
+            tbody
+              if logs
+                each it in logs
+                  tr
+                    td= it.createdAt
+                    td= it.type
+                    td= it.method
+                    td= it.argument
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Logs for sender person #{parcel.fromPerson ? parcel.fromPerson.firstname + ' ' + parcel.fromPerson.lastname : parcel.owner.firstname + ' ' + parcel.owner.lastname}
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th Date
+                th Action
+                th Object
+                th Argument
+            tbody
+              if senderLogs
+                each it in senderLogs
+                  tr
+                    td= it.createdAt
+                    td= it.type
+                    td= it.method
+                    td= it.argument
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Logs for recipient person #{parcel.toPerson ? parcel.toPerson.firstname + ' ' + parcel.toPerson.lastname : parcel.owner.firstname + ' ' + parcel.owner.lastname}
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th Date
+                th Action
+                th Object
+                th Argument
+            tbody
+              if acceptorLogs
+                each it in acceptorLogs
+                  tr
+                    td= it.createdAt
+                    td= it.type
+                    td= it.method
+                    td= it.argument
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Logs for request
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th Date
+                th Action
+                th Object
+                th Argument
+            tbody
+              if requestLogs
+                each it in requestLogs
+                  tr
+                    td= it.createdAt
+                    td= it.type
+                    td= it.method
+                    td= it.argument
+

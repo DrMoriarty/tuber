@@ -8,6 +8,7 @@
  * For more information on bootstrapping your app, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
 """
+{ObjectId} = require('mongodb')
 
 module.exports.bootstrap = (cb) ->
 
@@ -52,6 +53,16 @@ module.exports.bootstrap = (cb) ->
             else
                 User.update({id: user.id}, {login: user.email}).exec (err, result) ->
                     console.log err if err?
+
+    Log.find({object: {$exists: false}}).exec (err, logs) ->
+        for log in logs
+            obj = JSON.parse(log.argument)
+            objectId = obj.id
+            #console.log 'Log object', obj
+            #console.log 'ObjectId', objectId, 'type', typeof(objectId)
+            #console.log 'Log id', log.id, 'type', typeof(log.id)
+            Log.update({id: log.id}, {object: objectId}).exec (err, result) ->
+                console.log err if err?
                 
     # It's very important to trigger this callback method when you are finished
     # with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)

@@ -26,6 +26,37 @@ module.exports =
     cities: (req, res) ->
         res.view 'cities', {user: req.user}
 
+    parcelLog: (req, res) ->
+        id = req.param('id')
+        Parcel.findOne(id).populateAll().exec (err, parcel) ->
+            if err or !parcel
+                res.notFound()
+            else
+                senderId = if parcel.fromPerson then parcel.fromPerson.id else parcel.owner
+                acceptorId = if parcel.toPerson then parcel.toPerson.id else parcel.owner
+                async.series( [
+                    (cb) ->
+                        LogService.logsForObject 10, id, (err, logs) ->
+                            return cb(err, logs)
+                    (cb) ->
+                        LogService.logsForObject 10, senderId, (err, senderLogs) ->
+                            return cb(err, senderLogs)
+                    (cb) ->
+                        LogService.logsForObject 10, acceptorId, (err, acceptorLogs) ->
+                            return cb(err, acceptorLogs)
+                    (cb) ->
+                        Request.find({parcel: id, driverAccepted: true, senderAccepted: true}).populateAll().exec (err, requests) ->
+                            if err or not requests or requests.length <= 0
+                                console.log err
+                                return cb(err, [])
+                            else
+                                LogService.logsForObject 10, requests[0].id, (err, requestLogs) ->
+                                    return cb(err, requestLogs)
+                ], (err, result) ->
+                    res.view 'parcellog', {user: req.user, parcel: parcel, logs: result[0], senderLogs: result[1], acceptorLogs: result[2], requestLogs: result[3]}
+                )
+
+
     parcel: (req, res) ->
         id = req.param('id')
         Parcel.findOne(id).populateAll().exec (err, result) ->

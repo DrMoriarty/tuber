@@ -7,13 +7,13 @@ block content
     | 
     .container
       form.form.transporter.js-validate(action='/api/user/#{user.id}', method='POST')
-        h3 #{__('Transport coverage')}
-        label(for='nb_vehicle') #{__('NB OF VEHICLE:')}
-        input#nb_vehicle.required.number(name='vehicleNum', type='text', placeholder='', value='#{user.vehicleNum}')
-        label(for='type_vehicle') #{__('TYPE OF VEHICLE:')}
-        input#type_vehicle.required.minLength-3(name='vehicleType', type='text', placeholder='', value='#{user.vehicleType}')
-        h3 #{__('Volume coverage')}
-        label #{__('MAXI PARCEL SIZE:')}
+        //h3 #{__('Transport coverage')}
+        //label(for='nb_vehicle') #{__('NB OF VEHICLE:')}
+        //input#nb_vehicle.required.number(name='vehicleNum', type='text', placeholder='', value='#{user.vehicleNum}')
+        //label(for='type_vehicle') #{__('TYPE OF VEHICLE:')}
+        //input#type_vehicle.required.minLength-3(name='vehicleType', type='text', placeholder='', value='#{user.vehicleType}')
+        h3 #{__('Transporter parametres')}
+        label #{__('Maximum parcel size that I can transport:')}
         ul.form-sizes
           li
             span.up
@@ -51,12 +51,12 @@ block content
         input#nb_max.required.number(name='parcelsPerDay', type='text', placeholder='', value='#{user.parcelsPerDay}')
         h3 #{__('Geography coverage')}
         .form-half
-          label #{__('I CAN TRANSPORT THOUGH:')}
+          label #{__('I can transport though:')}
           input.required.minLength-3(name='country', type='text', placeholder='Country', value='#{user.country}')
           input.required.number.minLength-5(name='zip', type='text', placeholder='Zip Code', value='#{user.zip}')
           label(for='place') #{__('WITHIN AN AREA OF (km):')}
           input#place.required.number(name='coverageDistance', type='text', placeholder='Coverage distance', value='#{user.coverageDistance}')
-          label #{__('ON DAYS:')}
+          label #{__('On the following days of week:')}
           ul.days
             li
               input#mon(name='workDay0', type='checkbox', value='true', checked=user.workDay0)
@@ -86,15 +86,15 @@ block content
         h3 #{__('Time coverage')}
         label(for='speed') #{__('MY SPEED IS ROUGHLY (km/hour):')}
         input#speed.required.number(name='averageSpeed', type='text', placeholder='XXXX', value='#{user.averageSpeed}')
-        label(for='max_speed') #{__('MY MAXI KM PER DAY (km/day):')}
-        input#max_speed.required.number(name='averageDayDistance', type='text', placeholder='XXXX', value='#{user.averageDayDistance}')
+        //label(for='max_speed') #{__('MY MAXI KM PER DAY (km/day):')}
+        //input#max_speed.required.number(name='averageDayDistance', type='text', placeholder='XXXX', value='#{user.averageDayDistance}')
         h3 #{__('Pricing')}
         label(for='price_km') #{__('PRICE PER KM (€):')}
         input#price_km.required.number(name='pricePerKm', type='text', placeholder='XX', value='#{user.pricePerKm}')
         //label(for='price_country') PRICE PER COUNTRY (€):
         //input#price_country.required(type='text', placeholder='XX')
-        label(for='price_ft') #{__('PRICE FROM/TO (€):')}
-        input#price_ft.required.number(name='defaultPrice', type='text', placeholder='XX', value='#{user.defaultPrice}')
+        //label(for='price_ft') #{__('PRICE FROM/TO (€):')}
+        //input#price_ft.required.number(name='defaultPrice', type='text', placeholder='XX', value='#{user.defaultPrice}')
         h3 #{__('My Payment Data')}
         label(for='accountNumber') #{__('YOUR IBAN NUMBER:')}
         input#accountNumber.required.number.minLength-11(name='bankAccount', type='text', placeholder='', value='#{user.bankAccount || ""}')
@@ -102,8 +102,8 @@ block content
         input#bankCode.required.number.minLength-5(name='bankCode', type='text', placeholder='', value='#{user.bankCode || ""}')
         label(for='bankName') #{__('BANK NAME:')}
         input#bankName.required.minLength-3(name='bankName', type='text', placeholder='', value='#{user.bankName || ""}')
-        label(for='personName') #{__('ACCOUNT OWNER:')}
-        input#personName.required.minLength-3(name='bankClientName', type='text', placeholder='', value='#{user.bankClientName || user.fullname()}')
+        //label(for='personName') #{__('ACCOUNT OWNER:')}
+        //input#personName.required.minLength-3(name='bankClientName', type='text', placeholder='', value='#{user.bankClientName || user.fullname()}')
         button.orange_button #{__('Save details')}
 
 block script

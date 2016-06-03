@@ -78,10 +78,12 @@ module.exports =
             type: 'float'
             defaultsTo: 0
         # fields for drivers
-        vehicleType: 'string'
+        vehicleType:
+            type: 'string'
+            defaultsTo: 'car'
         vehicleNum: 
             type: 'integer'
-            defaultsTo: 0
+            defaultsTo: 1
         maxLength:
             type: 'integer'
             defaultsTo: 20

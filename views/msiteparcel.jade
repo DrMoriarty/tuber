@@ -7,7 +7,7 @@ block head
 block content
   // content
   section.section
-    h1 #{__('Packet24 parcels delivery')}
+    h1 #{__('I want to send a parcel...')}
     ul.breadcrumbs
       li #{__('You are here')}
       li
@@ -50,8 +50,8 @@ block content
             input#toCountry(type='text', placeholder='Country, for ex.: “United States”', name='toPerson.country', value='#{__("Germany")}')
             input#toPhone.number.minLength-11(type='text', placeholder='Mobile phone, for ex.: “001 999 4611 8937”', name='toPerson.phone')
             input#toEmail.email(type='text', placeholder='E-mail, for ex.: “George@delti.com”', name='toPerson.email')
-          input#packetshop(type='checkbox', name='usePacketshop')
-          label.packetshop(for='packetshop') #{__('To reduce costs, I am willing to drop the package in a Packetshop close to me.')}
+          //input#packetshop(type='checkbox', name='usePacketshop')
+          //label.packetshop(for='packetshop') #{__('To reduce costs, I am willing to drop the package in a Packetshop close to me.')}
           //a.orange_button(href='#') GO TO &quot;MY PROFILE&quot;
         .form-block.bordered
           i.icons-parcel
@@ -101,8 +101,8 @@ block content
             //span.placeholder2 #{__('Parcel should arrive before')}
             input.pl1#pickupDate(type='datetime-local', placeholder="#{__('Parcel can be picked up starting')}")
             input.pl2#arriveDate(type='datetime-local', placeholder="#{__('Parcel should arrive before')}")
-          input#timing(type='checkbox', name='userAgreementTimes')
-          label.timing(for='timing') #{__('I am aware that the time frame influences Packet24 prices.')}
+          //input#timing(type='checkbox', name='userAgreementTimes')
+          //label.timing(for='timing') #{__('I am aware that the time frame influences Packet24 prices.')}
         //.form-block.bordered
           i.icons-insurrance
           h3 #{__('About insurrance')}

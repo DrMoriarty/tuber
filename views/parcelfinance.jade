@@ -27,6 +27,8 @@ block content
                 th Price
                 th Status
                 th Tracking number
+                th Delivery
+                th Last update
             tbody
               if request
                 tr
@@ -34,6 +36,12 @@ block content
                   td= request.price
                   td= request.status
                   td= request.trackingNumber
+                  if request.status == 'arrived'
+                    td
+                      a(href='/upload/subscript_'+request.id+'.png', target='_blank')
+                  else
+                    td Not arrived
+                  td #{moment(request.updatedAt).format('LL')}
                   //td '#{JSON.stringify(request, null, 4)}'
 
   .row

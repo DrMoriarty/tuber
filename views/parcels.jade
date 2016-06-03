@@ -37,7 +37,7 @@ block content
           table.table.table-hover
             thead
               tr
-                th(onclick='javascript:location.href="/admin/parcel?sort=id"') #
+                //th(onclick='javascript:location.href="/admin/parcel?sort=id"') #
                 th Sender
                 th Driver
                 th Size
@@ -53,7 +53,7 @@ block content
               if result
                 each it in result
                   tr(onclick='javascript:if(!window.currentRequestId){location.href="/admin/parcel_log/#{it.id}";}')
-                    td= it.id
+                    //td= it.id
                     if it.owner
                       td #{it.owner.firstname} #{it.owner.lastname}
                     else

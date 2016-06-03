@@ -47,6 +47,7 @@ block content
                 th(onclick='javascript:location.href="/admin/parcel?sort=status"') Status
                 th Find carriers
                 th Edit
+                th Finance
                 th Delete
             tbody
               if result
@@ -75,6 +76,10 @@ block content
                       a(href='/admin/parcel/#{it.id}')
                         button.btn.btn-info(class='button') 
                           span.glyphicons.glyphicons-edit
+                    td
+                      a(href='/admin/parcel_finance/#{it.id}')
+                        button.btn.btn-info(class='button')
+                          span.glyphicons.glyphicons-coins
                     td
                       a(href='javascript:; ', onclick='window.currentRequestId = "#{it.id}";')
                         button.btn.btn-danger(class='button', data-toggle='modal', data-target='#rmModal') X

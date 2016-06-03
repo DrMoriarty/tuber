@@ -56,6 +56,20 @@ module.exports =
                     res.view 'parcellog', {user: req.user, parcel: parcel, logs: result[0], senderLogs: result[1], acceptorLogs: result[2], requestLogs: result[3]}
                 )
 
+    parcelFinance: (req, res) ->
+        id = req.param('id')
+        Request.find({parcel: id, senderAccepted: true}).populateAll().exec (err, requests) ->
+            if err or not requests or requests.length <= 0
+                console.log err
+                res.view 'parcelfinance', {user: req.user}
+            else
+                request = requests[0]
+                if request.invoice and request.invoice.length > 0
+                    invoice = JSON.parse(request.invoice)
+                    delete request.invoice
+                else
+                    invoice = null
+                res.view 'parcelfinance', {user: req.user, request: request, invoice: invoice}
 
     parcel: (req, res) ->
         id = req.param('id')

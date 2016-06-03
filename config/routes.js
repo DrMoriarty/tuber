@@ -92,6 +92,7 @@ module.exports.routes = {
     'get /admin/country': 'AdminController.countries',
     //'get /admin/country/:id': 'AdminController.country',
     'get /admin/parcel_log/:id': 'AdminController.parcelLog',
+    'get /admin/parcel_finance/:id': 'AdminController.parcelFinance',
     'get /admin/parcel': 'AdminController.parcels',
     'get /admin/parcel/new': 'AdminController.newParcel',
     'get /admin/parcel/:id': 'AdminController.parcel',

@@ -1,0 +1,54 @@
+extend layout
+
+block topbar
+  .topbar-left
+    ol.breadcrumb
+      li.crumb-icon
+        a(href='/admin')
+          span.glyphicon.glyphicon-home
+      li.crumb
+        a(href='/admin/parcel') Parcels
+      li.crumb-active
+        a(href='javascript:;') Parcel finance information
+
+block content
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Common information
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th Paid
+                th Price
+                th Status
+                th Tracking number
+            tbody
+              if request
+                tr
+                  td= request.paid
+                  td= request.price
+                  td= request.status
+                  td= request.trackingNumber
+                  //td '#{JSON.stringify(request, null, 4)}'
+
+  .row
+    .col-md-12
+      .panel.panel-visible
+        .panel-heading
+          span.panel-title
+            span.glyphicon.glyphicon-list-alt
+            |  Payments information
+        .panel-body
+          table.table.table-hover
+            thead
+              tr
+                th Raw invoice information
+            tbody
+              if invoice
+                tr
+                  td '#{JSON.stringify(invoice, null, 4)}'

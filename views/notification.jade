@@ -13,6 +13,13 @@ block topbar
         a(href='/admin/notification') Notifications
       li.crumb-active
         a(href='/admin/notification/new') Notification [#{result.lang}] - #{result.event}
+  .topbar-right
+    ol.breadcrumb
+      input#testEmailAddress(type='text', placeholder='enter an email address')
+      &nbsp;
+      &nbsp;
+      a(href='javascript:sendTestEmail();')
+        button.btn.btn-info#testEmail(class='button') Send test email
 
 block content
   .row
@@ -64,6 +71,13 @@ block content
 
 block script
   script(type='text/javascript').
+    function sendTestEmail() {
+      address = $('#testEmailAddress').val();
+      var data = {'email':address, 'type':'#{result.event}'};
+      $.post('/test/email', data, function(data, status) {
+        console.log('Email result', data, status);
+      });
+    }
     jQuery(document).ready(function () {
       // validate the comment form when it is submitted
       $("#altForm").validate({

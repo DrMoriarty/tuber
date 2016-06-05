@@ -84,6 +84,8 @@ module.exports.routes = {
     'all /accept/carrier/parcel/:parcelId': 'SearchController.acceptParcel',
     'all /search/zip': 'SearchController.lookupZip',
 
+    'post /test/email': 'TestController.sendEmail',
+
     'get /admin': 'AdminController.main',
     'get /admin/profile': 'AdminController.profile',
     'get /admin/profile/edit': 'AdminController.profileEdit',

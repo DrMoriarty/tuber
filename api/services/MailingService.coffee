@@ -14,7 +14,7 @@ module.exports =
             from: 'info@packet24.com'
             to: recipient
             subject: subject
-            text: text
+            html: text
         MailingService.transporter.sendMail options, (err, info) ->
             console.log 'MailingService error', err if err?
             console.log 'Message sent', info.response if info?

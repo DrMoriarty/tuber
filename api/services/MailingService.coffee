@@ -37,5 +37,5 @@ module.exports =
                         text += additionalText
                     else
                         for own key, value of additionalText
-                            text = text.replaceAll(key, value)
+                            text = text.replace key, value
                 MailingService.sendEmail recipient, nt.subject, text

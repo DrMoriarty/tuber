@@ -33,5 +33,9 @@ module.exports =
                 nt = result[0]
                 text = nt.text
                 if additionalText?
-                    text += additionalText
+                    if typeof additionalText is 'string'
+                        text += additionalText
+                    else
+                        for own key, value of additionalText
+                            text = text.replaceAll(key, value)
                 MailingService.sendEmail recipient, nt.subject, text

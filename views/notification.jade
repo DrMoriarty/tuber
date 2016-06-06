@@ -30,7 +30,10 @@ block content
             span.glyphicon.glyphicon-pencil
             |  New notification
         .panel-body
-          .alert.alert-theme Yellow fields are required!
+          .alert.alert-theme
+            | You can use tag 
+            b INFO 
+            | for inserting additional information into the email body
           form#altForm.cmxform(method='post', action='/api/notification/#{result.id}')
             .form-group.has-warning
               label.control-label(for='lang') Language

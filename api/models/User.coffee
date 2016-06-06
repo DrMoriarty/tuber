@@ -141,8 +141,9 @@ module.exports =
         recoveryHash:
             type: 'string'
         getPrice: (parcel) ->
-            #if @defaultPrice > 0 then @defaultPrice else @pricePerKm * parcel.pathLength
             return DepartureService.priceCalc this, parcel
+        getDeliveryPrice: (parcel) ->
+            return DepartureService.deliveryPriceCalc this, parcel
         bankAccount: 'string'
         bankCode: 'string'
         bankName: 'string'

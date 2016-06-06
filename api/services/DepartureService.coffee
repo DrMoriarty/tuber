@@ -18,6 +18,23 @@ module.exports =
                 return if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
         else
             if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
+
+    deliveryPriceCalc:(driver, parcel) ->
+        if driver.company == DpdService.company
+            if dpd_prices? and dpd_prices.length > 0
+                delivery = 0
+                for dp in dpd_prices
+                    if delivery == 0 and parcel.weight <= dp.weight
+                        delivery = dp.delivery
+                if delivery == 0
+                    delivery = dpd_prices[dpd_prices.length-1].delivery
+                return delivery
+            else
+                console.log 'Can not DPD custom prices. Using default price calculation.'
+                return 0
+        else
+            return 0
+        
     processRequest: (requestId) ->
         Request.findOne(requestId).populateAll().exec (err, request) ->
             if err?

@@ -106,7 +106,7 @@ block content
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')} 
                     if parcel.request
-                      strong #{parcel.request.price}&euro;
+                      strong #{(parcel.request.price+parcel.request.deliveryPrice).toFixed(2)}&euro;
                 if parcel.fromPerson
                   .sender-name(style='min-height: 221px;')
                     figure
@@ -157,11 +157,12 @@ block content
                         strong #{parcel.toPerson.phone}
                 .clear
                 if parcel.status == 'draft'
-                  //a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}?m=1"') CONTINUE
                   h3 #{__('THE ORDER NOT COMPLETED')}
                 else if parcel.status == 'published'
-                  //a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') PROCESS PAYMENT
-                  h3 #{__('THE ORDER NOT PAID')}
+                  if parcel.request && !parcel.request.driverAccepted
+                    a.orange_button.cansel_order(href='#', onClick='acceptOrder("#{parcel.id}")') #{__('ACCEPT ORDER')}
+                  else
+                    h3 #{__('THE ORDER NOT PAID')}
                 else if parcel.status == 'accepted'
                   a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') #{__('ORDER PICKED UP')}
                 else if parcel.status == 'started'
@@ -279,7 +280,7 @@ block content
                     strong +0&euro; #{__('to home adress')}
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')} 
-                    strong #{parcel.request.price}&euro;
+                    strong #{(parcel.request.price+parcel.request.deliveryPrice).toFixed(2)}&euro;
                 //a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
                 //span.note * You myst delivery this order to 23/11/2015
                 .pattern

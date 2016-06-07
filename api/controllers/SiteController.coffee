@@ -143,6 +143,49 @@ module.exports =
                             view = 'sitedashboard'
                         res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1, lang: req.getLocale(req)}
         else if req.user? and req.user.driver
+            async.series( [
+                (cb) ->
+                    Request.find({driver: req.user.id}).sort('createdAt DESC').populateAll().exec (err, requests) ->
+                        result = []
+                        archive = []
+                        for request in requests
+                            if request.parcel?
+                                if request.parcel.status not in ['arrived', 'archive', 'canceled']
+                                    result.push request
+                                else
+                                    archive.push request
+                        cb(err, [result, archive])
+                (cb) ->
+                    Request.find({paid: true}).sort('createdAt DESC').populateAll().exec (err, requests) ->
+                        console.log 'Get completed requests', requests
+                        cb(err, requests)
+            ], (err, result) ->
+                if err
+                    console.log err
+                    return res.negotiate err
+                r1 = result[0]
+                requests = r1[0]
+                count = requests.length
+                archive = r1[1]
+                payments = result[1]
+                if req.mobile
+                    view = 'msitedriverdashboard'
+                else
+                    view = 'sitedriverdashboard'
+                async.map archive,
+                    (it, cb) ->
+                        Parcel.findOne(it.parcel.id).populateAll().exec (err, parcel) ->
+                            cb err, parcel
+                    (err, parcelArchive) ->
+                        pageContent = requests.splice((page-1)*pageSize, pageSize)
+                        async.map pageContent,
+                            (it, cb) ->
+                                Parcel.findOne(it.parcel.id).populateAll().exec (err, parcel) ->
+                                    cb err, parcel
+                            (err, parcelPage) ->
+                                res.view view, {user: req.user, parcels: parcelPage, archive: parcelArchive, payments: payments, page: page, pages: Math.floor(count/pageSize)+1, lang: req.getLocale(req)}
+            )
+            """
             filter = {driver: req.user.id, status: {'!': ['arrived', 'archive', 'canceled']}}
             Parcel.count(filter).exec (err, count) ->
                 Parcel.find(filter).sort('createdAt DESC').paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
@@ -160,6 +203,7 @@ module.exports =
                         Request.find({paid: true}).sort('createdAt DESC').populateAll().exec (err, requests) ->
                             console.log 'Get completed requests', requests
                             res.view view, {user: req.user, parcels: result, archive: archive, payments: requests, page: page, pages: Math.floor(count/pageSize)+1, lang: req.getLocale(req)}
+            """
         else
             if req.mobile
                 res.redirect '/?m=1'

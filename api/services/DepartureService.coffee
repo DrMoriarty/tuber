@@ -3,37 +3,61 @@ fs = require 'fs'
 dpd_prices = JSON.parse(fs.readFileSync('dpd_prices.json', 'utf8'));
 
 module.exports =
+    dpdPrice: (parcel) ->
+        if dpd_prices? and dpd_prices.length > 0
+            price = 0
+            for dp in dpd_prices
+                if price == 0 and parcel.weight <= dp.weight
+                    price = dp.price
+            if price == 0
+                price = dpd_prices[dpd_prices.length-1].price
+            return price
+        else
+            return 0
+
+    defaultPrice: (driver, parcel) ->
+        return if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
+
     priceCalc:(driver, parcel) ->
         if driver.company == DpdService.company
-            if dpd_prices? and dpd_prices.length > 0
-                price = 0
-                for dp in dpd_prices
-                    if price == 0 and parcel.weight <= dp.weight
-                        price = dp.price
-                if price == 0
-                    price = dpd_prices[dpd_prices.length-1].price
-                return price
-            else
+            price = DepartureService.dpdPrice parcel
+            if price <= 0
                 console.log 'Can not DPD custom prices. Using default price calculation.'
-                return if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
+                price = DepartureService.defaultPrice driver, parcel
         else
-            if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
+            price = DepartureService.defaultPrice driver, parcel
+            dpdPrice = DepartureService.dpdPrice parcel
+            if price < dpdPrice
+                price = dpdPrice
+        return price
+
+    dpdDeliveryPrice: (parcel) ->
+        if dpd_prices? and dpd_prices.length > 0
+            delivery = 0
+            for dp in dpd_prices
+                if delivery == 0 and parcel.weight <= dp.weight
+                    delivery = dp.delivery
+            if delivery == 0
+                delivery = dpd_prices[dpd_prices.length-1].delivery
+            return delivery
+        else
+            return 0
+
+    defaultDeliveryPrice: (driver, parcel) ->
+        return 0
 
     deliveryPriceCalc:(driver, parcel) ->
         if driver.company == DpdService.company
-            if dpd_prices? and dpd_prices.length > 0
-                delivery = 0
-                for dp in dpd_prices
-                    if delivery == 0 and parcel.weight <= dp.weight
-                        delivery = dp.delivery
-                if delivery == 0
-                    delivery = dpd_prices[dpd_prices.length-1].delivery
-                return delivery
-            else
+            delivery = DepartureService.dpdDeliveryPrice parcel
+            if delivery <= 0
                 console.log 'Can not DPD custom prices. Using default price calculation.'
-                return 0
+                delivery = DepartureService.defaultDeliveryPrice driver, parcel
         else
-            return 0
+            delivery = DepartureService.defaultDeliveryPrice driver, parcel
+            dpdDelivery = DepartureService.dpdDeliveryPrice parcel
+            if delivery < dpdDelivery
+                delivery = dpdDelivery
+        return delivery
         
     processRequest: (requestId) ->
         Request.findOne(requestId).populateAll().exec (err, request) ->

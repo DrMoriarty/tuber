@@ -46,7 +46,7 @@ block content
           //li
             | #{__('INSURRANCE:')} 
             strong #{__('Standart')} (#{__('until')} #{parcel.insurance} &euro;)
-        span.total #{__('TOTAL AMOUNT (Including VAT):')} #{request.price} &euro;
+        span.total #{__('TOTAL AMOUNT (Including VAT):')} #{request.price + request.deliveryPrice} &euro;
     hr
     .container
       form.form#payment-form(action='/braintree/transaction/#{request.id}', method='POST')
@@ -85,7 +85,7 @@ block content
       #want_popup_box.popup_box
         span
           | #{__('YOUR PAYMENT HAVE BEEN COMPLETE')}
-          strong #{request.price} &euro;
+          strong #{request.price + request.deliveryPrice} &euro;
         br
         strong #{__('The carrier will receive a message about that')}
         br

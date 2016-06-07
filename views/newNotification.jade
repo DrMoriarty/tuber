@@ -1,5 +1,8 @@
 extend layout
 
+block head
+  script(src='https://cdn.tinymce.com/4/tinymce.min.js')
+
 block topbar
   .topbar-left
     ol.breadcrumb
@@ -39,6 +42,8 @@ block content
                   option(value='registrationComplete') Complete registration
                   option(value='passwordRestore')  Restore password
                   option(value='passwordGenerated') Generate password
+                  option(value='driverNeedAccept') Carrier have to accept a parcel
+                  option(value='senderWaitingForAccept') Sender is waiting for carrier accepting
                   option(value='orderAccepted') Accept order
                   option(value='orderPayed') Complete payment
                   option(value='orderPlaced') Order placed to DPD
@@ -54,7 +59,7 @@ block content
               .input-group
                 span.input-group-addon
                   i.fa.fa-user
-                textarea#text.form-control(name='text', type='text', rows='10', placeholder='', required='')
+                textarea#text.form-control(type='text', rows='10', placeholder='', required='')
             .form-group
               input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')
 
@@ -65,7 +70,9 @@ block script
       $("#altForm").validate({
         submitHandler: function(form) {
           Pace.restart();
-          $.post(form.action, $(form).serialize(), function(data, status) {
+          var data = $(form).serialize();
+          data = data + '&text=' + encodeURIComponent(tinyMCE.activeEditor.getContent());
+          $.post(form.action, data, function(data, status) {
             location.href = '/admin/notification';
           });
         }
@@ -75,5 +82,8 @@ block script
       });
       $('#selectevent').multiselect({
         enableFiltering: false,
+      });
+      tinymce.init({
+        selector: '#text'
       });
     });

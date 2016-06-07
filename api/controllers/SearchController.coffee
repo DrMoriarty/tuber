@@ -87,17 +87,14 @@ module.exports =
                             MessagingService.driverAcceptedByOwner result.id
                             res.json result
                 else
-                    driverAccepted = false
-                    for req in requests
-                        if req.driverAccepted
-                            driverAccepted = true
-                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {senderAccepted: true}).exec (err, result) ->
+                    request = requests[0]
+                    Request.update({id: request.id}, {senderAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
                         else
-                            MessagingService.driverAcceptedByOwner result.id
+                            MessagingService.driverAcceptedByOwner request.id
                             res.json result
-                    if driverAccepted
+                    if request.driverAccepted
                         # remove all other requests for this parcel
                         finishRequest(parcel.owner.id, parcelId, driverId)
 
@@ -114,17 +111,14 @@ module.exports =
                             MessagingService.parcelAcceptedByDriver result.id
                             res.json result
                 else
-                    senderAccepted = false
-                    for req in requests
-                        if req.senderAccepted
-                            senderAccepted = true
-                    Request.update({parcel: parcelId, driver: driverId, sender: parcel.owner.id}, {driverAccepted: true}).exec (err, result) ->
+                    request = requests[0]
+                    Request.update({id: request.id}, {driverAccepted: true}).exec (err, result) ->
                         if err?
                             res.json err
                         else
-                            MessagingService.parcelAcceptedByDriver result.id
+                            MessagingService.parcelAcceptedByDriver request.id
                             res.json result
-                    if senderAccepted
+                    if request.senderAccepted
                         # we need to remove all other requests from this driver
                         finishRequest(parcel.owner.id, parcelId, driverId)
 

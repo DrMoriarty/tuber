@@ -39,6 +39,10 @@ module.exports =
             type: 'string'
         status:
             type: 'string'
+        fromParcelShop:
+            type: 'string'
+        toParcelShop:
+            type: 'string'
 
         totalPrice: ->
             @price + @deliveryPrice + @parcel.insurance

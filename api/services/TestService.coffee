@@ -1,4 +1,3 @@
-
 request = require("request")
 querystring = require("querystring")
 async = require 'async'
@@ -161,6 +160,18 @@ module.exports =
                     callback()
             () ->
                 cb(results)
+
+    sendEmail: (email, notificationType, language) ->
+        info = ''
+        switch
+            when notificationType == 'registrationComplete' then info = ''
+            when notificationType == 'passwordRestore' then info = sails.getBaseURL() + '/recovery?hash=0987654321'
+            when notificationType == 'passwordGenerated' then info = 'YOURNEWPASSWORD'
+            when notificationType == 'orderAccepted' then info = ''
+            when notificationType == 'orderPayed' then info = ''
+            when notificationType == 'orderPlaced' then info = sails.getBaseURL() + '/upload/349849238479.pdf'
+            when notificationType == 'orderArrived' then info = ''
+        MailingService.processEvent email, notificationType, language, {'INFO': info}
     
     
 #performComplexTest [{list: testlist, count:10}, {list: testlist, count:25}, {list: testlist, count:50}, {list: testlist, count:100}], (res) ->

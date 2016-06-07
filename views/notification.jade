@@ -52,6 +52,8 @@ block content
                   option(value='registrationComplete', selected=result.event == 'registrationComplete') Complete registration
                   option(value='passwordRestore', selected=result.event == 'passwordRestore')  Restore password
                   option(value='passwordGenerated', selected=result.event == 'passwordGenerated') Generate password
+                  option(value='driverNeedAccept', selected=result.event == 'driverNeedAccept') Carrier have to accept a parcel
+                  option(value='senderWaitingForAccept', selected=result.event == 'senderWaitingForAccept') Sender is waiting for carrier accepting
                   option(value='orderAccepted', selected=result.event == 'orderAccepted') Accept order
                   option(value='orderPayed', selected=result.event == 'orderPayed') Complete payment
                   option(value='orderPlaced', selected=result.event == 'orderPlaced') Order placed to DPD
@@ -76,7 +78,7 @@ block script
   script(type='text/javascript').
     function sendTestEmail() {
       address = $('#testEmailAddress').val();
-      var data = {'email':address, 'type':'#{result.event}'};
+      var data = {'email':address, 'type':'#{result.event}', 'language':'#{result.lang}'};
       $.post('/test/email', data, function(data, status) {
         console.log('Email result', data, status);
       });

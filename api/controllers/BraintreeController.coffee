@@ -22,8 +22,8 @@ module.exports =
                         console.log err 
                     else
                         MessagingService.invoicePaid requestId
-                Parcel.update({id: request.parcel}, {status: 'accepted', driver: request.driver}).exec (err, result) ->
-                    console.log err if err?
+                #Parcel.update({id: request.parcel}, {status: 'accepted', driver: request.driver}).exec (err, result) ->
+                #    console.log err if err?
         if not requestId or not nonce
             res.status 400
             res.json {error: 'Bad request'}

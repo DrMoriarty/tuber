@@ -161,8 +161,12 @@ block content
                 if parcel.status == 'draft'
                   a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}?m=1"') #{__('CONTINUE')}
                 else if parcel.status == 'published'
+                  if parcel.request && !parcel.request.driverAccepted
+                    span.note #{__('Waiting for carrier acception')}
                   a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') #{__('PROCESS PAYMENT')}
                 else if parcel.status == 'accepted'
+                  if parcel.request && !parcel.request.driverAccepted
+                    span.note #{__('Waiting for carrier acception')}
                   a.orange_button.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') #{__('CANCEL THIS ORDER')}
                   span.note * #{__('If you canceled this order now, you will be refunded 75% of delivery price;')}
                 else if parcel.status == 'started'

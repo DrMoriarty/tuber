@@ -10,7 +10,7 @@ module.exports =
             required: true
         event:
             type: 'string'
-            enum: ['registrationComplete', 'passwordRestore', 'passwordGenerated', 'orderAccepted', 'orderPayed', 'orderPlaced', 'orderArrived']
+            enum: ['registrationComplete', 'passwordRestore', 'passwordGenerated', 'driverNeedAccept', 'senderWaitingForAccept', 'orderAccepted', 'orderPayed', 'orderPlaced', 'orderArrived']
             required: true
         subject: 'string'
         text: 'string'

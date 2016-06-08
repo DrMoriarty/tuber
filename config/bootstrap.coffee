@@ -63,6 +63,11 @@ module.exports.bootstrap = (cb) ->
             #console.log 'Log id', log.id, 'type', typeof(log.id)
             Log.update({id: log.id}, {object: objectId}).exec (err, result) ->
                 console.log err if err?
+
+    User.find({driverAcceptTime: {$exists: false}}).exec (err, drivers) ->
+        for driver in drivers
+            User.update({id: driver.id}, {driverAcceptTime: 12}).exec (err, result) ->
+                console.log err if err?
                 
     # It's very important to trigger this callback method when you are finished
     # with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)

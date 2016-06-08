@@ -59,6 +59,12 @@ module.exports =
                 delivery = dpdDelivery
         return delivery
         
+    autoAccept: (driver) ->
+        if driver.company == DpdService.company
+            return true
+        else
+            return false
+
     processRequest: (requestId) ->
         Request.findOne(requestId).populateAll().exec (err, request) ->
             if err?

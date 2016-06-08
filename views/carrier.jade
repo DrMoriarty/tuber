@@ -213,6 +213,12 @@ block content
                 span.input-group-addon
                   i.fa.fa-money
                 input#defaultPrice.form-control.defaultPrice(name='defaultPrice', type='text', placeholder='', required='', value='#{result.defaultPrice}')
+            .form-group.has-warning
+              label(for='acceptTime') Time for driver acception (h)
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-clock-o
+                input#acceptTime.form-control.acceptTime(name='driverAcceptTime', type='text', placeholder='', required='', value='#{result.driverAcceptTime}')
 
             .form-group
               input.submit.btn.bg-purple.pull-right(type='submit', value='Submit')

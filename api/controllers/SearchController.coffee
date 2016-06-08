@@ -79,24 +79,43 @@ module.exports =
         parcelId = req.param('parcelId')
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
             Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).exec (err, requests) ->
-                if err? or not requests or requests.length <= 0
-                    Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, senderAccepted: true}).exec (err, result) ->
-                        if err?
-                            res.json err
+                User.findOne(driverId).populateAll().exec (err, driver) ->
+                    autoAccept = driver.autoAccept()
+                    if err? or not requests or requests.length <= 0
+                        newRequest = {parcel: parcelId, driver: driverId, sender: parcel.owner.id, senderAccepted: true}
+                        if autoAccept
+                            newRequest.driverAccepted = true
                         else
-                            MessagingService.driverAcceptedByOwner result.id
-                            res.json result
-                else
-                    request = requests[0]
-                    Request.update({id: request.id}, {senderAccepted: true}).exec (err, result) ->
-                        if err?
-                            res.json err
+                            now = new Date()
+                            newRequest.driverAcceptTimeout = new Date(now);
+                            newRequest.driverAcceptTimeout.setHours(now.getHours() + driver.driverAcceptTime)
+                        Request.create(newRequest).exec (err, result) ->
+                            if err?
+                                res.json err
+                            else
+                                MessagingService.driverAcceptedByOwner result.id
+                                res.json result
+                        if autoAccept
+                            # remove all other requests for this parcel
+                            finishRequest(parcel.owner.id, parcelId, driverId)
+                    else
+                        request = requests[0]
+                        data = {senderAccepted: true}
+                        if autoAccept
+                            data.driverAccepted = true
                         else
-                            MessagingService.driverAcceptedByOwner request.id
-                            res.json result
-                    if request.driverAccepted
-                        # remove all other requests for this parcel
-                        finishRequest(parcel.owner.id, parcelId, driverId)
+                            now = new Date()
+                            data.driverAcceptTimeout = new Date(now);
+                            data.driverAcceptTimeout.setHours(now.getHours() + driver.driverAcceptTime)
+                        Request.update({id: request.id}, data).exec (err, result) ->
+                            if err?
+                                res.json err
+                            else
+                                MessagingService.driverAcceptedByOwner request.id
+                                res.json result
+                        if request.driverAccepted or autoAccept
+                            # remove all other requests for this parcel
+                            finishRequest(parcel.owner.id, parcelId, driverId)
 
     acceptParcel: (req, res) ->
         driverId = req.user.id

@@ -106,7 +106,7 @@ block content
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')} 
                     if parcel.request
-                      strong #{(parcel.request.price+parcel.request.deliveryPrice).toFixed(2)}&euro;
+                      strong #{parcel.request.totalPrice()}&euro;
                 if parcel.fromPerson
                   .sender-name(style='min-height: 221px;')
                     figure
@@ -164,7 +164,10 @@ block content
                   else
                     h3 #{__('THE ORDER NOT PAID')}
                 else if parcel.status == 'accepted'
-                  a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') #{__('ORDER PICKED UP')}
+                  if parcel.request && parcel.request.paid
+                    a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') #{__('ORDER PICKED UP')}
+                  else
+                    h3 #{__('THE ORDER NOT PAID')}
                 else if parcel.status == 'started'
                   a.orange_button.cansel_order(href='#', onClick='location.href="/subscript?parcel=#{parcel.id}&m=1"') #{__('CONFIRM DELIVERY')}
                 //else if parcel.status == 'arrived'
@@ -280,7 +283,7 @@ block content
                     strong +0&euro; #{__('to home adress')}
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')} 
-                    strong #{(parcel.request.price+parcel.request.deliveryPrice).toFixed(2)}&euro;
+                    strong #{parcel.request.totalPrice()}&euro;
                 //a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
                 //span.note * You myst delivery this order to 23/11/2015
                 .pattern

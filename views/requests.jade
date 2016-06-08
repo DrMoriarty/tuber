@@ -39,6 +39,7 @@ block content
                 th Departure
                 th(onclick='javascript:location.href="/admin/request?sort=senderAccepted"') Sender accepted
                 th(onclick='javascript:location.href="/admin/request?sort=driverAccepted"') Carrier accepted
+                th(onclick='javascript:location.href="/admin/request?sort=driverAcceptTimeout"') Carrier timeout
                 th(onclick='javascript:location.href="/admin/request?sort=paid"') Paid
                 th(onclick='javascript:location.href="/admin/request?sort=trackingNumber"') Tracking number
                 th Delete
@@ -61,6 +62,7 @@ block content
                       td
                     td= it.senderAccepted
                     td= it.driverAccepted
+                    td= it.driverAcceptTimeout
                     td= it.paid
                     td= it.trackingNumber
                     td

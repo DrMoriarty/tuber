@@ -43,9 +43,11 @@ module.exports =
             type: 'string'
         toParcelShop:
             type: 'string'
+        driverAcceptTimeout:
+            type: 'datetime'
 
         totalPrice: ->
-            @price + @deliveryPrice + @parcel.insurance
+            return ((if @price? then @price else 0) + (if @deliveryPrice? then @deliveryPrice else 0) + (if @parcel.insurance? then @parcel.insurance else 0)).toFixed(2)
 
     afterCreate: (object, cb) ->
         LogService.saveLog 'Create', 'Request', JSON.stringify(object)

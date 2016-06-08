@@ -151,6 +151,11 @@ module.exports =
         lang:
             type: 'string'
             defaultsTo: 'en'
+        driverAcceptTime:
+            type: 'integer'
+            defaultsTo: 12
+        autoAccept: ->
+            return DepartureService.autoAccept this
         toJSON: ->
             obj = this.toObject()
             delete obj.password

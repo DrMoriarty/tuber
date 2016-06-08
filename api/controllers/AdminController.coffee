@@ -82,7 +82,7 @@ module.exports =
         
     parcels: (req, res) ->
         page = req.param('page') or 1
-        sort = req.param('sort') or 'createdAt'
+        sort = req.param('sort') or 'createdAt DESC'
         Parcel.count().exec (err, count) ->
             Parcel.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                 res.view 'parcels', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
@@ -102,7 +102,7 @@ module.exports =
 
     persons: (req, res) ->
         page = req.param('page') or 1
-        sort = req.param('sort') or 'createdAt'
+        sort = req.param('sort') or 'createdAt DESC'
         Person.count().exec (err, count) ->
             Person.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                 res.view 'persons', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
@@ -131,11 +131,22 @@ module.exports =
 
     carriers: (req, res) ->
         page = req.param('page') or 1
-        sort = req.param('sort') or 'createdAt'
+        sort = req.param('sort') or 'createdAt DESC'
         filter = {driver: true, admin: false}
-        User.count(filter).exec (err, count) ->
-            User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
-                res.view 'carriers', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+        search = req.param('search')
+        if search? and search.length > 0
+            filter['$text'] = {$search: search}
+            User.native (err, collection) ->
+                collection.find(filter).toArray (err, result) ->
+                    for r in result
+                        r.id = r._id
+                        delete r._id
+                        delete r.password
+                    res.view 'carriers', {user: req.user, result: result, sort: null, page: 1, pages: 1}
+        else
+            User.count(filter).exec (err, count) ->
+                User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
+                    res.view 'carriers', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newCarrier: (req, res) ->
         res.view 'newcarrier', {user: req.user}
@@ -150,11 +161,22 @@ module.exports =
 
     senders: (req, res) ->
         page = req.param('page') or 1
-        sort = req.param('sort') or 'createdAt'
+        sort = req.param('sort') or 'createdAt DESC'
         filter = {driver: false, admin: false}
-        User.count(filter).exec (err, count) ->
-            User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
-                res.view 'senders', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+        search = req.param('search')
+        if search? and search.length > 0
+            filter['$text'] = {$search: search}
+            User.native (err, collection) ->
+                collection.find(filter).toArray (err, result) ->
+                    for r in result
+                        r.id = r._id
+                        delete r._id
+                        delete r.password
+                    res.view 'senders', {user: req.user, result: result, sort: null, page: 1, pages: 1}
+        else
+            User.count(filter).exec (err, count) ->
+                User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
+                    res.view 'senders', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
 
     newSender: (req, res) ->
         res.view 'newsender', {user: req.user}
@@ -278,7 +300,7 @@ module.exports =
 
     requests: (req, res) ->
         page = req.param('page') or 1
-        sort = req.param('sort') or 'createdAt'
+        sort = req.param('sort') or 'createdAt DESC'
         Request.count().exec (err, count) ->
             Request.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                 res.view 'requests', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
@@ -304,7 +326,7 @@ module.exports =
 
     payments: (req, res) ->
         page = req.param('page') or 1
-        sort = req.param('sort') or 'createdAt'
+        sort = req.param('sort') or 'createdAt DESC'
         fromDate = req.param('fromDate')
         toDate = req.param('toDate')
         enableDone = if req.param('enableDone')? then JSON.parse(req.param('enableDone')) else true
@@ -362,7 +384,7 @@ module.exports =
 
     notifications: (req, res) ->
         page = req.param('page') or 1
-        sort = req.param('sort') or 'createdAt'
+        sort = req.param('sort') or 'createdAt DESC'
         Notification.count().exec (err, count) ->
             Notification.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                 res.view 'notifications', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}

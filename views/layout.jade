@@ -3,9 +3,9 @@ html
   head
     // Meta, title, CSS, favicons, etc.
     meta(charset='utf-8')
-    title Fusion - A Responsive HTML5 Admin UI Template Theme
-    meta(name='keywords', content='HTML5 Bootstrap 3 Admin Template UI Theme')
-    meta(name='description', content='Fusion - A Responsive HTML5 Admin UI Template Theme')
+    title Packet24 Admin
+    meta(name='keywords', content='Packet24 Admin')
+    meta(name='description', content='Packet24 Admin')
     meta(name='author', content='AdminDesigns')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     // Font CSS (Via CDN)
@@ -38,7 +38,7 @@ html
         .navbar-divider
       .navbar-right
         .navbar-search
-          input#HeaderSearch(type='text', placeholder='Search...', value='Search...')
+          input#HeaderSearch(type='text', placeholder='Search...', value='Search...', onkeypress="return makeSearch(event);")
         .navbar-menus
     // End: Header
     // Start: Main
@@ -60,7 +60,7 @@ html
         .user-divider
         .sidebar-menu
           ul.nav.sidebar-nav
-            li
+            //li
               a.ajax-disable(href='/admin')
                 span.glyphicons.glyphicons-home
                 span.sidebar-title Dashboard
@@ -160,4 +160,16 @@ html
       });
     script(type="text/javascript").
       _satellite.pageBottom();
+    script(type="text/javascript").
+      function makeSearch(e) {
+        e = e || window.event;
+        if(e.keyCode == 13) {
+          var searchString = e.target.value;
+          console.log('Search for', searchString);
+          var url = location.protocol + '//' + location.host + location.pathname + '?search='+encodeURIComponent(searchString);
+          location.href = url;
+          return false;
+        }
+        return true;
+      }
     block script

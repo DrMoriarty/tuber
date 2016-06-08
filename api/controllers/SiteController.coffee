@@ -308,7 +308,7 @@ module.exports =
 
     profile: (req, res) ->
         if req.user?
-            if req.mobile?
+            if req.mobile
                 res.view 'msiteprofile', {user: req.user, lang: req.getLocale(req)}
             else
                 res.view 'siteprofile', {user: req.user, lang: req.getLocale(req)}

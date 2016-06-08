@@ -301,5 +301,18 @@
 	"EMAIL ALREADY USED": "EMAIL ALREADY USED",
 	"I want to send a parcel...": "I want to send a parcel...",
 	"Waiting for carrier acception": "Waiting for carrier acception",
-	"ACCEPT ORDER": "ACCEPT ORDER"
+	"ACCEPT ORDER": "ACCEPT ORDER",
+	"USER ALREADY REGISTERED": "USER ALREADY REGISTERED",
+	"Zip code (only numbers)": "Zip code (only numbers)",
+	"City": "City",
+	"Country": "Country",
+	"Mobile phone (only numbers)": "Mobile phone (only numbers)",
+	"City of destination": "City of destination",
+	"Country of destination": "Country of destination",
+	"TOTAL AMOUNT (Incl. VAT):": "TOTAL AMOUNT (Incl. VAT):",
+	"Transport parameters": "Transport parameters",
+	"Maximum parcel size that I can transport:": "Maximum parcel size that I can transport:",
+	"I can transport though:": "I can transport though:",
+	"On the following days of week:": "On the following days of week:",
+	"Edit login information": "Edit login information"
 }

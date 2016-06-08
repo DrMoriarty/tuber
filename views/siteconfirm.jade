@@ -125,7 +125,7 @@ block content
             span &euro; #{__('to home adress')}
           .confirmation-confirm-total
             h4
-              span #{__('TOTAL AMOUNT (Including VAT):')}
+              span #{__('TOTAL AMOUNT (Incl. VAT):')}
               span#totalPrice #{(drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0) + drivers[0].getDeliveryPrice(parcel)).toFixed(2)}
               span &euro;
           a.orange_button(onClick='javascript:confirmation();') #{__('CONFIRM')}

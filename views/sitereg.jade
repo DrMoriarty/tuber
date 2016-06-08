@@ -53,16 +53,16 @@ block content
           input#email_again.required.email(type='text')
           p#email_differs(style='color: red; display: none;') #{__('E-MAILS DIFFERS')}
           label(for='password') #{__('PASSWORD*')}
-          input#password.required.number.minLength-6(type='password', name='password')
+          input#password.required.minLength-6(type='password', name='password')
           p#password_tooshort(style='color: red; display: none;') #{__('PASSWORD TOO SHORT')}
           label(for='password_again') #{__('PASSWORD CONFIRMATION*')}
-          input#password_again.required.number.minLength-6(type='password')
+          input#password_again.required.minLength-6(type='password')
           p#password_differs(style='color: red; display: none;') #{__('PASSWORDS DIFFERS')}
           input(type='hidden', name='driver', value='#{driver}')
           input(type='hidden', name='lang', value='#{lang}')
           p#err11000(style='color: red; display: none;') #{__('USER WITH SUCH EMAIL ALREADY EXISTS')}
           p#addressError(style='color: red; display: none;') #{__('There is no such index in Germany')}
-          button.orange_button #{__('CONFIRM YOUR DATAS')}
+          button.orange_button #{__('CONFIRM')}
           //a.more(href='/') #{__('GO TO "SEND MY PARCEL"')}
   // promo
   section.promo

@@ -5,7 +5,7 @@ block content
   section.section
     h1 #{__('Packet24 parcels delivery')}
     ul.breadcrumbs
-      li #{__('You are here')}
+      li #{__('You are here')} 
       li
         i.fa.fa-angle-double-right
         span #{__('About me')}
@@ -13,12 +13,12 @@ block content
       | #{__('Call us on')}  
       span +49 511 879 893 02
       br
-      strong or
+      strong #{__('or')}
       |  #{__('fill in an enquiry below.')}
     .container.bordered
       form.form.js-validate(action='/api/user/#{user.id}', method='POST')
         figure.profile
-          img(src='img/profile.png', alt='')
+          img(src='/img/profile.png', alt='')
           //input#uplad_image.uplad_image(type='file')
           //label(for='uplad_image') Upload my picture
         .form-margined
@@ -71,7 +71,7 @@ block script
         data: regdata,
         success: function(data) {
           console.log('Change profile', data);
-          location.href = '/';
+          location.href = '/dashboard';
         },
         error: function(err) {
           console.log("Registration error", err);

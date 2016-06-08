@@ -59,7 +59,10 @@ block content
               li
                 | #{__('SUBSCRIBE:')}
                 strong #{__('YES')}
-            a.orange_button(href='/profile') #{__('CHANGE MY INFO')}
+            a.orange_button(href='/') #{__('CHANGE MY INFO')}
+            p(style={'text-align': 'center'})
+              u
+                a(href='/profile') #{__('Edit login information')}
             .pattern
         // tab
         .js-tab-body(style='display: block;')

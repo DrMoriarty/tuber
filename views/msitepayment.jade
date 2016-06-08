@@ -46,7 +46,7 @@ block content
           //li
             | #{__('INSURRANCE:')} 
             strong #{__('Standard')} (#{__('until')} #{parcel.insurance}&euro;)
-        span.total #{__('TOTAL AMOUNT (Including VAT):')} #{(request.totalPrice()}&euro;
+        span.total #{__('TOTAL AMOUNT (Incl. VAT):')} #{request.totalPrice()}&euro;
     hr
     .container
       form.form#payment-form(action='/braintree/transaction/#{request.id}', method='POST')

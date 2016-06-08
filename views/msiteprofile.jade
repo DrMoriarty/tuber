@@ -5,7 +5,7 @@ block content
   section.section
     h1 #{__('Packet24 parcels delivery')}
     ul.breadcrumbs
-      li #{__('You are here')}
+      li #{__('You are here')} 
       li
         i.fa.fa-angle-double-right
         span #{__('About me')}
@@ -71,7 +71,7 @@ block script
         data: regdata,
         success: function(data) {
           console.log('Change profile', data);
-          location.href = '/?m=1';
+          location.href = '/dashboard?m=1';
         },
         error: function(err) {
           console.log("Registration error", err);

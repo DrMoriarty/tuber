@@ -41,6 +41,8 @@ module.exports =
             type: 'string'
         fromParcelShop:
             type: 'string'
+        fromParcelShopAddress:
+            type: 'string'
         toParcelShop:
             type: 'string'
         driverAcceptTimeout:

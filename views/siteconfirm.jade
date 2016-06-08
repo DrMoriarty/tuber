@@ -176,6 +176,7 @@ block script
         document.fromParcelShopId = event.target.options[event.target.selectedIndex].getAttribute('parcelShopId');
       }
       selectDriver($('#driverSelection')[0]);
+      document.fromParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
     });
     $('#addressSelect2').on('change', function(event) {
       var coords = event.target.value.split(',');
@@ -236,6 +237,7 @@ block script
         var newRequest = {parcel: '#{parcel.id}', driver: document.currentDriverId, sender: '#{user.id}', senderAccepted: false, price: document.currentPrice, deliveryPrice: document.currentDeliveryPrice};
         if(document.fromParcelShopId) newRequest.fromParcelShop = document.fromParcelShopId;
         if(document.toParcelShopId) newRequest.toParcelShop = document.toParcelShopId;
+        if(document.fromParcelShopAddress) newRequest.fromParcelShopAddress = document.fromParcelShopAddress;
         if(!document.fromParcelShopId || !document.toParcelShopId) {
           newRequest.deliveryOption = 'home';
         }

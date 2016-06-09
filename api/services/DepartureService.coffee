@@ -16,7 +16,7 @@ module.exports =
             return 0
 
     defaultPrice: (driver, parcel) ->
-        return if driver.defaultPrice > 0 then driver.defaultPrice else driver.pricePerKm * parcel.pathLength
+        return if driver.defaultPrice > 0 then driver.defaultPrice else parseFloat((driver.pricePerKm * parcel.pathLength / 1000).toFixed(2))
 
     priceCalc:(driver, parcel) ->
         if driver.company == DpdService.company

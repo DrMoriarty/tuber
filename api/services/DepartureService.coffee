@@ -65,6 +65,12 @@ module.exports =
         else
             return false
 
+    isCorporation: (driver) ->
+        if driver.company == DpdService.company
+            return true
+        else
+            return false
+
     processRequest: (requestId) ->
         Request.findOne(requestId).populateAll().exec (err, request) ->
             if err?

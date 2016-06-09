@@ -69,6 +69,7 @@ $(document).ready(function() {
 	});
 
 	// date time
+    /*
 	$('.js-datetime-body').each(function() {
 		var el = $(this);
 		el.datepicker({
@@ -88,6 +89,53 @@ $(document).ready(function() {
 			}
 		});
 	});
+    */
+
+    /* global setting */
+    var datepickersOpt = {
+        dateFormat: 'dd MM yy',
+        minDate   : 0,
+        maxDate: "+1M"
+    }
+
+    $("#datePicker1").datepicker($.extend({
+        onSelect: function(text, e) {
+		    var el = $(this);
+            var minDate = $(this).datepicker('getDate');
+            minDate.setDate(minDate.getDate()+1);
+            $("#datePicker2").datepicker( "option", "minDate", minDate);
+
+			if (el.find('.time_at').length && el.find('.time_at').val() != '') {
+				text += ', ' + el.find('.time_at').val();
+				if (el.find('.time_to').length && el.find('.time_to').val() != '') {
+					text += ' - ' + el.find('.time_to').val();
+				}
+			}
+			
+			el.siblings('.js-datetime').val(text);
+			el.hide();
+        }
+    },datepickersOpt));
+
+    $("#datePicker2").datepicker($.extend({
+        onSelect: function(text, e) {
+		    var el = $(this);
+            var maxDate = $(this).datepicker('getDate');
+            maxDate.setDate(maxDate.getDate()-1);
+            $("#datePicker1").datepicker( "option", "maxDate", maxDate);
+
+			if (el.find('.time_at').length && el.find('.time_at').val() != '') {
+				text += ', ' + el.find('.time_at').val();
+				if (el.find('.time_to').length && el.find('.time_to').val() != '') {
+					text += ' - ' + el.find('.time_to').val();
+				}
+			}
+			
+			el.siblings('.js-datetime').val(text);
+			el.hide();
+        }
+    },datepickersOpt));
+
 	$('.js-datetime').click(function() {
 		$('.js-datetime-body, .js-time-body').hide();
 		$(this).siblings('.js-datetime-body, .js-time-body').show();

@@ -40,12 +40,12 @@ block content
           label(for='2days_later') #{__('two days later')}
           .confirmation-calendar
             input.js-datetime(name='pickupDate', type='text', placeholder='28 April 2015', value='#{moment(parcel.pickupDate).format("LL")}')
-            .confirmation-calendar-body.js-datetime-body.hide
+            #datePicker1.confirmation-calendar-body.js-datetime-body.hide
               h4 #{__('Your check in Date')}
           span.span_to  #{__('to')} 
           .confirmation-calendar
             input.js-datetime(name='arriveDate', type='text', placeholder='28 April 2015', value='#{moment(parcel.arriveDate).format("LL")}')
-            .confirmation-calendar-body.js-datetime-body.hide
+            #datePicker2.confirmation-calendar-body.js-datetime-body.hide
               h4 #{__('Your check in Date')}
           input#day_before2(name='day2', type='radio')
           label(for='day_before2') #{__('day earlier')}

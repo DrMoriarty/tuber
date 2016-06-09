@@ -109,7 +109,7 @@ block content
             h3 #{__('About the timing')}
             .form-datepicker
               input.time.js-datetime(type='text', placeholder='#{__("Parcel can be picked up starring")}', name='pickupDate')
-              .form-datepicker-body.js-datetime-body.hide
+              #datePicker1.form-datepicker-body.js-datetime-body.hide
                 h4 #{__('Your check in Date')}
                 strong.time #{__('TIME:')}
                 strong.at #{__('at')}
@@ -119,7 +119,7 @@ block content
                 em #{__('*Period must be have more than two hours.')}
             .form-datepicker
               input.time.js-datetime.time-right(type='text', placeholder='#{__("Parcel should arrived before")}', name='arriveDate')
-              .form-datepicker-body.calendar-right.js-datetime-body.hide
+              #datePicker2.form-datepicker-body.calendar-right.js-datetime-body.hide
                 h4 #{__('Your check in Date')}
                 strong.time #{__('TIME:')}
                 strong.at #{__('at')}

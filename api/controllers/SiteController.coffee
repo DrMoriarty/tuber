@@ -85,6 +85,8 @@ module.exports =
                         cheapest = fastest = ecologiest = null
                         pathLength = parcel.pathLength
                         for carrier in data
+                            if not carrier.isCarrierCorporation() and carrier.getPrice(parcel) > 100
+                                continue
                             if cheapest?
                                 if carrier.getPrice(parcel) < cheapest.getPrice(parcel)
                                     cheapest = carrier

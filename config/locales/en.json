@@ -316,5 +316,7 @@
 	"On the following days of week:": "On the following days of week:",
 	"Edit login information": "Edit login information",
 	"Transporter parametres": "Transporter parametres",
-	"(Incl. VAT):": "(Incl. VAT):"
+	"(Incl. VAT):": "(Incl. VAT):",
+	"Number of maximum parcels i can transport a single day": "Number of maximum parcels i can transport a single day",
+	"JOIN THE PACK": "JOIN THE PACK"
 }

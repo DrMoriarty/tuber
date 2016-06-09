@@ -102,6 +102,8 @@ block script
     var clientToken = '#{token}';
     var client = new braintree.api.Client({clientToken: clientToken});
     //braintree.setup(clientToken, 'custom', {id: 'payment-form'});
+    $('#card_date').mask('99/99');
+    $('#cvv_code').mask('999');
     $("#payment-form").submit(function(event) {
       event.preventDefault();
 

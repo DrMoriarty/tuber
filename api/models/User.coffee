@@ -98,7 +98,7 @@ module.exports =
             defaultsTo: 1
         parcelsPerDay:
             type: 'integer'
-            defaultsTo: 0
+            defaultsTo: 2
         workDay0: 
             type: 'boolean'
             defaultsTo: true
@@ -122,19 +122,19 @@ module.exports =
             defaultsTo: true
         averageSpeed:
             type: 'float'
-            defaultsTo: 0
+            defaultsTo: 70
         averageDayDistance:
             type: 'float'
             defaultsTo: 0
         pricePerKm:
             type: 'float'
-            defaultsTo: 0
+            defaultsTo: 1
         defaultPrice:
             type: 'float'
             defaultsTo: 0
         coverageDistance:
             type: 'float'
-            defaultsTo: 100
+            defaultsTo: 75
         balance:
             type: 'float'
             defaultsTo: 0
@@ -144,6 +144,8 @@ module.exports =
             return DepartureService.priceCalc this, parcel
         getDeliveryPrice: (parcel) ->
             return DepartureService.deliveryPriceCalc this, parcel
+        isCarrierCorporation: ->
+            return @driver and DepartureService.isCorporation this
         bankAccount: 'string'
         bankCode: 'string'
         bankName: 'string'

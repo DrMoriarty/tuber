@@ -12,38 +12,18 @@
 
 module.exports.bootstrap = (cb) ->
 
-    """
-    GeoService.zipGeoFromGoogle '30166', 'Germany', (lat, lng) ->
-        console.log('Google said', lat, lng)
-
-    GeoService.zipGeoFromOSM '30166', 'Germany', (lat, lng) ->
-        console.log('OSM said', lat, lng)
-    """
-
-    Person.find({}).exec (err, persons) ->
+    Person.find({countryCode: {$exists: false}}).exec (err, persons) ->
         if err?
             console.log err
             return
         for person in persons
-            if not person.countryCode?
-                Person.update({id: person.id}, {country: person.country}).exec (err, result) ->
-                    console.log err if err?
-    User.find({}).exec (err, users) ->
-        for user in users
-            if not user.countryCode?
-                User.update({id: user.id}, {country: user.country}).exec (err, result) ->
-                    console.log err if err?
+            Person.update({id: person.id}, {country: person.country}).exec (err, result) ->
+                console.log err if err?
 
-    """
-    User.find({driver: true, company: DpdService.company}).exec (err, users) ->
-        console.log err if err?
-        if users? and users.length>0
-            driver = users[0]
-            Parcel.find({}).exec (err, parcels) ->
-                for parcel in parcels
-                    price = driver.getPrice parcel
-                    console.log 'Price', price, 'for', parcel.weight
-    """
+    User.find({countryCode: {$exists: false}}).exec (err, users) ->
+        for user in users
+            User.update({id: user.id}, {country: user.country}).exec (err, result) ->
+                console.log err if err?
 
     User.find({login: {$exists: false}}).exec (err, users) ->
         for user in users
@@ -58,9 +38,6 @@ module.exports.bootstrap = (cb) ->
         for log in logs
             obj = JSON.parse(log.argument)
             objectId = obj.id
-            #console.log 'Log object', obj
-            #console.log 'ObjectId', objectId, 'type', typeof(objectId)
-            #console.log 'Log id', log.id, 'type', typeof(log.id)
             Log.update({id: log.id}, {object: objectId}).exec (err, result) ->
                 console.log err if err?
 
@@ -68,6 +45,28 @@ module.exports.bootstrap = (cb) ->
         for driver in drivers
             User.update({id: driver.id}, {driverAcceptTime: 12}).exec (err, result) ->
                 console.log err if err?
+
+    defaultAdmin = sails.config.tuber.defaultAdmin
+    if defaultAdmin? and defaultAdmin.email?
+        User.find({email: defaultAdmin.email, admin: true}).exec (err, users) ->
+            if users? and users.length > 0
+                console.log 'Check admin account: OK'
+            else
+                console.log 'Create default admin account'
+                User.find({admin: true}).exec (err, admins) ->
+                    console.log err if err
+                    defaultAdmin.admin = true
+                    User.create(defaultAdmin).exec (err, result) ->
+                        if err
+                            console.log 'Change admin cancelled'
+                            console.log err
+                        else
+                            console.log 'New admin account', defaultAdmin.email
+                            for lastAdmin in admins
+                                User.destroy({id: lastAdmin.id}).exec (err, result) ->
+                                    console.log err if err
+    else
+        console.log 'Can not create default admin user! Check file config/tuber.coffee'
                 
     # It's very important to trigger this callback method when you are finished
     # with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)

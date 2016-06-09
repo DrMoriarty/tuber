@@ -8,10 +8,8 @@ roundInt = (x) ->
     x = Number(x)
     (if x >= 0 then Math.floor(x) else Math.ceil(x))
 
-#dpdUserName = 'delti130'
-#dpdPassword = 'p9934g'
-dpdUserName = '2406008738'
-dpdPassword = 'kxra4'
+#dpdUserName = '2406008738'
+#dpdPassword = 'kxra4'
 
 #API_DPD = 'https://public-ws-stage.dpd.com/'
 API_DPD = 'https://public-ws.dpd.com/'
@@ -30,7 +28,7 @@ module.exports =
 
     login: (cb) ->
         DpdService.loginClient (client) ->
-            args = {delisId: dpdUserName, password: dpdPassword}
+            args = {delisId: sails.config.tuber.dpd.dpdUserName, password: sails.config.tuber.dpd.dpdPassword}
             client.getAuth args, (err, result) ->
                 if err?
                     console.log err
@@ -41,8 +39,8 @@ module.exports =
     
     getAuth: (cb) ->
         self = @
-        username = dpdUserName
-        password = dpdPassword
+        username = sails.config.tuber.dpd.dpdUserName
+        password = sails.config.tuber.dpd.dpdPassword
         lang = 'en_US'   # en_US or de_DE
         data = """
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/LoginService/2.0">
@@ -96,7 +94,7 @@ module.exports =
             req()
 
     storeOrderRequest: (parcel, cb) ->
-        username = dpdUserName
+        username = sails.config.tuber.dpd.dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         fromAddress = parcel.fromPerson || parcel.owner
@@ -201,7 +199,7 @@ module.exports =
             @getTrackingDataRequest labelNumber, cb
 
     getTrackingDataRequest: (labelNumber, cb) ->
-        username = dpdUserName
+        username = sails.config.tuber.dpd.dpdUserName
         token = DpdService.authToken
         lang = 'en_EN'   # en_US or de_DE
         data = """
@@ -236,7 +234,7 @@ module.exports =
                         cb null, result
 
     getParcelLabelNumber: (cb) ->
-        username = dpdUserName
+        username = sails.config.tuber.dpd.dpdUserName
         webnumber = 'IO1234567'
         data = """
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://dpd.com/common/service/types/ParcelLifeCycleService/2.0">
@@ -270,7 +268,7 @@ module.exports =
             @findParcelShopsRequest cb
 
     findParcelShopsRequest: (cb) ->
-        username = dpdUserName
+        username = sails.config.tuber.dpd.dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """
@@ -321,7 +319,7 @@ module.exports =
             @findParcelShopsByGeoDataRequest lat, lng, cb
 
     findParcelShopsByGeoDataRequest: (lat, lng, cb) ->
-        username = dpdUserName
+        username = sails.config.tuber.dpd.dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """
@@ -370,7 +368,7 @@ module.exports =
             @findCitiesRequest cb
 
     findCitiesRequest: (cb) ->
-        username = dpdUserName
+        username = sails.config.tuber.dpd.dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """
@@ -420,7 +418,7 @@ module.exports =
             @getAvailableServicesRequest cb
 
     getAvailableServicesRequest: (cb) ->
-        username = dpdUserName
+        username = sails.config.tuber.dpd.dpdUserName
         token = DpdService.authToken
         lang = 'en_US'   # en_US or de_DE
         data = """

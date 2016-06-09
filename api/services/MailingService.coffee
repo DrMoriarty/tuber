@@ -2,12 +2,12 @@ nodemailer = require 'nodemailer'
 
 module.exports =
     transporter: nodemailer.createTransport
-        host: 'smtp2.delti.com'
-        port: 25
+        host: sails.config.tuber.mailing.host
+        port: sails.config.tuber.mailing.port
         #secure: true
         auth:
-            user: 'svc_packet24'
-            pass: 'WaeZaeh4qu' #'buC2Mied0r'
+            user: sails.config.tuber.mailing.user
+            pass: sails.config.tuber.mailing.pass
 
     sendEmail: (recipient, subject, text) ->
         options = 

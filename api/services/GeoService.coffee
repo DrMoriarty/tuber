@@ -7,6 +7,7 @@ module.exports =
         geocoder.geocode country, (err, data) ->
             if err?
                 console.log err
+                callback null
             else
                 console.log 'Geocode country', JSON.stringify(data)
                 for r in  data.results

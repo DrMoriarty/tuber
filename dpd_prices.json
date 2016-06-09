@@ -1,9 +1,0 @@
-[
-    {"weight": 3, "price": 3.34, "delivery": 1.10},
-    {"weight": 5, "price": 3.62, "delivery": 1.20},
-    {"weight": 10, "price": 4.01, "delivery": 1.30},
-    {"weight": 15, "price": 4.42, "delivery": 1.50},
-    {"weight": 20, "price": 4.77, "delivery": 1.60},
-    {"weight": 25, "price": 5.35, "delivery": 1.90},
-    {"weight": 31.5, "price": 6.06, "delivery": 2.00}
-]

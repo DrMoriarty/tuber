@@ -1,9 +1,10 @@
 fs = require 'fs'
 
-dpd_prices = JSON.parse(fs.readFileSync('dpd_prices.json', 'utf8'));
+#dpd_prices = JSON.parse(fs.readFileSync('dpd_prices.json', 'utf8'));
 
 module.exports =
     dpdPrice: (parcel) ->
+        dpd_prices = sails.config.tuber.dpd_prices
         if dpd_prices? and dpd_prices.length > 0
             price = 0
             for dp in dpd_prices
@@ -32,6 +33,7 @@ module.exports =
         return price
 
     dpdDeliveryPrice: (parcel) ->
+        dpd_prices = sails.config.tuber.dpd_prices
         if dpd_prices? and dpd_prices.length > 0
             delivery = 0
             for dp in dpd_prices

@@ -1,13 +1,9 @@
 paypal = require 'paypal-rest-sdk'
 
 paypal.configure({
-  'mode': 'live' #sandbox or live
-  #'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM'
-  #'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
-  ##'client_id': 'AZbqv_U8f3JeJooJJceTSfVbG8XoDaUmuG4kXqx12Tbj8ic_KEv_6DQF3yUNlSPVAmazuVip5LWV-vcF'
-  ##'client_secret': 'EJhCwIMnuuFe_BR3XXKWgse5A0g6jr23qk3wUpslxX6DA9Ne6TAKaM_QHiIGpTy-oVvqseT30Kx53xHO'
-  'client_id': 'Ab-kxGLHnY1TsnXH5gr_9VkDHTY7aLzbPlN6YsOa7IpT_RyVlPYar3EIQGfG2cmZCyu2EQ1HlphNXJHB'
-  'client_secret': 'EGHm9UL-A-phWhY9m-EyRgugGq3zt2gDQMIoNMjbZRiy9HmBMk9LwlyMvIAxl4-OsIiwSY1hop_nWxtM'
+  'mode': sails.config.tuber.paypal.mode 
+  'client_id': sails.config.tuber.paypal.client_id
+  'client_secret': sails.config.tuber.paypal.client_secret
 })
 
 module.exports =

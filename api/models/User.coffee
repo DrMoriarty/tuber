@@ -187,10 +187,12 @@ module.exports =
             (callback) ->
                 if user.zip? and user.country?
                     GeoService.zipGeo user.zip, user.country, (lat, lng) ->
-                        user.latitude = lat
-                        user.longitude = lng
+                        if lat? and lng?
+                            user.latitude = lat
+                            user.longitude = lng
                         GeoService.countryCode user.country, (code) ->
-                            user.countryCode = code
+                            if code?
+                                user.countryCode = code
                             callback null, user
                 else
                     callback null, user
@@ -216,16 +218,18 @@ module.exports =
                     callback null, user
             (callback) ->
                 if user.zip? and user.country?
-                   GeoService.zipGeo user.zip, user.country, (lat, lng) ->
-                        user.latitude = lat
-                        user.longitude = lng
+                    GeoService.zipGeo user.zip, user.country, (lat, lng) ->
+                        if lat? and lng?
+                            user.latitude = lat
+                            user.longitude = lng
                         callback null, user
                 else
                     callback null, user
             (callback) ->
                 if user.country?
                     GeoService.countryCode user.country, (code) ->
-                        user.countryCode = code
+                        if code? 
+                            user.countryCode = code
                         callback null, user
                 else
                     callback null, user

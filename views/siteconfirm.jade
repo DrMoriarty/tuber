@@ -164,8 +164,6 @@ block script
       $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
     });
     $('#addressSelect1').on('change', function(event) {
-      var coords = event.target.value.split(',');
-      window.marker1.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
       //console.log(event.target.selectedIndex);
       if(event.target.selectedIndex == 0) {
         // delivery from home address
@@ -180,10 +178,11 @@ block script
       }
       selectDriver($('#driverSelection')[0]);
       document.fromParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
+      var coords = event.target.value.split(',');
+      if(window.marker1)
+        window.marker1.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
     });
     $('#addressSelect2').on('change', function(event) {
-      var coords = event.target.value.split(',');
-      window.marker2.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
       //console.log(event.target.selectedIndex);
       if(event.target.selectedIndex == 0) {
         // delivery to home address
@@ -197,6 +196,9 @@ block script
         $('#home2')[0].checked = false;
       }
       selectDriver($('#driverSelection')[0]);
+      var coords = event.target.value.split(',');
+      if(window.marker2)
+        window.marker2.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
     });
     document.currentDriverId = '#{drivers[0].id}';
     document.currentPrice = #{drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}

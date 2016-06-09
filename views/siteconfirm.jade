@@ -27,7 +27,7 @@ block content
           .confirmation-select.confirmation-first-select
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}') #{__('cheapest delivery')} ---  &euro;#{driver.getPrice(parcel)}
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}') #{__('cheapest delivery')}, from #{driver.getPrice(parcel)}&euro;
           .clear
         hr
         #dateblock
@@ -151,18 +151,17 @@ block script
   script(src="/js/site/view/gmap.js")
   script(src="https://maps.googleapis.com/maps/api/js")
   script(type='text/javascript').
-    // TODO
     $('#home').on('click', function() {
-      console.log('Home 1', $(this).prop('checked'));
-      $('#addressSelect1').val('homeAddress1');
+      $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
     });
     $('#home2').on('click', function() {
-      console.log('Home 2', $(this).prop('checked'));
-      $('#addressSelect2').val('homeAddress2');
+      $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
     });
     $('#postbox').on('click', function() {
+      $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
     });
     $('#postbox2').on('click', function() {
+      $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
     });
     $('#addressSelect1').on('change', function(event) {
       var coords = event.target.value.split(',');
@@ -171,9 +170,13 @@ block script
       if(event.target.selectedIndex == 0) {
         // delivery from home address
         document.fromParcelShopId = null;
+        $('#postbox')[0].checked = false;
+        $('#home')[0].checked = true;
       } else {
         // delivery from post shop
         document.fromParcelShopId = event.target.options[event.target.selectedIndex].getAttribute('parcelShopId');
+        $('#postbox')[0].checked = true;
+        $('#home')[0].checked = false;
       }
       selectDriver($('#driverSelection')[0]);
       document.fromParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
@@ -185,9 +188,13 @@ block script
       if(event.target.selectedIndex == 0) {
         // delivery to home address
         document.toParcelShopId = null;
+        $('#postbox2')[0].checked = false;
+        $('#home2')[0].checked = true;
       } else {
         // delivery to post shop
         document.toParcelShopId = event.target.options[event.target.selectedIndex].getAttribute('parcelShopId');
+        $('#postbox2')[0].checked = true;
+        $('#home2')[0].checked = false;
       }
       selectDriver($('#driverSelection')[0]);
     });

@@ -23,9 +23,9 @@ block content
         .confirmation-selected
           h3 #{__('YOU HAVE SELECTED')}
           .confirmation-select-mobile
-            select.js-select(onchange='selectDriver(this)')
+            select.js-select#driverSelection(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}') #{__('cheapest delivery')} ---  &euro;#{driver.getPrice(parcel)}
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}') #{__('cheapest delivery')}, from #{driver.getPrice(parcel)}&euro;
         hr
         .confirmation-delivery.plc
           h3 #{__('Departure and arrivals dates')}
@@ -45,13 +45,13 @@ block content
           //label.post-office(for='post-office') #{__('Post office')}
           .form-block
             .confirmation-select-mobile
-              select.js-select1#addressSelect1
+              select.js-select#addressSelect1
                 if parcel.fromPerson
                   option(value='#{parcel.fromPerson.latitude},#{parcel.fromPerson.longitude}') #{parcel.fromPersonAddress()}
                 else
                   option(value='#{parcel.owner.latitude},#{parcel.owner.longitude}') #{parcel.ownerAddress()}
                 each fromShop in fromShops
-                  option(value='#{fromShop.latitude},#{fromShop.longitude}') #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
+                  option(value='#{fromShop.latitude},#{fromShop.longitude}', parcelShopId='#{fromShop.parcelShopId}') #{fromShop.zipCode} #{fromShop.city} #{fromShop.street} #{fromShop.houseNo}
         .confirmation-destination
           h3 To:
           input#postbox1(type='radio', name='adress-to', value='postbox')
@@ -62,13 +62,13 @@ block content
           //label.post-offices(for='post-office1') #{__('Post office')}
           .form-block
             .confirmation-select-mobile.confirmation-select-last
-              select.js-select2#addressSelect2
+              select.js-select#addressSelect2
                 if parcel.toPerson
                   option(value='#{parcel.toPerson.latitude},#{parcel.toPerson.longitude}') #{parcel.toPersonAddress()}
                 else
                   option(value='#{parcel.owner.latitude},#{parcel.owner.longitude}') #{parcel.ownerAddress()}
                 each toShop in toShops
-                  option(value='#{toShop.latitude},#{toShop.longitude}') #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
+                  option(value='#{toShop.latitude},#{toShop.longitude}', parcelShopId='#{toShop.parcelShopId}') #{toShop.zipCode} #{toShop.city} #{toShop.street} #{toShop.houseNo}
         hr
         .confirmation-confirm-title
           ul
@@ -88,7 +88,7 @@ block content
             span #{__('TOTAL AMOUNT')} 
             | #{__('(Incl. VAT):')} 
             span#totalPrice #{(drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0) + drivers[0].getDeliveryPrice(parcel)).toFixed(2)}
-              span &euro;
+            span &euro;
         a.orange_button(onClick='javascript:confirmation();') #{__('CONFIRM')}
   // maps
   section.maps
@@ -121,13 +121,50 @@ block script
     $('.pl2').mask('99.99.9999, 99.99');
 
     //ReactDOM.render(React.createElement(DateBlock, {pdate:'#{parcel.pickupDate}', adate:'#{parcel.arriveDate}'}), document.getElementById('dateblock'));
+    $('#home-adress').on('click', function() {
+      $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
+    });
+    $('#home-adress1').on('click', function() {
+      $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
+    });
+    $('#postbox').on('click', function() {
+      $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+    });
+    $('#postbox1').on('click', function() {
+      $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+    });
     $('#addressSelect1').on('change', function(event) {
       var coords = event.target.value.split(',');
       window.marker1.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
+      if(event.target.selectedIndex == 0) {
+        // delivery from home address
+        document.fromParcelShopId = null;
+        $('#postbox')[0].checked = false;
+        $('#home-adress')[0].checked = true;
+      } else {
+        // delivery from post shop
+        document.fromParcelShopId = event.target.options[event.target.selectedIndex].getAttribute('parcelShopId');
+        $('#postbox')[0].checked = true;
+        $('#home-adress')[0].checked = false;
+      }
+      selectDriver($('#driverSelection')[0]);
+      document.fromParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
     });
     $('#addressSelect2').on('change', function(event) {
       var coords = event.target.value.split(',');
       window.marker2.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
+      if(event.target.selectedIndex == 0) {
+        // delivery to home address
+        document.toParcelShopId = null;
+        $('#postbox1')[0].checked = false;
+        $('#home-adress1')[0].checked = true;
+      } else {
+        // delivery to post shop
+        document.toParcelShopId = event.target.options[event.target.selectedIndex].getAttribute('parcelShopId');
+        $('#postbox1')[0].checked = true;
+        $('#home-adress1')[0].checked = false;
+      }
+      selectDriver($('#driverSelection')[0]);
     });
     ReactDOM.render(React.createElement(GMap, {
       title1: "#{__('HOME ADDRESS')}",

@@ -176,6 +176,7 @@ $(document).ready(function() {
 	});
 
 	// select value from selectboxit
+    /*
 	var selectBox1 = $('.js-select1').selectBoxIt().data('selectBox-selectBoxIt');
 	$('.postbox').click(function() {selectBox1.selectOption('Postbox Bremen friedrich missler str.,1');});
 	$('.home-adress').click(function() {selectBox1.selectOption('Home Bremen friedrich missler str.,1');});
@@ -185,7 +186,7 @@ $(document).ready(function() {
 	$('.postboxs').click(function() {selectBox2.selectOption('Postbox Hamburg, Niedergeorgswerder Deich 73, 4');});
 	$('.home-adresss').click(function() {selectBox2.selectOption('Home Hamburg, Niedergeorgswerder Deich 73, 4');});
 	$('.post-offices').click(function() {selectBox2.selectOption('office Hamburg, Niedergeorgswerder Deich 73, 4');});
-
+    */
 });
 
 

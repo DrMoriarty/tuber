@@ -45,12 +45,12 @@ DateBlock = React.createClass
             label {htmlFor: 'pd_p2'}, 'two days later'
             div {className: 'confirmation-calendar'},
                 input {className:'js-datetime', name:'pickupDate', type: 'text', value: @state.pickupDate}
-                div {className: 'confirmation-calendar-body js-datetime-body hide'},
+                div {id: 'datePicker1', className: 'confirmation-calendar-body js-datetime-body hide'},
                     h4 {}, 'Your check in Date'
             span {className: 'span_to'}, ' to '
             div {className: 'confirmation-calendar'},
                 input {className:'js-datetime', name:'arriveDate', type: 'text', value: @state.arriveDate}
-                div {className: 'confirmation-calendar-body js-datetime-body hide'},
+                div {id: 'datePicker2', className: 'confirmation-calendar-body js-datetime-body hide'},
                     h4 {}, 'Your check in Date'
             input {id: 'ad_m1', type: 'radio', name: 'adate', onClick: @adm1Click}
             label {htmlFor: 'ad_m1'}, 'day earlier'

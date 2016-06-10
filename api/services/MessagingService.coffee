@@ -8,9 +8,9 @@ module.exports =
                 #    console.log err if err?
                 if request.driverAccepted
                     if request.senderAccepted
-                        MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang
+                        MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang, {INFO: ''}
                         shopAddress = if request.fromParcelShopAddress then request.fromParcelShopAddress else ''
-                        MailingService.processEvent request.sender.email, 'orderAccepted', request.sender.lang, {INFO: address}
+                        MailingService.processEvent request.sender.email, 'orderAccepted', request.sender.lang, {INFO: shopAddress}
                     else
                         # TODO
 
@@ -23,9 +23,9 @@ module.exports =
                 #    console.log err if err?
                 if request.senderAccepted
                     if request.driverAccepted
-                        MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang
+                        MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang, {INFO: ''}
                         shopAddress = if request.fromParcelShopAddress then request.fromParcelShopAddress else ''
-                        MailingService.processEvent request.sender.email, 'orderAccepted', request.sender.lang, {INFO: address}
+                        MailingService.processEvent request.sender.email, 'orderAccepted', request.sender.lang, {INFO: shopAddress}
                     else
                         MailingService.processEvent request.driver.email, 'driverNeedAccept', request.driver.lang
                         MailingService.processEvent request.sender.email, 'senderWaitingForAccept', request.sender.lang

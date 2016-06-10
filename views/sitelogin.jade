@@ -21,7 +21,7 @@ block content
           input#send_login.required(type='text', name='email')
           label(for='send_password') #{__('Password')}
           input#send_password.required(type='password', name='password')
-          span#error1(style='color:red;', hidden) Sorry, we don't recognize this email.
+          label#error1(style='color:red;display:none;') Sorry, we don't recognize this email.
           button.orange_button(type='submit') #{__('Send')}
           a(href='/passwordrestore') #{__('Need help?')} 
           span #{__('or')}
@@ -34,7 +34,7 @@ block content
           input#transport_login.required(type='text', name='email')
           label(for='transport_password') #{__('Password')}
           input#transport_password.required(type='password', name='password')
-          span#error2(style='color:red;', hidden) Sorry, we don't recognize this email.
+          label#error2(style='color:red;display:none;') Sorry, we don't recognize this email.
           button.orange_button(type='submit') #{__('Send')}
           a(href='/passwordrestore') #{__('Need help?')} 
           span #{__('or')}
@@ -55,14 +55,14 @@ block content
 block script
   script(type='text/javascript').
     $('#loginSender').submit(function() {
-      $('#error1').hide();
+      $('#error1').attr('style', 'display:none;');
       var data = $(this).serialize()
       data = data + '&login=' + encodeURIComponent($('#send_login').val());
       $.post(this.action, data, function(data) {
         console.log('Logged in', data);
         if(!data || !data.user) {
           // error
-          $('#error1').show();
+          $('#error1').attr('style', 'color:red;');
         } else {
           location.reload();
         }
@@ -70,14 +70,14 @@ block script
       return false;
     });
     $('#loginDriver').submit(function() {
-      $('#error2').hide();
+      $('#error2').attr('style', 'display:none;');
       var data = $(this).serialize()
       data = data + '&login=driver_' + encodeURIComponent($('#transport_login').val());
       $.post(this.action, data, function(data) {
         console.log('Logged in', data);
         if(!data || !data.user) {
           // error
-          $('#error2').show();
+          $('#error2').attr('style', 'color:red;');
         } else {
           location.href = '/dashboard';
         }

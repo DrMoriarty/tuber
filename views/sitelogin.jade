@@ -21,10 +21,11 @@ block content
           input#send_login.required(type='text', name='email')
           label(for='send_password') #{__('Password')}
           input#send_password.required(type='password', name='password')
+          span#error1(style='color:red;', hidden) Sorry, we don't recognize this email.
           button.orange_button(type='submit') #{__('Send')}
-          a(href='/passwordrestore') #{__('Forgot your password?')} 
+          a(href='/passwordrestore') #{__('Need help?')} 
           span #{__('or')}
-          a(href='/registration?driver=false')  #{__('Register')}
+          a(href='/registration?driver=false')  #{__('Sign up')}
       .login
         form.form.js-validate#loginDriver(method='POST', action='/login')
           i.icons-can_transport_parsel
@@ -33,10 +34,11 @@ block content
           input#transport_login.required(type='text', name='email')
           label(for='transport_password') #{__('Password')}
           input#transport_password.required(type='password', name='password')
+          span#error2(style='color:red;', hidden) Sorry, we don't recognize this email.
           button.orange_button(type='submit') #{__('Send')}
-          a(href='/passwordrestore') #{__('Forgot your password?')} 
+          a(href='/passwordrestore') #{__('Need help?')} 
           span #{__('or')}
-          a(href='/registration?driver=true')  #{__('Register')}
+          a(href='/registration?driver=true')  #{__('Sign up')}
   // promo
   section.promo
     .container
@@ -53,20 +55,32 @@ block content
 block script
   script(type='text/javascript').
     $('#loginSender').submit(function() {
+      $('#error1').hide();
       var data = $(this).serialize()
       data = data + '&login=' + encodeURIComponent($('#send_login').val());
       $.post(this.action, data, function(data) {
         console.log('Logged in', data);
-        location.reload();
+        if(!data || !data.user) {
+          // error
+          $('#error1').show();
+        } else {
+          location.reload();
+        }
       });
       return false;
     });
     $('#loginDriver').submit(function() {
+      $('#error2').hide();
       var data = $(this).serialize()
       data = data + '&login=driver_' + encodeURIComponent($('#transport_login').val());
       $.post(this.action, data, function(data) {
         console.log('Logged in', data);
-        location.href = '/dashboard';
+        if(!data || !data.user) {
+          // error
+          $('#error2').show();
+        } else {
+          location.href = '/dashboard';
+        }
       });
       return false;
     });

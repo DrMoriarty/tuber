@@ -3455,3 +3455,9 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 .app .section .form .form-sizes li strong {font-size: 24px;}
 .app .section .form .form-sizes li input {width: 137px; font-size: 60px; line-height: 60px;}
 
+
+.app .section .form input[type="text"], .app .section .form input[type="password"] {border: 2px solid #dfdfe0;}
+.app .section .form input[type="text"]:focus, .app .section .form input[type="password"]:focus {border: 2px solid #e58000;}
+
+
+

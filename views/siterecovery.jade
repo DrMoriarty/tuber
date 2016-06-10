@@ -21,6 +21,14 @@ block content
         em * #{__('The link in email will valid only 3 days')}
         br
         a.orange_button(href='/') #{__('OK')}
+      #error_popup_box.popup_box
+        span
+          | #{__('SORRY, WE DON\'T RECOGNIZE THIS EMAIL.')}
+          strong 
+        br
+        strong #{__('Check your e-mail address and try again')}
+        br
+        a.orange_button(href='javascript:location.reload();') #{__('OK')}
 
 block script
   script(type='text/javascript').
@@ -41,6 +49,11 @@ block script
         },
         error: function(err) {
           console.log("Error", err);
+          $('#error_popup_box').bPopup({
+            easing: 'easeOutBack', //uses jQuery easing plugin
+            speed: 450,
+            transition: 'slideDown'
+          });
         }});
       return false;
     });

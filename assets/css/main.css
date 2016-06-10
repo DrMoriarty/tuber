@@ -151,92 +151,96 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     src: url("../fonts/ProximaNova-RegularIt/ProximaNova-RegularIt.svg#ProximaNova-RegularIt") format("svg");
   }
 }
-/* @font-face {
-  font-family: FontAwesome;
-  src: url("../fonts/FontAwesome/FontAwesome.eot");
-  src: url("../fonts/FontAwesome/FontAwesome.eot") format("embedded-opentype"), url("../fonts/FontAwesome/FontAwesome.woff2") format("woff2"), url("../fonts/FontAwesome/FontAwesome.woff") format("woff"), url("../fonts/FontAwesome/FontAwesome.ttf") format("truetype"), url("../fonts/FontAwesome/FontAwesome.svg#TTDrugsThin") format("svg");
-  font-weight: normal;
-  font-style: normal;
-} */
-/* @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  @font-face {
-    font-family: FontAwesome;
-    src: url("../fonts/FontAwesome/FontAwesome.svg#FontAwesome") format("svg");
-  }
-} */
 /* define fonts */
 /* Font mixin */
 /* Включаем спрайты */
-/* line 120, icons/*.png */
-.icons-sprite, .icons-can_transport_parsel, .icons-faq_arrow, .icons-footer-adress, .icons-insurrance, .icons-parcel, .icons-plus, .icons-profile, .icons-timing, .icons-visa, .icons-want_send_parsel {
-  background-image: url('../img/icons-s71c0aa876f.png');
+/* line 128, icons/*.png */
+.icons-sprite, .icons-arrow-right, .icons-arrow, .icons-can_transport_parsel, .icons-faq_arrow, .icons-insurrance, .icons-parcel, .icons-plus, .icons-profile, .icons-timing, .icons-visa, .icons-want_send_parsel {
+  background-image: url('../img/icons-s3af80811bd.png');
   background-repeat: no-repeat;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
-.icons-can_transport_parsel {
+.icons-arrow-right {
   background-position: 0 0;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
-.icons-faq_arrow {
-  background-position: 0 -101px;
+.icons-arrow {
+  background-position: 0 -42px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
-.icons-footer-adress {
-  background-position: 0 -108px;
+.icons-can_transport_parsel {
+  background-position: 0 -88px;
+}
+
+/* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
+.icons-faq_arrow {
+  background-position: 0 -189px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
 .icons-insurrance {
-  background-position: 0 -128px;
+  background-position: 0 -196px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
 .icons-parcel {
-  background-position: 0 -261px;
+  background-position: 0 -329px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
 .icons-plus {
-  background-position: 0 -394px;
+  background-position: 0 -462px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
 .icons-profile {
-  background-position: 0 -407px;
+  background-position: 0 -475px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
 .icons-timing {
-  background-position: 0 -560px;
+  background-position: 0 -628px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
 .icons-visa {
-  background-position: 0 -694px;
+  background-position: 0 -762px;
 }
 
 /* line 84, ../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/utilities/sprites/_base.scss */
 .icons-want_send_parsel {
-  background-position: 0 -729px;
+  background-position: 0 -797px;
 }
 
 /* Подключаем Иконки */
-/* line 130, ../sass/_settings.scss */
-.icons-footer-adress {
+/* line 138, ../sass/_settings.scss */
+.icons-arrow {
   display: inline-block;
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 46px;
+  height: 46px;
   vertical-align: top;
   display: -moz-inline-stack;
   zoom: 1;
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
+.icons-arrow-right {
+  display: inline-block;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  vertical-align: top;
+  display: -moz-inline-stack;
+  zoom: 1;
+  *display: inline;
+}
+
+/* line 138, ../sass/_settings.scss */
 .icons-profile {
   display: inline-block;
   position: relative;
@@ -248,7 +252,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-parcel {
   display: inline-block;
   position: relative;
@@ -260,7 +264,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-timing {
   display: inline-block;
   position: relative;
@@ -272,7 +276,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-insurrance {
   display: inline-block;
   position: relative;
@@ -284,7 +288,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-faq_arrow {
   display: inline-block;
   position: relative;
@@ -296,7 +300,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-visa {
   display: inline-block;
   position: relative;
@@ -308,7 +312,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-plus {
   display: inline-block;
   position: relative;
@@ -320,7 +324,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-can_transport_parsel {
   display: inline-block;
   position: relative;
@@ -332,7 +336,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 130, ../sass/_settings.scss */
+/* line 138, ../sass/_settings.scss */
 .icons-want_send_parsel {
   display: inline-block;
   position: relative;
@@ -344,25 +348,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *display: inline;
 }
 
-/* line 148, ../sass/_settings.scss */
+/* line 156, ../sass/_settings.scss */
 body {
   /* сглаживание шрифтов в вебките */
   -webkit-font-smoothing: subpixel-antialiased;
 }
-/* line 153, ../sass/_settings.scss */
+/* line 161, ../sass/_settings.scss */
 body button, body select {
   -webkit-appearance: none;
 }
-/* line 155, ../sass/_settings.scss */
+/* line 163, ../sass/_settings.scss */
 body a {
   text-decoration: none;
 }
-/* line 158, ../sass/_settings.scss */
+/* line 166, ../sass/_settings.scss */
 body a:hover, body a:focus, body a:active, body a:active:focus {
   outline: none;
 }
 
-/* line 166, ../sass/_settings.scss */
+/* line 174, ../sass/_settings.scss */
 .inline-block, .confirmation-select, .faq_select-body, .app .header .logo, .app .header .nav li, .app .header .nav li a span, .app .header-section ul li, .app .header-section .title, .app .section .breadcrumbs li, .app .section .form .form-sizes li, .app .section .form .form-sizes li input, .app .section .form .form-block .right .more, .app .section .form .form-block .form-datepicker, .app .section .confirmation .confirmation-calendar, .app .section .confirmation .confirmation-clock, .app .section .confirmation .confirmation-confirm .confirmation-confirm-title h4, .app .section .pagination li, .app .section .login, .app .section .transporter .form-withdraw .blue_button, .app .promo a {
   display: -moz-inline-stack;
   /* Firefox 2 */
@@ -376,7 +380,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   /* with hasLayout true display:inline in IE6, IE7 behaves like display:inline-block */
 }
 
-/* line 176, ../sass/_settings.scss */
+/* line 184, ../sass/_settings.scss */
 .clear:before, .clear:after, .app .section .form .form-block:after {
   clear: both;
   box-sizing: border-box;
@@ -385,7 +389,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 }
 
 /* Адаптация */
-/* line 216, ../sass/_settings.scss */
+/* line 224, ../sass/_settings.scss */
 .orange_button,
 .gray_button,
 .blue_button {
@@ -412,7 +416,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
-/* line 235, ../sass/_settings.scss */
+/* line 243, ../sass/_settings.scss */
 .orange_button:active, .orange_button:focus, .orange_button:active:focus,
 .gray_button:active,
 .gray_button:focus,
@@ -427,41 +431,41 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   box-shadow: inset 0px 0px 5px 0px #1a1a1a;
 }
 
-/* line 242, ../sass/_settings.scss */
+/* line 250, ../sass/_settings.scss */
 .orange_button {
   background: #e58000;
 }
-/* line 242, ../sass/_settings.scss */
+/* line 250, ../sass/_settings.scss */
 .orange_button:hover {
-  background: #666666;
+  background: #6fa8a4;
 }
 
-/* line 243, ../sass/_settings.scss */
+/* line 251, ../sass/_settings.scss */
 .gray_button {
   background: #666666;
 }
-/* line 243, ../sass/_settings.scss */
+/* line 251, ../sass/_settings.scss */
 .gray_button:hover {
   background: #999;
 }
 
-/* line 244, ../sass/_settings.scss */
+/* line 252, ../sass/_settings.scss */
 .blue_button {
   background: #4cbfc6;
 }
-/* line 244, ../sass/_settings.scss */
+/* line 252, ../sass/_settings.scss */
 .blue_button:hover {
   background: #19a6ab;
 }
 
-/* line 250, ../sass/_settings.scss */
+/* line 258, ../sass/_settings.scss */
 .container {
   position: relative;
   width: 1000px;
   margin: 0 auto;
   box-sizing: border-box;
 }
-/* line 255, ../sass/_settings.scss */
+/* line 263, ../sass/_settings.scss */
 .container.bordered {
   margin: 0 auto 60px auto;
   border: 1px solid #c9cbcc;
@@ -471,27 +475,27 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   border-radius: 16px;
 }
 
-/* line 264, ../sass/_settings.scss */
+/* line 271, ../sass/_settings.scss */
 #wrap_hide {
   display: none;
 }
-/* line 266, ../sass/_settings.scss */
+/* line 273, ../sass/_settings.scss */
 #wrap_hide label {
   width: 690px;
   display: block;
   margin: 0 auto 5px auto;
 }
-/* line 271, ../sass/_settings.scss */
+/* line 278, ../sass/_settings.scss */
 #wrap_hide input {
   margin-left: auto;
   margin-right: auto;
 }
-/* line 275, ../sass/_settings.scss */
+/* line 282, ../sass/_settings.scss */
 #wrap_hide + .orange_button {
   margin-bottom: 60px;
 }
 
-/* line 281, ../sass/_settings.scss */
+/* line 288, ../sass/_settings.scss */
 .popup_box {
   display: none;
   background: #fff;
@@ -504,7 +508,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   text-align: center;
   padding: 30px;
 }
-/* line 290, ../sass/_settings.scss */
+/* line 297, ../sass/_settings.scss */
 .popup_box span {
   font-family: "Cabin-Regular", sans-serif;
   font-size: 16px;
@@ -513,7 +517,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #3d4951;
   text-transform: uppercase;
 }
-/* line 293, ../sass/_settings.scss */
+/* line 300, ../sass/_settings.scss */
 .popup_box span strong {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 16px;
@@ -522,7 +526,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #000;
   text-transform: uppercase;
 }
-/* line 298, ../sass/_settings.scss */
+/* line 305, ../sass/_settings.scss */
 .popup_box strong {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 16px;
@@ -531,7 +535,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #000;
   text-transform: uppercase;
 }
-/* line 302, ../sass/_settings.scss */
+/* line 309, ../sass/_settings.scss */
 .popup_box em {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 14px;
@@ -539,7 +543,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0px;
   color: #666666;
 }
-/* line 305, ../sass/_settings.scss */
+/* line 312, ../sass/_settings.scss */
 .popup_box .orange_button,
 .popup_box .gray_button {
   display: inline-block;
@@ -547,28 +551,28 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   margin: 30px auto 15px;
 }
 
-/* line 314, ../sass/_settings.scss */
+/* line 321, ../sass/_settings.scss */
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;
   text-align: center;
 }
 
-/* line 319, ../sass/_settings.scss */
+/* line 326, ../sass/_settings.scss */
 .rating > span {
   display: inline-block;
   position: relative;
   width: 1.1em;
 }
 
-/* line 324, ../sass/_settings.scss */
+/* line 331, ../sass/_settings.scss */
 .rating > span:hover,
 .rating > span:hover ~ span {
   color: transparent;
   cursor: pointer;
 }
 
-/* line 328, ../sass/_settings.scss */
+/* line 335, ../sass/_settings.scss */
 .rating > span:hover:before,
 .rating > span:hover ~ span:before {
   content: "\2605";
@@ -577,7 +581,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #111;
 }
 
-/* line 336, ../sass/_settings.scss */
+/* line 343, ../sass/_settings.scss */
 .error {
   -moz-animation: blink ease-in 2s forwards;
   -webkit-animation: blink ease-in 2s forwards;
@@ -652,20 +656,20 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
     border-color: #e58000;
   }
 }
-/* line 351, ../sass/_settings.scss */
+/* line 358, ../sass/_settings.scss */
 .ui-widget-content {
   border: none;
   background: #fff;
 }
 
-/* line 356, ../sass/_settings.scss */
+/* line 363, ../sass/_settings.scss */
 .ui-corner-all {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
 
-/* line 360, ../sass/_settings.scss */
+/* line 367, ../sass/_settings.scss */
 .ui-datepicker {
   padding: 0;
   width: 314px;
@@ -676,42 +680,42 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-/* line 365, ../sass/_settings.scss */
+/* line 372, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
   top: 45px;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 368, ../sass/_settings.scss */
+/* line 375, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-prev:hover, .ui-datepicker .ui-datepicker-next:hover {
   border: none;
   background: transparent;
 }
-/* line 371, ../sass/_settings.scss */
+/* line 378, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-prev {
   left: 5px;
   cursor: pointer;
 }
-/* line 373, ../sass/_settings.scss */
+/* line 380, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-prev span {
   background: transparent url("../img/picker-arrow-left.png") center center no-repeat;
 }
-/* line 375, ../sass/_settings.scss */
+/* line 382, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-next {
   right: 5px;
   cursor: pointer;
 }
-/* line 377, ../sass/_settings.scss */
+/* line 384, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-next span {
   background: transparent url("../img/picker-arrow-right.png") center center no-repeat;
 }
-/* line 380, ../sass/_settings.scss */
+/* line 387, ../sass/_settings.scss */
 .ui-datepicker table {
   margin: 0 6px 10px;
   width: 95%;
 }
-/* line 385, ../sass/_settings.scss */
+/* line 392, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-header {
   margin-bottom: 13px;
   padding: 40px 0 0 0;
@@ -725,14 +729,14 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-/* line 394, ../sass/_settings.scss */
+/* line 401, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-header:after {
   content: "";
   display: block;
   height: 40px;
   background: #f9f9f9;
 }
-/* line 400, ../sass/_settings.scss */
+/* line 407, ../sass/_settings.scss */
 .ui-datepicker .ui-datepicker-title {
   margin: 0px 15px 5px;
   position: absolute;
@@ -740,7 +744,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   left: 75px;
 }
 
-/* line 405, ../sass/_settings.scss */
+/* line 412, ../sass/_settings.scss */
 .ui-datepicker-title span {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 14px;
@@ -750,16 +754,16 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   text-transform: uppercase;
 }
 
-/* line 410, ../sass/_settings.scss */
+/* line 417, ../sass/_settings.scss */
 .ui-datepicker-calendar thead th {
   padding: 3px 6px;
 }
-/* line 411, ../sass/_settings.scss */
+/* line 418, ../sass/_settings.scss */
 .ui-datepicker-calendar thead tr {
   border-top: 1px solid #483653;
   border-bottom: 1px solid #483653;
 }
-/* line 415, ../sass/_settings.scss */
+/* line 422, ../sass/_settings.scss */
 .ui-datepicker-calendar thead tr span {
   text-transform: uppercase;
   font-family: "ProximaNova-Bold", sans-serif;
@@ -768,19 +772,19 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0;
   color: #000;
 }
-/* line 421, ../sass/_settings.scss */
+/* line 428, ../sass/_settings.scss */
 .ui-datepicker-calendar tbody td {
   text-align: center;
 }
-/* line 423, ../sass/_settings.scss */
+/* line 430, ../sass/_settings.scss */
 .ui-datepicker-calendar tbody td .ui-state-default, .ui-datepicker-calendar tbody td .ui-state-active {
   padding: 6px 3px;
 }
-/* line 425, ../sass/_settings.scss */
+/* line 432, ../sass/_settings.scss */
 .ui-datepicker-calendar tbody td .ui-state-default:hover, .ui-datepicker-calendar tbody td .ui-state-active:hover {
   border: 1px solid #8d8d8d;
 }
-/* line 428, ../sass/_settings.scss */
+/* line 435, ../sass/_settings.scss */
 .ui-datepicker-calendar tbody td a.ui-state-default {
   background: #fff;
   border: 1px solid #fff;
@@ -790,7 +794,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0;
   color: #000;
 }
-/* line 433, ../sass/_settings.scss */
+/* line 440, ../sass/_settings.scss */
 .ui-datepicker-calendar tbody td a.ui-state-active {
   background: #f9f9f9;
   border: 1px solid #fff;
@@ -799,17 +803,17 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   box-shadow: inset -2px 2px 5px -3px rgba(0, 0, 0, 0.3);
 }
 
-/* line 441, ../sass/_settings.scss */
+/* line 448, ../sass/_settings.scss */
 .ui-datepicker td a {
   text-align: center;
 }
 
-/* line 445, ../sass/_settings.scss */
+/* line 452, ../sass/_settings.scss */
 .ui-datepicker td {
   padding: 5px;
 }
 
-/* line 453, ../sass/_settings.scss */
+/* line 460, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container {
   padding: 2px 10px;
   width: 653px;
@@ -826,22 +830,22 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-appearance: none;
   vertical-align: middle;
 }
-/* line 463, ../sass/_settings.scss */
+/* line 470, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container:focus, .confirmation-select .selectboxit-container:active {
   outline: none;
 }
-/* line 465, ../sass/_settings.scss */
+/* line 472, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit {
   width: 100% !important;
   height: 46px;
   background: transparent;
   border: none;
 }
-/* line 470, ../sass/_settings.scss */
+/* line 477, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit .selectboxit-option-icon-url {
   background-size: auto;
 }
-/* line 474, ../sass/_settings.scss */
+/* line 481, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit .selectboxit-text {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 16px;
@@ -851,27 +855,27 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   max-width: 100% !important;
   margin: 10px 0 0 0;
 }
-/* line 479, ../sass/_settings.scss */
+/* line 486, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit .selectboxit-arrow-container {
   background: transparent url("../img/select-arrow.png") center center no-repeat;
   height: 40px;
   width: 32px;
   margin-right: -10px;
 }
-/* line 483, ../sass/_settings.scss */
+/* line 490, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit .selectboxit-arrow-container i {
   display: none;
 }
-/* line 486, ../sass/_settings.scss */
+/* line 493, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit:hover, .confirmation-select .selectboxit-container .selectboxit:focus {
   background: transparent;
 }
-/* line 489, ../sass/_settings.scss */
+/* line 496, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit .selectboxit-option-icon-container {
   display: none;
   margin: 0;
 }
-/* line 494, ../sass/_settings.scss */
+/* line 501, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options {
   width: 101%;
   background: #fff;
@@ -885,7 +889,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   top: -2px !important;
   left: -2px;
 }
-/* line 503, ../sass/_settings.scss */
+/* line 510, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option-first {
   -moz-border-radius-topright: 10px;
   -webkit-border-top-right-radius: 10px;
@@ -894,7 +898,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-top-left-radius: 10px;
   border-top-left-radius: 10px;
 }
-/* line 508, ../sass/_settings.scss */
+/* line 515, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option-last {
   -moz-border-radius-bottomright: 10px;
   -webkit-border-bottom-right-radius: 10px;
@@ -903,15 +907,15 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-/* line 514, ../sass/_settings.scss */
+/* line 521, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option:last-child .selectboxit-option-anchor {
   background: #ffffff;
 }
-/* line 516, ../sass/_settings.scss */
+/* line 523, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option:last-child .selectboxit-option-anchor:hover {
   background: #4d5f7a;
 }
-/* line 520, ../sass/_settings.scss */
+/* line 527, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option-anchor {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 15px;
@@ -922,28 +926,28 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   padding: 0 0 0 20px;
   background: #ffffff url(../img/pattern_select.jpg) left bottom repeat-x;
 }
-/* line 525, ../sass/_settings.scss */
+/* line 532, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option-anchor .selectboxit-option-icon-url {
   background-size: auto;
 }
-/* line 529, ../sass/_settings.scss */
+/* line 536, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option-anchor .selectboxit-option-icon-container {
   display: none;
   margin: 0;
 }
-/* line 533, ../sass/_settings.scss */
+/* line 540, ../sass/_settings.scss */
 .confirmation-select .selectboxit-container .selectboxit-options .selectboxit-option-anchor:hover {
   background: #4d5f7a;
   color: #fff;
 }
 
-/* line 540, ../sass/_settings.scss */
+/* line 547, ../sass/_settings.scss */
 .confirmation-first-select .selectboxit-container {
   width: 570px;
   height: 45px;
 }
 
-/* line 549, ../sass/_settings.scss */
+/* line 556, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container {
   vertical-align: middle;
   height: 56px;
@@ -956,7 +960,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-box-shadow: inset 0 0 0 1px #f5f5f5;
   box-shadow: inset 0 0 0 1px #f5f5f5;
 }
-/* line 556, ../sass/_settings.scss */
+/* line 563, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit {
   border: none;
   width: 100% !important;
@@ -966,11 +970,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 562, ../sass/_settings.scss */
+/* line 569, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit:hover, .faq_select-body .selectboxit-container .selectboxit:focus {
   background: #fff;
 }
-/* line 566, ../sass/_settings.scss */
+/* line 573, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit .selectboxit-text {
   max-width: 100% !important;
   margin: 15px 0 0 0;
@@ -981,20 +985,20 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0px;
   color: #a2a2a2;
 }
-/* line 571, ../sass/_settings.scss */
+/* line 578, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit .selectboxit-option-icon-container {
   display: none;
 }
-/* line 573, ../sass/_settings.scss */
+/* line 580, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-arrow-container {
   background: transparent url("../img/select-faq.png") 2px no-repeat;
   height: 56px;
 }
-/* line 577, ../sass/_settings.scss */
+/* line 584, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-arrow-container i {
   display: none;
 }
-/* line 581, ../sass/_settings.scss */
+/* line 588, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-options {
   width: 101%;
   -moz-border-radius: 10px;
@@ -1009,12 +1013,12 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   top: -1px !important;
   left: -1px;
 }
-/* line 590, ../sass/_settings.scss */
+/* line 597, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-options .selectboxit-option-icon-container {
   display: none;
   margin: 0;
 }
-/* line 594, ../sass/_settings.scss */
+/* line 601, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-options .selectboxit-option-first {
   -moz-border-radius-topright: 10px;
   -webkit-border-top-right-radius: 10px;
@@ -1023,7 +1027,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-top-left-radius: 10px;
   border-top-left-radius: 10px;
 }
-/* line 599, ../sass/_settings.scss */
+/* line 606, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-options .selectboxit-option-last {
   -moz-border-radius-bottomright: 10px;
   -webkit-border-bottom-right-radius: 10px;
@@ -1032,7 +1036,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-/* line 604, ../sass/_settings.scss */
+/* line 611, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-options .selectboxit-option-anchor {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 15px;
@@ -1043,7 +1047,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   padding: 0 0 0 10px;
   background: #ffffff;
 }
-/* line 609, ../sass/_settings.scss */
+/* line 616, ../sass/_settings.scss */
 .faq_select-body .selectboxit-container .selectboxit-options .selectboxit-option-anchor:hover {
   color: #fff;
   background: #d1762c;
@@ -1052,17 +1056,17 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   box-shadow: inset 0 0 0 1px #e4e4e4;
 }
 
-/* line 616, ../sass/_settings.scss */
+/* line 623, ../sass/_settings.scss */
 .maps {
   overflow: hidden;
 }
 
-/* line 617, ../sass/_settings.scss */
+/* line 624, ../sass/_settings.scss */
 .maps > div {
   float: left;
 }
 
-/* line 618, ../sass/_settings.scss */
+/* line 625, ../sass/_settings.scss */
 .maps-left {
   width: 40%;
   border-right: 1px solid #192f43;
@@ -1070,13 +1074,13 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   border-bottom: 1px solid #192f43;
   box-sizing: border-box;
 }
-/* line 621, ../sass/_settings.scss */
+/* line 628, ../sass/_settings.scss */
 .maps-left .wr-map:last-child {
   border-top: 2px solid #192f43;
   margin-top: -2px;
 }
 
-/* line 624, ../sass/_settings.scss */
+/* line 631, ../sass/_settings.scss */
 .maps-right {
   width: 60%;
   border-left: 1px solid #192f43;
@@ -1085,12 +1089,12 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   box-sizing: border-box;
 }
 
-/* line 627, ../sass/_settings.scss */
+/* line 634, ../sass/_settings.scss */
 .wr-map {
   position: relative;
 }
 
-/* line 630, ../sass/_settings.scss */
+/* line 637, ../sass/_settings.scss */
 .maps-sign {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 18px;
@@ -1105,29 +1109,29 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   right: 0;
 }
 
-/* line 637, ../sass/_settings.scss */
+/* line 644, ../sass/_settings.scss */
 #map3 + .maps-sign {
   text-align: center;
   left: 0;
   right: 0;
 }
 
-/* line 642, ../sass/_settings.scss */
+/* line 649, ../sass/_settings.scss */
 #map1, #map2, #map3, #map4 {
   width: 100%;
 }
 
-/* line 643, ../sass/_settings.scss */
+/* line 650, ../sass/_settings.scss */
 #map1, #map2 {
   height: 250px;
 }
 
-/* line 644, ../sass/_settings.scss */
+/* line 651, ../sass/_settings.scss */
 #map3 {
   height: 500px;
 }
 
-/* line 645, ../sass/_settings.scss */
+/* line 652, ../sass/_settings.scss */
 #map4 {
   height: 340px;
 }
@@ -1804,7 +1808,8 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   margin-top: 60px;
 }
 /* line 409, ../sass/_style.scss */
-.app .section .status span {
+.app .section .status span,
+.app .section .status .span {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 16px;
   line-height: 16px;
@@ -1823,7 +1828,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   position: relative;
   top: -19px;
 }
-/* line 417, ../sass/_style.scss */
+/* line 418, ../sass/_style.scss */
 .app .section .status strong {
   font-family: "Cabin-Regular", sans-serif;
   font-size: 16px;
@@ -1834,7 +1839,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   display: inline-block;
   margin-bottom: 12px;
 }
-/* line 421, ../sass/_style.scss */
+/* line 422, ../sass/_style.scss */
 .app .section .status strong em {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 16px;
@@ -1844,8 +1849,8 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   margin: 0 0 0 5px;
   border-bottom: none;
 }
-/* line 427, ../sass/_style.scss */
-.app .section .status em {
+/* line 428, ../sass/_style.scss */
+.app .section .status a {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 16px;
   line-height: 20px;
@@ -1856,20 +1861,20 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   display: inline-block;
   margin-bottom: 30px;
 }
-/* line 436, ../sass/_style.scss */
+/* line 437, ../sass/_style.scss */
 .app .section .profile {
   float: left;
   width: 190px;
 }
-/* line 438, ../sass/_style.scss */
+/* line 439, ../sass/_style.scss */
 .app .section .profile img {
   max-width: 150px;
 }
-/* line 439, ../sass/_style.scss */
+/* line 440, ../sass/_style.scss */
 .app .section .profile .uplad_image {
   display: none;
 }
-/* line 441, ../sass/_style.scss */
+/* line 442, ../sass/_style.scss */
 .app .section .profile .uplad_image + label {
   font-family: ProximaNova-RegularIt;
   font-size: 16px;
@@ -1879,29 +1884,29 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   cursor: pointer;
   border-bottom: 1px dashed #010000;
 }
-/* line 445, ../sass/_style.scss */
+/* line 446, ../sass/_style.scss */
 .app .section .profile .uplad_image + label:hover, .app .section .profile .uplad_image + label:active, .app .section .profile .uplad_image + label:focus, .app .section .profile .uplad_image + label:active:focus {
   border-bottom: 1px dashed #fff;
 }
-/* line 451, ../sass/_style.scss */
+/* line 452, ../sass/_style.scss */
 .app .section .form-margined {
   margin-left: 200px;
 }
-/* line 453, ../sass/_style.scss */
+/* line 454, ../sass/_style.scss */
 .app .section .form-margined h3 {
   text-transform: none;
 }
-/* line 456, ../sass/_style.scss */
+/* line 457, ../sass/_style.scss */
 .app .section .form-margined label {
   text-transform: none;
   margin-bottom: 6px;
   display: inline-block;
 }
-/* line 461, ../sass/_style.scss */
+/* line 462, ../sass/_style.scss */
 .app .section .form-margined .orange_button {
   margin-bottom: 12px;
 }
-/* line 462, ../sass/_style.scss */
+/* line 463, ../sass/_style.scss */
 .app .section .form-margined .more {
   font-family: ProximaNova-RegularIt;
   font-size: 16px;
@@ -1914,11 +1919,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   margin: 0 auto;
   text-align: center;
 }
-/* line 466, ../sass/_style.scss */
+/* line 467, ../sass/_style.scss */
 .app .section .form-margined .more:hover, .app .section .form-margined .more:active, .app .section .form-margined .more:focus, .app .section .form-margined .more:active:focus {
   border-bottom: 1px dashed #f3f3f3;
 }
-/* line 473, ../sass/_style.scss */
+/* line 474, ../sass/_style.scss */
 .app .section .faq_accordion {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 14px;
@@ -1927,11 +1932,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #3d4951;
   padding: 0px 60px 60px 120px;
 }
-/* line 477, ../sass/_style.scss */
+/* line 478, ../sass/_style.scss */
 .app .section .faq_accordion li {
   padding-bottom: 15px;
 }
-/* line 480, ../sass/_style.scss */
+/* line 481, ../sass/_style.scss */
 .app .section .faq_accordion li span {
   color: #395467;
   font-size: 19px;
@@ -1939,36 +1944,36 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   margin-bottom: 15px;
   cursor: pointer;
 }
-/* line 484, ../sass/_style.scss */
+/* line 485, ../sass/_style.scss */
 .app .section .faq_accordion li span:hover {
   color: #111;
 }
-/* line 486, ../sass/_style.scss */
+/* line 487, ../sass/_style.scss */
 .app .section .faq_accordion li span i {
   top: 5px;
   left: -5px;
 }
-/* line 488, ../sass/_style.scss */
+/* line 489, ../sass/_style.scss */
 .app .section .faq_accordion li p {
   color: #000000;
   font-size: 18px;
   line-height: 21px;
   padding: 0 0 15px 15px;
 }
-/* line 492, ../sass/_style.scss */
+/* line 493, ../sass/_style.scss */
 .app .section .faq_accordion li p a {
   color: #395467;
   text-decoration: underline;
 }
-/* line 495, ../sass/_style.scss */
+/* line 496, ../sass/_style.scss */
 .app .section .faq_accordion li p a:hover {
   text-decoration: none;
 }
-/* line 500, ../sass/_style.scss */
+/* line 501, ../sass/_style.scss */
 .app .section .faq_select {
   margin-bottom: 50px;
 }
-/* line 503, ../sass/_style.scss */
+/* line 504, ../sass/_style.scss */
 .app .section .faq_select .faq_select-span {
   font-family: "Cabin-Regular", sans-serif;
   font-size: 17px;
@@ -1978,23 +1983,23 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   text-transform: uppercase;
   margin: 0 15px 0 170px;
 }
-/* line 508, ../sass/_style.scss */
+/* line 509, ../sass/_style.scss */
 .app .section .faq_select .faq_select-ul {
   width: 220px;
   margin: 60px auto;
   overflow: hidden;
 }
-/* line 511, ../sass/_style.scss */
+/* line 512, ../sass/_style.scss */
 .app .section .faq_select .faq_select-ul li {
   float: left;
   padding: 0 5px;
   border-right: 1px solid #a2a2a2;
 }
-/* line 515, ../sass/_style.scss */
+/* line 516, ../sass/_style.scss */
 .app .section .faq_select .faq_select-ul li:last-child {
   border: none;
 }
-/* line 517, ../sass/_style.scss */
+/* line 518, ../sass/_style.scss */
 .app .section .faq_select .faq_select-ul li a {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 17px;
@@ -2002,23 +2007,23 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0px;
   color: #395467;
 }
-/* line 517, ../sass/_style.scss */
+/* line 518, ../sass/_style.scss */
 .app .section .faq_select .faq_select-ul li a:hover {
   text-decoration: underline;
 }
-/* line 524, ../sass/_style.scss */
+/* line 525, ../sass/_style.scss */
 .app .section .offers {
   text-align: center;
   float: left;
   width: 319px;
   margin: 7px;
 }
-/* line 528, ../sass/_style.scss */
+/* line 529, ../sass/_style.scss */
 .app .section .offers figure {
   position: relative;
   margin-bottom: 35px;
 }
-/* line 532, ../sass/_style.scss */
+/* line 533, ../sass/_style.scss */
 .app .section .offers figure figcaption {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 18px;
@@ -2032,7 +2037,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   top: 160px;
   background: #4cbfc6;
 }
-/* line 539, ../sass/_style.scss */
+/* line 540, ../sass/_style.scss */
 .app .section .offers strong {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 19px;
@@ -2042,11 +2047,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   text-transform: uppercase;
   font-weight: normal;
 }
-/* line 540, ../sass/_style.scss */
+/* line 541, ../sass/_style.scss */
 .app .section .offers ul {
   margin: 10px 0;
 }
-/* line 542, ../sass/_style.scss */
+/* line 543, ../sass/_style.scss */
 .app .section .offers ul li {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 18px;
@@ -2054,7 +2059,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0px;
   color: #000000;
 }
-/* line 544, ../sass/_style.scss */
+/* line 545, ../sass/_style.scss */
 .app .section .offers .more {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 12px;
@@ -2062,18 +2067,18 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0px;
   color: #000000;
 }
-/* line 546, ../sass/_style.scss */
+/* line 547, ../sass/_style.scss */
 .app .section .offers .more i {
   top: 2px;
   left: -5px;
 }
-/* line 549, ../sass/_style.scss */
+/* line 550, ../sass/_style.scss */
 .app .section .offers a.orange_button {
   width: 170px;
   line-height: 19px;
   padding: 11px 0;
 }
-/* line 551, ../sass/_style.scss */
+/* line 552, ../sass/_style.scss */
 .app .section .offers-more {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 18px;
@@ -2086,16 +2091,16 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   margin: 0 auto 30px auto;
   border-bottom: 1px dashed #010000;
 }
-/* line 555, ../sass/_style.scss */
+/* line 556, ../sass/_style.scss */
 .app .section .offers-more:hover, .app .section .offers-more:active, .app .section .offers-more:focus, .app .section .offers-more:active:focus {
   border-bottom: 1px dashed #fff;
 }
-/* line 561, ../sass/_style.scss */
+/* line 562, ../sass/_style.scss */
 .app .section .confirmation {
   background: #1c1e2e;
   margin: -66px 0 0 0;
 }
-/* line 565, ../sass/_style.scss */
+/* line 566, ../sass/_style.scss */
 .app .section .confirmation h3 {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 16px;
@@ -2103,16 +2108,16 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0;
   color: #fff;
 }
-/* line 567, ../sass/_style.scss */
+/* line 568, ../sass/_style.scss */
 .app .section .confirmation hr {
   border: 1px solid #fff;
   margin: 0;
 }
-/* line 570, ../sass/_style.scss */
+/* line 571, ../sass/_style.scss */
 .app .section .confirmation select {
   background: transparent url("../img/select-arrow.png") right center no-repeat;
 }
-/* line 575, ../sass/_style.scss */
+/* line 576, ../sass/_style.scss */
 .app .section .confirmation input[type="text"] {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 14px;
@@ -2132,23 +2137,23 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 584, ../sass/_style.scss */
+/* line 585, ../sass/_style.scss */
 .app .section .confirmation input[type="text"]:focus {
   color: #fff;
 }
-/* line 585, ../sass/_style.scss */
+/* line 586, ../sass/_style.scss */
 .app .section .confirmation input[type="text"]:focus, .app .section .confirmation input[type="text"]:active {
   outline: none;
 }
-/* line 589, ../sass/_style.scss */
+/* line 590, ../sass/_style.scss */
 .app .section .confirmation .confirmation-calendar input {
   background: transparent url("../img/calendar.png") right 8px no-repeat;
 }
-/* line 592, ../sass/_style.scss */
+/* line 593, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time input {
   background: transparent url("../img/clock.png") right 9px no-repeat;
 }
-/* line 596, ../sass/_style.scss */
+/* line 597, ../sass/_style.scss */
 .app .section .confirmation input[type="radio"] + label {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 12px;
@@ -2161,31 +2166,31 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   cursor: pointer;
   display: inline-block;
 }
-/* line 602, ../sass/_style.scss */
+/* line 603, ../sass/_style.scss */
 .app .section .confirmation input[type="radio"] {
   position: absolute;
   left: -9999px;
 }
-/* line 607, ../sass/_style.scss */
+/* line 608, ../sass/_style.scss */
 .app .section .confirmation input[type="radio"]:checked + label {
   background: #4d5f7a;
   color: #fff;
 }
-/* line 616, ../sass/_style.scss */
+/* line 617, ../sass/_style.scss */
 .app .section .confirmation .confirmation-selected {
   padding: 36px 0 22px;
 }
-/* line 617, ../sass/_style.scss */
+/* line 618, ../sass/_style.scss */
 .app .section .confirmation .confirmation-selected h3 {
   float: left;
   margin: 10px 11px 0 123px;
 }
-/* line 621, ../sass/_style.scss */
+/* line 622, ../sass/_style.scss */
 .app .section .confirmation .confirmation-delivery {
   padding: 21px 0 7px 0;
   margin-left: 6px;
 }
-/* line 623, ../sass/_style.scss */
+/* line 624, ../sass/_style.scss */
 .app .section .confirmation .confirmation-delivery label[for="day_before"] {
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
@@ -2194,7 +2199,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-/* line 624, ../sass/_style.scss */
+/* line 625, ../sass/_style.scss */
 .app .section .confirmation .confirmation-delivery label[for="2days_later2"] {
   -moz-border-radius-topright: 10px;
   -webkit-border-top-right-radius: 10px;
@@ -2203,15 +2208,15 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-/* line 625, ../sass/_style.scss */
+/* line 626, ../sass/_style.scss */
 .app .section .confirmation .confirmation-delivery label[for="2days_later"] {
   margin-right: -4px;
 }
-/* line 626, ../sass/_style.scss */
+/* line 627, ../sass/_style.scss */
 .app .section .confirmation .confirmation-delivery label[for="day_before2"] {
   margin-left: -4px;
 }
-/* line 630, ../sass/_style.scss */
+/* line 631, ../sass/_style.scss */
 .app .section .confirmation .confirmation-delivery .span_to, .app .section .confirmation .confirmation-time .span_to {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 14px;
@@ -2220,13 +2225,13 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #fff;
   margin: 0 4px;
 }
-/* line 633, ../sass/_style.scss */
+/* line 634, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time {
   text-align: center;
   padding: 0 0 19px 0;
   margin: 0 50px 0 0;
 }
-/* line 639, ../sass/_style.scss */
+/* line 640, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body {
   width: 313px;
   padding: 0 0 16px 0;
@@ -2242,7 +2247,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   border-top-right-radius: 10px;
   z-index: 1;
 }
-/* line 647, ../sass/_style.scss */
+/* line 648, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .confirmation-clock-header {
   padding: 11px 0;
   margin-bottom: 12px;
@@ -2258,13 +2263,13 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-top-right-radius: 10px;
   border-top-right-radius: 10px;
 }
-/* line 655, ../sass/_style.scss */
+/* line 656, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .confirmation-clock-header span {
   color: #fff;
   font-size: 21px;
   line-height: 25px;
 }
-/* line 658, ../sass/_style.scss */
+/* line 659, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body span {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 12px;
@@ -2273,19 +2278,19 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #000;
   text-transform: uppercase;
 }
-/* line 662, ../sass/_style.scss */
+/* line 663, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .to {
   margin: 0 8px;
 }
-/* line 663, ../sass/_style.scss */
+/* line 664, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .time {
   margin-left: -13px;
 }
-/* line 664, ../sass/_style.scss */
+/* line 665, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body .at {
   margin: 0px 3px 0px 5px;
 }
-/* line 666, ../sass/_style.scss */
+/* line 667, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body input {
   font-family: "Cabin-Regular", sans-serif;
   font-size: 15px;
@@ -2304,12 +2309,12 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 673, ../sass/_style.scss */
+/* line 674, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body input:focus {
   color: #000;
   font-weight: 600;
 }
-/* line 676, ../sass/_style.scss */
+/* line 677, ../sass/_style.scss */
 .app .section .confirmation .confirmation-time .confirmation-clock .confirmation-clock-body em {
   font-family: "Cabin-Regular", sans-serif;
   font-size: 11px;
@@ -2320,11 +2325,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   padding: 0 38px;
   display: block;
 }
-/* line 686, ../sass/_style.scss */
+/* line 687, ../sass/_style.scss */
 .app .section .confirmation .confirmation-calendar, .app .section .confirmation .confirmation-clock {
   position: relative;
 }
-/* line 696, ../sass/_style.scss */
+/* line 697, ../sass/_style.scss */
 .app .section .confirmation .confirmation-calendar .confirmation-calendar-body {
   position: absolute;
   left: 0;
@@ -2339,7 +2344,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-top-right-radius: 10px;
   border-top-right-radius: 10px;
 }
-/* line 704, ../sass/_style.scss */
+/* line 705, ../sass/_style.scss */
 .app .section .confirmation .confirmation-calendar .confirmation-calendar-body h4 {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 21px;
@@ -2352,7 +2357,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   left: 50px;
   z-index: 1;
 }
-/* line 712, ../sass/_style.scss */
+/* line 713, ../sass/_style.scss */
 .app .section .confirmation .confirmation-departure .white_span, .app .section .confirmation .confirmation-destination .white_span, .app .section .confirmation .confirmation-time .white_span {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 15px;
@@ -2362,16 +2367,16 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   text-transform: uppercase;
   font-weight: 600;
 }
-/* line 715, ../sass/_style.scss */
+/* line 716, ../sass/_style.scss */
 .app .section .confirmation .confirmation-departure {
   padding: 19px 0 16px 0;
   margin-left: 3px;
 }
-/* line 717, ../sass/_style.scss */
+/* line 718, ../sass/_style.scss */
 .app .section .confirmation .confirmation-departure .to {
   margin-right: 3px;
 }
-/* line 718, ../sass/_style.scss */
+/* line 719, ../sass/_style.scss */
 .app .section .confirmation .confirmation-departure label[for="postbox"] {
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
@@ -2380,21 +2385,21 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-/* line 719, ../sass/_style.scss */
+/* line 720, ../sass/_style.scss */
 .app .section .confirmation .confirmation-departure label[for="postoffice"] {
   margin-right: -4px;
 }
-/* line 722, ../sass/_style.scss */
+/* line 723, ../sass/_style.scss */
 .app .section .confirmation .confirmation-destination {
   padding: 0 0 23px 0;
   margin-left: 3px;
   float: left;
 }
-/* line 724, ../sass/_style.scss */
+/* line 725, ../sass/_style.scss */
 .app .section .confirmation .confirmation-destination .from {
   margin-right: 25px;
 }
-/* line 725, ../sass/_style.scss */
+/* line 726, ../sass/_style.scss */
 .app .section .confirmation .confirmation-destination label[for="postbox2"] {
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
@@ -2403,20 +2408,20 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   -webkit-border-bottom-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-/* line 726, ../sass/_style.scss */
+/* line 727, ../sass/_style.scss */
 .app .section .confirmation .confirmation-destination label[for="postoffice2"] {
   margin-right: -4px;
 }
-/* line 732, ../sass/_style.scss */
+/* line 733, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm {
   padding: 29px 0 31px 0;
 }
-/* line 734, ../sass/_style.scss */
+/* line 735, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm .confirmation-confirm-title {
   float: left;
   width: 350px;
 }
-/* line 736, ../sass/_style.scss */
+/* line 737, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm .confirmation-confirm-title h4 {
   text-transform: uppercase;
   font-family: "Cabin-Regular", sans-serif;
@@ -2425,7 +2430,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 1.2px;
   color: #fff;
 }
-/* line 739, ../sass/_style.scss */
+/* line 740, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm .confirmation-confirm-title span {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 16px;
@@ -2434,7 +2439,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #fff;
   margin-left: 8px;
 }
-/* line 745, ../sass/_style.scss */
+/* line 746, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm .confirmation-confirm-total {
   float: left;
   width: 412px;
@@ -2444,7 +2449,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   box-sizing: border-box;
   border: 1px dashed #e58000;
 }
-/* line 750, ../sass/_style.scss */
+/* line 751, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm .confirmation-confirm-total h4 {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 19px;
@@ -2452,11 +2457,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 1.5px;
   color: #fff;
 }
-/* line 752, ../sass/_style.scss */
+/* line 753, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm .confirmation-confirm-total h4 span {
   text-transform: uppercase;
 }
-/* line 755, ../sass/_style.scss */
+/* line 756, ../sass/_style.scss */
 .app .section .confirmation .confirmation-confirm a {
   float: right;
   margin: 7px 11px 0 22px;
@@ -2464,12 +2469,12 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   padding: 6px 0;
   font-size: 21px;
 }
-/* line 760, ../sass/_style.scss */
+/* line 761, ../sass/_style.scss */
 .app .section .order {
   text-align: center;
   padding: 10px 0 22px 0;
 }
-/* line 764, ../sass/_style.scss */
+/* line 765, ../sass/_style.scss */
 .app .section .order h3 {
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 16px;
@@ -2478,7 +2483,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   color: #3d4951;
   margin-bottom: 20px;
 }
-/* line 767, ../sass/_style.scss */
+/* line 768, ../sass/_style.scss */
 .app .section .order h3 span {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 20px;
@@ -2486,11 +2491,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 0.6px;
   color: #000000;
 }
-/* line 770, ../sass/_style.scss */
+/* line 771, ../sass/_style.scss */
 .app .section .order ul {
   margin-bottom: 23px;
 }
-/* line 773, ../sass/_style.scss */
+/* line 774, ../sass/_style.scss */
 .app .section .order ul li {
   font-family: "Cabin-Regular", sans-serif;
   font-size: 16px;
@@ -2498,7 +2503,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 1px;
   color: #3d4951;
 }
-/* line 776, ../sass/_style.scss */
+/* line 777, ../sass/_style.scss */
 .app .section .order ul li strong {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 20px;
@@ -2506,7 +2511,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   letter-spacing: 1.2px;
   color: #000000;
 }
-/* line 783, ../sass/_style.scss */
+/* line 784, ../sass/_style.scss */
 .app .section .order .total {
   font-family: "ProximaNova-Bold", sans-serif;
   font-size: 20px;
@@ -2518,44 +2523,45 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   height: 58px;
   display: inline-block;
 }
-/* line 789, ../sass/_style.scss */
+/* line 790, ../sass/_style.scss */
 .app .section .payment {
   width: 265px;
   margin: 54px auto 0;
 }
-/* line 792, ../sass/_style.scss */
+/* line 793, ../sass/_style.scss */
 .app .section .payment li {
   height: 52px;
   position: relative;
   padding-left: 40px;
 }
-/* line 796, ../sass/_style.scss */
+/* line 797, ../sass/_style.scss */
 .app .section .payment li label {
   background: none;
   padding: 0;
 }
-/* line 800, ../sass/_style.scss */
+/* line 801, ../sass/_style.scss */
 .app .section .payment li label i {
   font-size: 42px;
   color: #3d4951;
   line-height: 30px;
   margin: 0px 7px;
+  cursor: pointer;
 }
-/* line 805, ../sass/_style.scss */
+/* line 806, ../sass/_style.scss */
 .app .section .payment li label i:hover {
   color: #4cbfc6;
 }
-/* line 808, ../sass/_style.scss */
+/* line 809, ../sass/_style.scss */
 .app .section .payment li label i.active {
   color: #4cbfc6;
 }
-/* line 811, ../sass/_style.scss */
+/* line 812, ../sass/_style.scss */
 .app .section .payment li input[type="radio"] {
   transition: all 1s ease 1s;
   position: absolute;
   left: -9999px;
 }
-/* line 814, ../sass/_style.scss */
+/* line 815, ../sass/_style.scss */
 .app .section .payment li input[type="radio"] ~ label.check {
   background: url(../img/checkbox.png) 0 0 no-repeat;
   display: inline-block;
@@ -2564,6 +2570,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   position: absolute;
   top: 0px;
   left: 2px;
+  cursor: pointer;
 }
 /* line 820, ../sass/_style.scss */
 .app .section .payment li input[type="radio"]:checked ~ label.check {
@@ -3130,3 +3137,14 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 /* Welcome to Compass. Use this file to define print styles.
  * Import this file using the following HTML or equivalent:
  * <link href="/css/print.css" media="print" rel="stylesheet" type="text/css" /> */
+
+input {color: #000000 !important;}
+
+.app .section .form input[type="text"], .app .section .form input[type="password"] {border: 2px solid #dfdfe0;}
+.app .section .form input[type="text"]:focus, .app .section .form input[type="password"]:focus {border: 2px solid #e58000;}
+
+
+
+
+
+

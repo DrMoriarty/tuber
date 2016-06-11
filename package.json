@@ -50,6 +50,7 @@
     "rx-react": "^0.3.0",
     "sails": "~0.11.2",
     "sails-disk": "~0.10.0",
+    "sails-hook-cron": "^2.2.0",
     "sails-mongos": "^0.11.2",
     "skipper-disk": "^0.5.4",
     "soap": "^0.11.0",

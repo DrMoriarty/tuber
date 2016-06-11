@@ -324,5 +324,6 @@
 	"Join the packet24 team!": "Join the packet24 team!",
 	"I can transport through:": "I can transport through:",
 	"PAYMENT CAN NOT BE COMPLETED": "PAYMENT CAN NOT BE COMPLETED",
-	"Check you payment details and try again": "Check you payment details and try again"
+	"Check you payment details and try again": "Check you payment details and try again",
+	"Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details.": "Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details."
 }

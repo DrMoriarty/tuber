@@ -92,6 +92,13 @@ block content
         em * #{__('We will inform you about your order status')}
         br
         a.orange_button(href='/dashboard') #{__('OK')}
+      #error_popup_box.popup_box
+        span
+          | #{__('PAYMENT CAN NOT BE COMPLETED')}
+        br
+        strong #{__('Check you payment details and try again')}
+        br
+        a.orange_button(href='javascript:location.reload();') #{__('OK')}
 
 block script
   script(src="https://js.braintreegateway.com/v2/braintree.js")
@@ -157,6 +164,11 @@ block script
             },
             error: function(err) {
               console.log('Payment error', err);
+              $('#error_popup_box').bPopup({
+                easing: 'easeOutBack', //uses jQuery easing plugin
+                  speed: 450,
+                  transition: 'slideDown'
+              });
             }
           });
         }

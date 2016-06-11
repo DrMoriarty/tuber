@@ -30,7 +30,7 @@ module.exports.tuber = {
     defaultAdmin:
         firstname: 'Admin'
         lastname: 'Admin'
-        email: 'admin@dot.com'
+        email: 'admin@me.com'
         password: 'admin'
         address1: 'Kremlin sq.'
         address2: 'bt. 1'
@@ -38,4 +38,5 @@ module.exports.tuber = {
         city: 'Vologda'
         country: 'Russia'
         phone: '01'
+    driverAcceptTime: 12  #hours
 }

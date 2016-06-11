@@ -1,5 +1,14 @@
 async = require 'async'
 gps = require 'gps-util'
+
+finishRequest = (senderId, parcelId, driverId) ->
+    Request.destroy({sender: senderId, parcel: parcelId, driver: {'!': driverId}}).exec (err, result) ->
+        console.log err if err?
+        console.log 'Remove other requests', result
+    Parcel.update({id: parcelId}, {status: 'accepted', driver: driverId}).exec (err, result) ->
+        console.log err if err?
+        console.log 'Update parcel', result
+
 module.exports = 
     searchDriver: (parcelId, cb) ->
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
@@ -65,3 +74,70 @@ module.exports =
                                     console.log err
                                 cb(null, parcels)
 
+    acceptDriver: (driverId, parcelId, cb) ->
+        Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+            if not parcel.owner?
+                console.log 'Invalid parcel', parcel, 'No owner!'
+                return cb {error: 'No parcel owner'}, null
+            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).exec (err, requests) ->
+                User.findOne(driverId).populateAll().exec (err, driver) ->
+                    autoAccept = driver.autoAccept()
+                    if err? or not requests or requests.length <= 0
+                        newRequest = {parcel: parcelId, driver: driverId, sender: parcel.owner.id, senderAccepted: true}
+                        if autoAccept
+                            newRequest.driverAccepted = true
+                        else
+                            now = new Date()
+                            newRequest.driverAcceptTimeout = new Date(now);
+                            driverAcceptTime = sails.config.tuber.driverAcceptTime || driver.driverAcceptTime
+                            newRequest.driverAcceptTimeout.setHours(now.getHours() + driverAcceptTime)
+                        Request.create(newRequest).exec (err, result) ->
+                            if err?
+                                cb err, null
+                            else
+                                MessagingService.driverAcceptedByOwner result.id
+                                cb null, result
+                        if autoAccept
+                            # remove all other requests for this parcel
+                            finishRequest(parcel.owner.id, parcelId, driverId)
+                    else
+                        request = requests[0]
+                        data = {senderAccepted: true}
+                        if autoAccept
+                            data.driverAccepted = true
+                        else
+                            now = new Date()
+                            data.driverAcceptTimeout = new Date(now);
+                            driverAcceptTime = sails.config.tuber.driverAcceptTime || driver.driverAcceptTime
+                            data.driverAcceptTimeout.setHours(now.getHours() + driverAcceptTime)
+                        Request.update({id: request.id}, data).exec (err, result) ->
+                            if err?
+                                cb err, null
+                            else
+                                MessagingService.driverAcceptedByOwner request.id
+                                cb null, result
+                        if request.driverAccepted or autoAccept
+                            # remove all other requests for this parcel
+                            finishRequest(parcel.owner.id, parcelId, driverId)
+
+    acceptParcel: (driverId, parcelId, cb) ->
+        Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
+            Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).populateAll().exec (err, requests) ->
+                if err? or not requests or requests.length <= 0
+                    Request.create({parcel: parcelId, driver: driverId, sender: parcel.owner.id, driverAccepted: true}).exec (err, result) ->
+                        if err?
+                            cb err, null
+                        else
+                            MessagingService.parcelAcceptedByDriver result.id
+                            cb null, result
+                else
+                    request = requests[0]
+                    Request.update({id: request.id}, {driverAccepted: true}).exec (err, result) ->
+                        if err?
+                            cb err, null
+                        else
+                            MessagingService.parcelAcceptedByDriver request.id
+                            cb null, result
+                    if request.senderAccepted
+                        # we need to remove all other requests from this driver
+                        finishRequest(parcel.owner.id, parcelId, driverId)

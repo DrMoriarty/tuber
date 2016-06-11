@@ -1,5 +1,6 @@
 async = require 'async'
 
+"""
 finishRequest = (senderId, parcelId, driverId) ->
     Request.destroy({sender: senderId, parcel: parcelId, driver: {'!': driverId}}).exec (err, result) ->
         console.log err if err?
@@ -7,6 +8,7 @@ finishRequest = (senderId, parcelId, driverId) ->
     Parcel.update({id: parcelId}, {status: 'accepted', driver: driverId}).exec (err, result) ->
         console.log err if err?
         console.log 'Update parcel', result
+"""
 
 module.exports = 
     searchDriver: (req, res) ->
@@ -77,6 +79,12 @@ module.exports =
     acceptDriver: (req, res) ->
         driverId = req.param('driverId')
         parcelId = req.param('parcelId')
+        SearchService.acceptDriver driverId, parcelId, (err, result) ->
+            if err?
+                res.json err
+            else
+                res.json result
+        """
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
             Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).exec (err, requests) ->
                 User.findOne(driverId).populateAll().exec (err, driver) ->
@@ -88,7 +96,8 @@ module.exports =
                         else
                             now = new Date()
                             newRequest.driverAcceptTimeout = new Date(now);
-                            newRequest.driverAcceptTimeout.setHours(now.getHours() + driver.driverAcceptTime)
+                            driverAcceptTime = sails.config.tuber.driverAcceptTime || driver.driverAcceptTime
+                            newRequest.driverAcceptTimeout.setHours(now.getHours() + driverAcceptTime)
                         Request.create(newRequest).exec (err, result) ->
                             if err?
                                 res.json err
@@ -106,7 +115,8 @@ module.exports =
                         else
                             now = new Date()
                             data.driverAcceptTimeout = new Date(now);
-                            data.driverAcceptTimeout.setHours(now.getHours() + driver.driverAcceptTime)
+                            driverAcceptTime = sails.config.tuber.driverAcceptTime || driver.driverAcceptTime
+                            data.driverAcceptTimeout.setHours(now.getHours() + driverAcceptTime)
                         Request.update({id: request.id}, data).exec (err, result) ->
                             if err?
                                 res.json err
@@ -116,10 +126,17 @@ module.exports =
                         if request.driverAccepted or autoAccept
                             # remove all other requests for this parcel
                             finishRequest(parcel.owner.id, parcelId, driverId)
+        """
 
     acceptParcel: (req, res) ->
         driverId = req.user.id
         parcelId = req.param('parcelId')
+        SearchService.acceptParcel driverId, parcelId, (err, result) ->
+            if err?
+                res.json err
+            else
+                res.json result
+        """
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
             Request.find({parcel: parcelId, driver: driverId, sender: parcel.owner.id}).populateAll().exec (err, requests) ->
                 if err? or not requests or requests.length <= 0
@@ -140,6 +157,7 @@ module.exports =
                     if request.senderAccepted
                         # we need to remove all other requests from this driver
                         finishRequest(parcel.owner.id, parcelId, driverId)
+        """
 
     lookupZip: (req, res) ->
         zip = req.param('zip')

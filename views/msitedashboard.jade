@@ -110,7 +110,8 @@ block content
                     if parcel.request
                       strong #{parcel.request.totalPrice()}&euro;
                 if parcel.fromPerson
-                  .sender-name(style='min-height: 221px;')
+                  //.sender-name(style='min-height: 221px;')
+                  div
                     figure
                       span #{__('THE SENDER:')}
                       //img(src='img/person.png', alt='')
@@ -118,7 +119,7 @@ block content
                         a(href='tel://#{parcel.fromPerson.phone}')
                           i.fa.fa-phone-square
                           | #{__('call')}
-                    ul
+                    ul.sender-list
                       li
                         | #{__('NAME:')} 
                         strong #{parcel.fromPerson.firstname} #{parcel.fromPerson.lastname}
@@ -134,7 +135,8 @@ block content
                         | #{__('PHONENUMBER:')} 
                         strong #{parcel.fromPerson.phone}
                 if parcel.toPerson
-                  .sender-name(style='min-height: 221px;')
+                  //.sender-name(style='min-height: 221px;')
+                  div
                     figure
                       span #{__('THE SENDER:')}
                       //img(src='img/person.png', alt='')
@@ -142,7 +144,7 @@ block content
                         a(href='tel://#{parcel.toPerson.phone}')
                           i.fa.fa-phone-square
                           | #{__('call')}
-                    ul
+                    ul.sender-list
                       li
                         | #{__('NAME:')} 
                         strong #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
@@ -162,11 +164,14 @@ block content
                   a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}?m=1"') #{__('CONTINUE')}
                 else if parcel.status == 'published'
                   if parcel.request && !parcel.request.driverAccepted
-                    span.note #{__('Waiting for carrier acception')}
-                  a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') #{__('PROCESS PAYMENT')}
+                    span.note(style={'color':'red'}) #{__('Waiting for carrier acception')}
+                    span #{__('Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier\'s data. There is not need to update this status, since we will find 100% find a carrier for your parcel.')}
+                  else
+                    a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') #{__('PROCESS PAYMENT')}
                 else if parcel.status == 'accepted'
                   if parcel.request && !parcel.request.driverAccepted
-                    span.note #{__('Waiting for carrier acception')}
+                    span.note(style={'color':'red'}) #{__('Waiting for carrier acception')}
+                    span #{__('Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier\'s data. There is not need to update this status, since we will find 100% find a carrier for your parcel.')}
                   else if parcel.request && !parcel.request.paid
                     a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') #{__('PROCESS PAYMENT')}
                   else

@@ -1,11 +1,11 @@
 async = require 'async'
 gps = require 'gps-util'
 
-finishRequest = (senderId, parcelId, driverId) ->
+finishRequest = (senderId, parcelId, driverId, requestId) ->
     Request.destroy({sender: senderId, parcel: parcelId, driver: {'!': driverId}}).exec (err, result) ->
         console.log err if err?
         console.log 'Remove other requests', result
-    Parcel.update({id: parcelId}, {status: 'accepted', driver: driverId}).exec (err, result) ->
+    Parcel.update({id: parcelId}, {status: 'accepted', driver: driverId, request: requestId}).exec (err, result) ->
         console.log err if err?
         console.log 'Update parcel', result
 
@@ -96,10 +96,10 @@ module.exports =
                                 cb err, null
                             else
                                 MessagingService.driverAcceptedByOwner result.id
+                                if autoAccept
+                                    # remove all other requests for this parcel
+                                    finishRequest(parcel.owner.id, parcelId, driverId, result.id)
                                 cb null, result
-                        if autoAccept
-                            # remove all other requests for this parcel
-                            finishRequest(parcel.owner.id, parcelId, driverId)
                     else
                         request = requests[0]
                         data = {senderAccepted: true}
@@ -118,7 +118,7 @@ module.exports =
                                 cb null, result
                         if request.driverAccepted or autoAccept
                             # remove all other requests for this parcel
-                            finishRequest(parcel.owner.id, parcelId, driverId)
+                            finishRequest(parcel.owner.id, parcelId, driverId, request.id)
 
     acceptParcel: (driverId, parcelId, cb) ->
         Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
@@ -140,4 +140,4 @@ module.exports =
                             cb null, result
                     if request.senderAccepted
                         # we need to remove all other requests from this driver
-                        finishRequest(parcel.owner.id, parcelId, driverId)
+                        finishRequest(parcel.owner.id, parcelId, driverId, request.id)

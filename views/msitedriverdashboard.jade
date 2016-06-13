@@ -3,7 +3,7 @@ extend layoutm
 block header
   // header section
   section.header-section
-    span.title #{user.firstname} #{user.lastname}
+    span.title #{user.fullname()}
     .container
       ul
         if user.driver
@@ -40,7 +40,7 @@ block content
             ul.sender-list
               li
                 | #{__('NAME:')}
-                strong #{user.firstname} #{user.lastname}
+                strong #{user.fullname()}
               li
                 | #{__('COMPANY (optional):')}
                 strong #{user.company}
@@ -122,7 +122,7 @@ block content
                     ul
                       li
                         | #{__('NAME:')} 
-                        strong #{parcel.fromPerson.firstname} #{parcel.fromPerson.lastname}
+                        strong #{parcel.fromPerson.fullname()}
                       //li
                         | #{__('RAITE:')} 
                         span.rating
@@ -146,7 +146,7 @@ block content
                     ul
                       li
                         | #{__('NAME:')} 
-                        strong #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
+                        strong #{parcel.toPerson.fullname()}
                       //li
                         | #{__('RAITE:')} 
                         span.rating
@@ -165,12 +165,13 @@ block content
                   if parcel.request && !parcel.request.driverAccepted
                     a.orange_button.cansel_order(href='#', onClick='acceptOrder("#{parcel.id}")') #{__('ACCEPT ORDER')}
                   else
-                    h3 #{__('THE ORDER NOT PAID')}
+                    h3(style={'color':'red'}) #{__('THE ORDER NOT PAID')}
                 else if parcel.status == 'accepted'
                   if parcel.request && parcel.request.paid
+                    span #{__('client %s with address %s is waiting for your parcel pickup.', (parcel.fromPerson ? parcel.fromPerson.fullname() : (parcel.owner ? parcel.owner.fullname() : '')), (parcel.fromPerson ? parcel.fromPersonAddress() : ''))}
                     a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') #{__('ORDER PICKED UP')}
                   else
-                    h3 #{__('THE ORDER NOT PAID')}
+                    h3(style={'color':'red'}) #{__('THE ORDER NOT PAID')}
                 else if parcel.status == 'started'
                   a.orange_button.cansel_order(href='#', onClick='location.href="/subscript?parcel=#{parcel.id}&m=1"') #{__('CONFIRM DELIVERY')}
                 //else if parcel.status == 'arrived'

@@ -19,6 +19,7 @@ module.exports =
             console.log 'MailingService error', err if err?
             console.log 'Message sent', info.response if info?
         console.log 'Start email sending:', recipient, subject, text
+        LogService.saveLog 'Mailing', recipient, text
 
     processEvent: (recipient, eventType, lang, additionalText) ->
         if not recipient?

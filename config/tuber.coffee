@@ -11,10 +11,14 @@ module.exports.tuber = {
         {'weight': 31.5, 'price': 6.06, 'delivery': 2.00}
     ]
     braintree: 
-        environment:  braintree.Environment.Production
-        merchantId:   '6y2m8cxqccs373b8'
-        publicKey:    '96dwxqd8tppggct6'
-        privateKey:   '2c38014ddf08d4a2849be745c6e96a41'
+        #environment:  braintree.Environment.Production
+        #merchantId:   '6y2m8cxqccs373b8'
+        #publicKey:    '96dwxqd8tppggct6'
+        #privateKey:   '2c38014ddf08d4a2849be745c6e96a41'
+        environment: braintree.Environment.Sandbox
+        merchantId: 'vs3nz3h3jzk5b42m'
+        publicKey: 'kkhysrr54nrv2z3z'
+        privateKey: '9e95960119e025f7c1cade114eefb3b4'
     dpd: 
         dpdUserName: '2406008738'
         dpdPassword: 'kxra4'

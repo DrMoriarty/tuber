@@ -27,8 +27,8 @@ module.exports =
                         shopAddress = if request.fromParcelShopAddress then request.fromParcelShopAddress else ''
                         MailingService.processEvent request.sender.email, 'orderAccepted', request.sender.lang, {INFO: shopAddress}
                     else
-                        MailingService.processEvent request.driver.email, 'driverNeedAccept', request.driver.lang
-                        MailingService.processEvent request.sender.email, 'senderWaitingForAccept', request.sender.lang
+                        MailingService.processEvent request.driver.email, 'driverNeedAccept', request.driver.lang, {INFO: sails.config.proxyHost+'/dashboard'}
+                        MailingService.processEvent request.sender.email, 'senderWaitingForAccept', request.sender.lang, {INFO: sails.config.proxyHost+'/dashboard'}
 
     invoicePaid: (requestId) ->
         Request.findOne(requestId).populateAll().exec (err, result) ->

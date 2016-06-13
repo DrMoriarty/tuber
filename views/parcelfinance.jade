@@ -33,7 +33,7 @@ block content
               if request
                 tr
                   td= request.paid
-                  td= request.price
+                  td= request.totalPrice()
                   td= request.status
                   td= request.trackingNumber
                   if request.status == 'arrived'

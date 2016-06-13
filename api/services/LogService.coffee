@@ -4,9 +4,15 @@ module.exports =
             objectid = argument.id
             argument = JSON.stringify(argument)
         else
-            obj = JSON.parse argument
-            objectid = obj.id
-        Log.create({type: type, method: method, object: objectid, argument: argument}).exec (err, result) ->
+            try
+                obj = JSON.parse argument
+                objectid = obj.id
+            catch error
+                console.log 'Can not parse log argument'
+        data = {type: type, method: method, argument: argument}
+        if objectId?
+            data.object = objectid
+        Log.create(data).exec (err, result) ->
             console.log err if err?
     
     lastLogs: (count, cb) ->

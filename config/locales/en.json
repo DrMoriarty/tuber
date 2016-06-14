@@ -327,5 +327,8 @@
 	"Check you payment details and try again": "Check you payment details and try again",
 	"Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details.": "Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details.",
 	"Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier's data. There is not need to update this status, since we will find 100% find a carrier for your parcel.": "Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier's data. There is not need to update this status, since we will find 100% find a carrier for your parcel.",
-	"client %s with address %s is waiting for your parcel pickup.": "client %s with address %s is waiting for your parcel pickup."
+	"client %s with address %s is waiting for your parcel pickup.": "client %s with address %s is waiting for your parcel pickup.",
+	"SEE MORE OFFERS": "SEE MORE OFFERS",
+	"SORRY, WE DON'T RECOGNIZE THIS EMAIL.": "SORRY, WE DON'T RECOGNIZE THIS EMAIL.",
+	"Check your e-mail address and try again": "Check your e-mail address and try again"
 }

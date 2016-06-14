@@ -288,5 +288,22 @@
 	"Need help?": "Need help?",
 	"Sign up": "Sign up",
 	"SORRY, WE DON'T RECOGNIZE THIS EMAIL.": "SORRY, WE DON'T RECOGNIZE THIS EMAIL.",
-	"Check your e-mail address and try again": "Check your e-mail address and try again"
+	"Check your e-mail address and try again": "Check your e-mail address and try again",
+	"There is no such index in Germany": "There is no such index in Germany",
+	"I want to send a parcel...": "I want to send a parcel...",
+	"Zip code (only numbers)": "Zip code (only numbers)",
+	"City": "City",
+	"Country": "Country",
+	"Mobile phone (only numbers)": "Mobile phone (only numbers)",
+	"City of destination": "City of destination",
+	"Country of destination": "Country of destination",
+	"TOTAL AMOUNT (Incl. VAT):": "TOTAL AMOUNT (Incl. VAT):",
+	"Name, Family Name": "Name, Family Name",
+	"PAYMENT CAN NOT BE COMPLETED": "PAYMENT CAN NOT BE COMPLETED",
+	"Check you payment details and try again": "Check you payment details and try again",
+	"SEE MORE OFFERS": "SEE MORE OFFERS",
+	"Waiting for carrier acception": "Waiting for carrier acception",
+	"Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier's data. There is not need to update this status, since we will find 100% find a carrier for your parcel.": "Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier's data. There is not need to update this status, since we will find 100% find a carrier for your parcel.",
+	"CANCEL THIS ORDER": "CANCEL THIS ORDER",
+	"If you canceled this order now, you will be refunded 75% of delivery price;": "If you canceled this order now, you will be refunded 75% of delivery price;"
 }

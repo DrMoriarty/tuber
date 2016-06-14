@@ -36,10 +36,13 @@ module.exports.bootstrap = (cb) ->
 
     Log.find({object: {$exists: false}}).exec (err, logs) ->
         for log in logs
-            obj = JSON.parse(log.argument)
-            objectId = obj.id
-            Log.update({id: log.id}, {object: objectId}).exec (err, result) ->
-                console.log err if err?
+            try
+                obj = JSON.parse(log.argument)
+                objectId = obj.id
+                Log.update({id: log.id}, {object: objectId}).exec (err, result) ->
+                    console.log err if err?
+            catch err
+                # do nothing
 
     User.find({driverAcceptTime: {$exists: false}}).exec (err, drivers) ->
         for driver in drivers

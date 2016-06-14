@@ -8,10 +8,11 @@ module.exports =
                 #    console.log err if err?
                 if request.driverAccepted
                     if request.senderAccepted
-                        MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang, {INFO: ''}
+                        #MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang, {INFO: ''}
                         shopAddress = if request.fromParcelShopAddress then request.fromParcelShopAddress else ''
                         MailingService.processEvent request.sender.email, 'orderAccepted', request.sender.lang, {INFO: shopAddress}
                     else
+                        console.log 'Driver accepted a parcel, but owner not'
                         # TODO
 
     driverAcceptedByOwner: (requestId) ->
@@ -23,7 +24,7 @@ module.exports =
                 #    console.log err if err?
                 if request.senderAccepted
                     if request.driverAccepted
-                        MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang, {INFO: ''}
+                        #MailingService.processEvent request.driver.email, 'orderAccepted', request.driver.lang, {INFO: ''}
                         shopAddress = if request.fromParcelShopAddress then request.fromParcelShopAddress else ''
                         MailingService.processEvent request.sender.email, 'orderAccepted', request.sender.lang, {INFO: shopAddress}
                     else

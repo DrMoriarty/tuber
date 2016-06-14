@@ -346,6 +346,19 @@ block script
         }
       });
     }
+    function acceptOrder(parcelId) {
+      console.log('Accept order', parcelId);
+      $.ajax({
+        type: 'GET',
+        url: '/accept/carrier/parcel/'+parcelId,
+        success: function(data) {
+          location.reload();
+        },
+        error: function(err) {
+          console.log('Accept order error:', err);
+        }
+      });
+    }
     /*
     function archiveOrder(id) {
       console.log('Archive order', id);

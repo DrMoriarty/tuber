@@ -38,7 +38,7 @@ block content
           label(for='address_str') #{__('ADDRESS (street)*')}
           input#address_str.required.minLength-3(type='text', placeholder='Bruhlstr', name='address1')
           label(for='address_num') #{__('ADDRESS (number)*')}
-          input#address_num.required.number(type='text', placeholder='11', name='address2')
+          input#address_num.required(type='text', placeholder='11', name='address2')
           label(for='zip') #{__('ZIP CODE*')}
           input#zip.required.number.minLength-5(type='text', placeholder='10557', name='zip')
           label(for='city') #{__('CITY*')}
@@ -110,6 +110,7 @@ block script
       $('#addressError').hide();
 
       var country = this[8].value;
+      /*
       if(country != "Austria" &&
         country != "Belgium" &&
         country != "Bulgaria" &&
@@ -141,6 +142,7 @@ block script
         $('#country').addClass('error');
         return false;
       }
+      */
 
 
       if(this[10].value != this[11].value) {

@@ -65,6 +65,13 @@ module.exports =
                         console.log err
                         res.negotiate err
                     else
+                        SearchService.castingDrivers data, parcel, (carriers, prices) ->
+                            if req.mobile
+                                res.view 'msiteprice', {user: req.user, parcel: parcel, drivers: prices, more: false, lang: req.getLocale(req)}
+                            else
+                                res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: false, lang: req.getLocale(req)}
+                        return
+                        """
                         prices =
                             cheapest: 
                                 price: ''
@@ -120,6 +127,7 @@ module.exports =
                             res.view 'msiteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable, lang: req.getLocale(req)}
                         else
                             res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable, lang: req.getLocale(req)}
+                        """
         else
             if req.mobile
                 res.redirect '/?m=1'
@@ -216,6 +224,7 @@ module.exports =
         if req.user?
             parcelId = req.param('parcelId')
             driverId = req.param('driverId')
+            delivery = req.param('delivery')
             Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
                 if err?
                     console.log err
@@ -251,9 +260,9 @@ module.exports =
                                     return cb(null, [])
                     ], (err, result) ->
                         if req.mobile
-                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: req.getLocale(req)}
+                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: req.getLocale(req), delivery: delivery}
                         else
-                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: req.getLocale(req)}
+                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: req.getLocale(req), delivery: delivery}
                     )
         else
             if req.mobile

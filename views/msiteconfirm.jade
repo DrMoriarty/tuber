@@ -111,7 +111,21 @@ block script
   script(src="/js/site/view/gmap.js")
   script(src="https://maps.googleapis.com/maps/api/js")
   script(type='text/javascript').
-    // TODO
+    if('#{delivery}' != 'home') {
+      console.log('Select parcel boxes');
+      var selection1 = $('#addressSelect1')[0];
+      var selection2 = $('#addressSelect2')[0];
+      $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+      $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+      document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
+      document.toParcelShopId = selection2.options[selection2.selectedIndex].getAttribute('parcelShopId');
+      $('#postbox')[0].checked = true;
+      $('#home-adress')[0].checked = false;
+      $('#postbox1')[0].checked = true;
+      $('#home-adress1')[0].checked = false;
+      selectDriver($('#driverSelection')[0]);
+    }
+
     document.currentDriverId = '#{drivers[0].id}';
     document.currentPrice = #{drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
     document.currentDeliveryPrice = #{drivers[0].getDeliveryPrice(parcel)};

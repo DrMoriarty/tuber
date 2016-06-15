@@ -69,7 +69,10 @@ block content
                 each it in result
                   tr
                     td= it.id
-                    td #{it.driver.firstname} #{it.driver.lastname}
+                    if it.driver
+                      td #{it.driver.fullname()}
+                    else
+                      td None
                     if it.parcel && it.parcel.fromPerson
                       td #{it.parcel.fromPerson.firstname} #{it.parcel.fromPerson.lastname}
                     else if it.sender

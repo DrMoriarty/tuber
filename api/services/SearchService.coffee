@@ -28,11 +28,12 @@ module.exports =
                     console.log 'Unfiltered drivers', result
                     drivers = []
                     for driver in result
-                        dist = gps.getDistance(parcel.owner.longitude, parcel.owner.latitude, driver.longitude, driver.latitude)
-                        if dist*0.001 <= driver.coverageDistance
-                            drivers.push driver
-                        else
-                            console.log 'Too far', dist
+                        if parcel.owner? and driver?
+                            dist = gps.getDistance(parcel.owner.longitude, parcel.owner.latitude, driver.longitude, driver.latitude)
+                            if dist*0.001 <= driver.coverageDistance
+                                drivers.push driver
+                            else
+                                console.log 'Too far', dist
                     console.log 'Filtered drivers', drivers
                     cb(null, drivers)
                     

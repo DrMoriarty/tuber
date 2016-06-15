@@ -38,6 +38,7 @@ block content
             thead
               tr
                 //th(onclick='javascript:location.href="/admin/parcel?sort=id"') #
+                th(onclick='javascript:location.href="/admin/parcel?sort=createdAt"') Created
                 th Sender
                 th Driver
                 th Size
@@ -54,6 +55,7 @@ block content
                 each it in result
                   tr(onclick='javascript:if(!window.currentRequestId){location.href="/admin/parcel_log/#{it.id}";}')
                     //td= it.id
+                    td #{moment(it.createdAt).format('LL')}
                     if it.owner
                       td #{it.owner.firstname} #{it.owner.lastname}
                     else

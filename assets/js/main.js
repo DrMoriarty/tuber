@@ -16,11 +16,21 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#card1, #card2, #card3').change(function() {
+	$('#card1, #card2').change(function() {
 		if ($(this).prop('checked')) {
 			$('#wrap_hide').slideDown('fast');
 			//$('#pay_form_button').attr('href', 'Sender_dashboard_4.html').attr('target', '');
 		}
+        $('#cvv_code').unmask();
+        $('#cvv_code').mask('999');
+	});	
+	$('#card3').change(function() {
+		if ($(this).prop('checked')) {
+			$('#wrap_hide').slideDown('fast');
+			//$('#pay_form_button').attr('href', 'Sender_dashboard_4.html').attr('target', '');
+		}
+        $('#cvv_code').unmask();
+        $('#cvv_code').mask('9999');
 	});	
 	
 	// sticked block

@@ -25,10 +25,10 @@ block content
           table.table.table-hover
             thead
               tr
-                th(onclick='javascript:location.href="/admin/person?sort=id"') #
-                th(onclick='javascript:location.href="/admin/person?sort=firstname"') First Name
-                th(onclick='javascript:location.href="/admin/person?sort=lastname"') Last Name
-                th(onclick='javascript:location.href="/admin/person?sort=zip"') ZIP
+                th(onclick='sort("id")') #
+                th(onclick='sort("firstname")') First Name
+                th(onclick='sort("lastname")') Last Name
+                th(onclick='sort("zip")') ZIP
             tbody
               if result
                 each it in result
@@ -48,3 +48,13 @@ block content
                 else
                   li
                     a(href='/admin/person?sort=#{sort}&page=#{i}') #{i}
+
+block script
+  script(type='text/javascript').
+    function sort(field) {
+      var oldSort = '#{sort}';
+      if(oldSort == field) {
+        field = field+'%20DESC';
+      }
+      location.href = location.protocol + '//' + location.host + location.pathname + '?sort=' + field;
+    }

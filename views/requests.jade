@@ -33,15 +33,15 @@ block content
           table.table.table-hover
             thead
               tr
-                th(onclick='javascript:location.href="/admin/request?sort=id"') #
+                th(onclick='sort("id")') #
                 th Sender
                 th Carrier
                 th Departure
-                th(onclick='javascript:location.href="/admin/request?sort=senderAccepted"') Sender accepted
-                th(onclick='javascript:location.href="/admin/request?sort=driverAccepted"') Carrier accepted
-                th(onclick='javascript:location.href="/admin/request?sort=driverAcceptTimeout"') Carrier timeout
-                th(onclick='javascript:location.href="/admin/request?sort=paid"') Paid
-                th(onclick='javascript:location.href="/admin/request?sort=trackingNumber"') Tracking number
+                th(onclick='sort("senderAccepted")') Sender accepted
+                th(onclick='sort("driverAccepted")') Carrier accepted
+                th(onclick='sort("driverAcceptTimeout")') Carrier timeout
+                th(onclick='sort("paid")') Paid
+                th(onclick='sort("trackingNumber")') Tracking number
                 th Delete
             tbody
               if result
@@ -82,6 +82,13 @@ block content
 
 block script
   script(type='text/javascript').
+    function sort(field) {
+      var oldSort = '#{sort}';
+      if(oldSort == field) {
+        field = field+'%20DESC';
+      }
+      location.href = location.protocol + '//' + location.host + location.pathname + '?sort=' + field;
+    }
     window.removeItem = function() {
       $.ajax({
         url: '/api/request/'+window.currentRequestId,

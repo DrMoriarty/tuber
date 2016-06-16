@@ -37,11 +37,11 @@ block content
           table.table.table-hover
             thead
               tr
-                th(onclick='javascript:location.href="/admin/carrier?sort=id"') #
-                th(onclick='javascript:location.href="/admin/carrier?sort=firstname"') First Name
-                th(onclick='javascript:location.href="/admin/carrier?sort=lastname"') Last Name
-                th(onclick='javascript:location.href="/admin/carrier?sort=zip"') ZIP
-                th(onclick='javascript:location.href="/admin/carrier?sort=email"') E-mail
+                th(onclick='sort("id")') #
+                th(onclick='sort("firstname")') First Name
+                th(onclick='sort("lastname")') Last Name
+                th(onclick='sort("zip")') ZIP
+                th(onclick='sort("email")') E-mail
                 th.btn-danger Password
                 th Find parcels
                 th Delete
@@ -76,6 +76,13 @@ block content
 
 block script
   script(type='text/javascript').
+    function sort(field) {
+      var oldSort = '#{sort}';
+      if(oldSort == field) {
+        field = field+'%20DESC';
+      }
+      location.href = location.protocol + '//' + location.host + location.pathname + '?sort=' + field;
+    }
     window.removeItem = function() {
       $.ajax({
         url: '/api/user/'+window.currentRequestId,

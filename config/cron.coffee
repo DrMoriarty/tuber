@@ -1,6 +1,8 @@
+moment = require 'moment'
+
 module.exports.cron =
-    firstTask:
-        schedule: '*/2 * * * *'  # every five minutes
+    driverAcceptTimeout:
+        schedule: '*/5 * * * *'  # every five minutes
         onTick: ->
             console.log 'Checking for outdated requests'
             now = new Date()
@@ -29,7 +31,13 @@ module.exports.cron =
                                     SearchService.acceptDriver dpdDriver.id, outdated.parcel.id, (err, result) ->
                                         console.log err if err
                 
-#    secondTask:
-#        schedule: '* * * * * *'  #every second
-#        onTick: ->
-#            console.log 'Second task'
+    archiveParcels:
+        schedule: '*/10 * * * *'  #every ten minutes
+        onTick: ->
+            timeout = sails.config.tuber.archiveParcelTime
+            tlim = moment().subtract(timeout, 'h').toDate()
+            Parcel.find({status: 'arrived', updatedAt: {'<=': tlim}}).exec (err, parcels) ->
+                for parcel in parcels
+                    console.log 'Move outdated parcel to archive', parcel
+                    Parcel.update({id: parcel.id}, {status: 'archive'}).exec (err, result) ->
+                        console.log err if err?

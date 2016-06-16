@@ -43,4 +43,5 @@ module.exports.tuber = {
         country: 'Russia'
         phone: '01'
     driverAcceptTime: 12  #hours
+    archiveParcelTime: 4  #hours
 }

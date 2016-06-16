@@ -178,9 +178,11 @@ block content
                     a.orange_button.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') #{__('CANCEL THIS ORDER')}
                     span.note * #{__('If you canceled this order now, you will be refunded 75% of delivery price;')}
                 else if parcel.status == 'started'
-                  a.orange_button.cansel_order(href='#', onClick='confirmOrder("#{parcel.id}")') #{__('CONFIRM RECEIPT OF PARCEL')}
+                  span.note #{__('Parcel is received by our carrier and is on the way to client')}
+                  //a.orange_button.cansel_order(href='#', onClick='confirmOrder("#{parcel.id}")') #{__('CONFIRM RECEIPT OF PARCEL')}
                 else if parcel.status == 'arrived'
-                  a.orange_button.cansel_order(href='#', onClick='archiveOrder("#{parcel.id}")') #{__('ARCHIVE RECORD')}
+                  span.note #{__('Parcel is successfully delivered to client')}
+                  //a.orange_button.cansel_order(href='#', onClick='archiveOrder("#{parcel.id}")') #{__('ARCHIVE RECORD')}
                 else
                   a.orange_button.cansel_order(href='#', onClick='deleteOrder("#{parcel.id}")') #{__('DELETE')}
                 if parcel.shipment

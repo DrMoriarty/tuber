@@ -40,8 +40,10 @@ block content
                     td= it.zip
                     td
                       if it.request 
-                        if it.request.senderAccepted
+                        if it.request.senderAccepted && it.request.driverAccepted
                           button.btn.btn-default(type='button') Accepted
+                        else if it.request.senderAccepted
+                          button.btn.btn-default(type='button') Waiting for approval
                         else
                           a(href='/admin/accept/parcel/#{parcelId}/carrier/#{it.id}')
                             button.btn.btn-info.btn-gradient(type='button')

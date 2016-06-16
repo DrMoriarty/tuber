@@ -41,7 +41,12 @@ block content
         .panel-heading
           span.panel-title
             span.glyphicon.glyphicon-list-alt
-            |  Logs for sender person #{parcel.fromPerson ? parcel.fromPerson.firstname + ' ' + parcel.fromPerson.lastname : parcel.owner.firstname + ' ' + parcel.owner.lastname}
+            if parcel.fromPerson
+              |  Logs for sender person #{parcel.fromPerson.fullname()}
+            else if parcel.owner
+              |  Logs for sender person #{parcel.owner.fullname()}
+            else
+              |  Sender not defined
         .panel-body
           table.table.table-hover
             thead

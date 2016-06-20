@@ -51,10 +51,13 @@ html
           li
             a(href='/') #{__('Home')}
           li
-            if user && user.parcelCount
+            if user && (user.parcelCount || user.driver)
               a(href='/dashboard')
-                | #{__('My Parcels')} - 
-                span #{user.parcelCount}
+                if user.parcelCount > 0
+                  | #{__('My Parcels')} - 
+                  span #{user.parcelCount}
+                else
+                  | #{__('My Parcels')}
           li
             a(href='/faq') #{__('FAQ')}
           //li

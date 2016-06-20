@@ -305,5 +305,12 @@
 	"Waiting for carrier acception": "Warten auf Träger acception",
 	"Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier's data. There is not need to update this status, since we will find 100% find a carrier for your parcel.": "Ihr Paket wartet nun durch den Träger bestätigt werden. Dies wird bis zu 12 Stunden dauern. Sobald Träger es bestätigt, erhalten Sie eine Benachrichtigung per E-Mail mit allen Daten des Trägers erhalten. Es wird müssen diesen Status nicht aktualisiert werden, da wir 100% finden einen Träger für Ihr Paket zu finden.",
 	"CANCEL THIS ORDER": "Diese Bestellung stornieren",
-	"If you canceled this order now, you will be refunded 75% of delivery price;": "Wenn Sie diesen Auftrag jetzt storniert, werden Sie 75% des Lieferpreises zurückerstattet;"
+	"If you canceled this order now, you will be refunded 75% of delivery price;": "Wenn Sie diesen Auftrag jetzt storniert, werden Sie 75% des Lieferpreises zurückerstattet;",
+	"Join the packet24 team!": "Join the packet24 team!",
+	"Number of maximum parcels i can transport a single day": "Number of maximum parcels i can transport a single day",
+	"I can transport through:": "I can transport through:",
+	"NOT FOUND": "NOT FOUND",
+	"Edit login information": "Edit login information",
+	"Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details.": "Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details.",
+	"EMAIL ALREADY USED": "EMAIL ALREADY USED"
 }

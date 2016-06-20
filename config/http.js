@@ -12,6 +12,10 @@
 var moment = require('moment');
 var device = require('express-device');
 
+function moneyString(money) {
+    return money.toFixed(2).replace('.', ',');
+}
+
 module.exports.http = {
 
   /****************************************************************************
@@ -128,5 +132,6 @@ module.exports.http = {
 
     customMiddleware: function(app) {
         app.locals.moment = moment;
+        app.locals.moneyString = moneyString;
     }
 };

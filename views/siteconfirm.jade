@@ -27,7 +27,7 @@ block content
           .confirmation-select.confirmation-first-select
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}') #{__('cheapest delivery')}, from #{driver.getPrice(parcel)}&euro;
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}') #{__('cheapest delivery')}, from #{moneyString(driver.getPrice(parcel))} &euro;
           .clear
         hr
         #dateblock
@@ -118,16 +118,16 @@ block content
             h4 #{__('SENDING DETAILS:')}
             span #{parcel.weight}#{__('kg')}, #{parcel.width}#{__('cm')} x #{parcel.length}#{__('cm')} x #{parcel.depth}#{__('cm')}
             //h4 #{__('INSURRANCE:')}
-            //span Standart (until #{parcel.insurance}&euro;)
+            //span Standart (until #{parcel.insurance} &euro;)
             h4 #{__('DELIVERY OPTIONS:')}
             span +
-            span #{drivers[0].getDeliveryPrice(parcel)}
+            span #{moneyString(drivers[0].getDeliveryPrice(parcel))}
             span &euro; #{__('to home adress')}
           .confirmation-confirm-total
             h4
               span #{__('TOTAL AMOUNT (Incl. VAT):')}
-              span#totalPrice #{(drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0) + drivers[0].getDeliveryPrice(parcel)).toFixed(2)}
-              span &euro;
+              span#totalPrice #{(drivers[0].getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0) + drivers[0].getDeliveryPrice(parcel)).toFixed(2)} 
+              span  &euro;
           a.orange_button(onClick='javascript:confirmation();') #{__('CONFIRM')}
           .clear
   // maps
@@ -291,7 +291,7 @@ block script
       if(!document.fromParcelShopId || !document.toParcelShopId) {
         price += document.currentDeliveryPrice;
       }
-      $('span#totalPrice').html(price.toFixed(2));
+      $('span#totalPrice').html(price.toFixed(2).replace(".", ","));
       document.currentDriverId = option.getAttribute('driverId');
       document.currentTotalPrice = price.toFixed(2);
     }

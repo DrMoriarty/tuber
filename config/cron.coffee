@@ -15,6 +15,8 @@ module.exports.cron =
                     Request.find({driverAcceptTimeout: {'<=': now}, driverAccepted: false}).populateAll().exec (err, result) ->
                         console.log 'Outdated requests:', result
                         for outdated in result
+                            if not outdated.parcel?
+                                continue
                             newRequest =
                                 parcel: outdated.parcel.id
                                 driver: dpdDriver.id

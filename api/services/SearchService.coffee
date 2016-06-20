@@ -189,32 +189,32 @@ module.exports =
         if corporations.length > 0
             corp = corporations[0].driver
             prices.cheapest.id = corp.id
-            prices.cheapest.price = corp.getPrice(parcel).toFixed(2)
+            prices.cheapest.price = corp.getPrice(parcel)
             prices.cheapest.available = true
             prices.cheapest.delivery = 'parcelBox'
             
             prices.fastest.id = corp.id
-            prices.fastest.price = (corp.getPrice(parcel) + corp.getDeliveryPrice(parcel)).toFixed(2)
+            prices.fastest.price = (corp.getPrice(parcel) + corp.getDeliveryPrice(parcel))
             prices.fastest.available = true
             prices.fastest.delivery = 'home'
         if filteredDrivers.length > 0
             dr = filteredDrivers[0].driver
             prices.custom1.id = dr.id
-            prices.custom1.price = dr.getPrice(parcel).toFixed(2)
+            prices.custom1.price = dr.getPrice(parcel)
             prices.custom1.available = true
             prices.custom1.delivery = 'home'
             prices.custom1.title = dr.fullname()
         if filteredDrivers.length > 1
             dr = filteredDrivers[1].driver
             prices.custom2.id = dr.id
-            prices.custom2.price = dr.getPrice(parcel).toFixed(2)
+            prices.custom2.price = dr.getPrice(parcel)
             prices.custom2.available = true
             prices.custom2.delivery = 'home'
             prices.custom2.title = dr.fullname()
         if filteredDrivers.length > 2
             dr = filteredDrivers[2].driver
             prices.custom3.id = dr.id
-            prices.custom3.price = dr.getPrice(parcel).toFixed(2)
+            prices.custom3.price = dr.getPrice(parcel)
             prices.custom3.available = true
             prices.custom3.delivery = 'home'
             prices.custom3.title = dr.fullname()

@@ -312,5 +312,6 @@
 	"NOT FOUND": "NOT FOUND",
 	"Edit login information": "Edit login information",
 	"Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details.": "Thank you for registering at Packet24. We have successfully added you details to our carrier database. As soon as you get new order, you will receive an email with all the details.",
-	"EMAIL ALREADY USED": "EMAIL ALREADY USED"
+	"EMAIL ALREADY USED": "EMAIL ALREADY USED",
+	"CONTINUE": "CONTINUE"
 }

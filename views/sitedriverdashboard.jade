@@ -101,15 +101,15 @@ block content
                       strong #{parcel.ownerAddress()}
                   //li.no-margin
                     | #{__('INSURRANCE:')} 
-                    strong Standart (until #{parcel.insurance}&euro;)
+                    strong Standart (until #{parcel.insurance} &euro;)
                   //li
                   //  | #{__('DELIVERY OPTIONS:')}
                   //  if parcel.request && parcel.request.deliveryPrice
-                  //    strong +#{parcel.request.deliveryPrice}&euro; #{parcel.request.deliveryOption}
+                  //    strong +#{parcel.request.deliveryPrice} &euro; #{parcel.request.deliveryOption}
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')}
                     if parcel.request
-                      strong #{parcel.request.totalPrice()}&euro;
+                      strong #{moneyString(parcel.request.totalPrice())} &euro`;
                 if parcel.fromPerson
                   .sender-name
                     figure
@@ -212,10 +212,10 @@ block content
                     em #{__('Pay Success')}
                   li.no-margin
                     | #{__('TOTAL AMOUNT:')}
-                    strong #{payment.price} &euro;
+                    strong #{moneyString(payment.price)} &euro;
                   li
                     | #{__('Received:')}
-                    strong #{payment.price} &euro; 
+                    strong #{moneyString(payment.price)} &euro; 
                   li.no-margin
                     | #{__('Payment Method:')} 
                     strong #{__('Credit Card')}
@@ -267,13 +267,13 @@ block content
                       strong #{parcel.ownerAddress()}
                   li.no-margin
                     | #{__('INSURRANCE:')} 
-                    strong #{__('Standard')} (#{__('until')} #{parcel.insurance}&euro;)
+                    strong #{__('Standard')} (#{__('until')} #{moneyString(parcel.insurance)} &euro;)
                   li
                     | #{__('DELIVERY OPTIONS:')} 
-                    strong +0&euro; #{__('to home adress')}
+                    strong +0 &euro; #{__('to home adress')}
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')} 
-                    strong #{parcel.request.totalPrice()}&euro;
+                    strong #{moneyString(parcel.request.totalPrice())} &euro;
                 //a.orange_button.want_popup(href='#') I WANT DELIVERY THIS ORDER
                 //span.note * You must delivery this order to 23/11/2015
                 .pattern

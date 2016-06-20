@@ -25,7 +25,7 @@ block content
       .order
         h3
           | #{__('SUMMARY OF THE ORDER:')} 
-          span &euro;#{driver.getPrice(parcel)}
+          span #{moneyString(driver.getPrice(parcel))} &euro;
         ul
           li
             | #{__('FROM:')}  
@@ -45,8 +45,8 @@ block content
             strong #{parcel.weight}kg, #{parcel.width}cm x #{parcel.length}cm x #{parcel.depth}cm
           //li
             | #{__('INSURRANCE:')} 
-            strong #{__('Standard')} (#{__('until')} #{parcel.insurance}&euro;)
-        span.total #{__('TOTAL AMOUNT (Incl. VAT):')} #{request.totalPrice()}&euro;
+            strong #{__('Standard')} (#{__('until')} #{moneyString(parcel.insurance)} &euro;)
+        span.total #{__('TOTAL AMOUNT (Incl. VAT):')} #{moneyString(request.totalPrice())} &euro;
     hr
     .container
       form.form#payment-form(action='/braintree/transaction/#{request.id}', method='POST')
@@ -78,7 +78,7 @@ block content
       #want_popup_box.popup_box
         span
           | #{__('YOUR PAYMENT HAVE BEEN COMPLETE')}
-          strong #{request.totalPrice()} &euro;
+          strong #{moneyString(request.totalPrice())} &euro;
         br
         strong #{__('The carrier will receive a message about that')}
         br

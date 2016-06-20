@@ -158,6 +158,7 @@ block script
       $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
       $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
       document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
+      document.fromParcelShopAddress = selection1.options[selection1.selectedIndex].innerText;
       document.toParcelShopId = selection2.options[selection2.selectedIndex].getAttribute('parcelShopId');
       $('#postbox')[0].checked = true;
       $('#home')[0].checked = false;

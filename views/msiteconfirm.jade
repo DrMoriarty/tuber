@@ -118,6 +118,7 @@ block script
       $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
       $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
       document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
+      document.fromParcelShopAddress = selection1.options[selection1.selectedIndex].innerText;
       document.toParcelShopId = selection2.options[selection2.selectedIndex].getAttribute('parcelShopId');
       $('#postbox')[0].checked = true;
       $('#home-adress')[0].checked = false;
@@ -222,10 +223,20 @@ block script
           return;
         }
         // create request
-        $.post('/api/request', {parcel: '#{parcel.id}', driver: document.currentDriverId, sender: '#{user.id}', senderAccepted: true, price: document.currentTotalPrice}, function(request, status) {
+        var newRequest = {parcel: '#{parcel.id}', driver: document.currentDriverId, sender: '#{user.id}', senderAccepted: false, price: document.currentPrice, deliveryPrice: document.currentDeliveryPrice};
+        if(document.fromParcelShopId) newRequest.fromParcelShop = document.fromParcelShopId;
+        if(document.toParcelShopId) newRequest.toParcelShop = document.toParcelShopId;
+        if(document.fromParcelShopAddress) newRequest.fromParcelShopAddress = document.fromParcelShopAddress;
+        if(!document.fromParcelShopId || !document.toParcelShopId) {
+          newRequest.deliveryOption = 'home';
+        }
+        $.post('/api/request', newRequest, function(request, status) {
           if(status == 'success') {
             $.post('/api/parcel/#{parcel.id}', {request:request.id}, function(data, status) {
               if(status == 'success') {
+                $.get('/accept/parcel/#{parcel.id}/carrier/'+document.currentDriverId, function(request, status) {
+                  console.log('Accepting driver done', request, status);
+                });
                 location.href='/payment/'+request.id+'?m=1';
               } else {
                 console.log('Parcel result', data);

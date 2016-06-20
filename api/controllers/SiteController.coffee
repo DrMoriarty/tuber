@@ -166,7 +166,7 @@ module.exports =
                                     archive.push request
                         cb(err, [result, archive])
                 (cb) ->
-                    Request.find({paid: true}).sort('createdAt DESC').populateAll().exec (err, requests) ->
+                    Request.find({paid: true, driver: req.user.id}).sort('createdAt DESC').populateAll().exec (err, requests) ->
                         console.log 'Get completed requests', requests
                         cb(err, requests)
             ], (err, result) ->

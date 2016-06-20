@@ -188,7 +188,7 @@ block content
                 if parcel.shipment
                   p(style={'text-align': 'center'})
                     u
-                      a(href='/upload/#{parcel.id}.pdf', target='_blank')
+                      a.orange_button.cansel_order(href='/upload/#{parcel.id}.pdf', target='_blank')
                         | #{__('Open parcel label')}
                 .pattern
             .clear

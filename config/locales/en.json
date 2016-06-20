@@ -54,7 +54,6 @@
 	"YOU HAVE NO ARCHIVED PARCELS YET": "YOU HAVE NO ARCHIVED PARCELS YET",
 	"YOU CANCELLED ORDER": "YOU CANCELLED ORDER",
 	"ARE YOU SURE? You can not undo this action.": "ARE YOU SURE? You can not undo this action.",
-	"If you canceled this order, you will be refunded 75% delivery price": "If you canceled this order, you will be refunded 75% delivery price",
 	"YES, CANCEL THIS ORDER": "YES, CANCEL THIS ORDER",
 	"NO, LEAVE MY ORDER": "NO, LEAVE MY ORDER",
 	"ADRESS:": "ADRESS:",
@@ -256,6 +255,7 @@
 	"SECURITY CODE*": "SECURITY CODE*",
 	"CONFIRM ORDER": "CONFIRM ORDER",
 	"YOUR PAYMENT HAVE BEEN COMPLETE": "YOUR PAYMENT HAVE BEEN COMPLETE",
+	"PAYMENTCOMPLETE2": " ",
 	"The carrier will receive a message about that": "The carrier will receive a message about that",
 	"We will inform you about your order status": "We will inform you about your order status",
 	"CARDHOLDER FIRST NAME*": "CARDHOLDER FIRST NAME*",
@@ -330,5 +330,11 @@
 	"client %s with address %s is waiting for your parcel pickup.": "client %s with address %s is waiting for your parcel pickup.",
 	"SEE MORE OFFERS": "SEE MORE OFFERS",
 	"SORRY, WE DON'T RECOGNIZE THIS EMAIL.": "SORRY, WE DON'T RECOGNIZE THIS EMAIL.",
-	"Check your e-mail address and try again": "Check your e-mail address and try again"
+	"Check your e-mail address and try again": "Check your e-mail address and try again",
+	"Earn up to 13 €/hour by delivering parcels to people": "Earn up to 13 €/hour by delivering parcels to people",
+	"Be part of our growing start-up community": "Be part of our growing start-up community",
+	"We pay every 2 weeks straight to your bank account": "We pay every 2 weeks straight to your bank account",
+	"Flexible work; you can choose your own hours": "Flexible work; you can choose your own hours",
+	"Be active and stay in shape!": "Be active and stay in shape!",
+	"If you canceled this order, you will be refunded 75% delivery price": "If you canceled this order, you will be refunded 75% delivery price"
 }

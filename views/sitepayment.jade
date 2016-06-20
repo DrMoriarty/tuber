@@ -86,10 +86,11 @@ block content
         span
           | #{__('YOUR PAYMENT HAVE BEEN COMPLETE')}
           strong #{moneyString(request.totalPrice())} &euro;
+          | #{__('PAYMENTCOMPLETE2')}
         br
         strong #{__('The carrier will receive a message about that')}
         br
-        em * #{__('We will inform you about your order status')}
+        em #{__('We will inform you about your order status')}
         br
         a.orange_button(href='/dashboard') #{__('OK')}
       #error_popup_box.popup_box

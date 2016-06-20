@@ -5,6 +5,7 @@
  @docs        :: http://sailsjs.org/#!documentation/models
 """
 
+moment = require 'moment'
 async = require 'async'
 gps = require 'gps-util'
 
@@ -66,14 +67,26 @@ module.exports =
             defaultsTo: 'draft'
 
         ownerAddress: ->
-            if @owner?
-                return @owner.zip + ' ' + @owner.city + ', ' + @owner.address1 + ' ' + @owner.address2
+            if moment.locale() == 'de'
+                if @owner?
+                    return  @owner.address1 + ' ' + @owner.address2 + ', ' + @owner.zip + ' ' + @owner.city
+                else
+                    return ''
             else
-                return ''
+                if @owner?
+                    return @owner.zip + ' ' + @owner.city + ', ' + @owner.address1 + ' ' + @owner.address2
+                else
+                    return ''
         fromPersonAddress: ->
-            (if @fromPerson.zip? then @fromPerson.zip else '') + ' ' + @fromPerson.city + ', ' + @fromPerson.address1 + ' ' + @fromPerson.address2
+            if moment.locale() == 'de'
+                 @fromPerson.address1 + ' ' + @fromPerson.address2 + ', ' + (if @fromPerson.zip? then @fromPerson.zip else '') + ' ' + @fromPerson.city
+            else
+                (if @fromPerson.zip? then @fromPerson.zip else '') + ' ' + @fromPerson.city + ', ' + @fromPerson.address1 + ' ' + @fromPerson.address2
         toPersonAddress: ->
-            (if @toPerson.zip? then @toPerson.zip else '') + ' ' + @toPerson.city + ', ' + @toPerson.address1 + ' ' + @toPerson.address2
+            if moment.locale() == 'de'
+                @toPerson.address1 + ' ' + @toPerson.address2 + ', ' + (if @toPerson.zip? then @toPerson.zip else '') + ' ' + @toPerson.city
+            else
+                (if @toPerson.zip? then @toPerson.zip else '') + ' ' + @toPerson.city + ', ' + @toPerson.address1 + ' ' + @toPerson.address2
 
     beforeCreate: (parcel, cb) ->
         if parcel.insurance? and parcel.insurance > 0

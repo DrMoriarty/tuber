@@ -138,7 +138,8 @@ block content
                   //.sender-name
                   div
                     figure
-                      span #{__('THE RECIPIENT:')}
+                      ul
+                        li #{__('THE RECIPIENT:')}
                       //img(src='/img/person.png', alt='')
                       //figcaption
                         a(href='tel://#{parcel.toPerson.phone}')
@@ -175,7 +176,7 @@ block content
                   else if parcel.request && !parcel.request.paid
                     a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}"') #{__('PROCESS PAYMENT')}
                   else
-                    a.orange_button.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') #{__('CANCEL THIS ORDER')}
+                    a.orange_button.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') #{__('CANCEL THIS ORDER')} *
                     span.note * #{__('If you canceled this order now, you will be refunded 75% of delivery price;')}
                 else if parcel.status == 'started'
                   span.note #{__('Parcel is received by our carrier and is on the way to client')}
@@ -188,7 +189,7 @@ block content
                 if parcel.shipment
                   p(style={'text-align': 'center'})
                     u
-                      a(href='/upload/#{parcel.id}.pdf', target='_blank')
+                      a.orange_button.cansel_order(href='/upload/#{parcel.id}.pdf', target='_blank')
                         | #{__('Open parcel label')}
                 .pattern
             ul.pagination

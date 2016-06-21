@@ -7,7 +7,7 @@ moment = require 'moment'
 async = require 'async'
 gps = require 'gps-util'
 fs = require 'fs'
-pageSize = 3
+pageSize = 6
 
 module.exports = 
     home: (req, res) ->
@@ -163,7 +163,7 @@ module.exports =
                             view = 'msitedashboard'
                         else
                             view = 'sitedashboard'
-                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.floor(count/pageSize)+1, lang: lang}
+                        res.view view, {user: req.user, parcels: result, archive: archive, payments: [], page: page, pages: Math.ceil(count/pageSize), lang: lang}
         else if req.user? and req.user.driver
             async.series( [
                 (cb) ->
@@ -205,7 +205,7 @@ module.exports =
                                 Parcel.findOne(it.parcel.id).populateAll().exec (err, parcel) ->
                                     cb err, parcel
                             (err, parcelPage) ->
-                                res.view view, {user: req.user, parcels: parcelPage, archive: parcelArchive, payments: payments, page: page, pages: Math.floor(count/pageSize)+1, lang: lang}
+                                res.view view, {user: req.user, parcels: parcelPage, archive: parcelArchive, payments: payments, page: page, pages: Math.ceil(count/pageSize), lang: lang}
             )
             """
             filter = {driver: req.user.id, status: {'!': ['arrived', 'archive', 'canceled']}}
@@ -224,7 +224,7 @@ module.exports =
                             view = 'sitedriverdashboard'
                         Request.find({paid: true}).sort('createdAt DESC').populateAll().exec (err, requests) ->
                             console.log 'Get completed requests', requests
-                            res.view view, {user: req.user, parcels: result, archive: archive, payments: requests, page: page, pages: Math.floor(count/pageSize)+1, lang: lang}
+                            res.view view, {user: req.user, parcels: result, archive: archive, payments: requests, page: page, pages: Math.ceil(count/pageSize), lang: lang}
             """
         else
             if req.mobile

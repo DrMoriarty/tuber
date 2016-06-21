@@ -13,5 +13,4 @@ module.exports =
         unique: true
     code:
         type: 'string'
-        required: true
 

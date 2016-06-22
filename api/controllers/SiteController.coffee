@@ -80,64 +80,6 @@ module.exports =
                                 res.view 'msiteprice', {user: req.user, parcel: parcel, drivers: prices, more: false, lang: lang}
                             else
                                 res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: false, lang: lang}
-                        return
-                        """
-                        prices =
-                            cheapest: 
-                                price: ''
-                                pickupDate: '-'
-                                arriveDate: '-'
-                                available: false
-                            fastest:
-                                price: ''
-                                pickupDate: '-'
-                                arriveDate: '-'
-                                available: false
-                            ecologiest:
-                                price: ''
-                                pickupDate: '-'
-                                arriveDate: '-'
-                                available: false
-                        console.log 'Drivers', data
-                        cheapest = fastest = ecologiest = null
-                        pathLength = parcel.pathLength
-                        for carrier in data
-                            if not carrier.isCarrierCorporation() and carrier.getPrice(parcel) > 100
-                                continue
-                            if cheapest?
-                                if carrier.getPrice(parcel) < cheapest.getPrice(parcel)
-                                    cheapest = carrier
-                            else
-                                cheapest = carrier
-                            if fastest?
-                                if carrier.averageDayDistance > fastest.averageDayDistance or (carrier.averageDayDistance == fastest.averageDayDistance and carrier.averageSpeed > fastest.averageSpeed)
-                                    fastest = carrier
-                            else
-                                fastest = carrier
-                            if ecologiest?
-                                if carrier.averageSpeed < ecologiest.averageSpeed
-                                    ecologiest = carrier
-                            else
-                                ecologiest = carrier
-                        if cheapest?
-                            prices.cheapest.id = cheapest.id
-                            prices.cheapest.price = cheapest.getPrice parcel
-                            prices.cheapest.available = true
-                        if fastest?
-                            prices.fastest.id = fastest.id
-                            prices.fastest.price = fastest.getPrice parcel
-                            prices.fastest.available = true
-                        if ecologiest?
-                            prices.ecologiest.id = ecologiest.id
-                            prices.ecologiest.price = ecologiest.getPrice parcel
-                            prices.ecologiest.available = true
-                        console.log 'Prices', prices
-                        moreAvailable = data.length > 3
-                        if req.mobile
-                            res.view 'msiteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable, lang: lang}
-                        else
-                            res.view 'siteprice', {user: req.user, parcel: parcel, drivers: prices, more: moreAvailable, lang: lang}
-                        """
         else
             if req.mobile
                 res.redirect '/?m=1'

@@ -27,7 +27,7 @@ module.exports =
                 price = DepartureService.defaultPrice driver, parcel
         else
             price = DepartureService.defaultPrice driver, parcel
-            dpdPrice = DepartureService.dpdPrice parcel
+            dpdPrice = DepartureService.dpdPrice(parcel) + DepartureService.dpdDeliveryPrice(parcel)
             if price < dpdPrice
                 price = dpdPrice
         return price

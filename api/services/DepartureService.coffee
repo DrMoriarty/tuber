@@ -101,7 +101,9 @@ module.exports =
                                 Request.update({id: requestId}, {trackingNumber: shipmentData.parcelLabelNumber}).exec (err, res) ->
                                     console.log err if err?
                                 Parcel.findOne(request.parcel.id).populateAll().exec (err, parcel) ->
-                                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, {'INFO': sails.getBaseURL()+'/'+fname}
+                                    url = sails.getBaseURL()+'/'+fname
+                                    url = '<a href="'+url+'">'+url+'</a>';
+                                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, {'INFO': url}
                             catch error
                                 console.log error
                                 LogService.saveLog 'Error', 'DPD processing', data

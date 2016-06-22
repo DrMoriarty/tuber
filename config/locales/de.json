@@ -255,7 +255,7 @@
 	"SECURITY CODE*": "SICHERHEITSCODE*",
 	"CONFIRM ORDER": "AUFTRAG BESTÄTIGEN",
 	"YOUR PAYMENT HAVE BEEN COMPLETE": "Ihre Zahlung in höhe von",
-    "PAYMENTCOMPLETE2": "Wurde ABGESCHLOSSEN.",
+	"PAYMENTCOMPLETE2": "Wurde ABGESCHLOSSEN.",
 	"The carrier will receive a message about that": "Der zusteller wird benachrichtigt.",
 	"We will inform you about your order status": "Wir werden Sie über den Status Ihrer Bestellung informieren.",
 	"CARDHOLDER FIRST NAME*": "NACHNAME DES KARTENINHABERS*",
@@ -318,5 +318,8 @@
 	"Be part of our growing start-up community": "Werden Sie Teil unseres wachsenden Start-UP-Community",
 	"We pay every 2 weeks straight to your bank account": "Wir zahlen alle 2 Wochen direkt auf Ihr Bankkonto",
 	"Flexible work; you can choose your own hours": "Flexible Arbeits; Sie können Ihre eigenen Stunden Wählen",
-	"Be active and stay in shape!": "Aktiv sein und in Form zu bleiben!"
+	"Be active and stay in shape!": "Aktiv sein und in Form zu bleiben!",
+	"If you canceled this order, you will be refunded 75% delivery price": "If you canceled this order, you will be refunded 75% delivery price",
+	"ACCEPT ORDER": "ACCEPT ORDER",
+	"client %s with address %s is waiting for your parcel pickup.": "client %s with address %s is waiting for your parcel pickup."
 }

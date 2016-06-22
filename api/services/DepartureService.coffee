@@ -56,9 +56,9 @@ module.exports =
                 delivery = DepartureService.defaultDeliveryPrice driver, parcel
         else
             delivery = DepartureService.defaultDeliveryPrice driver, parcel
-            dpdDelivery = DepartureService.dpdDeliveryPrice parcel
-            if delivery < dpdDelivery
-                delivery = dpdDelivery
+            #dpdDelivery = DepartureService.dpdDeliveryPrice parcel
+            #if delivery < dpdDelivery
+            #    delivery = dpdDelivery
         return delivery
         
     autoAccept: (driver) ->

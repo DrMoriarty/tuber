@@ -27,7 +27,7 @@ block content
           .confirmation-select.confirmation-first-select
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}') #{__('cheapest delivery')}, from #{moneyString(driver.getPrice(parcel))} &euro;
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}', selected=driver.id == selected) #{__('cheapest delivery')}, from #{moneyString(driver.getPrice(parcel))} &euro;
           .clear
         hr
         #dateblock
@@ -121,7 +121,7 @@ block content
             //span Standart (until #{parcel.insurance} &euro;)
             h4 #{__('DELIVERY OPTIONS:')}
             span +
-            span #{moneyString(drivers[0].getDeliveryPrice(parcel))}
+            span#deliveryPrice #{moneyString(drivers[0].getDeliveryPrice(parcel))}
             span &euro; #{__('to home adress')}
           .confirmation-confirm-total
             h4
@@ -292,6 +292,7 @@ block script
       if(!document.fromParcelShopId || !document.toParcelShopId) {
         price += document.currentDeliveryPrice;
       }
+      $('deliveryPrice').html(document.currentDeliveryPrice.toFixed(2).replace(".", ","));
       $('span#totalPrice').html(price.toFixed(2).replace(".", ","));
       document.currentDriverId = option.getAttribute('driverId');
       document.currentTotalPrice = price.toFixed(2);

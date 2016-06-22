@@ -292,7 +292,7 @@ block script
       if(!document.fromParcelShopId || !document.toParcelShopId) {
         price += document.currentDeliveryPrice;
       }
-      $('deliveryPrice').html(document.currentDeliveryPrice.toFixed(2).replace(".", ","));
+      $('span#deliveryPrice').html(document.currentDeliveryPrice.toFixed(2).replace(".", ","));
       $('span#totalPrice').html(price.toFixed(2).replace(".", ","));
       document.currentDriverId = option.getAttribute('driverId');
       document.currentTotalPrice = price.toFixed(2);

@@ -84,8 +84,8 @@ block content
         button#pay_form_button.orange_button #{__('CONFIRM ORDER')}
       #want_popup_box.popup_box
         span
-          | #{__('YOUR PAYMENT HAVE BEEN COMPLETE')}
-          strong #{moneyString(request.totalPrice())} &euro;
+          | #{__('YOUR PAYMENT HAVE BEEN COMPLETE')}  
+          strong #{moneyString(request.totalPrice())} &euro;  
           | #{__('PAYMENTCOMPLETE2')}
         br
         strong #{__('The carrier will receive a message about that')}

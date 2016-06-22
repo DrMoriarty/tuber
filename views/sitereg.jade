@@ -34,19 +34,19 @@ block content
           label(for='first_name') #{__('COMPANY (optional)')}
           input#first_name(type='text', name='company')
           label(for='vat') #{__('VAT (optional)')}
-          input#vat(type='text', placeholder='DE000000000', name='vat')
+          input#vat(type='text', placeholder='#{__("DE000000000")}', name='vat')
           label(for='address_str') #{__('ADDRESS (street)*')}
-          input#address_str.required.minLength-3(type='text', placeholder='Bruhlstr', name='address1')
+          input#address_str.required.minLength-3(type='text', placeholder='#{__("Bruhlstr")}', name='address1')
           label(for='address_num') #{__('ADDRESS (number)*')}
-          input#address_num.required(type='text', placeholder='11', name='address2')
+          input#address_num.required(type='text', placeholder='#{__("11")}', name='address2')
           label(for='zip') #{__('ZIP CODE*')}
-          input#zip.required.number.minLength-5(type='text', placeholder='10557', name='zip')
+          input#zip.required.number.minLength-5(type='text', placeholder='#{__("10557")}', name='zip')
           label(for='city') #{__('CITY*')}
-          input#city.required.minLength-3(type='text', placeholder='Hannover', name='city')
+          input#city.required.minLength-3(type='text', placeholder='#{__("Hannover")}', name='city')
           label(for='country') #{__('COUNTRY*')}
-          input#country.required(type='text', placeholder='Germany', name='country')
+          input#country.required(type='text', placeholder='#{__("Germany")}', name='country')
           label(for='mobile') #{__('MOBILE PHONE*')}
-          input#mobile.required.number.minLength-11(type='text', placeholder='+49 511 879 893 02', name='phone')
+          input#mobile.required.number.minLength-11(type='text', placeholder='#{__("+49 511 879 893 02")}', name='phone')
           label(for='email') #{__('E-MAIL*')}
           input#email.required.email(type='text', name='email')
           label(for='email_again') #{__('E-MAIL CONFIRMATION*')}

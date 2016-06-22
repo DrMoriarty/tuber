@@ -110,10 +110,27 @@ block content
                     | #{__('TOTAL AMOUNT (Including VAT):')} 
                     if parcel.request
                       strong #{moneyString(parcel.request.totalPrice())} &euro;
+                  if parcel.fromPerson
+                    li
+                      | #{__('THE SENDER:')}
+                    li
+                      | #{__('NAME:')} 
+                      strong #{parcel.fromPerson.fullname()}
+                    li
+                      | #{__('PHONENUMBER:')} 
+                      strong #{parcel.fromPerson.phone}
+                  if parcel.toPerson
+                    li #{__('THE RECIPIENT:')}
+                    li
+                      | #{__('NAME:')} 
+                      strong #{parcel.toPerson.fullname()}
+                    li
+                      | #{__('PHONENUMBER:')} 
+                      strong #{parcel.toPerson.phone}
                 if parcel.fromPerson
-                  .sender-name(style='min-height: 221px;')
+                  //.sender-name(style='min-height: 221px;')
                     figure
-                      span #{__('THE SENDER:')}
+                      //span #{__('THE SENDER:')}
                       //img(src='img/person.png', alt='')
                       //figcaption
                         a(href='tel://#{parcel.fromPerson.phone}')
@@ -135,9 +152,9 @@ block content
                         | #{__('PHONENUMBER:')} 
                         strong #{parcel.fromPerson.phone}
                 if parcel.toPerson
-                  .sender-name(style='min-height: 221px;')
+                  //.sender-name(style='min-height: 221px;')
                     figure
-                      span #{__('THE SENDER:')}
+                      span #{__('THE RECIPIENT:')}
                       //img(src='img/person.png', alt='')
                       //figcaption
                         a(href='tel://#{parcel.toPerson.phone}')
@@ -168,7 +185,7 @@ block content
                     h3(style={'color':'red'}) #{__('THE ORDER NOT PAID')}
                 else if parcel.status == 'accepted'
                   if parcel.request && parcel.request.paid
-                    span #{__('client %s with address %s is waiting for your parcel pickup.', (parcel.fromPerson ? parcel.fromPerson.fullname() : (parcel.owner ? parcel.owner.fullname() : '')), (parcel.fromPerson ? parcel.fromPersonAddress() : ''))}
+                    span #{__('Client %s with address %s is waiting for your parcel pickup.', (parcel.fromPerson ? parcel.fromPerson.fullname() : (parcel.owner ? parcel.owner.fullname() : '')), (parcel.fromPerson ? parcel.fromPersonAddress() : ''))}
                     a.orange_button.cansel_order(href='#', onClick='startOrder("#{parcel.id}")') #{__('ORDER PICKED UP')}
                   else
                     h3(style={'color':'red'}) #{__('THE ORDER NOT PAID')}

@@ -215,10 +215,14 @@ module.exports =
                                     console.log 'Parcel shops for ', toAddress.latitude, toAddress.longitude, ' not found!'
                                     return cb(null, [])
                     ], (err, result) ->
+                        selectedDriver = if drivers[0]? then drivers[0] else null
+                        for dr in drivers
+                            if dr.id == driverId
+                                selectedDriver = dr
                         if req.mobile
-                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
+                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: selectedDriver, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
                         else
-                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: driverId, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
+                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: selectedDriver, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
                     )
         else
             if req.mobile

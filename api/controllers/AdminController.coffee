@@ -85,7 +85,7 @@ module.exports =
         sort = req.param('sort') or 'createdAt DESC'
         Parcel.count().exec (err, count) ->
             Parcel.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
-                res.view 'parcels', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+                res.view 'parcels', {user: req.user, result: result, sort: sort, page: page, pages: Math.ceil(count/pageSize)}
 
     newParcel: (req, res) ->
         User.find({driver: false}).exec (err, senders) ->
@@ -105,7 +105,7 @@ module.exports =
         sort = req.param('sort') or 'createdAt DESC'
         Person.count().exec (err, count) ->
             Person.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
-                res.view 'persons', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+                res.view 'persons', {user: req.user, result: result, sort: sort, page: page, pages: Math.ceil(count/pageSize)}
 
     newPerson: (req, res) ->
         res.view 'newperson', {user: req.user}
@@ -146,7 +146,7 @@ module.exports =
         else
             User.count(filter).exec (err, count) ->
                 User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
-                    res.view 'carriers', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+                    res.view 'carriers', {user: req.user, result: result, sort: sort, page: page, pages: Math.ceil(count/pageSize)}
 
     newCarrier: (req, res) ->
         res.view 'newcarrier', {user: req.user}
@@ -176,7 +176,7 @@ module.exports =
         else
             User.count(filter).exec (err, count) ->
                 User.find(filter).sort(sort).paginate({page:page, limit:pageSize}).exec (err, result) ->
-                    res.view 'senders', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+                    res.view 'senders', {user: req.user, result: result, sort: sort, page: page, pages: Math.ceil(count/pageSize)}
 
     newSender: (req, res) ->
         res.view 'newsender', {user: req.user}
@@ -303,7 +303,7 @@ module.exports =
         sort = req.param('sort') or 'createdAt DESC'
         Request.count().exec (err, count) ->
             Request.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
-                res.view 'requests', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+                res.view 'requests', {user: req.user, result: result, sort: sort, page: page, pages: Math.ceil(count/pageSize)}
 
     serverTests: (req, res) ->
         res.view 'pressureTest', {user: req.user}
@@ -356,7 +356,7 @@ module.exports =
                         else
                             cb(null)
                     (err) ->
-                        res.view 'payments', {user: req.user, result: requests, sort: sort, page: page, pages: (count/pageSize)+1, fromDate: fromDate, toDate: toDate, enableDoing: enableDoing, enableDone: enableDone}
+                        res.view 'payments', {user: req.user, result: requests, sort: sort, page: page, pages: Math.ceil(count/pageSize), fromDate: fromDate, toDate: toDate, enableDoing: enableDoing, enableDone: enableDone}
 
     paymentsFile: (req, res) ->
         fromDate = req.param('fromDate')
@@ -400,7 +400,7 @@ module.exports =
         sort = req.param('sort') or 'createdAt DESC'
         Notification.count().exec (err, count) ->
             Notification.find().sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
-                res.view 'notifications', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1}
+                res.view 'notifications', {user: req.user, result: result, sort: sort, page: page, pages: Math.ceil(count/pageSize)}
 
     newNotification: (req, res) ->
         res.view 'newNotification', {user: req.user}

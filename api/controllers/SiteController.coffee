@@ -405,6 +405,8 @@ module.exports =
                         res.negotiate err
                     else
                         res.json {status: 'success'}
+                Request.update({id: request.id}, {status: 'done'}).exec (err, data) ->
+                    console.log err if err?
                 MailingService.processEvent request.sender.email, 'orderArrived', request.sender.lang
             else
                 res.notFound()

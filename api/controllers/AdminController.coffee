@@ -345,8 +345,18 @@ module.exports =
         else if enableDoing and not enableDone
             filter.status = {$ne: 'done'};
         Request.count(filter).exec (err, count) ->
-            Request.find(filter).sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
-                res.view 'payments', {user: req.user, result: result, sort: sort, page: page, pages: (count/pageSize)+1, fromDate: fromDate, toDate: toDate, enableDoing: enableDoing, enableDone: enableDone}
+            Request.find(filter).sort(sort).paginate({page:page, limit:pageSize}).populateAll().exec (err, requests) ->
+                async.each requests,
+                    (it, cb) ->
+                        if it.parcel?
+                            Parcel.findOne({id: it.parcel.id}).populateAll().exec (err, parcel) ->
+                                if parcel?
+                                    it.parcel = parcel
+                                cb(null)
+                        else
+                            cb(null)
+                    (err) ->
+                        res.view 'payments', {user: req.user, result: requests, sort: sort, page: page, pages: (count/pageSize)+1, fromDate: fromDate, toDate: toDate, enableDoing: enableDoing, enableDone: enableDone}
 
     paymentsFile: (req, res) ->
         fromDate = req.param('fromDate')

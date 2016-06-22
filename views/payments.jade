@@ -57,7 +57,7 @@ block content
           table.table.table-hover
             thead
               tr
-                th(onclick='javascript:reloadPage({sort:"id"});') #
+                //th(onclick='javascript:reloadPage({sort:"id"});') #
                 th(onclick='javascript:reloadPage({sort:"driver"});') Carrier
                 th(onclick='javascript:reloadPage({sort:"sender"});') Sender
                 th(onclick='javascript:reloadPage({sort:"sender"});') Receiver
@@ -68,7 +68,7 @@ block content
               if result
                 each it in result
                   tr
-                    td= it.id
+                    //td= it.id
                     if it.driver
                       td #{it.driver.fullname()}
                     else
@@ -88,7 +88,7 @@ block content
                     if it.parcel
                       td= moment(it.parcel.arriveDate).format('LL')
                     else
-                      td
+                      td None
                     td= it.paid
                     td= it.status
           .dataTables_info

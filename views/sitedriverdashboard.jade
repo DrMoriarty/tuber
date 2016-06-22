@@ -109,7 +109,7 @@ block content
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')}
                     if parcel.request
-                      strong #{moneyString(parcel.request.totalPrice())} &euro`;
+                      strong #{moneyString(parcel.request.totalPrice())} &euro;
                 if parcel.fromPerson
                   .sender-name
                     figure

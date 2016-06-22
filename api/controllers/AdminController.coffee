@@ -374,9 +374,12 @@ module.exports =
                 from = if r.parcel? and r.parcel.fromPerson? then r.parcel.fromPerson else r.sender
                 to = if r.parcel? and r.parcel.toPerson? then r.parcel.toPerson else r.sender
                 arrivedate = if r.parcel? then moment(r.parcel.arriveDate).format('LL') else ''
+                drName = if r.driver? then r.driver.firstname + ' ' + r.driver.lastname else ''
+                frName = if from? then from.firstname + ' ' + from.lastname else ''
+                toName = if to? then to.firstname + ' ' + to.lastname else ''
                 s = s +
                 """
-                #{r.driver.firstname} #{r.driver.lastname};#{from.firstname} #{from.lastname};#{to.firstname} #{to.lastname};#{arrivedate};#{r.paid};#{r.status};#{r.price}\n
+                #{drName};#{frName};#{toName};#{arrivedate};#{r.paid};#{r.status};#{r.price}\n
                 """
             console.log 'Filter', filter
             res.attachment('report.csv')

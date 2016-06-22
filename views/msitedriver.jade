@@ -123,6 +123,18 @@ block script
       validateOnTheFly: true
     });
     $('.js-validate').submit(function() {
+      var accountNumber = $('#accountNumber').val();
+      var bankCode = $('#bankCode').val();
+      var bankName = $('#bankName').val();
+      if(accountNumber.length <= 11) {
+        return;
+      }
+      if(bankCode.length <= 5) {
+        return;
+      }
+      if(bankName.length <= 3) {
+        return;
+      }
       regdata = $(this).serialize();
       $.ajax({
         type: 'POST',

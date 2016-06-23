@@ -169,7 +169,7 @@ module.exports =
         Zip.find({code: zip}).populateAll().exec (err, result) ->
             for zcode in result
                 if zcode.latitude? and zcode.latitude != 0 and zcode.longitude? and zcode.longitude != 0
-                    return res.json {latitude: lat, longitude: lng}
+                    return res.json {latitude: zcode.latitude, longitude: zcode.longitude}
             GeoService.zipGeo zip, country, (lat, lng) ->
                 if lat? and lng?
                     res.json {latitude: lat, longitude: lng}

@@ -46,7 +46,7 @@ block content
           label(for='country') #{__('COUNTRY*')}
           input#country.required(type='text', placeholder='#{__("Germany")}', name='country')
           label(for='mobile') #{__('MOBILE PHONE*')}
-          input#mobile.required.number.minLength-11(type='text', placeholder='#{__("+49 511 879 893 02")}', name='phone')
+          input#mobile.required(type='text', placeholder='#{__("+49 511 879 893 02")}', name='phone')
           label(for='email') #{__('E-MAIL*')}
           input#email.required.email(type='text', name='email')
           label(for='email_again') #{__('E-MAIL CONFIRMATION*')}
@@ -94,8 +94,8 @@ block script
       },
       theme: "square"
     };
+    $('#mobile').mask('9999 99999999');
     $("#country").easyAutocomplete(options);
-
     $('.js-validate').submit(function() {
       $('#country').removeClass('error');
       $('#zip').removeClass('error');

@@ -44,15 +44,36 @@ module.exports.cron =
                     Parcel.update({id: parcel.id}, {status: 'archive'}).exec (err, result) ->
                         console.log err if err?
 
+    removeAbandonedParcels:
+        schedule: '*/1 * * * *'
+        onTick: ->
+            pageSize = sails.config.tuberaddon.dbCleanPageSize
+            page = sails.config.tuberaddon.dbCleanPageParcel
+            Parcel.find({}).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
+                if err? or not result? or result.length <= 0
+                    console.log 'End of parcels. Set dbCleanPageParcel = 0.'
+                    sails.config.tuberaddon.dbCleanPageParcel = 0
+                else
+                    idsForRemove = []
+                    for parcel in result
+                        if not parcel.owner?
+                            idsForRemove.push parcel.id
+                    console.log 'Page', page, '. Found', idsForRemove.length, idsForRemove, 'parcels for remove'
+                    for id in idsForRemove
+                        do (id) ->
+                            Parcel.destroy({id: id}).exec (err, result) ->
+                                console.log err if err?
+                    sails.config.tuberaddon.dbCleanPageParcel = page+1
+
     removeAbandonedRequests:
         schedule: '*/1 * * * *'
         onTick: ->
             pageSize = sails.config.tuberaddon.dbCleanPageSize
-            page = sails.config.tuberaddon.dbCleanPage
+            page = sails.config.tuberaddon.dbCleanPageRequest
             Request.find({}).paginate({page:page, limit:pageSize}).populateAll().exec (err, result) ->
                 if err? or not result? or result.length <= 0
-                    console.log 'End of requests. Set dbCleanPage = 0.'
-                    sails.config.tuberaddon.dbCleanPage = 0
+                    console.log 'End of requests. Set dbCleanPageRequest = 0.'
+                    sails.config.tuberaddon.dbCleanPageRequest = 0
                 else
                     idsForRemove = []
                     for request in result
@@ -63,4 +84,4 @@ module.exports.cron =
                         do (id) ->
                             Request.destroy({id: id}).exec (err, result) ->
                                 console.log err if err?
-                    sails.config.tuberaddon.dbCleanPage = page+1
+                    sails.config.tuberaddon.dbCleanPageRequest = page+1

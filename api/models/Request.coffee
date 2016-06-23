@@ -49,7 +49,7 @@ module.exports =
             type: 'datetime'
 
         totalPrice: ->
-            return (if @price? then @price else 0) + (if @deliveryPrice? then @deliveryPrice else 0) + (if @parcel.insurance? then @parcel.insurance else 0)
+            return (if @price? then @price else 0) + (if @deliveryPrice? then @deliveryPrice else 0) + (if @parcel? and @parcel.insurance? then @parcel.insurance else 0)
 
     afterCreate: (object, cb) ->
         LogService.saveLog 'Create', 'Request', JSON.stringify(object)

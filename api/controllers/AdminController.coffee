@@ -370,7 +370,7 @@ module.exports =
             filter.createdAt = {'>=': fromDate}
         else if toDate?
             filter.createdAt = {'<=': toDate}
-        s = 'Carrier;Sender;Receiver;Arrive Date;Paid;Competed;Sum;\n'
+        s = 'Carrier;Bank account;Sender;Receiver;Arrive Date;Paid;Competed;Sum;\n'
         if not enableDoing and not enableDone
             res.attachment('report.csv')
             res.send new Buffer(s)
@@ -379,21 +379,32 @@ module.exports =
             filter.status = 'done';
         else if enableDoing and not enableDone
             filter.status = {$ne: 'done'};
-        Request.find(filter).populateAll().exec (err, result) ->
-            for r in result
-                from = if r.parcel? and r.parcel.fromPerson? then r.parcel.fromPerson else r.sender
-                to = if r.parcel? and r.parcel.toPerson? then r.parcel.toPerson else r.sender
-                arrivedate = if r.parcel? then moment(r.parcel.arriveDate).format('LL') else ''
-                drName = if r.driver? then r.driver.firstname + ' ' + r.driver.lastname else ''
-                frName = if from? then from.firstname + ' ' + from.lastname else ''
-                toName = if to? then to.firstname + ' ' + to.lastname else ''
-                s = s +
-                """
-                #{drName};#{frName};#{toName};#{arrivedate};#{r.paid};#{r.status};#{r.price}\n
-                """
-            console.log 'Filter', filter
-            res.attachment('report.csv')
-            res.send new Buffer(s)
+        Request.find(filter).populateAll().exec (err, requests) ->
+            async.each requests,
+                (it, cb) ->
+                    if it.parcel?
+                        Parcel.findOne({id: it.parcel.id}).populateAll().exec (err, parcel) ->
+                            if parcel?
+                                it.parcel = parcel
+                            cb(null)
+                    else
+                        cb(null)
+                (err) ->
+                    for r in requests
+                        bankAccount = if r.driver? then r.driver.bankCode + ' ' + r.driver.bankName + ' ' + r.driver.bankAccount else ''
+                        from = if r.parcel? and r.parcel.fromPerson? then r.parcel.fromPerson else r.sender
+                        to = if r.parcel? and r.parcel.toPerson? then r.parcel.toPerson else r.sender
+                        arrivedate = if r.parcel? then moment(r.parcel.arriveDate).format('LL') else ''
+                        drName = if r.driver? then r.driver.firstname + ' ' + r.driver.lastname else ''
+                        frName = if from? then from.firstname + ' ' + from.lastname else ''
+                        toName = if to? then to.firstname + ' ' + to.lastname else ''
+                        s = s +
+                        """
+                        #{drName};#{bankAccount};#{frName};#{toName};#{arrivedate};#{(if r.paid? then 'Paid' else '')};#{r.status||''};#{r.totalPrice().toFixed(2)}\n
+                        """
+                    console.log 'Filter', filter
+                    res.attachment('report.csv')
+                    res.send new Buffer(s)
 
     notifications: (req, res) ->
         page = req.param('page') or 1

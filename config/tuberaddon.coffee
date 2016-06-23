@@ -1,3 +1,4 @@
 module.exports.tuberaddon = 
     dbCleanPageSize: 10
-    dbCleanPage: 0
+    dbCleanPageRequest: 0
+    dbCleanPageParcel: 0

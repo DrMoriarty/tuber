@@ -1,3 +1,4 @@
+async = require 'async'
 moment = require 'moment'
 
 module.exports.cron =
@@ -32,6 +33,23 @@ module.exports.cron =
                                 else
                                     SearchService.acceptDriver dpdDriver.id, outdated.parcel.id, (err, result) ->
                                         console.log err if err
+
+    checkZipGeoCoordinates:
+        schedule: '*/1 * * * *'
+        onTick: ->
+            Zip.find({latitude: 0, longitude: 0}).limit(100).populateAll().exec (err, result) ->
+                if err? or not result?
+                    console.log err
+                else
+                    console.log 'Update zip codes without geo position', result.length
+                    async.each result,
+                        (zip, cb) ->
+                            Country.findOne(zip.region.country).exec (err, country) ->
+                                GeoService.zipGeo zip.code, country.name, (latitude, longitude) ->
+                                    Zip.update({id: zip.id}, {latitude: latitude, longitude: longitude}).exec (err, result) ->
+                                        console.log err if err?
+                        (err) ->
+                            console.log err if err?
                 
     archiveParcels:
         schedule: '*/10 * * * *'  #every ten minutes

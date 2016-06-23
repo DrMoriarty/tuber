@@ -6,3 +6,9 @@ module.exports =
         code:
             type: 'string'
             required: true
+        latitude:
+            type: 'float'
+            defaultsTo: 0
+        longitude:
+            type: 'float'
+            defaultsTo: 0

@@ -166,8 +166,12 @@ module.exports =
             return res.badRequest('zip required')
         if not country?
             return res.badRequest('country required')
-        GeoService.zipGeo zip, country, (lat, lng) ->
-            if lat? and lng?
-                res.json {latitude: lat, longitude: lng}
-            else
-                res.json {error: 'Address not found'}
+        Zip.find({code: zip}).populateAll().exec (err, result) ->
+            for zcode in result
+                if zcode.latitude? and zcode.latitude != 0 and zcode.longitude? and zcode.longitude != 0
+                    return res.json {latitude: lat, longitude: lng}
+            GeoService.zipGeo zip, country, (lat, lng) ->
+                if lat? and lng?
+                    res.json {latitude: lat, longitude: lng}
+                else
+                    res.json {error: 'Address not found'}

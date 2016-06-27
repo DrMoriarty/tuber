@@ -127,14 +127,14 @@ block script
       var accountNumber = $('#accountNumber').val();
       var bankCode = $('#bankCode').val();
       var bankName = $('#bankName').val();
-      if(accountNumber.length <= 11) {
-        return;
+      if(accountNumber.length < 11) {
+        return false;
       }
-      if(bankCode.length <= 5) {
-        return;
+      if(bankCode.length < 5) {
+        return false;
       }
-      if(bankName.length <= 3) {
-        return;
+      if(bankName.length < 3) {
+        return false;
       }
       regdata = $(this).serialize();
       $.ajax({

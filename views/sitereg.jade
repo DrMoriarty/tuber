@@ -174,6 +174,7 @@ block script
       var country = this[8].value;
       var zip = this[6].value;
       var regurl = this.action;
+      Pace.start();
       $.ajax({
         type: 'POST',
         url: '/search/zip',
@@ -189,6 +190,7 @@ block script
               success: function(data) {
                 console.log('Registered', data);
                 $.post('/login', regdata, function(data) {
+                  Pace.stop();
                   console.log('Login performed', data);
                   location.href = '/';
                 });
@@ -202,10 +204,12 @@ block script
                 if(json && json.raw.code == 11000) {
                   $('#err11000').show();
                 }
+                Pace.stop();
               }});
           } else {
             $('#zip').addClass('error');
             console.log('Zip error', geodata);
+            Pace.stop();
           }
         },
         error: function() {

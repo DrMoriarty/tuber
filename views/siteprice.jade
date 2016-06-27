@@ -38,7 +38,7 @@ block content
           //a.more(href='#')
             i.icons-plus
             | #{__('MORE INFO')}
-          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.cheapest.id}&delivery=#{drivers.cheapest.delivery}')
+          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.cheapest.id}&delivery=#{drivers.cheapest.delivery}', onClick='Pace.start();')
             | #{__('GET IT')}
             br
             | #{__('NOW')}
@@ -63,7 +63,7 @@ block content
           //a.more(href='#')
             i.icons-plus
             | #{__('MORE INFO')}
-          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.fastest.id}&delivery=#{drivers.fastest.delivery}')
+          a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.fastest.id}&delivery=#{drivers.fastest.delivery}', onClick='Pace.start();')
             | #{__('GET IT')}
             br
             | #{__('NOW')}
@@ -89,7 +89,7 @@ block content
             //a.more(href='#')
               i.icons-plus
               | #{__('MORE INFO')}
-            a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.custom1.id}&delivery=#{drivers.custom1.delivery}')
+            a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.custom1.id}&delivery=#{drivers.custom1.delivery}', onClick='Pace.start();')
               | #{__('GET IT')}
               br
               | #{__('NOW')}
@@ -115,7 +115,7 @@ block content
             //a.more(href='#')
               i.icons-plus
               | #{__('MORE INFO')}
-            a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.custom2.id}&delivery=#{drivers.custom2.delivery}')
+            a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.custom2.id}&delivery=#{drivers.custom2.delivery}', onClick='Pace.start();')
               | #{__('GET IT')}
               br
               | #{__('NOW')}
@@ -138,7 +138,7 @@ block content
             //a.more(href='#')
               i.icons-plus
               | #{__('MORE INFO')}
-            a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.custom3.id}&delivery=#{drivers.custom3.delivery}')
+            a.orange_button(href='/confirmation/#{parcel.id}?driverId=#{drivers.custom3.id}&delivery=#{drivers.custom3.delivery}', onClick='Pace.start();')
               | #{__('GET IT')}
               br
               | #{__('NOW')}

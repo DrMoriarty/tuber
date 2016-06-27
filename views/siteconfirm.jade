@@ -240,6 +240,7 @@ block script
       document.getElementById('map2block'));
     function confirmation () {
       // update parcel
+      Pace.start();
       values = $('input.js-datetime');
       var data = {};
       data.pickupDate = moment(values[0].value, 'DD MMMM YYYY').format();
@@ -255,6 +256,7 @@ block script
       $.post('/api/parcel/#{parcel.id}', data, function(data, status) {
         if(status != 'success') {
           console.log('Result', data, 'status', status);
+          Pace.stop();
           return;
         }
         // create request
@@ -272,13 +274,16 @@ block script
                 $.get('/accept/parcel/#{parcel.id}/carrier/'+document.currentDriverId, function(request, status) {
                   console.log('Accepting driver done', request, status);
                 });
+                //Pace.stop();
                 location.href='/payment/'+request.id;
               } else {
                 console.log('Parcel result', data);
+                Pace.stop();
               }
             });
           } else {
             console.log('Result', request);
+            Pace.stop();
           }
         });
       });

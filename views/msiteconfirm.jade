@@ -200,6 +200,7 @@ block script
       }),
       document.getElementById('map2block'));
     function confirmation () {
+      Pace.start();
       // update parcel
       values = $('input.change_placeholder');
       var data = {};
@@ -220,6 +221,7 @@ block script
       $.post('/api/parcel/#{parcel.id}', data, function(data, status) {
         if(status != 'success') {
           console.log('Result', data, 'status', status);
+          Pace.stop();
           return;
         }
         // create request
@@ -237,13 +239,16 @@ block script
                 $.get('/accept/parcel/#{parcel.id}/carrier/'+document.currentDriverId, function(request, status) {
                   console.log('Accepting driver done', request, status);
                 });
+                //Pace.stop();
                 location.href='/payment/'+request.id+'?m=1';
               } else {
                 console.log('Parcel result', data);
+                Pace.stop();
               }
             });
           } else {
             console.log('Result', request);
+            Pace.stop();
           }
         });
       });

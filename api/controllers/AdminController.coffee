@@ -203,21 +203,23 @@ module.exports =
 
     findParcels: (req, res) ->
         driverId = req.param('id')
-        Parcel.find({driver: driverId}).exec (err, result) ->
+        Request.find({driver: driverId}).populateAll().exec (err, requests) ->
             parcels = []
-            async.each result,
+            async.each requests,
                 (it, cb) ->
-                    Request.find({parcel: it.id, driver: driverId}).populateAll().exec (err, res) ->
-                        if res? and res.length > 0
-                            it.request = res[0]
-                        parcels.push(it)
+                    Parcel.findOne({id: it.parcel.id}).populateAll().exec (err, parcel) ->
+                        if err? or not parcel?
+                            console.log err
+                        else
+                            parcel.request = it
+                            parcels.push(parcel)
                         cb(null)
                 (err) ->
                     console.log err if err?
-                    console.log 'Found parcels', parcels
+                    console.log 'Found requests', requests, 'and parcels', parcels
                     res.view 'findparcels', {user: req.user, driverId: driverId, result: parcels, err: err}
         """
-        SearchService.searchParcel driverId, (err, result) ->
+        Parcel.find({driver: driverId}).exec (err, result) ->
             parcels = []
             async.each result,
                 (it, cb) ->

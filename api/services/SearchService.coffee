@@ -36,7 +36,7 @@ module.exports =
                             if dist1*0.001 <= driver.coverageDistance and dist2*0.001 <= driver.coverageDistance
                                 drivers.push driver
                             else
-                                console.log 'Too far', dist
+                                console.log 'Too far', dist1, dist2
                     console.log 'Filtered drivers', drivers
                     cb(null, drivers)
                     

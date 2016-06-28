@@ -61,7 +61,8 @@ block content
                     else
                       td None
                     if it.text
-                      td!= it.text
+                      td
+                        div(style="max-height:100px;overflow:scroll;")!= it.text
                     else
                       td None
                     td

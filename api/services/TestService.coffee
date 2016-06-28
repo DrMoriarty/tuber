@@ -173,7 +173,7 @@ module.exports =
             when notificationType == 'orderPayed' then info = ''
             when notificationType == 'orderPlaced' then info = sails.getBaseURL() + '/upload/349849238479.pdf'
             when notificationType == 'orderArrived' then info = ''
-        MailingService.processEvent email, notificationType, language, {'INFO': info}
+        MailingService.processEvent email, notificationType, language, {'INFO': info, USERNAME: 'Admin'}
     
     
 #performComplexTest [{list: testlist, count:10}, {list: testlist, count:25}, {list: testlist, count:50}, {list: testlist, count:100}], (res) ->

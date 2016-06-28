@@ -1,8 +1,10 @@
 module.exports =
     saveLog: (type, method, argument) ->
         if typeof argument isnt 'string'
-            objectid = argument.id
+            #objectid = argument.id
             argument = JSON.stringify(argument)
+            obj = JSON.parse argument
+            objectid = obj.id
         else
             try
                 obj = JSON.parse argument

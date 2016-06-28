@@ -173,7 +173,7 @@ module.exports =
             when notificationType == 'orderAccepted' then info = 'Parcel shop address'
             when notificationType == 'orderPayed' then info = ''
             when notificationType == 'orderPlaced' then info = sails.getBaseURL() + '/upload/349849238479.pdf'
-            when notificationType == 'orderArrived' then info = ''
+            when notificationType == 'orderArrived' then info = 'Parcel show address'
         MailingService.processEvent email, notificationType, language, {'INFO': info, USERNAME: 'Admin'}
     
     

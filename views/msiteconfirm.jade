@@ -120,6 +120,7 @@ block script
       document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
       document.fromParcelShopAddress = selection1.options[selection1.selectedIndex].innerText;
       document.toParcelShopId = selection2.options[selection2.selectedIndex].getAttribute('parcelShopId');
+      document.toParcelShopAddress = selection2.options[selection2.selectedIndex].innerText;
       $('#postbox')[0].checked = true;
       $('#home-adress')[0].checked = false;
       $('#postbox1')[0].checked = true;
@@ -180,6 +181,7 @@ block script
         $('#home-adress1')[0].checked = false;
       }
       selectDriver($('#driverSelection')[0]);
+      document.toParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
     });
     ReactDOM.render(React.createElement(GMap, {
       title1: "#{__('HOME ADDRESS')}",
@@ -229,6 +231,7 @@ block script
         if(document.fromParcelShopId) newRequest.fromParcelShop = document.fromParcelShopId;
         if(document.toParcelShopId) newRequest.toParcelShop = document.toParcelShopId;
         if(document.fromParcelShopAddress) newRequest.fromParcelShopAddress = document.fromParcelShopAddress;
+        if(document.toParcelShopAddress) newRequest.toParcelShopAddress = document.toParcelShopAddress;
         if(!document.fromParcelShopId || !document.toParcelShopId) {
           newRequest.deliveryOption = 'home';
         }

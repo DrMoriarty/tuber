@@ -160,6 +160,7 @@ block script
       document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
       document.fromParcelShopAddress = selection1.options[selection1.selectedIndex].innerText;
       document.toParcelShopId = selection2.options[selection2.selectedIndex].getAttribute('parcelShopId');
+      document.toParcelShopAddress = selection2.options[selection2.selectedIndex].innerText;
       $('#postbox')[0].checked = true;
       $('#home')[0].checked = false;
       $('#postbox2')[0].checked = true;
@@ -211,6 +212,7 @@ block script
         $('#home2')[0].checked = false;
       }
       selectDriver($('#driverSelection')[0]);
+      document.toParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
       var coords = event.target.value.split(',');
       if(window.marker2)
         window.marker2.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
@@ -264,6 +266,7 @@ block script
         if(document.fromParcelShopId) newRequest.fromParcelShop = document.fromParcelShopId;
         if(document.toParcelShopId) newRequest.toParcelShop = document.toParcelShopId;
         if(document.fromParcelShopAddress) newRequest.fromParcelShopAddress = document.fromParcelShopAddress;
+        if(document.toParcelShopAddress) newRequest.toParcelShopAddress = document.toParcelShopAddress;
         if(!document.fromParcelShopId || !document.toParcelShopId) {
           newRequest.deliveryOption = 'home';
         }

@@ -407,7 +407,8 @@ module.exports =
                         res.json {status: 'success'}
                 Request.update({id: request.id}, {status: 'done'}).exec (err, data) ->
                     console.log err if err?
-                MailingService.processEvent request.sender.email, 'orderArrived', request.sender.lang, {USERNAME: request.sender.firstname}
+                shopAddress = request.toParcelShopAddress or ''
+                MailingService.processEvent request.sender.email, 'orderArrived', request.sender.lang, {INFO: shopAddress, USERNAME: request.sender.firstname}
             else
                 res.notFound()
 

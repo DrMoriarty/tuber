@@ -29,8 +29,11 @@ module.exports =
                     drivers = []
                     for driver in result
                         if parcel.owner? and driver?
-                            dist = gps.getDistance(parcel.owner.longitude, parcel.owner.latitude, driver.longitude, driver.latitude)
-                            if dist*0.001 <= driver.coverageDistance
+                            fromPoint = if parcel.fromPerson? then parcel.fromPerson else parcel.owner
+                            toPoint = if parcel.toPerson then parcel.toPerson else parcel.owner
+                            dist1 = gps.getDistance(fromPoint.longitude, fromPoint.latitude, driver.longitude, driver.latitude)
+                            dist2 = gps.getDistance(toPoint.longitude, toPoint.latitude, driver.longitude, driver.latitude)
+                            if dist1*0.001 <= driver.coverageDistance and dist2*0.001 <= driver.coverageDistance
                                 drivers.push driver
                             else
                                 console.log 'Too far', dist

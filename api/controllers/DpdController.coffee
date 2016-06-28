@@ -32,7 +32,7 @@ module.exports =
                     else
                         res.json result
                 Parcel.findOne(parcelId).populateAll().exec (err, parcel) ->
-                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, {'INFO': req.host+'/upload/'+parcelId+'.pdf', 'USERNAME': parcel.owner.firstname}
+                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, {'INFO': req.host+'/upload/'+parcelId+'.pdf', 'USERNAME': parcel.owner.firstname, FROMADDRESS: parcel.request.fromParcelShopAddress or ''}
 
     getTrackingData: (req, res) ->
         labelNumber = req.param('labelnumber')

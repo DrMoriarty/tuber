@@ -103,7 +103,7 @@ module.exports =
                                 Parcel.findOne(request.parcel.id).populateAll().exec (err, parcel) ->
                                     url = sails.getBaseURL()+'/'+fname
                                     url = '<a href="'+url+'">'+url+'</a>';
-                                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, {'INFO': url, USERNAME: parcel.owner.firstname}
+                                    MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, {'INFO': url, USERNAME: parcel.owner.firstname, FROMADDRESS: request.fromParcelShopAddress or ''}
                             catch error
                                 console.log error
                                 LogService.saveLog 'Error', 'DPD processing', data

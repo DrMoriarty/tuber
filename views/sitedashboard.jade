@@ -189,8 +189,7 @@ block content
                   a.orange_button.cansel_order(href='#', onClick='deleteOrder("#{parcel.id}")') #{__('DELETE')}
                 if parcel.shipment
                   p(style={'text-align': 'center'})
-                    u
-                      a.orange_button.cansel_order(href='#', onClick='location.href="/upload/#{parcel.id}.pdf";') #{__('Open parcel label')}
+                    a.orange_button.cansel_order(href='#', onClick='window.open("/upload/#{parcel.id}.pdf", "_blank");') #{__('Open parcel label')}
                 .pattern
             ul.pagination
               li.prev

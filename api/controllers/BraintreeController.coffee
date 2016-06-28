@@ -33,7 +33,7 @@ module.exports =
                     console.log err
                     res.negotiate err
                 else
-                    BraintreeService.gateway.transaction.sale { amount: request.totalPrice(), paymentMethodNonce: nonce}, (err, result) ->
+                    BraintreeService.gateway.transaction.sale { amount: request.totalPrice().toFixed(2), paymentMethodNonce: nonce}, (err, result) ->
                         if err?
                             console.log err
                             res.status 400

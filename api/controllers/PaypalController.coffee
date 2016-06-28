@@ -38,7 +38,7 @@ module.exports =
                     },
                     "transactions": [{
                         "amount": {
-                            "total": request.totalPrice(),
+                            "total": request.totalPrice().toFixed(2),
                             "currency": "EUR"
                         },
                         "description": "Packet24"

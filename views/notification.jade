@@ -50,6 +50,7 @@ block content
                   i.fa.fa-globe
                 select#selectevent(name='event', required='')
                   option(value='registrationComplete', selected=result.event == 'registrationComplete') Complete registration
+                  option(value='registrationCompleteCarrier', selected=result.event == 'registrationCompleteCarrier') Complete registration (carrier)
                   option(value='passwordRestore', selected=result.event == 'passwordRestore')  Restore password
                   option(value='passwordGenerated', selected=result.event == 'passwordGenerated') Generate password
                   option(value='driverNeedAccept', selected=result.event == 'driverNeedAccept') Carrier have to accept a parcel

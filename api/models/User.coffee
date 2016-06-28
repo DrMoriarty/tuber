@@ -240,7 +240,10 @@ module.exports =
     afterCreate: (object, cb) ->
         cb()
         LogService.saveLog 'Create', 'User', JSON.stringify(object)
-        MailingService.processEvent object.email, 'registrationComplete', object.lang, {USERNAME: object.firstname}
+        if object.driver
+            MailingService.processEvent object.email, 'registrationCompleteCarrier', object.lang, {USERNAME: object.firstname}
+        else
+            MailingService.processEvent object.email, 'registrationComplete', object.lang, {USERNAME: object.firstname}
 
     afterUpdate: (object, cb) ->
         cb()

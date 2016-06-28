@@ -9,7 +9,9 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     User.findOne({ id: id } , function (err, user) {
-        if(user.driver) {
+        if(!user) {
+            done("User not defined!", null);
+        } else if(user.driver) {
             Parcel.count({driver: id, status: {'!': ['archive', 'canceled']}}).exec( function (err, count) {
                 user.parcelCount = count;
                 done(err, user);

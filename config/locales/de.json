@@ -289,7 +289,7 @@
 	"Date Received:": "Empfangsdatum:",
 	"Need help?": "Passwort vergessen?",
 	"Sign up": "Registrieren?",
-	"SORRY, WE DON'T RECOGNIZE THIS EMAIL.": "Leider können wir diese E-Mail nicht erkennen.",
+	"Sorry, we don't recognize this email.": "Leider können wir diese E-Mail nicht erkennen.",
 	"Check your e-mail address and try again": "Überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut",
 	"There is no such index in Germany": "Bitte füllen Sie die benötigten Felder aus",
 	"I want to send a parcel...": "Ich möchte ein Paket verschicken...",
@@ -340,5 +340,5 @@
 	"September": "September",
 	"October": "Oktober",
 	"November": "November",
-	"December": "Dezember",
+	"December": "Dezember"
 }

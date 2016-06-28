@@ -21,7 +21,7 @@ block content
           input#send_login.required(type='text', name='email')
           label(for='send_password') #{__('Password')}
           input#send_password.required(type='password', name='password')
-          label#error1(style='color:red;display:none;') Sorry, we don't recognize this email.
+          label#error1(style='color:red;display:none;') #{__("Sorry, we don't recognize this email.")}
           button.orange_button(type='submit') #{__('Send')}
           a(href='/passwordrestore') #{__('Need help?')} 
           span #{__('or')}
@@ -34,7 +34,7 @@ block content
           input#transport_login.required(type='text', name='email')
           label(for='transport_password') #{__('Password')}
           input#transport_password.required(type='password', name='password')
-          label#error2(style='color:red;display:none;') Sorry, we don't recognize this email.
+          label#error2(style='color:red;display:none;') #{__("Sorry, we don't recognize this email.")}
           button.orange_button(type='submit') #{__('Send')}
           a(href='/passwordrestore') #{__('Need help?')} 
           span #{__('or')}

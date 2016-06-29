@@ -114,13 +114,13 @@ block content
                   div
                     figure
                       ul
-                        li #{__('THE SENDER:')}
                       //img(src='img/person.png', alt='')
                       //figcaption
                         a(href='tel://#{parcel.fromPerson.phone}')
                           i.fa.fa-phone-square
                           | #{__('call')}
                     ul.sender-list
+                      li #{__('THE SENDER:')}
                       li
                         | #{__('NAME:')} 
                         strong #{parcel.fromPerson.firstname} #{parcel.fromPerson.lastname}
@@ -135,18 +135,28 @@ block content
                       li
                         | #{__('PHONENUMBER:')} 
                         strong #{parcel.fromPerson.phone}
+                else
+                  div
+                    ul.sender-list
+                      li #{__('THE SENDER:')}
+                      li
+                        | #{__('NAME:')} 
+                        strong #{parcel.owner.firstname} #{parcel.owner.lastname}
+                      li
+                        | #{__('PHONENUMBER:')} 
+                        strong #{parcel.owner.phone}
                 if parcel.toPerson
                   //.sender-name(style='min-height: 221px;')
                   div
                     figure
                       ul
-                        li #{__('THE SENDER:')}
                       //img(src='img/person.png', alt='')
                       //figcaption
                         a(href='tel://#{parcel.toPerson.phone}')
                           i.fa.fa-phone-square
                           | #{__('call')}
                     ul.sender-list
+                      li #{__('THE RECIPIENT:')}
                       li
                         | #{__('NAME:')} 
                         strong #{parcel.toPerson.firstname} #{parcel.toPerson.lastname}
@@ -161,6 +171,16 @@ block content
                       li
                         | #{__('PHONENUMBER:')} 
                         strong #{parcel.toPerson.phone}
+                else
+                  div
+                    ul.sender-list
+                      li #{__('THE RECIPIENT:')}
+                      li
+                        | #{__('NAME:')} 
+                        strong #{parcel.owner.firstname} #{parcel.owner.lastname}
+                      li
+                        | #{__('PHONENUMBER:')} 
+                        strong #{parcel.owner.phone}
                 .clear
                 if parcel.status == 'draft'
                   a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}?m=1"') #{__('CONTINUE')}

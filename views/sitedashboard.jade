@@ -135,6 +135,18 @@ block content
                       li
                         | #{__('PHONENUMBER:')} 
                         strong #{parcel.fromPerson.phone}
+                else
+                  div
+                    figure
+                      ul
+                        li #{__('THE SENDER:')}
+                    ul
+                      li
+                        | #{__('NAME:')} 
+                        strong #{parcel.owner.firstname} #{parcel.owner.lastname}
+                      li
+                        | #{__('PHONENUMBER:')} 
+                        strong #{parcel.owner.phone}
                 if parcel.toPerson
                   //.sender-name
                   div
@@ -161,6 +173,18 @@ block content
                       li
                         | #{__('PHONENUMBER:')} 
                         strong #{parcel.toPerson.phone}
+                else
+                  div
+                    figure
+                      ul
+                        li #{__('THE RECIPIENT:')}
+                    ul
+                      li
+                        | #{__('NAME:')} 
+                        strong #{parcel.owner.firstname} #{parcel.owner.lastname}
+                      li
+                        | #{__('PHONENUMBER:')} 
+                        strong #{parcel.owner.phone}
                 .clear
                 if parcel.status == 'draft'
                   a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}"') #{__('CONTINUE')}

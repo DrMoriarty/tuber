@@ -126,6 +126,7 @@ $(document).ready(function() {
 			el.hide();
         }
     },datepickersOpt));
+    
 
     $("#datePicker2").datepicker($.extend({
         onSelect: function(text, e) {

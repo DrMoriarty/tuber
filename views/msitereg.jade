@@ -51,17 +51,17 @@ block content
           input#email.required.email(type='text', name='email')
           label(for='email_again') #{__('E-MAIL CONFIRMATION*')}
           input#email_again.required.email(type='text')
-          p#email_differs(style='color: red; display: none;') #{__('E-MAILS DIFFERS')}
+          label#email_differs(style='color: red; display: none;') #{__('E-MAILS DIFFERS')}
           label(for='password') #{__('PASSWORD*')}
           input#password.required.minLength-6(type='password', name='password')
-          p#password_tooshort(style='color: red; display: none;') #{__('PASSWORD TOO SHORT')}
+          label#password_tooshort(style='color: red; display: none;') #{__('PASSWORD TOO SHORT')}
           label(for='password_again') #{__('PASSWORD CONFIRMATION*')}
           input#password_again.required.minLength-6(type='password')
-          p#password_differs(style='color: red; display: none;') #{__('PASSWORDS DIFFERS')}
+          label#password_differs(style='color: red; display: none;') #{__('PASSWORDS DIFFERS')}
           input(type='hidden', name='driver', value='#{driver}')
           input(type='hidden', name='lang', value='#{lang}')
-          p#err11000(style='color: red; display: none;') #{__('USER ALREADY REGISTERED')}
-          p#addressError(style='color: red; display: none;') #{__('There is no such index in Germany')}
+          label#err11000(style='color: red; display: none;') #{__('USER ALREADY REGISTERED')}
+          label#addressError(style='color: red; display: none;') #{__('There is no such index in Germany')}
           button.orange_button #{__('CONFIRM')}
           //a.more(href='/?m=1') #{__('GO TO &ldquo;SEND MY PARCEL&rdquo;')}
   // promo
@@ -146,20 +146,20 @@ block script
 
       if(this[10].value != this[11].value) {
         // email differs
-        $('#email_differs').show();
+        $('#email_differs').css({display:'block'});
         $('#email').addClass('error');
         $('#email_again').addClass('error');
         return false;
       }
       if(this[12].value != this[13].value) {
         // password differs
-        $('#password_differs').show();
+        $('#password_differs').css({display:'block'});
         $('#password').toggleClass('error');
         $('#password_again').toggleClass('error');
         return false;  
       }
       if(this[12].value.length < 5) {
-        $('#password_tooshort').show();
+        $('#password_tooshort').css({display:'block'});
         $('#password').toggleClass('error');
         return false;
       }
@@ -194,18 +194,18 @@ block script
               error: function(err) {
                 console.log("Registration error", err);
                 if(err.responseJSON.raw.code == 11000) {
-                  $('#err11000').show();
+                  $('#err11000').css({display:'block'});
                 }
               }});
           } else {
             $('#zip').addClass('error');
             console.log('Zip error', geodata);
-            $('#addressError').show();
+            $('#addressError').css({display:'block'});
           }
         },
         error: function() {
           $('#zip').addClass('error');
-          $('#addressError').show();
+          $('#addressError').css({display:'block'});
         }
       });
       return false;

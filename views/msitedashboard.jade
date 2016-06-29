@@ -166,7 +166,8 @@ block content
                   a.orange_button.cansel_order(href='#', onClick='location.href="/price/#{parcel.id}?m=1"') #{__('CONTINUE')}
                 else if parcel.status == 'published'
                   if parcel.request && !parcel.request.driverAccepted
-                    span.note(style={'color':'red'}) #{__('Waiting for carrier acception')}
+                    .form
+                      label.note(style={'color':'red'}) #{__('Waiting for carrier acception')}
                     span #{__('Your parcel is now waiting to be confirmed by the carrier. This will take up to 12 hours. Once carrier confirms it, you will receive notification via email with all carrier\'s data. There is not need to update this status, since we will find 100% find a carrier for your parcel.')}
                   else
                     a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') #{__('PROCESS PAYMENT')}

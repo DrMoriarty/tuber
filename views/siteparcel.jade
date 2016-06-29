@@ -136,7 +136,7 @@ block content
           //.right.insurrance
             h3 #{__('About insurrance')}
             input.required(type='text', placeholder='Packet is insured until the value XXX €', name='insurance')
-          p#addressError(style='color: red; display: none;text-align:center;') #{__('There is no such index in Germany')}
+          label#addressError(style='color:red;display:none;text-align:center;') #{__('There is no such index in Germany')}
           button.orange_button #{__('Send!')}
         .clear
 
@@ -214,6 +214,7 @@ block script
               $('.hidden_address1').slideToggle('slow');
             }
             $('#addressError').show();
+            $('#addressError').attr('style', 'color:red;display:block;text-align:center;');
           } else if(err.responseText == 'To address error') {
             $('#toZip').addClass('error');
             $('#toCity').addClass('error');
@@ -223,6 +224,7 @@ block script
               $('.hidden_address2').slideToggle('slow');
             }
             $('#addressError').show();
+            $('#addressError').attr('style', 'color:red;display:block;text-align:center;');
           } else {
             var errMsg = JSON.parse(err.responseText);
             console.log("Error message", errMsg);

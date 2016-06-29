@@ -200,6 +200,7 @@ block script
           } else {
             $('#zip').addClass('error');
             console.log('Zip error', geodata);
+            $('#addressError').show();
           }
         },
         error: function() {

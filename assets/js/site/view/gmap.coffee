@@ -5,10 +5,10 @@ GMap = React.createClass
         div {},
             div {className:'wr-map'},
                 div {id: 'map1', ref: 'map1'}
-                div {className: 'maps-sign'}, 'FROM: ', @props.title1
+                div {className: 'maps-sign'}, @props.labelFrom, '  ', @props.title1
             div {className:'wr-map'},
                 div {id: 'map2', ref: 'map2'}
-                div {className: 'maps-sign'}, 'TO: ', @props.title2
+                div {className: 'maps-sign'}, @props.labelTo, '  ', @props.title2
 
     componentDidMount: ->
         p1 = new google.maps.LatLng(@props.lat1, @props.lon1)
@@ -38,7 +38,7 @@ GPath = React.createClass
     render: ->
         div {className: 'wr-map'},
             div {id: 'map3', ref: 'map3'}
-            div {className: 'maps-sign'}, 'PACKAGE ROUTE'
+            div {className: 'maps-sign'}, @props.labelRoute
 
     componentDidMount: ->
         mapCanvas3 = @refs.map3

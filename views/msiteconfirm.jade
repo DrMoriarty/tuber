@@ -25,7 +25,7 @@ block content
           .confirmation-select-mobile
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}', selected=driver.id == selected.id) #{__('cheapest delivery')}, from #{moneyString(driver.getPrice(parcel))} &euro;
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}', selected=driver.id == selected.id) #{__('cheapest delivery')}, #{moneyString(driver.getPrice(parcel))} &euro;
         hr
         .confirmation-delivery.plc
           h3 #{__('Departure and arrivals dates')}
@@ -78,7 +78,7 @@ block content
             //li
               | #{__('INSURRANCE:')}
               span #{__('Standard')} (#{__('until')} #{parcel.insurance} &euro;)
-            li
+            //li
               | #{__('DELIVERY OPTIONS:')}
               span +
               span#deliveryPrice #{moneyString(selected.getDeliveryPrice(parcel))}
@@ -109,7 +109,7 @@ block script
   script(src="/vendor/react/react-dom.min.js")
   script(src="/js/site/view/dateblock.js")
   script(src="/js/site/view/gmap.js")
-  script(src="https://maps.googleapis.com/maps/api/js")
+  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8DhuvWbZHjOZvY_nzTc3EfMFGR0vFNK8")
   script(type='text/javascript').
     if('#{delivery}' != 'home') {
       console.log('Select parcel boxes');
@@ -184,6 +184,8 @@ block script
       document.toParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
     });
     ReactDOM.render(React.createElement(GMap, {
+      labelFrom: "#{__('FROM:')}",
+      labelTo: "#{__('TO:')}",
       title1: "#{__('HOME ADDRESS')}",
       title2: "#{__('HOME ADDRESS')}",
       lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
@@ -192,6 +194,7 @@ block script
       lon2: #{parcel.toPerson ? parcel.toPerson.longitude : parcel.owner.longitude}}),
       document.getElementById('map1block'));
     ReactDOM.render(React.createElement(GPath, {
+      labelRoute: "#{__('PACKAGE ROUTE')}",
       lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
       lon1: #{parcel.fromPerson ? parcel.fromPerson.longitude : parcel.owner.longitude},
       lat2: #{parcel.toPerson ? parcel.toPerson.latitude : parcel.owner.latitude},

@@ -291,7 +291,7 @@
 	"Sign up": "Registrieren?",
 	"Sorry, we don't recognize this email.": "Leider können wir diese E-Mail nicht erkennen.",
 	"Check your e-mail address and try again": "Überprüfen Sie Ihre E-Mail-Adresse und versuchen Sie es erneut",
-	"There is no such index in Germany": "Es gibt keine solche Index in Deutschland",
+	"There is no such index in Germany": "Bitte füllen Sie die benötigten Felder aus",
 	"I want to send a parcel...": "Ich möchte ein Paket verschicken...",
 	"Zip code (only numbers)": "Postleitzahl",
 	"City": "Stadt",
@@ -340,5 +340,7 @@
 	"September": "September",
 	"October": "Oktober",
 	"November": "November",
-	"December": "Dezember"
+	"December": "Dezember",
+	"HOMEb ADRESS": "HOMEb ADRESS",
+	"(Incl. VAT):": "(Incl. VAT):"
 }

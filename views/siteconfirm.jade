@@ -27,7 +27,7 @@ block content
           .confirmation-select.confirmation-first-select
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}', selected=driver.id == selected.id) #{__('cheapest delivery')}, from #{moneyString(driver.getPrice(parcel))} &euro;
+                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}', selected=driver.id == selected.id) #{__('cheapest delivery')}, #{moneyString(driver.getPrice(parcel))} &euro;
           .clear
         hr
         #dateblock
@@ -119,13 +119,13 @@ block content
             span #{parcel.weight}#{__('kg')}, #{parcel.width}#{__('cm')} x #{parcel.length}#{__('cm')} x #{parcel.depth}#{__('cm')}
             //h4 #{__('INSURRANCE:')}
             //span Standart (until #{parcel.insurance} &euro;)
-            h4 #{__('DELIVERY OPTIONS:')}
-            span +
-            span#deliveryPrice #{moneyString(selected.getDeliveryPrice(parcel))}
-            span &euro; #{__('to home adress')}
+            //h4 #{__('DELIVERY OPTIONS:')}
+            //span +
+            //span#deliveryPrice #{moneyString(selected.getDeliveryPrice(parcel))}
+            //span &euro; #{__('to home adress')}
           .confirmation-confirm-total
             h4
-              span #{__('TOTAL AMOUNT (Incl. VAT):')}
+              span #{__('TOTAL AMOUNT (Incl. VAT):')}  
               span#totalPrice #{(selected.getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0) + selected.getDeliveryPrice(parcel)).toFixed(2)} 
               span  &euro;
           a.orange_button(onClick='javascript:confirmation();') #{__('CONFIRM')}
@@ -138,7 +138,7 @@ block content
         .maps-sign #{__('FROM:')} #{__('POSTBOX')}
       //.wr-map
         #map2
-        .maps-sign #{__('TO:')} #{__('HOME ADRESS')}
+        .maps-sign #{__('TO:')} #{__('HOMEb ADRESS')}
     .maps-right#map2block
       //.wr-map
         #map3
@@ -149,7 +149,7 @@ block script
   script(src="/vendor/react/react-dom.min.js")
   script(src="/js/site/view/dateblock.js")
   script(src="/js/site/view/gmap.js")
-  script(src="https://maps.googleapis.com/maps/api/js")
+  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8DhuvWbZHjOZvY_nzTc3EfMFGR0vFNK8")
   script(type='text/javascript').
     if('#{delivery}' != 'home') {
       console.log('Select parcel boxes');
@@ -221,8 +221,17 @@ block script
     document.currentPrice = #{selected.getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
     document.currentDeliveryPrice = #{selected.getDeliveryPrice(parcel)};
     document.currentTotalPrice = (document.currentPrice + document.currentDeliveryPrice).toFixed(2);
-    ReactDOM.render(React.createElement(DateBlock, {pdate:'#{parcel.pickupDate}', adate:'#{parcel.arriveDate}'}), document.getElementById('dateblock'));
+    ReactDOM.render(React.createElement(DateBlock, {
+      label1:"#{__('day earlier')}",
+      label2:"#{__('day later')}",
+      label3:"#{__('two days later')}",
+      title:"#{__('Your check in Date')}",
+      pdate:'#{parcel.pickupDate}',
+      adate:'#{parcel.arriveDate}'}),
+      document.getElementById('dateblock'));
     ReactDOM.render(React.createElement(GMap, {
+      labelFrom: "#{__('FROM:')}",
+      labelTo: "#{__('TO:')}",
       title1: "#{__('HOME ADDRESS')}",
       title2: "#{__('HOME ADDRESS')}",
       lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
@@ -231,6 +240,7 @@ block script
       lon2: #{parcel.toPerson ? parcel.toPerson.longitude : parcel.owner.longitude}}),
       document.getElementById('map1block'));
     ReactDOM.render(React.createElement(GPath, {
+      labelRoute: "#{__('PACKAGE ROUTE')}",
       lat1: #{parcel.fromPerson ? parcel.fromPerson.latitude : parcel.owner.latitude},
       lon1: #{parcel.fromPerson ? parcel.fromPerson.longitude : parcel.owner.longitude},
       lat2: #{parcel.toPerson ? parcel.toPerson.latitude : parcel.owner.latitude},

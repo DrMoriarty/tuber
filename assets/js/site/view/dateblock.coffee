@@ -38,26 +38,26 @@ DateBlock = React.createClass
     render: ->
         div {className: 'confirmation-delivery'},
             input {id: 'day_before', type: 'radio', name: 'pdate', onClick: @pdm1Click}
-            label {htmlFor: 'day_before'}, 'day earlier'
+            label {htmlFor: 'day_before'}, @props.label1
             input {id: 'pd_p1', type: 'radio', name: 'pdate', onClick: @pdp1Click}
-            label {htmlFor: 'pd_p1'}, 'day later'
+            label {htmlFor: 'pd_p1'}, @props.label2
             input {id: 'pd_p2', type: 'radio', name: 'pdate', onClick: @pdp2Click}
-            label {htmlFor: 'pd_p2'}, 'two days later'
+            label {htmlFor: 'pd_p2'}, @props.label3
             div {className: 'confirmation-calendar'},
                 input {className:'js-datetime', name:'pickupDate', type: 'text', value: @state.pickupDate}
                 div {id: 'datePicker1', className: 'confirmation-calendar-body js-datetime-body hide'},
-                    h4 {}, 'Your check in Date'
+                    h4 {}, @props.title
             span {className: 'span_to'}, ' to '
             div {className: 'confirmation-calendar'},
                 input {className:'js-datetime', name:'arriveDate', type: 'text', value: @state.arriveDate}
                 div {id: 'datePicker2', className: 'confirmation-calendar-body js-datetime-body hide'},
-                    h4 {}, 'Your check in Date'
+                    h4 {}, @props.title
             input {id: 'ad_m1', type: 'radio', name: 'adate', onClick: @adm1Click}
-            label {htmlFor: 'ad_m1'}, 'day earlier'
+            label {htmlFor: 'ad_m1'}, @props.label1
             input {id: 'ad_p1', type: 'radio', name: 'adate', onClick: @adp1Click}
-            label {htmlFor: 'ad_p1'}, 'day later'
+            label {htmlFor: 'ad_p1'}, @props.label2
             input {id: '2days_later2', type: 'radio', name: 'adate', onClick: @adp2Click}
-            label {htmlFor: '2days_later2'}, 'two days later'
+            label {htmlFor: '2days_later2'}, @props.label3
 
     componentDidUpdate: (oldProps, oldState) ->
         if oldProps.pdate != @props.pdate or oldProps.adate != @props.adate

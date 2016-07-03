@@ -71,7 +71,7 @@ module.exports =
                     console.log err
                     return res.negotiate err
                 SearchService.searchDriver parcelId, (err, data) ->
-                    if err?
+                    if err? or not data?
                         console.log err
                         res.negotiate err
                     else

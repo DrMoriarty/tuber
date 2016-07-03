@@ -3413,10 +3413,6 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
  * <link href="/css/print.css" media="print" rel="stylesheet" type="text/css" /> */
 
  input {color: #000000 !important;}
- .app .section .confirmation input,
- .app .section .confirmation .confirmation-calendar input,
- .app .section .confirmation .confirmation-time input,
- .app .section .confirmation .confirmation-delivery input {color: #ffffff !important;}
 
 .confirmation-select-mobile {position: relative; z-index: 1;}
 .confirmation-select-mobile .placeholder1,
@@ -3458,10 +3454,4 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 .app .section .form .form-sizes li {width: 137px; margin: 0 10px 10px 0;}
 .app .section .form .form-sizes li strong {font-size: 24px;}
 .app .section .form .form-sizes li input {width: 137px; font-size: 60px; line-height: 60px;}
-
-
-.app .section .form input[type="text"], .app .section .form input[type="password"] {border: 2px solid #dfdfe0;}
-.app .section .form input[type="text"]:focus, .app .section .form input[type="password"]:focus {border: 2px solid #e58000;}
-
-
 

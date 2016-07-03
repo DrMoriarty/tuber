@@ -89,6 +89,8 @@ block script
       });
       tinymce.init({
         selector: '#text',
-        plugins: 'link code'
+        plugins: 'link code',
+        relative_urls: false,
+        remove_script_host : false
       });
     });

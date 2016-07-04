@@ -26,8 +26,8 @@ block content
           h3 #{__('YOU HAVE SELECTED')}
           .confirmation-select.confirmation-first-select
             select.js-select#driverSelection(onchange='selectDriver(this)')
-              each driver in drivers
-                option(driverId='#{driver.id}', price='#{driver.getPrice(parcel)}', delivery='#{driver.getDeliveryPrice(parcel)}', selected=driver.id == selected.id) #{__('cheapest delivery')}, #{moneyString(driver.getPrice(parcel))} &euro;
+              each dr in drivers
+                option(driverId='#{dr.driver.id}', price='#{dr.driver.getPrice(parcel)}', delivery='#{dr.driver.getDeliveryPrice(parcel)}', postbox=dr.postbox, homeaddress=dr.homeaddress, selected=dr.driver.id == selected.id, deliveryType= dr.delivery) #{dr.title}, #{moneyString(dr.driver.getPrice(parcel))} &euro;
           .clear
         hr
         #dateblock
@@ -82,9 +82,9 @@ block content
         .confirmation-departure
           span.white_span.to #{__('FROM:')}
           input#postbox(name='post', type='radio', checked=true)
-          label(for='postbox') #{__('POSTBOX')}
+          label#postboxLabel(for='postbox') #{__('POST OFFICE')}
           input#home(name='post', type='radio', checked=true)
-          label(for='home') #{__('HOME ADDRESS')}
+          label#homeLabel(for='home') #{__('HOME ADDRESS')}
           //input#postoffice(name='post', type='radio')
           //label(for='postoffice') #{__('POST OFFICE')}
           .confirmation-select
@@ -98,9 +98,9 @@ block content
         .confirmation-destination
           span.white_span.from #{__('TO:')}
           input#postbox2(name='post2', type='radio', checked=true)
-          label(for='postbox2') #{__('POSTBOX')}
+          label#postboxLabel2(for='postbox2') #{__('POST OFFICE')}
           input#home2(name='post2', type='radio', checked=true)
-          label(for='home2') #{__('HOME ADDRESS')}
+          label#homeLabel2(for='home2') #{__('HOME ADDRESS')}
           //input#postoffice2(name='post2', type='radio')
           //label(for='postoffice2') #{__('POST OFFICE')}
           .confirmation-select
@@ -174,44 +174,70 @@ block script
       $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
     });
     $('#postbox').on('click', function() {
-      $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+      var selection1 = $('#addressSelect1')[0];
+      var selection2 = $('#addressSelect2')[0];
+      if(selection2.selectedIndex != 0)
+        $('#driverSelection').selectBoxIt().data('selectBox-selectBoxIt').selectOption(0);
+      if(selection1.selectedIndex == 0)
+        $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
     });
     $('#postbox2').on('click', function() {
-      $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+      var selection1 = $('#addressSelect1')[0];
+      var selection2 = $('#addressSelect2')[0];
+      if(selection1.selectedIndex != 0)
+        $('#driverSelection').selectBoxIt().data('selectBox-selectBoxIt').selectOption(0);
+      if(selection2.selectedIndex == 0)
+        $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
     });
     $('#addressSelect1').on('change', function(event) {
-      //console.log(event.target.selectedIndex);
+      var select = $('#driverSelection')[0];
+      var option = select.options[select.selectedIndex];
+      var deliveryType = option.getAttribute('deliveryType');
       if(event.target.selectedIndex == 0) {
         // delivery from home address
         document.fromParcelShopId = null;
         $('#postbox')[0].checked = false;
         $('#home')[0].checked = true;
+        if(deliveryType == 'postbox')
+          $('#driverSelection').selectBoxIt().data('selectBox-selectBoxIt').selectOption(1);
       } else {
         // delivery from post shop
         document.fromParcelShopId = event.target.options[event.target.selectedIndex].getAttribute('parcelShopId');
         $('#postbox')[0].checked = true;
         $('#home')[0].checked = false;
+
+        var selection2 = $('#addressSelect2')[0];
+        if(selection2.selectedIndex != 0)
+          $('#driverSelection').selectBoxIt().data('selectBox-selectBoxIt').selectOption(0);
       }
-      selectDriver($('#driverSelection')[0]);
+      selectDriver(select);
       document.fromParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
       var coords = event.target.value.split(',');
       if(window.marker1)
         window.marker1.setPosition(new google.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1])));
     });
     $('#addressSelect2').on('change', function(event) {
-      //console.log(event.target.selectedIndex);
+      var select = $('#driverSelection')[0];
+      var option = select.options[select.selectedIndex];
+      var deliveryType = option.getAttribute('deliveryType');
       if(event.target.selectedIndex == 0) {
         // delivery to home address
         document.toParcelShopId = null;
         $('#postbox2')[0].checked = false;
         $('#home2')[0].checked = true;
+        if(deliveryType == 'postbox')
+          $('#driverSelection').selectBoxIt().data('selectBox-selectBoxIt').selectOption(1);
       } else {
         // delivery to post shop
         document.toParcelShopId = event.target.options[event.target.selectedIndex].getAttribute('parcelShopId');
         $('#postbox2')[0].checked = true;
         $('#home2')[0].checked = false;
+
+        var selection1 = $('#addressSelect1')[0];
+        if(selection1.selectedIndex != 0)
+          $('#driverSelection').selectBoxIt().data('selectBox-selectBoxIt').selectOption(0);
       }
-      selectDriver($('#driverSelection')[0]);
+      selectDriver(select);
       document.toParcelShopAddress = event.target.options[event.target.selectedIndex].innerText;
       var coords = event.target.value.split(',');
       if(window.marker2)
@@ -303,6 +329,52 @@ block script
     }
     function selectDriver(select) {
       option = select.options[select.selectedIndex];
+      var postboxEnabled = option.getAttribute('postbox');
+      var homeaddressEnabled = option.getAttribute('homeaddress');
+      var deliveryType = option.getAttribute('deliveryType');
+      if(postboxEnabled) {
+        $('postboxLabel').show();
+        $('postboxLabel2').show();
+      } else {
+        $('postboxLabel').hide();
+        $('postboxLabel2').hide();
+      }
+      if(homeaddressEnabled) {
+        $('homeLabel').show();
+        $('homeLabel2').show();
+      } else {
+        $('homeLabel').hide();
+        $('homeLabel2').hide();
+      }
+
+      if(deliveryType == 'postbox') {
+        var selection1 = $('#addressSelect1')[0];
+        var selection2 = $('#addressSelect2')[0];
+        if(selection1.selectedIndex == 0)
+          $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+        if(selection2.selectedIndex == 0)
+          $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+        $('#postbox')[0].checked = true;
+        $('#home')[0].checked = false;
+        $('#postbox2')[0].checked = true;
+        $('#home2')[0].checked = false;
+      } else {
+        var selection1 = $('#addressSelect1')[0];
+        var selection2 = $('#addressSelect2')[0];
+        if(selection1.selectedIndex != 0 && selection2.selectedIndex != 0) {
+          $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
+          $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
+          $('#postbox')[0].checked = false;
+          $('#home')[0].checked = true;
+          $('#postbox2')[0].checked = false;
+          $('#home2')[0].checked = true;
+        }
+      }
+      document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
+      document.fromParcelShopAddress = selection1.options[selection1.selectedIndex].innerText;
+      document.toParcelShopId = selection2.options[selection2.selectedIndex].getAttribute('parcelShopId');
+      document.toParcelShopAddress = selection2.options[selection2.selectedIndex].innerText;
+
       insurancePrice = parseFloat('#{parcel.insurancePrice}');
       price = parseFloat(option.getAttribute('price')) + (insurancePrice ? insurancePrice : 0);
       document.currentPrice = price;

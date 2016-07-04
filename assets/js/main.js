@@ -149,6 +149,8 @@ $(document).ready(function() {
 
 	$('.js-datetime').click(function() {
 		$('.js-datetime-body, .js-time-body').hide();
+        // update date & time
+
 		$(this).siblings('.js-datetime-body, .js-time-body').show();
 		return false;
 	});
@@ -157,6 +159,8 @@ $(document).ready(function() {
 		if ($(e.target).parents('.js-datetime-body, .js-time-body, .ui-datepicker-header').length == 0 
 		&& $('.js-datetime-body:visible, .js-time-body:visible').length) {
 			$('.js-datetime-body, .js-time-body').hide();
+            // update date & time
+
 		}
 	});
 

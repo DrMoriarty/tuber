@@ -214,15 +214,47 @@ module.exports =
                                 catch e
                                     console.log 'Parcel shops for ', toAddress.latitude, toAddress.longitude, ' not found!'
                                     return cb(null, [])
+                        (cb) ->
+                            SearchService.castingDrivers drivers, parcel, (filteredDrivers, prices) ->
+                                drResult = []
+                                if prices.cheapest.available
+                                    for dr in drivers
+                                        if dr.id == prices.cheapest.id
+                                            drResult.push {title: 'Cheapest delivery', driver: dr, postbox: true, homeaddress: true, delivery: 'postbox'}
+                                            break
+                                if prices.fastest.available
+                                    for dr in drivers
+                                        if dr.id == prices.fastest.id
+                                            drResult.push {title: 'Fastest delivery', driver: dr, postbox: true, homeaddress: true, delivery: 'homeaddress'}
+                                            break
+                                if prices.custom1.available
+                                    for dr in drivers
+                                        if dr.id == prices.custom1.id
+                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress'}
+                                            break
+                                if prices.custom2.available
+                                    for dr in drivers
+                                        if dr.id == prices.custom2.id
+                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress'}
+                                            break
+                                if prices.custom3.available
+                                    for dr in drivers
+                                        if dr.id == prices.custom3.id
+                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress'}
+                                            break
+                                cb null, drResult
                     ], (err, result) ->
-                        selectedDriver = if drivers[0]? then drivers[0] else null
+                        drResult = result[2]
+                        selectedDriver = if drResult.length > 0 then drResult[0].driver else null
+                        """
                         for dr in drivers
                             if dr.id == driverId
                                 selectedDriver = dr
+                        """
                         if req.mobile
-                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: selectedDriver, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
+                            res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drResult, selected: selectedDriver, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
                         else
-                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drivers, selected: selectedDriver, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
+                            res.view 'siteconfirm', {user: req.user, parcel: parcel, drivers: drResult, selected: selectedDriver, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
                     )
         else
             if req.mobile

@@ -39,7 +39,7 @@ block content
               input#fromZip.number.minLength-5(type='text', placeholder="#{__('Zip code (only numbers)')}", name='fromPerson.zip')
               input#fromCity.minLength-3(type='text', placeholder="#{__('City')}", name='fromPerson.city')
               input#fromCountry(type='text', placeholder="#{__('Country')}", name='fromPerson.country')
-              input#fromPhone(type='text', placeholder="#{__('Mobile phone (only numbers)')}", name='fromPerson.phone')
+              input#fromPhone.number.minLength-11.maxLength-12(type='text', placeholder="#{__('Mobile phone (only numbers)')}", name='fromPerson.phone')
               //input#fromEmail.email(type='text', placeholder="#{__('E-mail, for ex.: “George@delti.com”')}", name='fromPersons.email')
             h3 #{__('To')} 
             input#address1(type='checkbox', name='toPersonProfile')
@@ -57,7 +57,7 @@ block content
               input#toZip.number.minLength-5(type='text', placeholder="#{__('Zip code (only numbers)')}", name='toPerson.zip')
               input#toCity.minLength-3(type='text', placeholder="#{__('City of destination')}", name='toPerson.city' )
               input#toCountry(type='text', placeholder="#{__('Country of destination')}", name='toPerson.country')
-              input#toPhone(type='text', placeholder="#{__('Mobile phone (only numbers)')}", name='toPerson.phone')
+              input#toPhone.number.minLength-11.maxLength-12(type='text', placeholder="#{__('Mobile phone (only numbers)')}", name='toPerson.phone')
               //input#toEmail.email(type='text', placeholder="#{__('E-mail, for ex.: “George@delti.com”')}", name='toPerson.email')
             //input#packetshop(type='checkbox', name='usePacketshop')
             //label.packetshop(for='packetshop') #{__('To reduce costs, I am willing to drop the package in a Packetshop close to me.')}
@@ -159,6 +159,14 @@ block script
     };
     //$('#fromPhone').mask('9999 99999999');
     //$('#toPhone').mask('9999 99999999');
+    $('#fromPhone, #toPhone').on('keyup paste', function() {
+      var prevVal = $(this).val();
+      prevVal = prevVal.replace(/\s/g, '')
+      if (prevVal.slice(0, 3) == '+49') {
+        prevVal = prevVal.substring(3);
+      }
+      $(this).val(prevVal);
+    });
     $("#fromCountry").easyAutocomplete(options);
     $("#toCountry").easyAutocomplete(options);
     $('#address').on('click', function(event) {

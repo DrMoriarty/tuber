@@ -175,3 +175,13 @@ module.exports =
                     res.json {latitude: lat, longitude: lng}
                 else
                     res.json {error: 'Address not found'}
+
+    lookupAddress: (req, res) ->
+        address = req.param('address')
+        if not address?
+            return res.badRequest('address required')
+        GeoService.addressGeo address, (lat, lng) ->
+            if lat? and lng?
+                res.json {latitude: lat, longitude: lng}
+            else
+                res.json {error: 'Address not found'}

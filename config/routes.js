@@ -82,6 +82,7 @@ module.exports.routes = {
     'all /accept/parcel/:parcelId/carrier/:driverId': 'SearchController.acceptDriver',
     'all /accept/carrier/parcel/:parcelId': 'SearchController.acceptParcel',
     'all /search/zip': 'SearchController.lookupZip',
+    'all /search/address': 'SearchController.lookupAddress',
 
     'post /test/email': 'TestController.sendEmail',
 

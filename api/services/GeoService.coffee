@@ -79,3 +79,19 @@ module.exports =
             if not found and count == 2
                 # both methods founded nothing
                 callback null, null
+
+    addressGeo: (address, callback) ->
+        geocoder.geocode address,
+            (err, data) ->
+                console.log err if err?
+                latitude = undefined
+                longitude = undefined
+                if not err and data
+                    if data.results? and data.results.length > 0
+                        res = data.results[0]
+                        if res.geometry?.location?
+                            latitude = res.geometry.location.lat
+                            longitude = res.geometry.location.lng
+                callback latitude, longitude
+            {}
+        

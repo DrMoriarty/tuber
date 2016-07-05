@@ -346,5 +346,7 @@
 	"Sorry, we don't recognize this email.": "Sorry, we don't recognize this email.",
 	"HOMEb ADRESS": "HOMEb ADRESS",
 	"POST OFFICE": "POST OFFICE",
-	"Post office": "Post office"
+	"Post office": "Post office",
+	"Sending": "Sending",
+	"Delivery": "Delivery"
 }

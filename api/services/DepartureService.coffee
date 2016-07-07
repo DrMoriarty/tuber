@@ -101,8 +101,7 @@ module.exports =
                                 Request.update({id: requestId}, {trackingNumber: shipmentData.parcelLabelNumber}).exec (err, res) ->
                                     console.log err if err?
                                 Parcel.findOne(request.parcel.id).populateAll().exec (err, parcel) ->
-                                    url = sails.getBaseURL()+'/'+fname
-                                    url = '<a href="'+url+'">'+url+'</a>';
+                                    url = 'packet24.com/'+fname
                                     MailingService.processEvent parcel.owner.email, 'orderPlaced', parcel.owner.lang, {'INFO': url, USERNAME: parcel.owner.firstname, FROMADDRESS: request.fromParcelShopAddress or ''}
                             catch error
                                 console.log error

@@ -313,18 +313,18 @@ block script
       var homeaddressEnabled = option.getAttribute('homeaddress');
       var deliveryType = option.getAttribute('deliveryType');
       if(postboxEnabled) {
-        $('postboxLabel').show();
-        $('postboxLabel2').show();
+        $('#postboxLabel').show();
+        $('#postboxLabel2').show();
       } else {
-        $('postboxLabel').hide();
-        $('postboxLabel2').hide();
+        $('#postboxLabel').hide();
+        $('#postboxLabel2').hide();
       }
       if(homeaddressEnabled) {
-        $('homeLabel').show();
-        $('homeLabel2').show();
+        $('#homeLabel').show();
+        $('#homeLabel2').show();
       } else {
-        $('homeLabel').hide();
-        $('homeLabel2').hide();
+        $('#homeLabel').hide();
+        $('#homeLabel2').hide();
       }
 
       if(deliveryType == 'postbox') {

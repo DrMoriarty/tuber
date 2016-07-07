@@ -194,32 +194,32 @@ module.exports =
             prices.cheapest.id = corp.id
             prices.cheapest.price = corp.getPrice(parcel)
             prices.cheapest.available = true
-            prices.cheapest.delivery = 'parcelBox'
+            prices.cheapest.delivery = 'parcelbox'
             
             prices.fastest.id = corp.id
             prices.fastest.price = (corp.getPrice(parcel) + corp.getDeliveryPrice(parcel))
             prices.fastest.available = true
-            prices.fastest.delivery = 'home'
+            prices.fastest.delivery = 'homeaddress'
         if filteredDrivers.length > 0
             dr = filteredDrivers[0].driver
             prices.custom1.id = dr.id
             prices.custom1.price = dr.getPrice(parcel)
             prices.custom1.available = true
-            prices.custom1.delivery = 'home'
+            prices.custom1.delivery = 'homeaddress'
             prices.custom1.title = dr.fullname()
         if filteredDrivers.length > 1
             dr = filteredDrivers[1].driver
             prices.custom2.id = dr.id
             prices.custom2.price = dr.getPrice(parcel)
             prices.custom2.available = true
-            prices.custom2.delivery = 'home'
+            prices.custom2.delivery = 'homeaddress'
             prices.custom2.title = dr.fullname()
         if filteredDrivers.length > 2
             dr = filteredDrivers[2].driver
             prices.custom3.id = dr.id
             prices.custom3.price = dr.getPrice(parcel)
             prices.custom3.available = true
-            prices.custom3.delivery = 'home'
+            prices.custom3.delivery = 'homeaddress'
             prices.custom3.title = dr.fullname()
         cb filteredDrivers, prices
         

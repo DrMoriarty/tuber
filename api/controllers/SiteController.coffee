@@ -246,7 +246,7 @@ module.exports =
                                 cb null, drResult
                     ], (err, result) ->
                         drResult = result[2]
-                        selectedDriver = if drResult.length > 0 then drResult[0].driver else null
+                        selectedDriver = if drResult? and drResult.length > 0 then drResult[0].driver else null
                         """
                         for dr in drivers
                             if dr.id == driverId

@@ -25,7 +25,7 @@ block content
           .confirmation-select-mobile
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each dr in drivers
-                option(driverId='#{dr.driver.id}', price='#{dr.driver.getPrice(parcel)}', delivery='#{dr.driver.getDeliveryPrice(parcel)}', postbox=dr.postbox, homeaddress=dr.homeaddress, selected=dr.driver.id == selected.id, deliveryType= dr.delivery) #{dr.title}, #{moneyString(dr.price)} &euro;
+                option(driverId='#{dr.driver.id}', price='#{dr.driver.getPrice(parcel)}', delivery='#{dr.driver.getDeliveryPrice(parcel)}', postbox=dr.postbox, homeaddress=dr.homeaddress, selected=dr.driver.id == selected.id && dr.delivery == delivery, deliveryType= dr.delivery) #{dr.title}, #{moneyString(dr.price)} &euro;
         hr
         .confirmation-delivery.plc
           h3 #{__('Departure and arrivals dates')}
@@ -111,7 +111,7 @@ block script
   script(src="/js/site/view/gmap.js")
   script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8DhuvWbZHjOZvY_nzTc3EfMFGR0vFNK8")
   script(type='text/javascript').
-    if('#{delivery}' != 'home') {
+    if('#{delivery}' != 'homeaddress') {
       console.log('Select parcel boxes');
       var selection1 = $('#addressSelect1')[0];
       var selection2 = $('#addressSelect2')[0];

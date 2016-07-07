@@ -168,6 +168,12 @@ block script
       }
       $(this).val(prevVal);
     });
+    var today = moment().format('YYYY-MM-DD[T]HH:mm:ss');
+    var dlimit = moment().add(7, 'd').format('YYYY-MM-DD[T]HH:mm:ss');
+    $('#pickupDate').attr('min', today);
+    $('#pickupDate').attr('max', dlimit);
+    $('#arriveDate').attr('min', today);
+    $('#arriveDate').attr('max', dlimit);
     $("#fromCountry").easyAutocomplete(options);
     $("#toCountry").easyAutocomplete(options);
     $('#address1').on('click', function(event) {

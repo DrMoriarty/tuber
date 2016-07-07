@@ -6,7 +6,7 @@
 	"Payment": "Bezahlung",
 	"Dashboard": "Übersicht",
 	"YOU HAVE SELECTED": "Deine Auswahl",
-	"cheapest delivery": "Günstigste Lieferung",
+	"Cheapest delivery": "Günstigste Lieferung",
 	"Departure and arrivals dates": "Termine Abfahrt und Ankunft",
 	"Postbox": "Schließfach",
 	"Home adress": "Privatadresse",
@@ -345,5 +345,6 @@
 	"POST OFFICE": "POST OFFICE",
 	"HOMEb ADRESS": "HOMEb ADRESS",
 	"Sending": "Sending",
-	"Delivery": "Delivery"
+	"Delivery": "Delivery",
+	"Fastest delivery": "Fastest delivery"
 }

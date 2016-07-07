@@ -220,12 +220,12 @@ module.exports =
                                 if prices.cheapest.available
                                     for dr in drivers
                                         if dr.id == prices.cheapest.id
-                                            drResult.push {title: 'Cheapest delivery', driver: dr, postbox: true, homeaddress: true, delivery: 'postbox'}
+                                            drResult.push {title: req.__('Cheapest delivery'), driver: dr, postbox: true, homeaddress: true, delivery: 'postbox'}
                                             break
                                 if prices.fastest.available
                                     for dr in drivers
                                         if dr.id == prices.fastest.id
-                                            drResult.push {title: 'Fastest delivery', driver: dr, postbox: true, homeaddress: true, delivery: 'homeaddress'}
+                                            drResult.push {title: req.__('Fastest delivery'), driver: dr, postbox: true, homeaddress: true, delivery: 'homeaddress'}
                                             break
                                 if prices.custom1.available
                                     for dr in drivers

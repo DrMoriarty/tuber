@@ -348,5 +348,7 @@
 	"POST OFFICE": "POST OFFICE",
 	"Post office": "Post office",
 	"Sending": "Sending",
-	"Delivery": "Delivery"
+	"Delivery": "Delivery",
+	"Cheapest delivery": "Cheapest delivery",
+	"Fastest delivery": "Fastest delivery"
 }

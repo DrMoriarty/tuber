@@ -27,7 +27,7 @@ block content
           .confirmation-select.confirmation-first-select
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each dr in drivers
-                option(driverId='#{dr.driver.id}', price='#{dr.driver.getPrice(parcel)}', delivery='#{dr.driver.getDeliveryPrice(parcel)}', postbox=dr.postbox, homeaddress=dr.homeaddress, selected=dr.driver.id == selected.id, deliveryType= dr.delivery) #{dr.title}, #{moneyString(dr.driver.getPrice(parcel))} &euro;
+                option(driverId='#{dr.driver.id}', price='#{dr.driver.getPrice(parcel)}', delivery='#{dr.driver.getDeliveryPrice(parcel)}', postbox=dr.postbox, homeaddress=dr.homeaddress, selected=dr.driver.id == selected.id, deliveryType= dr.delivery) #{dr.title}, #{moneyString(dr.price)} &euro;
           .clear
         hr
         #dateblock

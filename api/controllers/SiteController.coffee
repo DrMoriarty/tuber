@@ -220,27 +220,27 @@ module.exports =
                                 if prices.cheapest.available
                                     for dr in drivers
                                         if dr.id == prices.cheapest.id
-                                            drResult.push {title: req.__('Cheapest delivery'), driver: dr, postbox: true, homeaddress: true, delivery: 'postbox'}
+                                            drResult.push {title: req.__('Cheapest delivery'), driver: dr, postbox: true, homeaddress: true, delivery: 'postbox', price: dr.getPrice(parcel)}
                                             break
                                 if prices.fastest.available
                                     for dr in drivers
                                         if dr.id == prices.fastest.id
-                                            drResult.push {title: req.__('Fastest delivery'), driver: dr, postbox: true, homeaddress: true, delivery: 'homeaddress'}
+                                            drResult.push {title: req.__('Fastest delivery'), driver: dr, postbox: true, homeaddress: true, delivery: 'homeaddress', price: dr.getPrice(parcel)+dr.getDeliveryPrice(parcel)}
                                             break
                                 if prices.custom1.available
                                     for dr in drivers
                                         if dr.id == prices.custom1.id
-                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress'}
+                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress', price: dr.getPrice(parcel)}
                                             break
                                 if prices.custom2.available
                                     for dr in drivers
                                         if dr.id == prices.custom2.id
-                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress'}
+                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress', price: dr.getPrice(parcel)}
                                             break
                                 if prices.custom3.available
                                     for dr in drivers
                                         if dr.id == prices.custom3.id
-                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress'}
+                                            drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress', price: dr.getPrice(parcel)}
                                             break
                                 drResult.splice(3)
                                 cb null, drResult

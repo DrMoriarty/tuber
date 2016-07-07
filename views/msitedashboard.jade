@@ -198,7 +198,8 @@ block content
                   else if parcel.request && !parcel.request.paid
                     a.orange_button.cansel_order(href='#', onClick='location.href="/payment?parcel=#{parcel.id}&m=1"') #{__('PROCESS PAYMENT')}
                   else
-                    a.orange_button.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') #{__('CANCEL THIS ORDER')}
+                    .login(style={border:'none', 'margin-bottom':'0px'})
+                      a.cansel_order(href='#', onClick='cancelOrder("#{parcel.id}")') #{__('CANCEL THIS ORDER')}
                     span.note * #{__('If you canceled this order now, you will be refunded 75% of delivery price;')}
                 else if parcel.status == 'started'
                   span.note #{__('Parcel is received by our carrier and is on the way to client')}

@@ -242,6 +242,7 @@ module.exports =
                                         if dr.id == prices.custom3.id
                                             drResult.push {title: dr.fullname(), driver: dr, postbox: false, homeaddress: true, delivery: 'homeaddress'}
                                             break
+                                drResult.splice(3)
                                 cb null, drResult
                     ], (err, result) ->
                         drResult = result[2]

@@ -350,14 +350,14 @@ block script
       var postboxEnabled = option.getAttribute('postbox');
       var homeaddressEnabled = option.getAttribute('homeaddress');
       var deliveryType = option.getAttribute('deliveryType');
-      if(postboxEnabled) {
+      if(postboxEnabled != null) {
         $('#postboxLabel').show();
         $('#postboxLabel2').show();
       } else {
         $('#postboxLabel').hide();
         $('#postboxLabel2').hide();
       }
-      if(homeaddressEnabled) {
+      if(homeaddressEnabled != null) {
         $('#homeLabel').show();
         $('#homeLabel2').show();
       } else {

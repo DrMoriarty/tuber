@@ -318,12 +318,12 @@ block script
 
       var selection1 = $('#addressSelect1')[0];
       var selection2 = $('#addressSelect2')[0];
-      if(postbox1Enabled && (!homeaddress1Enabled || deliveryType == 'postbox') && selection1.selectedIndex == 0) {
+      if(postbox1Enabled && !homeaddress1Enabled && selection1.selectedIndex == 0) {
         // enable postbox 1
         $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
         $('#postbox')[0].checked = true;
         $('#home')[0].checked = false;
-      } else if(homeaddress1Enabled && (!postbox1Enabled || deliveryType == 'homeaddress') && selection1.selectedIndex != 0) {
+      } else if(homeaddress1Enabled && !postbox1Enabled && selection1.selectedIndex != 0) {
         // enable homeaddress 1
         $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
         $('#postbox')[0].checked = false;

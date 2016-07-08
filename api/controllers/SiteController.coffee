@@ -230,17 +230,17 @@ module.exports =
                                 if prices.custom1.available
                                     for dr in drivers
                                         if dr.id == prices.custom1.id
-                                            drResult.push {title: dr.fullname(), driver: dr, delivery: 'homeaddress', price: dr.getPrice(parcel)}
+                                            drResult.push {title: dr.fullname(), driver: dr, delivery: 'any', price: dr.getPrice(parcel)}
                                             break
                                 if prices.custom2.available
                                     for dr in drivers
                                         if dr.id == prices.custom2.id
-                                            drResult.push {title: dr.fullname(), driver: dr, delivery: 'homeaddress', price: dr.getPrice(parcel)}
+                                            drResult.push {title: dr.fullname(), driver: dr, delivery: 'any', price: dr.getPrice(parcel)}
                                             break
                                 if prices.custom3.available
                                     for dr in drivers
                                         if dr.id == prices.custom3.id
-                                            drResult.push {title: dr.fullname(), driver: dr, delivery: 'homeaddress', price: dr.getPrice(parcel)}
+                                            drResult.push {title: dr.fullname(), driver: dr, delivery: 'any', price: dr.getPrice(parcel)}
                                             break
                                 drResult.splice(3)
                                 cb null, drResult

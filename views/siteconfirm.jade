@@ -27,7 +27,7 @@ block content
           .confirmation-select.confirmation-first-select
             select.js-select#driverSelection(onchange='selectDriver(this)')
               each dr in drivers
-                option(driverId='#{dr.driver.id}', price='#{dr.driver.getPrice(parcel)}', delivery='#{dr.driver.getDeliveryPrice(parcel)}', postbox=dr.postbox, homeaddress=dr.homeaddress, selected=dr.driver.id == selected.id && dr.delivery == delivery, deliveryType= dr.delivery) #{dr.title}, #{moneyString(dr.price)} &euro;
+                option(driverId='#{dr.driver.id}', price='#{dr.driver.getPrice(parcel)}', delivery='#{dr.driver.getDeliveryPrice(parcel)}', postbox1=dr.driver.pickupPostbox, postbox2=dr.driver.arrivePostbox, homeaddress1=dr.driver.pickupHome, homeaddress2=dr.driver.arriveHome, selected=dr.driver.id == selected.id && dr.delivery == delivery, deliveryType= dr.delivery) #{dr.title}, #{moneyString(dr.price)} &euro;
           .clear
         hr
         #dateblock
@@ -151,22 +151,7 @@ block script
   script(src="/js/site/view/gmap.js")
   script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8DhuvWbZHjOZvY_nzTc3EfMFGR0vFNK8")
   script(type='text/javascript').
-    if('#{delivery}' != 'homeaddress') {
-      console.log('Select parcel boxes');
-      var selection1 = $('#addressSelect1')[0];
-      var selection2 = $('#addressSelect2')[0];
-      $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
-      $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
-      document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
-      document.fromParcelShopAddress = selection1.options[selection1.selectedIndex].innerText;
-      document.toParcelShopId = selection2.options[selection2.selectedIndex].getAttribute('parcelShopId');
-      document.toParcelShopAddress = selection2.options[selection2.selectedIndex].innerText;
-      $('#postbox')[0].checked = true;
-      $('#home')[0].checked = false;
-      $('#postbox2')[0].checked = true;
-      $('#home2')[0].checked = false;
-      selectDriver($('#driverSelection')[0]);
-    }
+    selectDriver($('#driverSelection')[0]);
     $('#home').on('click', function() {
       $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
     });
@@ -347,46 +332,51 @@ block script
     }
     function selectDriver(select) {
       option = select.options[select.selectedIndex];
-      var postboxEnabled = option.getAttribute('postbox');
-      var homeaddressEnabled = option.getAttribute('homeaddress');
+      var postbox1Enabled = option.getAttribute('postbox1') != null;
+      var homeaddress1Enabled = option.getAttribute('homeaddress1') != null;
+      var postbox2Enabled = option.getAttribute('postbox2') != null;
+      var homeaddress2Enabled = option.getAttribute('homeaddress2') != null;
       var deliveryType = option.getAttribute('deliveryType');
-      if(postboxEnabled != null) {
+      if(postbox1Enabled)
         $('#postboxLabel').show();
-        $('#postboxLabel2').show();
-      } else {
+      else
         $('#postboxLabel').hide();
+      if(postbox2Enabled)
+        $('#postboxLabel2').show();
+      else
         $('#postboxLabel2').hide();
-      }
-      if(homeaddressEnabled != null) {
+      if(homeaddress1Enabled)
         $('#homeLabel').show();
-        $('#homeLabel2').show();
-      } else {
+      else
         $('#homeLabel').hide();
+      if(homeaddress2Enabled)
+        $('#homeLabel2').show();
+      else
         $('#homeLabel2').hide();
-      }
 
-      if(deliveryType == 'postbox') {
-        var selection1 = $('#addressSelect1')[0];
-        var selection2 = $('#addressSelect2')[0];
-        if(selection1.selectedIndex == 0)
-          $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
-        if(selection2.selectedIndex == 0)
-          $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
+      var selection1 = $('#addressSelect1')[0];
+      var selection2 = $('#addressSelect2')[0];
+      if(postbox1Enabled && (!homeaddress1Enabled || deliveryType == 'postbox') && selection1.selectedIndex == 0) {
+        // enable postbox 1
+        $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
         $('#postbox')[0].checked = true;
         $('#home')[0].checked = false;
+      } else if(homeaddress1Enabled && (!postbox1Enabled || deliveryType == 'homeaddress') && selection1.selectedIndex != 0) {
+        // enable homeaddress 1
+        $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
+        $('#postbox')[0].checked = false;
+        $('#home')[0].checked = true;
+      }
+      if(postbox2Enabled && (!homeaddress2Enabled || deliveryType == 'postbox') && selection2.selectedIndex == 0) {
+        // enable postbox 2
+        $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(1);
         $('#postbox2')[0].checked = true;
         $('#home2')[0].checked = false;
-      } else {
-        var selection1 = $('#addressSelect1')[0];
-        var selection2 = $('#addressSelect2')[0];
-        if(selection1.selectedIndex != 0 && selection2.selectedIndex != 0) {
-          $("#addressSelect1").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
-          $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
-          $('#postbox')[0].checked = false;
-          $('#home')[0].checked = true;
-          $('#postbox2')[0].checked = false;
-          $('#home2')[0].checked = true;
-        }
+      } else if(homeaddress2Enabled && (!postbox2Enabled || deliveryType == 'homeaddress') && selection2.selectedIndex != 0) {
+        // enable homeaddress 2
+        $("#addressSelect2").selectBoxIt().data("selectBox-selectBoxIt").selectOption(0);
+        $('#postbox2')[0].checked = false;
+        $('#home2')[0].checked = true;
       }
       document.fromParcelShopId = selection1.options[selection1.selectedIndex].getAttribute('parcelShopId');
       document.fromParcelShopAddress = selection1.options[selection1.selectedIndex].innerText;

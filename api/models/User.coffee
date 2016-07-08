@@ -156,6 +156,24 @@ module.exports =
         driverAcceptTime:
             type: 'integer'
             defaultsTo: 12
+        pickupHome:
+            type: 'boolean'
+            defaultsTo: true
+        pickupPostoffice:
+            type: 'boolean'
+            defaultsTo: false
+        pickupPostbox:
+            type: 'boolean'
+            defaultsTo: false
+        arriveHome:
+            type: 'boolean'
+            defaultsTo: true
+        arrivePostoffice:
+            type: 'boolean'
+            defaultsTo: false
+        arrivePostbox:
+            type: 'boolean'
+            defaultsTo: true
         autoAccept: ->
             return DepartureService.autoAccept this
         toJSON: ->

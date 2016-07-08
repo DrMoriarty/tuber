@@ -153,6 +153,29 @@ module.exports.bootstrap = (cb) ->
                 Request.update({id: parcel.request.id}, {status: 'done'}).exec (err, result) ->
                     console.log err if err?
 
+    User.find({driver: true, pickupHome: {$exists: false}, pickupPostoffice: {$exists: false}, pickupPostbox: {$exists: false}, arriveHome: {$exists: false}, arrivePostoffice: {$exists: false}, arrivePostbox: {$exists: false}}).exec (err, drivers) ->
+        if err? or not drivers?
+            return console.log err
+        console.log 'Update pickup and arrive options for', drivers.length, 'carriers'
+        for driver in drivers
+            if driver.isCarrierCorporation()
+                driver.pickupHome = false
+                driver.pickupPostbox = true
+                driver.pickupPostoffice = true
+                driver.arriveHome = true
+                driver.arrivePostbox = true
+                driver.arrivePostoffice = true
+            else
+                driver.pickupHome = true
+                driver.pickupPostbox = false
+                driver.pickupPostoffice = false
+                driver.arriveHome = true
+                driver.arrivePostbox = true
+                driver.arrivePostoffice = false
+            do (driver) ->
+                User.update({id: driver.id}, driver).exec (err, result) ->
+                    console.log err if err?
+
     # It's very important to trigger this callback method when you are finished
     # with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
     cb()

@@ -2493,7 +2493,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   font-size: 31px;
   line-height: 30px;
   letter-spacing: 0px;
-  color: #fff;
+  color: #fff !important;
   padding: 5px 13px 0 13px;
   margin-bottom: 17px;
   width: 100%;

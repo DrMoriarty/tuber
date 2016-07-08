@@ -166,7 +166,7 @@ module.exports =
         switch
             when notificationType == 'registrationComplete' then info = ''
             when notificationType == 'registrationCompleteCarrier' then info = ''
-            when notificationType == 'passwordRestore' then info = sails.getBaseURL() + '/recovery?hash=0987654321'
+            when notificationType == 'passwordRestore' then info = 'packet24.com/recovery?hash=0987654321'
             when notificationType == 'passwordGenerated' then info = 'YOURNEWPASSWORD'
             when notificationType == 'driverNeedAccept' then info = ''
             when notificationType == 'senderWaitingForAccept' then info = ''

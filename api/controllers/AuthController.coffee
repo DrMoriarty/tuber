@@ -59,7 +59,7 @@ module.exports =
                             res.negotiate(err)
                         else
                             #MailingService.sendEmail email, 'Password recovery', 'Someone used your email address to recovery password. \nIf you want to reset your password go to this link\nhttp://packet24.com/recovery?hash='+hash
-                            MailingService.processEvent user.email, 'passwordRestore', user.lang, {'INFO': 'http://packet24.com/recovery?hash='+hash, 'USERNAME': user.firstname}
+                            MailingService.processEvent user.email, 'passwordRestore', user.lang, {'INFO': 'packet24.com/recovery?hash='+hash, 'USERNAME': user.firstname}
                             res.json {status: 'Email was sent'}
         else
             res.status(400)

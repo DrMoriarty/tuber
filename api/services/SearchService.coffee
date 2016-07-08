@@ -205,21 +205,21 @@ module.exports =
             prices.custom1.id = dr.id
             prices.custom1.price = dr.getPrice(parcel)
             prices.custom1.available = true
-            prices.custom1.delivery = 'homeaddress'
+            prices.custom1.delivery = 'any'
             prices.custom1.title = dr.fullname()
         if filteredDrivers.length > 1
             dr = filteredDrivers[1].driver
             prices.custom2.id = dr.id
             prices.custom2.price = dr.getPrice(parcel)
             prices.custom2.available = true
-            prices.custom2.delivery = 'homeaddress'
+            prices.custom2.delivery = 'any'
             prices.custom2.title = dr.fullname()
         if filteredDrivers.length > 2
             dr = filteredDrivers[2].driver
             prices.custom3.id = dr.id
             prices.custom3.price = dr.getPrice(parcel)
             prices.custom3.available = true
-            prices.custom3.delivery = 'homeaddress'
+            prices.custom3.delivery = 'any'
             prices.custom3.title = dr.fullname()
         cb filteredDrivers, prices
         

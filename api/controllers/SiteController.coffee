@@ -247,11 +247,9 @@ module.exports =
                     ], (err, result) ->
                         drResult = result[2]
                         selectedDriver = if drResult? and drResult.length > 0 then drResult[0].driver else null
-                        """
-                        for dr in drivers
-                            if dr.id == driverId
-                                selectedDriver = dr
-                        """
+                        for dr in drResult
+                            if dr.driver.id == driverId
+                                selectedDriver = dr.driver
                         if req.mobile
                             res.view 'msiteconfirm', {user: req.user, parcel: parcel, drivers: drResult, selected: selectedDriver, fromShops: result[0] or [], toShops: result[1] or [], lang: lang, delivery: delivery}
                         else

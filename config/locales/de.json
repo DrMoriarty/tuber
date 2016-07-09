@@ -346,5 +346,7 @@
 	"HOMEb ADRESS": "HOMEb ADRESS",
 	"Sending": "Sending",
 	"Delivery": "Delivery",
-	"Fastest delivery": "Fastest delivery"
+	"Fastest delivery": "Fastest delivery",
+	"CURRENT:": "CURRENT:",
+	"Parcel is successfully delivered to client": "Parcel is successfully delivered to client"
 }

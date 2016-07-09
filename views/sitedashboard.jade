@@ -48,7 +48,7 @@ block content
                 | #{__('VAT (optional):')}
                 strong #{user.vat}
               li
-                | #{__('ADRESS:')}
+                | #{__('ADDRESS:')}
                 strong #{user.zip} #{user.city} #{user.address1} #{user.address2}
               li
                 | #{__('MOBILE PHONE:')}
@@ -310,7 +310,7 @@ block content
                     strong Standart (until #{moneyString(parcel.insurance)} &euro;)
                   li
                     | #{__('DELIVERY OPTIONS:')} 
-                    strong +0 &euro; #{__('to home adress')}
+                    strong +0 &euro; #{__('to home address')}
                   li
                     | #{__('TOTAL AMOUNT (Including VAT):')} 
                     strong #{moneyString(parcel.request.totalPrice())} &euro;

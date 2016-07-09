@@ -122,7 +122,7 @@ block content
             //h4 #{__('DELIVERY OPTIONS:')}
             //span +
             //span#deliveryPrice #{moneyString(selected.getDeliveryPrice(parcel))}
-            //span &euro; #{__('to home adress')}
+            //span &euro; #{__('to home address')}
           .confirmation-confirm-total
             h4
               span #{__('TOTAL AMOUNT (Incl. VAT):')}  
@@ -138,7 +138,7 @@ block content
         .maps-sign #{__('FROM:')} #{__('POSTBOX')}
       //.wr-map
         #map2
-        .maps-sign #{__('TO:')} #{__('HOME ADRESS')}
+        .maps-sign #{__('TO:')} #{__('HOME ADDRESS')}
     .maps-right#map2block
       //.wr-map
         #map3
@@ -246,10 +246,6 @@ block script
         }
       }
     });
-    document.currentDriverId = '#{selected.id}';
-    document.currentPrice = #{selected.getPrice(parcel) + (parcel.insurancePrice ? parcel.insurancePrice : 0)}
-    document.currentDeliveryPrice = #{selected.getDeliveryPrice(parcel)};
-    document.currentTotalPrice = (document.currentPrice + document.currentDeliveryPrice).toFixed(2);
     ReactDOM.render(React.createElement(DateBlock, {
       label1:"#{__('day earlier')}",
       label2:"#{__('day later')}",
@@ -279,6 +275,7 @@ block script
       radius3: #{selected.coverageDistance}
       }),
       document.getElementById('map2block'));
+      
     function confirmation () {
       // update parcel
       Pace.start();
@@ -386,10 +383,12 @@ block script
       insurancePrice = parseFloat('#{parcel.insurancePrice}');
       price = parseFloat(option.getAttribute('price')) + (insurancePrice ? insurancePrice : 0);
       document.currentPrice = price;
-      document.currentDeliveryPrice = parseFloat(option.getAttribute('delivery'));
-      if(!document.fromParcelShopId || !document.toParcelShopId) {
-        price += document.currentDeliveryPrice;
+      if(document.fromParcelShopId != null && document.toParcelShopId != null) {
+        document.currentDeliveryPrice = 0;
+      } else {
+        document.currentDeliveryPrice = parseFloat(option.getAttribute('delivery'));
       }
+      price += document.currentDeliveryPrice;
       $('span#deliveryPrice').html(document.currentDeliveryPrice.toFixed(2).replace(".", ","));
       $('span#totalPrice').html(price.toFixed(2).replace(".", ","));
       document.currentDriverId = option.getAttribute('driverId');

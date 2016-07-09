@@ -589,7 +589,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 }
 
 /* line 327, ../sass/_settings.scss */
-.popup_adress {
+.popup_address {
   display: none;
   background: #fff;
   border-top: 1px solid #494949;
@@ -601,7 +601,7 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   text-align: center;
 }
 /* line 330, ../sass/_settings.scss */
-.popup_adress h3 {
+.popup_address h3 {
   font-family: Cabin-Bold;
   font-size: 26px;
   line-height: 26px;
@@ -613,13 +613,13 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
 }
 @media only screen and (max-width: 481px) {
   /* line 330, ../sass/_settings.scss */
-  .popup_adress h3 {
+  .popup_address h3 {
     font-size: 17px;
     letter-spacing: -0.2px;
   }
 }
 /* line 334, ../sass/_settings.scss */
-.popup_adress h3 span {
+.popup_address h3 span {
   font-family: "Cabin-Regular", sans-serif;
   font-size: 26px;
   line-height: 26px;
@@ -631,11 +631,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   left: 1px;
 }
 /* line 337, ../sass/_settings.scss */
-.popup_adress h3 span:hover, .popup_adress h3 span:active, .popup_adress h3 span:focus, .popup_adress h3 span:active:focus {
+.popup_address h3 span:hover, .popup_address h3 span:active, .popup_address h3 span:focus, .popup_address h3 span:active:focus {
   color: #e58000;
 }
 /* line 339, ../sass/_settings.scss */
-.popup_adress h3 a {
+.popup_address h3 a {
   font-family: Cabin-Bold;
   font-size: 26px;
   line-height: 22px;
@@ -647,11 +647,11 @@ body a:hover, body a:focus, body a:active, body a:active:focus {
   right: 1px;
 }
 /* line 342, ../sass/_settings.scss */
-.popup_adress h3 a:hover, .popup_adress h3 a:active, .popup_adress h3 a:focus, .popup_adress h3 a:active:focus {
+.popup_address h3 a:hover, .popup_address h3 a:active, .popup_address h3 a:focus, .popup_address h3 a:active:focus {
   color: #e58000;
 }
 /* line 345, ../sass/_settings.scss */
-.popup_adress input {
+.popup_address input {
   display: block;
   width: 100%;
   border: 1px solid #e4e4e4;

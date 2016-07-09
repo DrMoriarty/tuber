@@ -179,12 +179,12 @@ $(document).ready(function() {
     /*
 	var selectBox1 = $('.js-select1').selectBoxIt().data('selectBox-selectBoxIt');
 	$('.postbox').click(function() {selectBox1.selectOption('Postbox Bremen friedrich missler str.,1');});
-	$('.home-adress').click(function() {selectBox1.selectOption('Home Bremen friedrich missler str.,1');});
+	$('.home-address').click(function() {selectBox1.selectOption('Home Bremen friedrich missler str.,1');});
 	$('.post-office').click(function() {selectBox1.selectOption('office Bremen friedrich missler str.,1');});
 
 	var selectBox2 = $('.js-select2').selectBoxIt().data('selectBox-selectBoxIt');
 	$('.postboxs').click(function() {selectBox2.selectOption('Postbox Hamburg, Niedergeorgswerder Deich 73, 4');});
-	$('.home-adresss').click(function() {selectBox2.selectOption('Home Hamburg, Niedergeorgswerder Deich 73, 4');});
+	$('.home-addresss').click(function() {selectBox2.selectOption('Home Hamburg, Niedergeorgswerder Deich 73, 4');});
 	$('.post-offices').click(function() {selectBox2.selectOption('office Hamburg, Niedergeorgswerder Deich 73, 4');});
     */
 });
